@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap css cdn -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- header and footer styles, and auth_box -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+    <title>Register</title>
+</head>
+
+<body>
+    <!-- Header main -->
+    <nav class="navbar navbar-default">
+		<div class="container-fluid theme">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="Home.html">Ticket or Leave it</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="Movies">Movies</a></li>
+				<li><a href="calendar.html">Calendar</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<!-- USE NODEJS AND SESSIONS IN THE FUTURE, THIS WILL CHANGE TO USERNAME WHEN LOGGED IN -->
+				<li><a href="login.html">
+					<span class="glyphicon glyphicon-user"></span>
+					Register/Log In
+				</a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+
+
+    <!-- Main content below -->
+    <div class="container">
+        <div class="main_content">
+            <div class="auth_box">
+                <!-- Nav tabs -->
+                <div class="form-group">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active" id="tabRegister"><a data-toggle="tab" href="#reg_wrapper">Register</a></li>
+                        <li id="tabLogin"><a data-toggle="tab" href="#login_wrapper">Log in</a></li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Register -->
+                    <div id="reg_wrapper" class="tab-pane fade in active">
+                        <form name="register" id="register">
+                            <!-- Name -->
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="regFName" class="sr-only">First Name</label>
+                                        <input type="text" name="regFName" id="regFName" class="form-control" placeholder="First Name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="regLName" class="sr-only">Last Name</label>
+                                        <input type="text" name="regLName" id="regLName" class="form-control" placeholder="Last Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="regUName" class="sr-only">Username</label>
+                                <input type="text" name="regUName" id="regUName" class="form-control" placeholder="Username">
+                            </div>
+                            <!-- Email address -->
+                            <div class="form-group">
+                                <label for="regEmail" class="sr-only">Email address</label>
+                                <input type="email" name="regEmail" id="regEmail" class="form-control" placeholder="Email Address">
+                            </div>
+                            <!-- Password -->
+                            <div class="form-group">
+                                <label for="regPassword" class="sr-only">Password</label>
+                                <input type="password" name="regPassword" id="regPassword" class="form-control" placeholder="Password">
+                            </div>
+                            <!-- Confirm Password -->
+                            <div class="form-group">
+                                <label for="regConfPass" class="sr-only">Confirm Password</label>
+                                <input type="password" name="regConfPass" id="regConfPass" class="form-control" placeholder="Confirm Password">
+                            </div>
+                            <!-- Submit -->
+                            <div class="form-group">
+                                <input type="button" name="regRegister" id="regRegister" class="btn btn-md btn-default btn-block" value="Register">
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Login -->
+                    <div id="login_wrapper" class="tab-pane fade">
+                        <form name="login" id="login">
+                            <!-- Username -->
+                            <div class="form-group">
+                                <label for="logUName" class="sr-only">Username</label>
+                                <input type="text" name="logUName" id="logUName" class="form-control" placeholder="Username">
+                            </div>
+                            <!-- Password -->
+                            <div class="form-group">
+                                <label for="logPassword" class="sr-only">Password</label>
+                                <input type="password" name="logPassword" id="logPassword" class="form-control" placeholder="Password">
+                            </div>
+                            <!-- Submit -->
+                            <div class="form-group">
+                                <input type="button" name="logLogin" id="logLogin" class="btn btn-md btn-default btn-block" value="Log in">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Footer code below-->
+    <nav class="nav navbar-default">
+        <div class=" main_content footer">
+            &copy; Benedictos, Cagaoan, Montecillo, 2020.
+        </div>
+    </nav>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <!-- <script src="offcanvas.js"></script> -->
+    <!-- Main JS handler for this html page -->
+    <script type="text/javascript" src="scripts/login.js"></script>
+</body>
+</html>

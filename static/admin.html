@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Bootstrap css cdn -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- header and footer styles, and auth_box -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <!-- For the stars -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .on
+        {
+            color:orange;
+        }
+    </style>
+    <!-- <span class="fa fa-star on"></span>
+    <span class="fa fa-star on"></span>
+    <span class="fa fa-star on"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span> -->
+</head>
+<body>
+    <!-- Header main -->
+    <nav class="navbar navbar-default">
+		<div class="container-fluid theme">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="Home.html">Ticket or Leave it</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="Movies.html">Movies</a></li>
+				<li><a href="calendar.html">Calendar</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<!-- USE NODEJS AND SESSIONS IN THE FUTURE, THIS WILL CHANGE TO USERNAME WHEN LOGGED IN -->
+				<li><a href="login.html">
+					<span class="glyphicon glyphicon-user"></span>
+					Register/Log In
+				</a></li>
+			</ul>
+		</div>
+    </nav>
+    
+    <div class="container">
+        <div class="form-group">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a data-toggle="tab" href="#Main">Main</a></li>
+                <li><a data-toggle="tab" href="#EditRemove">Edit/Remove Showing Movies</a></li>
+                <li><a data-toggle="tab" href="#Add">Add Movie</a></li>
+            </ul>
+        </div>
+
+        <div class="tab-content mainBox">
+            
+                <div class="tab-pane fade in active container-fluid" id="Main">
+                    <h2>Admin Dashboard</h2>
+                    <hr>
+                    <h3>Click on the other tabs to begin.</h3>
+                </div>
+
+                <div class="tab-pane fade container-fluid" id="EditRemove">
+                    <h2>Currently Showing</h2>
+                    <hr>
+                    <div class="col-md-4 div-border-right">
+                        <div class="form-group">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a data-toggle="tab" href="#SunShow">Sunday</a></li>
+                                <li><a data-toggle="tab" href="#MonShow">Monday</a></li>
+                                <li><a data-toggle="tab" href="#TueShow">Tuesday</a></li>
+                                <li><a data-toggle="tab" href="#WedShow">Wednesday</a></li>
+                                <li><a data-toggle="tab" href="#ThuShow">Thursday</a></li>
+                                <li><a data-toggle="tab" href="#FriShow">Friday</a></li>
+                                <li><a data-toggle="tab" href="#SatShow">Saturday</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Individual movies; fold this part to see next sections -->
+                    <div class="col-md-8 ">
+                        <div class="container-fluid ">
+                            <div class="tab-content">
+                                <div class="tab-pane fade" id="SunShow">
+                                    <table class="table table-hover" id="movies">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieComAdventure</td>
+                                            <td>Comedy, Adventure</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieDramaAction</td>
+                                            <td>Drama, Action</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieMysteryAdventure</td>
+                                            <td>Mystery, Adventure</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="MonShow">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieComAdventure</td>
+                                            <td>Comedy, Adventure</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieDramaAction</td>
+                                            <td>Drama, Action</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieMysteryAdventure</td>
+                                            <td>Mystery, Adventure</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star "></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="TueShow">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieComAdventure</td>
+                                            <td>Comedy, Adventure</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieDramaAction</td>
+                                            <td>Drama, Action</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>MovieThrillerPsychological</td>
+                                            <td>Thriller, Psychological</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="WedShow">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieComAdventure</td>
+                                            <td>Comedy, Adventure</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieDramaAction</td>
+                                            <td>Drama, Action</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>MovieThrillerPsychological</td>
+                                            <td>Thriller, Psychological</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="ThuShow">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieDramaAction</td>
+                                            <td>Drama, Action</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>MovieThrillerPsychological</td>
+                                            <td>Thriller, Psychological</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>MovieComedyAction</td>
+                                            <td>Comedy, Action</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="FriShow">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieDramaAction</td>
+                                            <td>Drama, Action</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>MovieThrillerPsychological</td>
+                                            <td>Thriller, Psychological</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>MovieComedyAction</td>
+                                            <td>Comedy, Action</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="SatShow">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
+                                        </tr>
+                                        <tr>
+                                            <td>MovieComAdventure</td>
+                                            <td>Comedy, Adventure</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>MovieThrillerPsychological</td>
+                                            <td>Thriller, Psychological</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                         <tr>
+                                            <td>MovieComedyAction</td>
+                                            <td>Comedy, Action</td>
+                                            <td> 
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                                <span class="fa fa-star on"></span>
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Edit">
+                                            </td>
+                                            <td>
+                                                <input type="button" class="btn btn-default" value="Remove" onclick="deleteRow(this)" >
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane fade container-fluid" id="Add">
+                    <h2> Add Movie</h2>
+                    <hr>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-9">
+                        <form name="AddMovie" id="AddMovie"class="form-horizontal">
+                            <div class="form-group">
+                                <label for="movTitle" class="control-label col-md-3">Movie Title</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="movTitle" id="movTitle" class="form-control" placeholder="Title">
+                                </div>
+                            </div>
+                            <div class="form-group" class="form-horizontal">
+                                <label for="movGenre" class="control-label col-md-3">Genres</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="movGenre" id="movGenre" class="form-control" placeholder="Genre1, Genre2">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="movScore" class="control-label col-md-3">Score</label>
+                                <div class="col-md-9">
+                                    <input type="number" name="movScore" id="movScore" class="form-control" placeholder="Out of 5">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="movSynopsis" class="control-label col-md-3">Synopsis</label>
+                                <div class="col-md-9">
+                                    <textarea name="movSynopsis" id="movSynopsis" rows="5" class="form-control" placeholder="Movie Synopsis here" style="resize:none"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="movCast" class="control-label col-md-3">Cast</label>
+                                <div class="col-md-9">
+                                    <textarea name="movCast" id="movCast" rows="5" class="form-control" placeholder="Starring: " style="resize:none"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                    <input type="button" name="Upload" id="Upload" class="btn btn-default btn-block" value="Upload">
+                                </div>
+                                <div class="col-md-4"></div>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+	<nav class="nav navbar-default">
+		<div class=" main_content footer">
+			&copy; Benedictos, Cagaoan, Montecillo, 2020.
+		</div>
+	</nav>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <!-- <script src="offcanvas.js"></script> -->
+    <!-- Main JS handler for this html page -->
+    <!-- <script type="text/javascript" src="scripts/main.js"></script> -->
+    <script>
+        function deleteRow(e){
+            $(e).closest("tr").remove();
+        }
+    </script>
+
+</body>
+</html>

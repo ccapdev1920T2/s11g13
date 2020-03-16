@@ -1,0 +1,19 @@
+{
+  "name": "s11g13",
+  "version": "1.0.0",
+  "description": "AY1920T2-CCAPDEV Machine Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccapdev1920T2/s11g13.git"
+  },
+  "author": "Bianca Benedictos, John Henry Cagaoan, Howard Montecillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccapdev1920T2/s11g13/issues"
+  },
+  "homepage": "https://github.com/ccapdev1920T2/s11g13#readme"
+}

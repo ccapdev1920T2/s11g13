@@ -1,0 +1,164 @@
+/* Cross-site css */
+
+/* This class centers your content in the webpage */
+.main_content
+{
+    display:flex;
+    justify-content: center;
+}
+
+
+/* Payment and Login/Register custom style */
+.auth_box
+{
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    padding: 10px;
+    width: 400px;
+}
+
+/* remove side paddings of bootstrap container */
+.container-unpadded {
+    width: 100%;
+    height: 100%;
+}
+
+/* Header and footer styles */
+nav > div > ul > li:hover
+{
+    background: #ccc;
+}
+
+.footer
+{
+    color: #000;
+}
+
+.banner
+{
+    background-image: url("../assets/banner.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.banner > div > *
+{
+    color: #ddd;
+}
+
+/* Carousel */
+.carousel-parent {
+    height: 400px;
+    overflow: hidden
+}
+  
+.carousel-parent img{
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
+
+/* movie list */
+.movie-list {
+    white-space: wrap;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box; /* So the width will be 100% + 17px */
+}
+
+/* thumbnail */
+.thumbnail{
+    height: 400px; 
+    text-align: center;
+}
+.thumbnail img{
+    flex-shrink: 100%;
+    max-width: 100%;
+    max-height: 100%
+}
+
+/* thumnail showing schedule */
+.shows {
+    justify-content: center;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box; /* So the width will be 100% + 17px */
+}
+.shows .thumbnail{
+    height: 300px;
+    width: 250px;
+}
+.shows img{
+    height: 200px; 
+    flex-shrink: 100%;
+    max-width: 100%;
+    max-height: 100%
+}
+
+.div-border-right
+{
+    border-right: 2px solid #ddd;
+}
+
+/* Admin */
+.mainBox
+{
+    border: 1px solid #ddd;
+    border-top: 0px;
+}
+
+/* flexin' */
+.flex-to-row {
+    flex-flow: column wrap;
+}
+
+.flex-to-col {
+    flex-flow: row wrap;
+}
+
+.scrollvertical{
+    overflow-y: scroll;
+}
+
+.padded{
+    padding-top: 50px;
+}
+
+/* for rating */
+.btn-grey{
+    background-color:#D8D8D8;
+    color:#FFF;
+}
+
+.bold{
+    font-weight:700;
+}
+.padding-bottom-7{
+    padding-bottom:7px;
+}
+  
+.review-block{
+    background-color:#FAFAFA;
+    border:1px solid #EFEFEF;
+    /* padding:15px; */
+    border-radius:3px;
+    /* margin-bottom:15px; */
+}
+.review-block-name{
+    font-size:12px;
+}
+.review-block-date{
+    font-size:12px;
+}
+.review-block-rate{
+    font-size:13px;
+}
+.review-block-title{
+    font-size:15px;
+    font-weight:700;
+    /* margin-bottom:10px; */
+}
+.review-block-description{
+    font-size:13px;
+}

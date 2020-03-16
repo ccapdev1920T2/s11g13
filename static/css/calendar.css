@@ -1,0 +1,43 @@
+#Mo, #Tu, #We, #Th, #Fr, #Sa, #Su
+{
+    background-color: #f1f1f1;
+    margin: 10px;
+    padding: 20px;
+    font-size: 30px;
+    width: 150px;
+    height: 150px;
+    border-style: none;
+    background-size: 100% 100%;
+    transition: .3s ease;
+}
+
+#Mo
+{
+    background-image: url('../assets/moselected.png');
+}
+#Tu
+{
+    background-image: url('../assets/tuselected.png');
+}
+#We
+{
+    background-image: url('../assets/weselected.png');
+}
+#Th
+{
+    background-image: url('../assets/thselected.png');
+}
+#Fr
+{
+    background-image: url('../assets/frselected.png');
+}
+#Sa
+{
+    background-image: url('../assets/saselected.png');
+}
+#Su
+{
+    background-image: url('../assets/suselected.png');
+}
+
+

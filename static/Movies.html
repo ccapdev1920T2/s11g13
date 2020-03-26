@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+
+    <!-- Bootstrap css cdn -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- main.css -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+    <!-- Header main -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid theme">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="Home.html">Ticket or Leave it</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="Movies.html">Movies</a></li>
+          <li><a href="calendar.html">Calendar</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <!-- USE NODEJS AND SESSIONS IN THE FUTURE, THIS WILL CHANGE TO USERNAME WHEN LOGGED IN -->
+          <li><a href="login.html">
+            <span class="glyphicon glyphicon-user"></span>
+            Register/Log In
+          </a></li>
+        </ul>
+      </div>
+    </nav>
+     
+    <div class="jumbotron banner">
+        <!-- <img src="assets/banner.jpg" style="visibility: hidden;"> -->
+        <div class="container">
+            <h2>Check out our growing library</h2>
+            <hr>
+            <h4>Movie details as well as reviews from other users</h4>
+        </div>
+    </div>
+
+
+    <!-- Navbar Search bar -->
+    <nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<form class="navbar-form navbar-right">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search for Movies">
+				</div>
+				<input type="button" class="btn btn-default" value="Search">
+			</form>
+		</div>
+	</nav>
+
+
+    <!-- movie list -->
+    <div class="container container-unpadded main_content">
+        <div class="row movie-list">
+            <div class="col-md-12">
+                <a href="#">
+                    <div class="col-md-3">
+                      <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/it.jpg" alt="...">   
+                      </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="col-md-3">
+                      <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/PercyJacksonTheLightningThief.jpg" alt="...">   
+                      </div>
+                    </div>
+                </a>
+                <a href="movie-view.html">
+                    <div class="col-md-3">
+                      <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/psIStillLoveYou.jpg" alt="...">   
+                      </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="col-md-3">
+                      <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/Taken.jpg" alt="...">   
+                      </div>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="col-md-3">
+                      <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/TheConjuring.jpg" alt="...">   
+                      </div>
+                    </div>
+                </a>
+            </div> 
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="container container-unpadded">
+        <nav aria-label="...">
+            <ul class="pager">
+              <li><a href="#">Previous</a></li>
+              <li><a href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- footer -->
+    <nav class="nav navbar-default">
+      <div class=" main_content footer">
+        &copy; Benedictos, Cagaoan, Montecillo, 2020.
+      </div>
+    </nav>
+    
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <!-- <script src="offcanvas.js"></script> -->
+    <!-- Main JS handler for this html page -->
+    <script type="text/javascript" src="scripts/main.js"></script>
+  
+
+</body>
+</html>

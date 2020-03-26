@@ -1,0 +1,27 @@
+{
+  "name": "ccapdev-ay1920t2-mp",
+  "version": "1.0.0",
+  "description": "Machine Project for CCAPDEV",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JHCagaoan/CCAPDEV-MP.git"
+  },
+  "keywords": [
+    "ticket",
+    "website"
+  ],
+  "author": "Bianca Benedictos, John Henry Cagaoan, Howard Montecillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JHCagaoan/CCAPDEV-MP/issues"
+  },
+  "homepage": "https://github.com/JHCagaoan/CCAPDEV-MP#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.0"
+  }
+}

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+
+    <!-- Bootstrap css cdn -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- header and footer styles, and auth_box -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <!-- For the stars -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .on
+        {
+            color:orange;
+        }
+
+        .slider{
+          overflow: auto;
+          white-space: nowrap;
+          overflow-x:hidden;
+        }
+
+        img {
+          display:inline-block;
+          width: 200px;
+          height: 300px;
+        }
+
+    </style>
+    <!-- <span class="fa fa-star on"></span>
+    <span class="fa fa-star on"></span>
+    <span class="fa fa-star on"></span>
+    <span class="fa fa-star"></span>
+    <span class="fa fa-star"></span> -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Header main -->
+    <nav class="navbar navbar-default">
+		<div class="container-fluid theme">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="Home.html">Ticket or Leave it</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="Movies.html">Movies</a></li>
+				<li><a href="calendar.html">Calendar</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<!-- USE NODEJS AND SESSIONS IN THE FUTURE, THIS WILL CHANGE TO USERNAME WHEN LOGGED IN -->
+				<li><a href="login.html">
+					<span class="glyphicon glyphicon-user"></span>
+					Register/Log In
+				</a></li>
+			</ul>
+		</div>
+    </nav>
+    
+    <div class="container">
+        <div class="form-group">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="active"><a style="font-size: 30px;"data-toggle="tab" href="#ViewShow">View This Week's Show</a></li>
+            </ul>
+        </div>
+
+        <div class="tab-content mainBox">
+
+                <div class="tab-pane fade in active container-fluid" id="ViewShow">
+                    <h2>Currently Showing</h2>
+                    <hr>
+                    <div class="col-md-4 div-border-right">
+                        <div class="form-group">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a data-toggle="tab" href="#SunShow">Sunday</a></li>
+                                <li><a data-toggle="tab" href="#MonShow">Monday</a></li>
+                                <li><a data-toggle="tab" href="#TueShow">Tuesday</a></li>
+                                <li><a data-toggle="tab" href="#WedShow">Wednesday</a></li>
+                                <li><a data-toggle="tab" href="#ThuShow">Thursday</a></li>
+                                <li><a data-toggle="tab" href="#FriShow">Friday</a></li>
+                                <li><a data-toggle="tab" href="#SatShow">Saturday</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Individual movies; fold this part to see next sections -->
+                    <div class="col-md-8 ">
+                        <div class="container-fluid ">
+                            <div class="tab-content">
+                                <div class="tab-pane fade" id="SunShow">
+                                    <table class="table table-hover" id="movies">
+                                        <div class="slider" id="slider1">
+                                            
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton1"><</button> <button id="rightButton1">></button></div>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="MonShow">
+                                    <table class="table table-hover">
+                                        <div class="slider" id="slider2">
+                                            
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton2"><</button> <button id="rightButton2">></button></div>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="TueShow">
+                                    <table class="table table-hover">
+                                        <div class="slider" id="slider3">
+                                            
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton3"><</button> <button id="rightButton3">></button></div>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="WedShow">
+                                    <table class="table table-hover">
+                                        <div class="slider" id="slider4">
+                                            
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton4"><</button> <button id="rightButton4">></button></div>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="ThuShow">
+                                    <table class="table table-hover">
+                                        <div class="slider" id="slider5">
+                                            
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton5"><</button> <button id="rightButton5">></button></div>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="FriShow">
+                                    <table class="table table-hover">
+                                        <div class="slider" id="slider6">
+                                            
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton6"><</button> <button id="rightButton6">></button></div>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="SatShow">
+                                    <table class="table table-hover">
+                                        <div class="slider" id="slider7">
+                                            
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+                                            <img src="assets/MoviePosters/it.jpg">
+                                            <img src="assets/MoviePosters/Taken.jpg">
+                                            <img src="assets/MoviePosters/psIStillLoveYou.jpg">
+                                            <img src="assets/MoviePosters/TheConjuring.jpg">
+
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton7"><</button> <button id="rightButton7">></button></div>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+	<nav class="nav navbar-default">
+		<div class=" main_content footer">
+			&copy; Benedictos, Cagaoan, Montecillo, 2020.
+		</div>
+	</nav>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <!-- <script src="offcanvas.js"></script> -->
+    <!-- Main JS handler for this html page -->
+    <!-- <script type="text/javascript" src="scripts/main.js"></script> -->
+    <script>
+        $("#leftButton1").click(function(){
+            $("#slider1").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton1").click(function(){
+            $("#slider1").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton2").click(function(){
+            $("#slider2").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton2").click(function(){
+            $("#slider2").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton3").click(function(){
+            $("#slider3").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton3").click(function(){
+            $("#slider3").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton4").click(function(){
+            $("#slider4").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton4").click(function(){
+            $("#slider4").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton5").click(function(){
+            $("#slider5").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton5").click(function(){
+            $("#slider5").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton6").click(function(){
+            $("#slider6").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton6").click(function(){
+            $("#slider6").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton7").click(function(){
+            $("#slider7").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton7").click(function(){
+            $("#slider7").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+    </script>
+
+</body>
+</html>

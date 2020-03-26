@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User Account</title>
+
+	<!-- Bootstrap css cdn -->
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="../../../../../../../css/bootstrap.min.css">
+	<!-- Optional theme -->
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="../../../../../../../css/bootstrap-theme.min.css">
+
+	<!-- header and footer styles, and auth_box -->
+	<link rel="stylesheet" type="text/css" href="../../../../../../../css/main.css">
+
+	<!-- This page's CSS -->
+	<link rel="stylesheet" type="text/css" href="../../../../../../../css/userprofile.css">
+
+</head>
+<body>
+	<!-- Header main -->
+    <nav class="navbar navbar-default">
+		<div class="container-fluid theme">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="Home.html">Ticket or Leave it</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="Movies.html">Movies</a></li>
+				<li><a href="calendar.html">Calendar</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<!-- USE NODEJS AND SESSIONS IN THE FUTURE, THIS WILL CHANGE TO USERNAME WHEN LOGGED IN -->
+				<li><a href="login.html">
+					<span class="glyphicon glyphicon-user"></span>
+					Register/Log In
+				</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<!-- Profile photo -->
+		<div class="col-md-3">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="main_content">
+						<img id="profilepic" src={{pic}}>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<input type="file" name="File" id="File" class="btn btn-block hidden" accept="image/*" 
+					value="Upload Photo" onchange="document.getElementById('profilepic').src = window.URL.createObjectURL(this.files[0])">
+				</div>
+			</div>
+		</div>
+		<!-- Other contents -->
+		<div class="col-md-9">
+			<form class="form-horizontal">
+				<!-- Name -->
+				<div class="form-group">
+					<label class="control-label col-md-2">Name: </label>
+					<div class="col-md-5">
+						<input type="text" name="fName" id="fName" class="form-control" value={{fname}} readonly>
+					</div>
+					<div class="col-md-5">
+						<input type="text" name="lName" id="lName" class="form-control" value={{lname}} readonly>
+					</div>
+				</div>
+
+				<!-- Username -->
+				<div class="form-group">
+					<label for="UName" class="control-label col-md-2">Username</label>
+					<div class="col-md-10">
+						<input type="text" name="UName" id="UName" class="form-control" value={{username}} readonly>
+					</div>
+				</div>
+
+				<!-- Email address -->
+				<div class="form-group">
+					<label for="Email" class="control-label col-md-2">Email address</label>
+					<div class="col-md-10">
+						<input type="email" name="Email" id="Email" class="form-control" value={{email}} readonly>
+					</div>
+				</div>
+
+				<!-- Phone number -->
+				<div class="form-group">
+					<label for="Mobile" class="control-label col-md-2">Mobile number</label>
+					<div class="col-md-10">
+						<input type="nuber" name="Mobile" id="Mobile" class="form-control" value={{mobileNum}} readonly>
+					</div>
+				</div>
+
+				<!-- Controls -->
+				<div class="form-group">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<input type="button" name="Edit" id="Edit" class="btn btn-default btn-block" value="Edit">
+						<input type="button" name="Save" id="Save" class="btn btn-default btn-block hidden" value="Save">
+						<input type="button" name="ViewTicket" id="ViewTicket" class="btn btn-default btn-block" value="View Ticket">
+					</div>
+					<div class="col-md-4"></div>
+
+				</div>
+				
+			</form>
+		</div>
+
+	</div>
+
+
+	<!-- Footer -->
+	<nav class="nav navbar-default">
+		<div class=" main_content footer">
+			&copy; Benedictos, Cagaoan, Montecillo, 2020.
+		</div>
+	</nav>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../../../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <!-- <script src="offcanvas.js"></script> -->
+	<!-- Main JS handler for this html page -->
+	<script type="text/javascript" src="../../../../../../../scripts/userprofile.js"></script>
+		
+</body>
+</html>

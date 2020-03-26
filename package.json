@@ -1,13 +1,20 @@
 {
+<<<<<<< HEAD
   "name": "ccapdev-ay1920t2-mp",
   "version": "1.0.0",
   "description": "Machine Project for CCAPDEV",
+=======
+  "name": "s11g13",
+  "version": "1.0.0",
+  "description": "AY1920T2-CCAPDEV Machine Project",
+>>>>>>> c606c26728378c7a460bdce61703058dd7cd8a75
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
+<<<<<<< HEAD
     "url": "git+https://github.com/JHCagaoan/CCAPDEV-MP.git"
   },
   "keywords": [
@@ -24,4 +31,14 @@
     "express": "^4.17.1",
     "hbs": "^4.1.0"
   }
+=======
+    "url": "git+https://github.com/ccapdev1920T2/s11g13.git"
+  },
+  "author": "Bianca Benedictos, John Henry Cagaoan, Howard Montecillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccapdev1920T2/s11g13/issues"
+  },
+  "homepage": "https://github.com/ccapdev1920T2/s11g13#readme"
+>>>>>>> c606c26728378c7a460bdce61703058dd7cd8a75
 }

@@ -22,6 +22,7 @@ const indexFunctions = {
     	  mobileNum: req.params.mobileNum,
     	  pic: '../../../../../../../assets/profpic.png'
     	})
+<<<<<<< HEAD
     },
 
     getViewTicket: function(req, res, next) {
@@ -41,6 +42,8 @@ const indexFunctions = {
             seatNum: 'req.params.seatNum',
             price: 'req.params.price'
         })
+=======
+>>>>>>> c606c26728378c7a460bdce61703058dd7cd8a75
     }
 };
 

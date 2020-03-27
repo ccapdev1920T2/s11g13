@@ -3,6 +3,16 @@ const indexFunctions = {
         res.render("home", {
             pageName: "Home",
             current: "Home",
+            movies: [
+                {title: "P.S. I Still Love You", imageurl: "assets/MoviePosters/psIStillLoveYou.jpg"},
+                {title:"The Conjuring", imageurl: "assets/MoviePosters/TheConjuring.jpg"},
+                {title: "The Lightning Thief", imageurl: "assets/MoviePosters/PercyJacksonTheLightningThief.jpg"},
+                {title: "It", imageurl: "assets/MoviePosters/it.jpg"},
+                {title: "Taken", imageurl: "assets/MoviePosters/Taken.jpg"},
+                {title: "Avengers: Civil War", imageurl: "assets/carousel/AvengersCivilWar.png"},
+                {title: "Captain America: The Winter Soldier", imageurl: "assets/carousel/CaptainAmericaTheWinterSoldier.jpeg"},
+                {title: "Doctor Who - The Day of the Doctor", imageurl: "assets/carousel/DoctorWhoTheDayOfTheDoctor.jpg"},
+            ],
         })
     },
 
@@ -10,6 +20,16 @@ const indexFunctions = {
         res.render("movies", {
             pageName: "Movies",
             current: "Movies",
+            movies: [
+                {title: "P.S. I Still Love You", imageurl: "assets/MoviePosters/psIStillLoveYou.jpg"},
+                {title:"The Conjuring", imageurl: "assets/MoviePosters/TheConjuring.jpg"},
+                {title: "The Lightning Thief", imageurl: "assets/MoviePosters/PercyJacksonTheLightningThief.jpg"},
+                {title: "It", imageurl: "assets/MoviePosters/it.jpg"},
+                {title: "Taken", imageurl: "assets/MoviePosters/Taken.jpg"},
+                {title: "Avengers: Civil War", imageurl: "assets/carousel/AvengersCivilWar.png"},
+                {title: "Captain America: The Winter Soldier", imageurl: "assets/carousel/CaptainAmericaTheWinterSoldier.jpeg"},
+                {title: "Doctor Who - The Day of the Doctor", imageurl: "assets/carousel/DoctorWhoTheDayOfTheDoctor.jpg"},
+            ],
         })
     }, 
 

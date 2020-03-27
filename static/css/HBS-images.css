@@ -1,0 +1,10 @@
+.HBS-carousel-img
+{
+    height: 350px;
+}
+
+.movie-cover
+{
+    max-height: 350px;
+    max-width: 75rem;
+}

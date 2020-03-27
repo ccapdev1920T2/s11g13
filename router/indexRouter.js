@@ -6,12 +6,14 @@ const controller = require('../controller/index');
 
 ////// ROUTING /////////
 // this path is to '/'
-router.get('/', controller.getHome);
+router.get(["/", "/home"], controller.getHome);
 
-router.get('/movies', controller.getMovies);
+router.get("/movies", controller.getMovies);
 
-router.get('/calendar', controller.getCalendar);
+router.get("/calendar", controller.getCalendar);
 
+router.get("/register", controller.getRegister);
+router.get("/login", controller.getLogin);
 
 
 // this path is to '/asdf'

@@ -20,6 +20,20 @@ const indexFunctions = {
         })
     },
 
+    getRegister: function(req, res, next){
+        res.render("register", {
+            pageName: "Register",
+            
+        })
+    },
+
+    getLogin: function(req, res, next){
+        res.render("login", {
+            pageName: "Login",
+            
+        })
+    },
+
     getAsdf: function(req, res, next) {
         res.send('Asdf Directory');
     },

@@ -17,6 +17,7 @@ const indexFunctions = {
         res.render("calendar", {
             pageName: "Calendar",
             current: "Calendar",
+            // isSignedIn: true,
         })
     },
 
@@ -29,7 +30,7 @@ const indexFunctions = {
 
     getLogin: function(req, res, next){
         res.render("login", {
-            pageName: "Login",
+            pageName: "Log In",
             
         })
     },

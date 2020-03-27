@@ -22,16 +22,23 @@
 			</li>
 		</ul>
 		<ul class="navbar-nav nav">
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="RegLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<i class="fa fa-user" aria-hidden="true"></i>
-				Register/Log In
-				</a>
-				<div class="dropdown-menu" aria-labelledby="RegLogIn">
-					<a class="dropdown-item" href="/register">Register</a>
-					<a class="dropdown-item" href="/login">Log In</a>
-				</div>
-			</li>
+			{{#if isSignedIn}}
+				<li class="nav-item">
+					<a class="nav-link">Log Out</a>
+				</li>
+			{{else}}
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="RegLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="fa fa-user" aria-hidden="true"></i>
+					Register/Log In
+					</a>
+					<div class="dropdown-menu" aria-labelledby="RegLogIn">
+						<a class="dropdown-item" href="/register">Register</a>
+						<a class="dropdown-item" href="/login">Log In</a>
+					</div>
+				</li>
+			{{/if}}
+
 		</ul>
 	</div>
 </nav>

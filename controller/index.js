@@ -55,6 +55,26 @@ const indexFunctions = {
         })
     },
 
+
+    getPayment: function(req, res, next){
+        res.render("payment", {
+            pageName: "Payment Gateway",
+            isSignedIn: true,
+            ticketDetails: {
+                title: "P.S. I Still Love You",
+                showDate: "04-14-2000",
+                showTime: "12:45PM - 2:15PM",
+                seats: ["1A", "1B"],
+                totalCost: 570.00,
+            },
+
+            
+        })
+    },
+
+
+
+
     getAsdf: function(req, res, next) {
         res.send('Asdf Directory');
     },

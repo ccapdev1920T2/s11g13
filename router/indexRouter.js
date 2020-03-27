@@ -15,6 +15,7 @@ router.get("/calendar", controller.getCalendar);
 router.get("/register", controller.getRegister);
 router.get("/login", controller.getLogin);
 
+router.get("/payment", controller.getPayment);
 
 // this path is to '/asdf'
 router.get('/asdf', controller.getAsdf);

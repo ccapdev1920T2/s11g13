@@ -1,6 +1,23 @@
 const indexFunctions = {
     getHome: function(req, res, next) {
-        res.send('Home Directory');
+        res.render("home", {
+            pageName: "Home",
+            current: "Home",
+        })
+    },
+
+    getMovies: function(req, res, next) {
+        res.render("movies", {
+            pageName: "Movies",
+            current: "Movies",
+        })
+    }, 
+
+    getCalendar: function(req, res, next) {
+        res.render("calendar", {
+            pageName: "Calendar",
+            current: "Calendar",
+        })
     },
 
     getAsdf: function(req, res, next) {
@@ -22,28 +39,6 @@ const indexFunctions = {
     	  mobileNum: req.params.mobileNum,
     	  pic: '../../../../../../../assets/profpic.png'
     	})
-<<<<<<< HEAD
-    },
-
-    getViewTicket: function(req, res, next) {
-        res.render('ticket', {
-            /*
-            title: req.params.title,
-            showDate: req.params.showDate,
-            showTime: req.params.showTime,
-            dateBooked: req.params.dateBooked,
-            seatNum: req.params.seatNum,
-            price: req.params.price
-            */
-            title: 'req.params.title',
-            showDate: 'req.params.showDate',
-            showTime: 'req.params.showTime',
-            dateBooked: 'req.params.dateBooked',
-            seatNum: 'req.params.seatNum',
-            price: 'req.params.price'
-        })
-=======
->>>>>>> c606c26728378c7a460bdce61703058dd7cd8a75
     }
 };
 

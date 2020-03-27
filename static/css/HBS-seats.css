@@ -1,0 +1,12 @@
+.seatRow {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+
+}
+
+.seat input[type=checkbox]:checked + label {
+    background: #FF8C00;
+}

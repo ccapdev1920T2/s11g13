@@ -55,6 +55,11 @@ const indexFunctions = {
         })
     },
 
+    getSeats: (req, res, next)=>{
+        res.render("seats", {
+            pageName: "Reserve Seats",
+        })
+    },
 
     getPayment: function(req, res, next){
         res.render("payment", {
@@ -77,12 +82,6 @@ const indexFunctions = {
 
     getAsdf: function(req, res, next) {
         res.send('Asdf Directory');
-    },
-
-    getSeats: function(req, res, next) {
-    	res.render('seats', {
-    	  header: 'seats'
-    	})
     },
 
     getUserProfile: function(req, res, next) {

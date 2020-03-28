@@ -1,85 +1,64 @@
 $(document).ready(function() {
-    $("#Su").click(function(){
-        console.log("Su pressed");
-    });
+    $("#leftButton1").click(function(){
+            $("#slider1").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton1").click(function(){
+            $("#slider1").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
 
-    $("#Su").hover(function(){
-        $("#Su").css('background-image', 'url("assets/su.png")');
-    });
+        $("#leftButton2").click(function(){
+            $("#slider2").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton2").click(function(){
+            $("#slider2").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
 
-    $("#Su").mouseleave(function(){
-        $("#Su").css('background-image', 'url("assets/suselected.png")');
-    });
+        $("#leftButton3").click(function(){
+            $("#slider3").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton3").click(function(){
+            $("#slider3").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
 
-    $("#Mo").click(function(){
-        console.log("Mo pressed");
-    });
+        $("#leftButton4").click(function(){
+            $("#slider4").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton4").click(function(){
+            $("#slider4").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
 
-    $("#Mo").hover(function(){
-        $("#Mo").css('background-image', 'url("assets/mo.png")');
-    });
+        $("#leftButton5").click(function(){
+            $("#slider5").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton5").click(function(){
+            $("#slider5").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
 
-    $("#Mo").mouseleave(function(){
-        $("#Mo").css('background-image', 'url("assets/moselected.png")');
-    });
+        $("#leftButton6").click(function(){
+            $("#slider6").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton6").click(function(){
+            $("#slider6").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
 
-    $("#Tu").click(function(){
-        console.log("Tu pressed");
-    });
-
-    $("#Tu").hover(function(){
-        $("#Tu").css('background-image', 'url("assets/tu.png")');
-    });
-
-    $("#Tu").mouseleave(function(){
-        $("#Tu").css('background-image', 'url("assets/tuselected.png")');
-    });
-
-    $("#We").click(function(){
-        console.log("We pressed");
-    });
-
-    $("#We").hover(function(){
-        $("#We").css('background-image', 'url("assets/we.png")');
-    });
-
-    $("#We").mouseleave(function(){
-        $("#We").css('background-image', 'url("assets/weselected.png")');
-    });
-
-    $("#Th").click(function(){
-        console.log("Th pressed");
-    });
-
-    $("#Th").hover(function(){
-        $("#Th").css('background-image', 'url("assets/th.png")');
-    });
-
-    $("#Th").mouseleave(function(){
-        $("#Th").css('background-image', 'url("assets/thselected.png")');
-    });
-
-    $("#Fr").click(function(){
-        console.log("Fr pressed");
-    });
-
-    $("#Fr").hover(function(){
-        $("#Fr").css('background-image', 'url("assets/fr.png")');
-    });
-
-    $("#Fr").mouseleave(function(){
-        $("#Fr").css('background-image', 'url("assets/frselected.png")');
-    });
-
-    $("#Sa").click(function(){
-        console.log("Sa pressed");
-    });
-
-    $("#Sa").hover(function(){
-        $("#Sa").css('background-image', 'url("assets/sa.png")');
-    });
-
-    $("#Sa").mouseleave(function(){
-        $("#Sa").css('background-image', 'url("assets/saselected.png")');
-    });
+        $("#leftButton7").click(function(){
+            $("#slider7").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton7").click(function(){
+            $("#slider7").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
 });

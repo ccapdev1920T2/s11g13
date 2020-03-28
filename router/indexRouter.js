@@ -21,7 +21,7 @@ router.get("/payment", controller.getPayment);
 router.get('/asdf', controller.getAsdf);
 //this path is to '/seats'
 router.get('/seats', controller.getSeats);
-//this path is to '/userprofile'
-router.get('/userprofile/:fname/:lname/:username/:email/:mobileNum/', controller.getUserProfile);
+//this path is to '/userprofile/:email'
+router.get('/userprofile/:email', controller.getUserProfile);
 
 module.exports = router;

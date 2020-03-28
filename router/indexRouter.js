@@ -13,6 +13,8 @@ router.get("/movies", controller.getMovies);
 router.get("/calendar", controller.getCalendar);
 
 router.get("/register", controller.getRegister);
+router.post("/register", controller.postRegister);
+
 router.get("/login", controller.getLogin);
 router.post("/login", controller.postLogin);
 

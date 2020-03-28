@@ -22,7 +22,7 @@ router.get("/payment", controller.getPayment);
 router.get('/asdf', controller.getAsdf);
 //this path is to '/seats'
 router.get('/seats', controller.getSeats);
-//this path is to '/userprofile/:email'
-router.get('/userprofile/:email', controller.getUserProfile);
+//this path is to '/userprofile/:username'
+router.get('/userprofile/:username', controller.getUserProfile);
 
 module.exports = router;

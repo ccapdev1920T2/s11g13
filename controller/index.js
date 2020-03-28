@@ -106,7 +106,7 @@ const indexFunctions = {
     getUserProfile: function(req, res, next) {
     	res.render('userprofile', {
             pageName: "User Profile",
-            email: req.params.email
+            username: req.params.username
     	})
     }
 };

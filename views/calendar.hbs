@@ -13,6 +13,26 @@
     
     <link rel="stylesheet" href="css/HBS-images.css">
 
+<style>
+        .on
+        {
+            color:orange;
+        }
+
+        .slider{
+          overflow: auto;
+          white-space: nowrap;
+          overflow-x:hidden;
+        }
+
+        img {
+          display:inline-block;
+          width: 200px;
+          height: 300px;
+        }
+
+    </style>
+    
 </head>
 <body>
     {{>header}}
@@ -63,18 +83,23 @@
                             <div class="row">
                                 <h4>Sunday</h4>
                             </div>
-                            <div class="row row-cols-2 row-cols-md-4">
+                            <div>
 
-                                <!-- Placeholder Movie -->
-                                <div class="col mb-4">
+                                <!-- Movies -->
+                                <div>
                                     <a href="#">
-                                        <div class="card h-100">
-                                            <img src="assets/MoviePosters/it.jpg" class="movie-cover">
-                                            <h5 class="text-center card-title">It</h5>
+                                        <div class="">
+                                            <div class="slider" id="slider1">
+                                            
+                                            {{#each moviePicM}}
+                                            <img src={{this}}>
+                                            {{/each}}
+
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton1"><</button> <button id="rightButton1">></button></div>
                                         </div>
                                     </a>
                                 </div>
-
 
                             </div>
                         </div>
@@ -87,6 +112,26 @@
                                 <h4>Monday</h4>
                             </div>
 
+                            <div>
+
+                                <!-- Movies -->
+                                <div>
+                                    <a href="#">
+                                        <div class="">
+                                            <div class="slider" id="slider2">
+                                            
+                                            {{#each moviePicT}}
+                                            <img src={{this}}>
+                                            {{/each}}
+
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton2"><</button> <button id="rightButton2">></button></div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
 
@@ -95,6 +140,21 @@
                         <div class="container">
                             <div class="row">
                                 <h4>Tuesday</h4>
+                            </div>
+
+                            <div>
+                                <a href="#">
+                                    <div class="">
+                                        <div class="slider" id="slider3">
+                                        
+                                        {{#each moviePicW}}
+                                        <img src={{this}}>
+                                        {{/each}}
+
+                                    </div>
+                                    <div style="text-align:center;"><button id="leftButton3"><</button> <button id="rightButton3">></button></div>
+                                    </div>
+                                </a>
                             </div>
 
                         </div>
@@ -107,6 +167,21 @@
                                 <h4>Wednesday</h4>
                             </div>
 
+                            <div>
+                                <a href="#">
+                                    <div class="">
+                                        <div class="slider" id="slider4">
+                                        
+                                        {{#each moviePicH}}
+                                        <img src={{this}}>
+                                        {{/each}}
+
+                                    </div>
+                                    <div style="text-align:center;"><button id="leftButton4"><</button> <button id="rightButton4">></button></div>
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
 
@@ -115,6 +190,21 @@
                         <div class="container">
                             <div class="row">
                                 <h4>Thursday</h4>
+                            </div>
+
+                            <div>
+                                <a href="#">
+                                    <div class="">
+                                        <div class="slider" id="slider5">
+                                        
+                                        {{#each moviePicF}}
+                                        <img src={{this}}>
+                                        {{/each}}
+
+                                    </div>
+                                    <div style="text-align:center;"><button id="leftButton5"><</button> <button id="rightButton5">></button></div>
+                                    </div>
+                                </a>
                             </div>
 
                         </div>
@@ -127,6 +217,21 @@
                                 <h4>Friday</h4>
                             </div>
 
+                            <div>
+                                <a href="#">
+                                    <div class="">
+                                        <div class="slider" id="slider6">
+                                        
+                                        {{#each moviePicSa}}
+                                        <img src={{this}}>
+                                        {{/each}}
+
+                                    </div>
+                                    <div style="text-align:center;"><button id="leftButton6"><</button> <button id="rightButton6">></button></div>
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
 
@@ -135,6 +240,21 @@
                         <div class="container">
                             <div class="row">
                                 <h4>Saturday</h4>
+                            </div>
+
+                            <div>
+                                <a href="#">
+                                    <div class="">
+                                        <div class="slider" id="slider7">
+                                        
+                                        {{#each moviePicSu}}
+                                        <img src={{this}}>
+                                        {{/each}}
+
+                                    </div>
+                                    <div style="text-align:center;"><button id="leftButton7"><</button> <button id="rightButton7">></button></div>
+                                    </div>
+                                </a>
                             </div>
 
                         </div>
@@ -149,5 +269,72 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+
+    <script>
+        $("#leftButton1").click(function(){
+            $("#slider1").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton1").click(function(){
+            $("#slider1").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton2").click(function(){
+            $("#slider2").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton2").click(function(){
+            $("#slider2").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton3").click(function(){
+            $("#slider3").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton3").click(function(){
+            $("#slider3").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton4").click(function(){
+            $("#slider4").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton4").click(function(){
+            $("#slider4").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton5").click(function(){
+            $("#slider5").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton5").click(function(){
+            $("#slider5").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton6").click(function(){
+            $("#slider6").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton6").click(function(){
+            $("#slider6").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+
+        $("#leftButton7").click(function(){
+            $("#slider7").animate({scrollLeft: '-=300'}, 500);
+            console.log("left");
+        });
+        $("#rightButton7").click(function(){
+            $("#slider7").animate({scrollLeft: '+=300'}, 500);
+            console.log("right");
+        });
+    </script>
 </body>
 </html>

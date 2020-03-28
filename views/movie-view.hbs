@@ -17,8 +17,108 @@
     {{>header}}
 
     {{!-- bodehhhh --}}
-    {{!-- SYEMPRE WALA PANG LAMAN :> andun sa movie-view-2 --}}
+    <div class="d-flex flex-row w-100">
+        <!-- Movie Information -->
+        <!-- EDITED -->
+        <div id="movieInfo" class="d-flex flex-row">
+            <div class="w-75 p-3">
+                <div id="title" class="w-100">
+                    <h3>{{title}}</h3>
+                </div>
+                <div id="genre" class="w-100">
+                    <h4>{{genre}}</h4>
+                </div>
+                <div class="d-flex flex-row p-3">
+                    <div id = "movie-cover" class="w-25 justify-content-center" style="height: 400px;">
+                        <img src={{imageurl}} alt="psily-movie" height="100%">
+                    </div>
+                    <div class="w-75">
+                        <!-- Rating -->
+                        {{!-- need javascript for this... append ang idea ko :< pero dunno pa how ill do it --}}
+                        <div class="container">
+                            <h2 class="bold padding-bottom-7">4.4 <small>/ 5</small></h2>
+                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-grey btn-sm" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        
+                        <!-- Synopsis -->
+                        <div id="synopsis" class="padded">
+                            <h6>{{synopsis}}</h6>
+                        </div>
+                        
+                        <!-- cast -->
+                        <div id="cast" class="padded">
+                            <h6>{{cast}}</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="w-100" type="button" class="btn btn-success" id="seeTrailer">See Trailer</button>
+                <button class="w-100" type="button" class="btn btn-success" id="buyTicket">Buy Ticket</button>
+            </div>
+
+            <!-- Reviews -->
+            <div class="w-25 review-block pre-scrollable overflow-auto">
+            <!-- use whole keme for 'each' -->
+            {{#each review}}
+                <hr>
+                <div class="w-100 d-flex flex-row">
+                    <div class="w-25">
+                        <img src={{imageurl}} class="img-rounded">
+                        <div class="review-block-name"><a href="#">{{name}}</a></div>
+                        <div class="review-block-date">{{date}}<br/>...</div>
+                    </div>
+                    <div class="w-75">
+                        {{!-- hindi pa naeedit, need ata javascript here --}}
+                        {{!-- di pa gumagana ung star --}}
+                        <div id= "review-block-rate" class="review-block-rate">
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="review-block-title">{{cTitle}}</div>
+                        <div class="review-block-description">{{comment}}</div>
+                    </div>
+                </div>
+            {{/each}}
+            <!-- end keme for each -->
+                <hr>
+                <!-- source: https://bootsnipp.com/snippets/40pMm -->
+            </div>
+        </div>
+    </div>
     
+    <!-- Showing Schedules -->
+    <!-- EDITED -->
+    <div class="schedules w-100">
+        {{>displayMovies}}   
+    </div>
+
     <!-- BS4 Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

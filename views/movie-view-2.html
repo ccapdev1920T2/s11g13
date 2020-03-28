@@ -48,6 +48,21 @@
         .review-block-description{
             font-size:13px;
         }
+        
+        .movie-cover
+        {
+            max-height: 350px;
+            max-width: 75rem;
+        }
+
+        /* anw this is what i did para isang CSS file parin :<
+        since it will be under a "schedules" div, supposedly ito kukunin nya :<
+        diko parin maayos grrr bat ganon*/
+        .schedules > .movie-cover{
+            max-height: 250px;
+            max-width: 75rem;
+        }
+        
     </style>
 </head>
 <body>
@@ -175,10 +190,21 @@
     <!-- ETO UNG DI KO MAGAWA. I want to utilize sana ung gawa mong display movies na partial
         since cchange lang naman ung text sa baba ng card na title&date pero ung height sana mas maliit compared dun sa display movies
         :> -->
-    <div id="scheds" class="d-flex flex-row" style="height: 100px;">
-        
+    <div class="schedules w-100">
+        <div class="container mt-5">
+            <div class="row row-cols-2 row-cols-md-4">
+                <div class="col mb-4">
+                    <a href="#">
+                        <div class="card h-100">
+                            <img src="assets/MoviePosters/psIStillLoveYou.jpg" class="movie-cover">
+                            <h5 class="text-center card-title">{{title}}</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-
+    
     <!-- footer -->
     <!-- EDITED -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

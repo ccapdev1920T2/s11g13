@@ -42,19 +42,24 @@
 
 			<input type="checkbox" style="disabled: true;">
 
-			{{#each seatRow}}
-			<ol class="seatRow">
-				{{#each seatCols}}
-					<li class="seat">
-						<input type="checkbox" id={{seatID}}>
-						<label for={{seatID}}>{{seatID}}</label>
-					</li>
-				{{/each}}
-			</ol>
-			{{/each}}
 		</div>
 
+    <div class="containerOld">
+      <ol>
+        {{#each seatRow}}
+        <ol class="seats">
+          {{#each this}}
+            <li class="seat">
+              <input type="checkbox" id={{this}}>
+              <label for={{this}}>{{this}}</label>
+            </li>
+          {{/each}}
+        </ol>
+        {{/each}}
+      </ol>
+    </div>
 
+<!--
 		<div class="containerOld">
       <ol>
           <li>
@@ -203,6 +208,7 @@
             </li>
       </ol>
     </div>
+  -->
     <div class="containerOld">
       <input type="button" id="reserve" value="Reserve" class="btn btn-default" style="margin:0 auto;">
     </div>

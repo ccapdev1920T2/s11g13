@@ -48,11 +48,24 @@ const indexFunctions = {
         })
     },
 
+    //Render login page
     getLogin: function(req, res, next){
         res.render("login", {
             pageName: "Log In",
             
         })
+    },
+
+    postLogin: (req, res, next)=>{
+        console.log(req.body);
+        let {
+            username,
+            password,
+        } = req.body;
+
+        res.render("userprofile", {
+            username,
+        });
     },
 
     getSeats: (req, res, next)=>{

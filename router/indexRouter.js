@@ -14,6 +14,7 @@ router.get("/calendar", controller.getCalendar);
 
 router.get("/register", controller.getRegister);
 router.get("/login", controller.getLogin);
+router.post("/login", controller.postLogin);
 
 router.get("/payment", controller.getPayment);
 

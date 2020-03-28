@@ -105,12 +105,8 @@ const indexFunctions = {
 
     getUserProfile: function(req, res, next) {
     	res.render('userprofile', {
-    	  fname: req.params.fname,
-    	  lname: req.params.lname,
-    	  username: req.params.username,
-    	  email: req.params.email,
-    	  mobileNum: req.params.mobileNum,
-    	  pic: '../../../../../../../assets/profpic.png'
+            pageName: "User Profile",
+            email: req.params.email
     	})
     }
 };

@@ -247,13 +247,80 @@ const indexFunctions = {
     },
 
     getUserTicket: function(req, res, next) {
+        let tickets = [
+            {
+                status: "booked", 
+                title: "P.S. I Still Love You",
+                showDate: "04-14-2020",
+                showTime: "12:45PM - 2:15PM",
+                seats: ["1A", "1B"],
+                totalCost: 570.00,
+                dateBooked: "04-09-2020",
+            },
+            {
+                status: "bought", 
+                title: "It",
+                showDate: "04-12-2020",
+                showTime: "12:45PM - 2:15PM",
+                seats: ["2A"],
+                totalCost: 285.00,
+                dateBooked: "04-10-2020",
+            },
+            {
+                status: "bought", 
+                title: "The Lightning Thief",
+                showDate: "04-13-2020",
+                showTime: "12:45PM - 2:15PM",
+                seats: ["1B"],
+                totalCost: 240.00,
+                dateBooked: "04-11-2020",
+            },
+            {
+                status: "booked", 
+                title: "Taken",
+                showDate: "04-15-2020",
+                showTime: "12:45PM - 2:15PM",
+                seats: ["3E", "3F", "3G"],
+                totalCost: 630.00,
+                dateBooked: "04-12-2020",
+            },
+            {
+                status: "booked", 
+                title: "The Conjuring",
+                showDate: "04-16-2020",
+                showTime: "12:45PM - 2:15PM",
+                seats: ["2D", "2E"],
+                totalCost: 545.00,
+                dateBooked: "04-10-2020",
+            },
+        ];
+
+        let fname = "";
+        let lname ="";
+        
+        let retrievedData = {};
+
+        if(req.params.username == "biancarb"){
+            fname = "Bianca Joy";
+            lname = "Benedictos";
+        }
+        else if(req.params.username == "jhcagaoan"){
+            fname = "John Henry";
+            lname = "Cagaoan";
+        }
+        else if(req.params.username == "howardg"){
+            fname = "Howard";
+            lname = "Montecillo";
+        }
+
+
         res.render('ticket', {
             pageName: "View ticket",
+            pic: "/assets/profpic.png",
             username: req.params.username,
-            tickets: [{title: "title1",showDate: "showDate1",showTime: "showTime1",dateBooked: "dateBooked1",seatNum: "seatNum1",price: "price1"},
-            {title: "title2",showDate: "showDate2",showTime: "showTime2",dateBooked: "dateBooked2",seatNum: "seatNum2",price: "price2"},
-            {title: "title3",showDate: "showDate3",showTime: "showTime3",dateBooked: "dateBooked3",seatNum: "seatNum3",price: "price3"},
-            {title: "title4",showDate: "showDate4",showTime: "showTime4",dateBooked: "dateBooked4",seatNum: "seatNum4",price: "price4"}]
+            fname,
+            lname,
+            tickets,
         })
     }
 };

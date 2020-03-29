@@ -11,87 +11,72 @@
     <!-- Font Awesome 4 Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <link rel="stylesheet" href="css/HBS-images.css">
-
-    <style>
-      .ticket {
-        margin:auto;
-        height: 500px;
-        width: 500px;
-        border-style: groove;
-        margin-bottom: 50px;
-      }
-
-      .box {
-        margin-top: 40px;
-        margin-left: 20px;
-      }
-
-      label {
-        font-size: 20px;
-      }
-
-      h2 {
-        text-align: center;
-      }
-
-
-    </style>
-
-    <!-- This page's CSS -->
-  <link rel="stylesheet" type="text/css" href="../../../css/userprofile.css">
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"> </script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-      
-    });
-  </script>
+    <link rel="stylesheet" href="/css/HBS-images.css">
 </head>
 <body >
-          <!-- Header main -->
-          {{>header}}
-<h2>View Ticket</h2>
-{{#each tickets}}
-        <center><h4> Ticket No. 
-        {{#ticketNumber @key}}
-        {{this}}
-        {{/ticketNumber}}
-        </h4></center>
-        <!-- Ticket -->
-        <div class="ticket">
-          <!-- Movie Title -->
-          <div class="box ">
-            <label class="col-md-5">Movie Title : </label>
-            <label id="title"> {{title}}</label>
-          </div>
-          <!-- Show Date -->
-          <div class="box">
-            <label class="col-md-5">Show Date : </label>
-            <label id="showDate"> {{showDate}}</label>
-          </div>
-          <!-- Show Time -->
-          <div class="box">
-            <label class="col-md-5">Show Time : </label>
-            <label id="showTime"> {{showTime}}</label>
-          </div>
+	<!-- Header main -->
+	{{>header}}
 
-          <div class="box">
-            <label class="col-md-5">Date Booked : </label>
-            <label id="dateBooked"> {{dateBooked}}</label>
-          </div>
-          <!--Seat Number-->
-          <div class="box">
-            <label class="col-md-5">Seat Number: </label>
-            <label id="seatNum"> {{seatNum}}</label>
-          </div>
-          <!--Price-->
-          <div class="box">
-            <label class="col-md-5">Price : </label>
-            <label id="price"> {{price}}</label>
-          </div>
-        </div>
-    {{/each}}
-       
+	<div class="container-fluid mt-4">
+		<div class="row">
+			<!-- Sidebar -->
+			<div class="col-sm-3">
+				<div class="row">
+					<img class="img-thumbnail mx-auto" id="profilepic" src={{pic}}>
+				</div>
+				<hr>
+				<h5 class="text-center">{{fname}} {{lname}}</h5>
+				<h6 class="text-center text-secondary">{{username}}</h6>
+			</div>
+
+			<!--Tickets-->
+			<div class="col-sm-9">
+				<div class="container">
+					<div class="row">
+						<h3 class="text-danger mb-0">Tickets</h3>	
+					</div>
+					<hr>
+					<div class="row">
+						{{#each tickets}}
+							{{ticketBorder status}}		
+								<div class="card-header py-2">
+									<h5 class="mb-0">{{title}}</h5>
+								</div>
+
+								<div class="card-body p-0">
+									<table class="table table-sm table-borderless text-center mb-0">
+										<tr>
+											<td><h6>Show Date:</h6></td>
+											<td>{{showDate}}</td>
+										</tr>
+										<tr>
+											<td><h6>Show Time:</b></td>
+											<td>{{showTime}}</td>
+										</tr>
+										<tr>
+											<td><h6>Seats:</h6></td>
+											<td>
+											{{#each seats}}
+												{{this}}
+												{{#unless @last}}, {{/unless}}
+											{{/each}}
+											</td>
+										</tr>
+										<tr>
+											<td><h6>Total Cost:</h6></td>
+											<td>{{totalCost}}</td>
+										</tr>
+									</table>
+								</div>
+								<div class="card-footer py-1">
+									<small class="text-muted">Booked: {{dateBooked}}</small>
+								</div>
+							</div> <!-- Dangling div because ticketborder helper creates div with border -->
+						{{/each}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>       
 </body>
 </html>

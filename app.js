@@ -25,10 +25,52 @@ hbs.registerHelper("navBuilder", (activeLoc, headerName, url)=>{
     return new hbs.SafeString(element);
 })
 
-hbs.registerHelper('ticketNumber', function(i) {
-    i++;
-    return i;
+/* Easier way to render tickets pero kabado ako kasi merong naliligaw na closing tag ng div sa tickets.hbs */
+hbs.registerHelper('ticketBorder', (status)=>{
+    let x = "";
+    if(status=="bought"){
+        x = '<div class="card border-success mb-4 mx-2" style="width: 17rem;">';
+    }
+    else if(status=="booked"){
+        x = '<div class="card border-warning mb-4 mx-2" style="width: 17rem;">'
+    }
+
+    return new hbs.SafeString(x);
 });
+
+/* Purge this code with holy water oh my God */
+// hbs.registerHelper('ticketSeatsBuilder', (seats)=>{
+//     let string = "";
+//     seats.forEach(element => {
+//         string += element + " ";
+//     });
+//     console.log(string);
+//     return string;
+// })
+
+// hbs.registerHelper('ticketBuilder', (status, seats, details)=>{
+//     let x = "";
+//     let y = '<div class="card-header py-2"><h5 class="mb-0">'+ details.title + '</h5></div><div class="card-body p-0">'+
+//     '<table class="table table-sm table-borderless text-center mb-0"><tr><td><h6>Show Date:</h6></td><td>'+ details.showDate +
+//     '</td></tr><tr><td><h6>Show Time:</b></td><td>'+ details.showTime +'</td></tr><tr><td><h6>Seats:</h6></td><td>' + seats +
+//     '</td></tr><tr><td><h6>Total Cost:</h6></td><td> PHP'+ details.totalCost +
+//     '</td></tr></table></div><div class="card-footer py-1"><small class="text-muted">Booked: ' + details.dateBooked + '</small></div></div>'
+    
+//     console.log(status=="booked");
+//     if(status=="bought"){
+//         x = '<div class="card border-success mb-4" style="width: 20rem;">';
+//     }
+//     else if(status=="booked"){
+//         x = '<div class="card border-warning mb-4" style="width: 20rem;">'
+//     }
+//     else{
+//         x = ""; y = "";
+//     }
+
+//    return new hbs.SafeString(x+y);
+// });
+
+
 
 hbs.registerHelper('rateBuilder', function(rating) {
     var ctr = 1;

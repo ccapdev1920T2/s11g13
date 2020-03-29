@@ -183,14 +183,11 @@ const indexFunctions = {
         let review;
 
         let movies = [
-            {title: "P.S. I Still Love You", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
-            {title:"The Conjuring", imageurl: "/assets/MoviePosters/TheConjuring.jpg"},
-            {title: "The Lightning Thief", imageurl: "/assets/MoviePosters/PercyJacksonTheLightningThief.jpg"},
-            {title: "It", imageurl: "/assets/MoviePosters/it.jpg"},
-            {title: "Taken", imageurl: "/assets/MoviePosters/Taken.jpg"},
-            {title: "Avengers: Civil War", imageurl: "/assets/carousel/AvengersCivilWar.png"},
-            {title: "Captain America: The Winter Soldier", imageurl: "/assets/carousel/CaptainAmericaTheWinterSoldier.jpeg"},
-            {title: "Doctor Who - The Day of the Doctor", imageurl: "/assets/carousel/DoctorWhoTheDayOfTheDoctor.jpg"},
+            {title: "April 2, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
+            {title: "April 3, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
+            {title: "April 4, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
+            {title: "April 5, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
+            {title: "April 6, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
         ];
 
         //sample data retrieved from db
@@ -199,7 +196,7 @@ const indexFunctions = {
                 title: "To All The Boys P.S. I Love You",
                 genre: "Romance",
                 moviecover: "/assets/MoviePosters/psIStillLoveYou.jpg",
-                rating: 4.4,
+                rating: 4.6,
                 synopsis: "Lara Jean is officially Peter’s girlfriend, so everything should be perfect, right? But feelings grow complicated when an old crush reenters her life.",
                 cast: ["Lana Condor", "Noah Centineo", "Jordan Fisher"],
             }
@@ -221,7 +218,7 @@ const indexFunctions = {
                 rating: 5, commentTitle: "Super Good", comment: "Haven't watched romance in a while. Definitely a good movie to watch.",},
 
                 {fName: "Chuan-chen", lName: "Chu", profilepic: "/assets/profpic.png", date: "March 22, 2020",
-                rating: 5, commentTitle: "What", comment: "Maling movie ata napanood ko",},
+                rating: 3, commentTitle: "What", comment: "Maling movie ata napanood ko",},
             ]
         }
 

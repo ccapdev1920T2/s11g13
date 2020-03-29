@@ -31,23 +31,23 @@ hbs.registerHelper('ticketNumber', function(i) {
 });
 
 hbs.registerHelper('rateBuilder', function(rating) {
-    var ctr = 1;
+    var arren = 1;
     var rate = parseInt(rating, 10);
     var x = '';
 
-    while (ctr<=rate){
-        x += '<i class="fa fa-minus text-warning"></i>';
-        ctr++;
+    while (arren<=rate){
+        x += '<i class="fa fa-minus text-warning"></i>\n';
+        arren++;
     }
 
-    while (ctr<=5){
-        x += '<i class="fa fa-minus text-secondary"></i>';
-        ctr++;
+    while (arren<=5){
+        x += '<i class="fa fa-minus text-secondary"></i>\n';
+        arren++;
     }
     
-    console.log(x);
     return new hbs.SafeString(x);
 });
+
 
 /********* Routing *********/
 const indexRouter = require('./router/indexRouter');

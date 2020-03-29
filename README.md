@@ -12,8 +12,10 @@ Full list of the specifications for the project can be found [here](https://gith
 Ensure that you have [git](https://git-scm.com/downloads), [Node JS](https://nodejs.org/en/download/), and [MongoDB](https://www.mongodb.com/download-center/community) installed in your machine. 
 
 ### Installing
+Entering the following commands in your CLI:
 
-1. Clone the repository by entering the following command in your CLI:
+
+1. Clone the repository through 
 ```
 https://github.com/ccapdev1920T2/s11g1.git
 ```
@@ -24,15 +26,21 @@ https://github.com/ccapdev1920T2/s11g1.git
 
 ## Dependencies
 [Bootstrap 4.4.1](https://getbootstrap.com/) - Frontend framework
+
 [Express](https://www.npmjs.com/package/express) - server
+
 [body-parser](https://www.npmjs.com/package/body-parser) - for easy form data parsing
+
 [Handlebars](https://www.npmjs.com/package/hbs) - view engine for dynamic data rendering
+
 [MongoDB](https://www.npmjs.com/package/mongodb) - to connect to the MongoDB Database
 
 ## Authors
-[Bianca Joy Benedictos](fb.me/biancajoyrb)
-[John Henry Cagaoan](fb.me/jhcagaoan)
-[Howard Montecillo](fb.me/howard.ang.7)
+[Bianca Joy Benedictos](https://fb.me/biancajoyrb)
+
+[John Henry Cagaoan](https://fb.me/jhcagaoan)
+
+[Howard Montecillo](https://fb.me/howard.ang.7)
 
 ## License
 This project is under the ISC Liscence.

@@ -191,6 +191,17 @@ const indexFunctions = {
             isSignedIn: true,
             username: req.params.username
     	})
+    },
+
+    getUserTicket: function(req, res, next) {
+        res.render('ticket', {
+            pageName: "View ticket",
+            username: req.params.username,
+            tickets: [{title: "title1",showDate: "showDate1",showTime: "showTime1",dateBooked: "dateBooked1",seatNum: "seatNum1",price: "price1"},
+            {title: "title2",showDate: "showDate2",showTime: "showTime2",dateBooked: "dateBooked2",seatNum: "seatNum2",price: "price2"},
+            {title: "title3",showDate: "showDate3",showTime: "showTime3",dateBooked: "dateBooked3",seatNum: "seatNum3",price: "price3"},
+            {title: "title4",showDate: "showDate4",showTime: "showTime4",dateBooked: "dateBooked4",seatNum: "seatNum4",price: "price4"}]
+        })
     }
 };
 

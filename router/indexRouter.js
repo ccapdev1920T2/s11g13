@@ -26,5 +26,7 @@ router.get('/asdf', controller.getAsdf);
 router.get('/seats', controller.getSeats);
 //this path is to '/userprofile/:username'
 router.get('/userprofile/:username', controller.getUserProfile);
+//this path is to '/userprofile/:username/ticket'
+router.get('/userprofile/:username/ticket', controller.getUserTicket);
 
 module.exports = router;

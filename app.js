@@ -25,6 +25,11 @@ hbs.registerHelper("navBuilder", (activeLoc, headerName, url)=>{
     return new hbs.SafeString(element);
 })
 
+hbs.registerHelper('ticketNumber', function(i) {
+    i++;
+    return i;
+});
+
 /********* Routing *********/
 const indexRouter = require('./router/indexRouter');
 app.use('/', indexRouter);

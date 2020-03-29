@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>View Ticket</title>
+    <title>{{pageName}}</title>
+
+    <!-- BS4 Link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Font Awesome 4 Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="css/HBS-images.css">
 
     <style>
       .ticket {
@@ -12,6 +19,7 @@
         height: 500px;
         width: 500px;
         border-style: groove;
+        margin-bottom: 50px;
       }
 
       .box {
@@ -30,12 +38,6 @@
 
     </style>
 
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
-    <!-- Header and footer style -->
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
-
     <!-- This page's CSS -->
   <link rel="stylesheet" type="text/css" href="../../../../../../../css/userprofile.css">
 
@@ -48,25 +50,14 @@
 </head>
 <body >
           <!-- Header main -->
-          <nav class="navbar navbar-default">
-          <div class="container-fluid theme">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="Home.html">Ticket or Leave it</a>
-            </div>
-            <ul class="nav navbar-nav">
-              <li><a href="Movies.html">Movies</a></li>
-              <li><a href="calendar.html">Calendar</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <!-- USE NODEJS AND SESSIONS IN THE FUTURE, THIS WILL CHANGE TO USERNAME WHEN LOGGED IN -->
-              <li><a href="login.html">
-                <span class="glyphicon glyphicon-user"></span>
-                Register/Log In
-              </a></li>
-            </ul>
-          </div>
-        </nav>
+          {{>header}}
 <h2>View Ticket</h2>
+{{#each tickets}}
+        <center><h4> Ticket No. 
+        {{#ticketNumber @key}}
+        {{this}}
+        {{/ticketNumber}}
+        </h4></center>
         <!-- Ticket -->
         <div class="ticket">
           <!-- Movie Title -->
@@ -100,7 +91,7 @@
             <label id="price"> {{price}}</label>
           </div>
         </div>
-    
+    {{/each}}
        
 </body>
 </html>

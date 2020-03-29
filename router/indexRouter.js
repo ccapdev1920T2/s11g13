@@ -32,4 +32,8 @@ router.get('/userprofile/:username', controller.getUserProfile);
 //this path is to '/userprofile/:username/ticket'
 router.get('/userprofile/:username/ticket', controller.getUserTicket);
 
+// TESTER FOR CART
+//this path is to '/userprofile/:username/cart'
+router.get('/userprofile/:username/cart', controller.getCart);
+
 module.exports = router;

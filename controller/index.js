@@ -252,7 +252,21 @@ const indexFunctions = {
             {title: "title3",showDate: "showDate3",showTime: "showTime3",dateBooked: "dateBooked3",seatNum: "seatNum3",price: "price3"},
             {title: "title4",showDate: "showDate4",showTime: "showTime4",dateBooked: "dateBooked4",seatNum: "seatNum4",price: "price4"}]
         })
-    }
+    },
+
+    getCart: function(req, res, next) {
+        res.render('cart', {
+            pageName: "View Cart",
+            pic: '/assets/profpic.png',
+            fname: 'Bianca Joy',
+            lname: 'Benedictos',
+            username: '@' + 'biancarb',
+            tickets: [{title: "title1",showDate: "showDate1",showTime: "showTime1", seatNum: "seatNum1",price: "price1"},
+            {title: "title2",showDate: "showDate2",showTime: "showTime2",seatNum: "seatNum2",price: "price2"},
+            {title: "title3",showDate: "showDate3",showTime: "showTime3",seatNum: "seatNum3",price: "price3"},
+            {title: "title4",showDate: "showDate4",showTime: "showTime4",seatNum: "seatNum4",price: "price4"}]
+        })
+    },
 };
 
 module.exports = indexFunctions;

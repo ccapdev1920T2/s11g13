@@ -20,72 +20,72 @@
 
 	<div class="container pt-5">
 		<div class="row">
-		<!-- Profile photo -->
-		<div class="col-md-3">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="main_content">
-						<img id="profilepic" src={{pic}}>
+			<!-- Profile photo -->
+			<div class="col-md-3">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="main_content">
+							<img id="profilepic" src={{pic}}>
+						</div>
 					</div>
-				</div>
 
-				<div class="form-group">
-					<input type="file" name="File" id="File" class="btn btn-block hidden" accept="image/*" 
-					value="Upload Photo" onchange="document.getElementById('profilepic').src = window.URL.createObjectURL(this.files[0])">
+					<div class="form-group">
+						<input type="file" name="File" id="File" class="btn btn-block hidden" accept="image/*" 
+						value="Upload Photo" onchange="document.getElementById('profilepic').src = window.URL.createObjectURL(this.files[0])">
+					</div>
 				</div>
 			</div>
+			<!-- Other contents -->
+			<div class="col-md-9">
+				<form class="form-horizontal">
+					<!-- Name -->
+					<div class="form-group row">
+						<label class="control-label col-md-2">Name: </label>
+						<div class="col-md-5">
+							<input type="text" name="fName" id="fName" class="form-control" value={{fname}} readonly>
+						</div>
+						<div class="col-md-5">
+							<input type="text" name="lName" id="lName" class="form-control" value={{lname}} readonly>
+						</div>
+					</div>
+
+					<!-- Username -->
+					<div class="form-group row">
+						<label for="UName" class="control-label col-md-2">Username</label>
+						<div class="col-md-10">
+							<input type="text" name="UName" id="UName" class="form-control" value={{username}} readonly>
+						</div>
+					</div>
+
+					<!-- Email address -->
+					<div class="form-group row">
+						<label for="Email" class="control-label col-md-2">Email address</label>
+						<div class="col-md-10">
+							<input type="email" name="Email" id="Email" class="form-control" value={{email}} readonly>
+						</div>
+					</div>
+
+					<!-- Phone number -->
+					<div class="form-group row">
+						<label for="Mobile" class="control-label col-md-2">Mobile number</label>
+						<div class="col-md-10">
+							<input type="nuber" name="Mobile" id="Mobile" class="form-control" value={{mobileNum}} readonly>
+						</div>
+					</div>
+
+					<!-- Controls -->
+					<div class="form-group row">
+						<div class="col-md-5"></div>
+						<div class="col-md-3">
+							<input type="button" name="Edit" id="Edit" class="btn btn-default btn-block" value="Edit">
+							<input type="button" name="Save" id="Save" class="btn btn-default btn-block hidden" value="Save">
+							<a name="ViewTicket" id="ViewTicket" class="btn btn-default btn-block button" href="{{username}}/ticket">View Ticket</a>
+
+						</div>
+					
+				</form>
+			</div>
 		</div>
-		<!-- Other contents -->
-		<div class="col-md-9">
-			<form class="form-horizontal">
-				<!-- Name -->
-				<div class="form-group row">
-					<label class="control-label col-md-2">Name: </label>
-					<div class="col-md-5">
-						<input type="text" name="fName" id="fName" class="form-control" value={{fname}} readonly>
-					</div>
-					<div class="col-md-5">
-						<input type="text" name="lName" id="lName" class="form-control" value={{lname}} readonly>
-					</div>
-				</div>
-
-				<!-- Username -->
-				<div class="form-group row">
-					<label for="UName" class="control-label col-md-2">Username</label>
-					<div class="col-md-10">
-						<input type="text" name="UName" id="UName" class="form-control" value={{username}} readonly>
-					</div>
-				</div>
-
-				<!-- Email address -->
-				<div class="form-group row">
-					<label for="Email" class="control-label col-md-2">Email address</label>
-					<div class="col-md-10">
-						<input type="email" name="Email" id="Email" class="form-control" value={{email}} readonly>
-					</div>
-				</div>
-
-				<!-- Phone number -->
-				<div class="form-group row">
-					<label for="Mobile" class="control-label col-md-2">Mobile number</label>
-					<div class="col-md-10">
-						<input type="nuber" name="Mobile" id="Mobile" class="form-control" value={{mobileNum}} readonly>
-					</div>
-				</div>
-
-				<!-- Controls -->
-				<div class="form-group row">
-					<div class="col-md-5"></div>
-					<div class="col-md-3">
-						<input type="button" name="Edit" id="Edit" class="btn btn-default btn-block" value="Edit">
-						<input type="button" name="Save" id="Save" class="btn btn-default btn-block hidden" value="Save">
-						<a name="ViewTicket" id="ViewTicket" class="btn btn-default btn-block button" href="{{username}}/ticket">View Ticket</a>
-
-					</div>
-				
-			</form>
-		</div>
-</div>
 	</div>
 
 	<!-- Bootstrap core JavaScript

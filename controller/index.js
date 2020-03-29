@@ -271,6 +271,12 @@ const indexFunctions = {
             {title: "title4",showDate: "showDate4",showTime: "showTime4",seatNum: "seatNum4",price: "price4"}]
         })
     },
+
+    getAdminBoard: function(req, res, next) {
+        res.render('admin', {
+            pageName: "Admin Dashboard",
+        })
+    },
 };
 
 module.exports = indexFunctions;

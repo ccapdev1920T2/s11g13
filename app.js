@@ -44,8 +44,28 @@ hbs.registerHelper('rateBuilder', function(rating) {
         x += '<i class="fa fa-minus text-secondary"></i>\n';
         arren++;
     }
+
+    /*  Di pa gumagana sa ngayon:
+        <span class="fa fa-star on"></span>
+        <span class="fa fa-star"></span>
+    */
     
     return new hbs.SafeString(x);
+});
+
+hbs.registerHelper('showDay', function(shows, val) {
+    let x = []; //new array
+    let day = parseInt(val,10);
+    let obj = {} //temporary object
+    
+    for(let i = 0; i < shows.length; i++){
+        if (shows[i].day == day){
+          obj= { title: shows[i].title, genre: shows[i].genre, rating: shows[i].rating};
+          x.push(obj);  
+        }
+      }
+    
+    return x;
 });
 
 

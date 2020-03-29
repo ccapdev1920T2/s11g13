@@ -154,10 +154,14 @@ const indexFunctions = {
         res.render("seats", {
             pageName: "Reserve Seats",
             seatRow: [
-                ["1A","1B","1C","1D","1E","1F","1G","1H"],
-                ["2A","2B","2C","2D","2E","2F","2G","2H"],
-                ["3A","3B","3C","3D","3E","3F","3G","3H"],
-                ["4A","4B","4C","4D","4E","4F","4G","4H"]
+                [{seatName: "1A", isTaken: true}, {seatName: "1B", isTaken: false}, {seatName: "1C", isTaken: false}, {seatName: "1D", isTaken: false},
+                {seatName: "1E", isTaken: false},{seatName: "1F", isTaken: false},{seatName: "1G", isTaken: false},{seatName: "1H", isTaken: false}],
+                [{seatName: "2A", isTaken: true},{seatName: "2B", isTaken: false},{seatName: "2C", isTaken: false},{seatName: "2D", isTaken: false},
+                {seatName: "2E", isTaken: false},{seatName: "2F", isTaken: true},{seatName: "2G", isTaken: true},{seatName: "2H", isTaken: false}],
+                [{seatName: "3A", isTaken: true},{seatName: "3B", isTaken: false},{seatName: "3C", isTaken: false},{seatName: "3D", isTaken: false},
+                {seatName: "3E", isTaken: false},{seatName: "3F", isTaken: false},{seatName: "3G", isTaken: false},{seatName: "3H", isTaken: false}],
+                [{seatName: "4A", isTaken: true},{seatName: "4B", isTaken: false},{seatName: "4C", isTaken: false},{seatName: "4D", isTaken: true},
+                {seatName: "4E", isTaken: false},{seatName: "4F", isTaken: false},{seatName: "4G", isTaken: false},{seatName: "4H", isTaken: false}]
             ]
         })
     },

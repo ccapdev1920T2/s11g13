@@ -30,6 +30,25 @@ hbs.registerHelper('ticketNumber', function(i) {
     return i;
 });
 
+hbs.registerHelper('rateBuilder', function(rating) {
+    var ctr = 1;
+    var rate = parseInt(rating, 10);
+    var x = '';
+
+    while (ctr<=rate){
+        x += '<i class="fa fa-minus text-warning"></i>';
+        ctr++;
+    }
+
+    while (ctr<=5){
+        x += '<i class="fa fa-minus text-secondary"></i>';
+        ctr++;
+    }
+    
+    console.log(x);
+    return new hbs.SafeString(x);
+});
+
 /********* Routing *********/
 const indexRouter = require('./router/indexRouter');
 app.use('/', indexRouter);

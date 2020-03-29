@@ -1,43 +1,43 @@
-# CCAPDEV-MP
-Machine Project - Online ticket reservation website
+# Ticket or Leave It
+CCAPDEV Term 2 AY1920 Machine Project - Online ticket reservation website
 
-CCAPDEV Term 2 AY1920
+This website allows user to view movie synopis and reviews, as well as allow for booking movie tickets. 
 
-Benedictos | Cagaoan | Montecillo
+Full list of the specifications for the project can be found [here](https://github.com/ccapdev1920T2/s11g13/blob/master/Group13%20S11%20MP%20Specifications.pdf).
 
-## Features to Implement
-- [ ] Register
-- [ ] Log in
-- [ ] Log Out
-- [ ] Calendar
-- [ ] View show's available slots
-- [ ] Buy ticket reservation
-- [ ] View ticket reservation
-- [ ] Cancel ticket resevation
-- [ ] Add trailers
-- [ ] Remove trailers
-- [ ] Add reviews
-- [ ] Remove Reviews
+## Getting Started
 
+### Prerequisites
 
-## Phase 1: Deadline - End of February
-> Front end: HTML, CSS, and JS for all pages in the site.
+Ensure that you have [git](https://git-scm.com/downloads), [Node JS](https://nodejs.org/en/download/), and [MongoDB](https://www.mongodb.com/download-center/community) installed in your machine. 
 
-## Phase 2:
-Node, Express, Handlebars, and MongoDB
+### Installing
 
->For this phase, you are required to submit a Node.js project that can be connected to locally by accessing localhost:3000. Architecture needs not to implement MVC yet but highly encouraged. For encouragement, MP Phase 3 is required to be in MVC.
+1. Clone the repository by entering the following command in your CLI:
+```
+https://github.com/ccapdev1920T2/s11g1.git
+```
 
-##### Model
-- Database design must be complete and the schema must be submitted.
-- All database related files should be in the model folder.
+2. Install all needed dependencies through `npm install`
 
-##### View
-- All views must be visible and can be navigated to from the first page.
-- All forms must use the appropriate HTTP methods (i.e. Login forms use POST, search queries use GET, etc).
-- All views are expected to be in the views folder. Convert files to handlebars/ejs/pug files as necessary.
+3. Run the web server with `node app` 
 
-##### Controller
-- The backend is expected to be in NodeJS. Database dialect is encouraged to be MongoDB (Mongoose as an ODM is accepted). 
-- Using third party database servers such as mlab is allowed. 
-- The use of different server scripts and database is allowed, like the Node.js version of Firestore.
+## Dependencies
+[Bootstrap 4.4.1](https://getbootstrap.com/) - Frontend framework
+[Express](https://www.npmjs.com/package/express) - server
+[body-parser](https://www.npmjs.com/package/body-parser) - for easy form data parsing
+[Handlebars](https://www.npmjs.com/package/hbs) - view engine for dynamic data rendering
+[MongoDB](https://www.npmjs.com/package/mongodb) - to connect to the MongoDB Database
+
+## Authors
+[Bianca Joy Benedictos](fb.me/biancajoyrb)
+[John Henry Cagaoan](fb.me/jhcagaoan)
+[Howard Montecillo](fb.me/howard.ang.7)
+
+## License
+This project is under the ISC Liscence.
+
+## Acknowledgments
+- Sir Arren Antioquia, our mentor throughout the duration of CCAPDEV
+- Our families and peers who provided feedback regarding our project's appearance
+- Canvas, without it we will have a harder time accessing video tutorials provided by out professor

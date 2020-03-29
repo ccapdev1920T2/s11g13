@@ -22,54 +22,29 @@
                 <h4 class="card-title text-center text-danger">Ticket Details</h4>
                 
                 {{#with ticketDetails}}
-                    <div class="row">
-                        <div class="col-5">
-                            <h6 class="text-right">Movie Title: </h6>
-                        </div>
-                        <div class="col-7">
-                            <p>{{title}}</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-5">
-                            <h6 class="text-right">Show Date: </h6>
-                        </div>
-                        <div class="col-7">
-                            <p>{{showDate}}</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-5">
-                            <h6 class="text-right">Show Time: </h6>
-                        </div>
-                        <div class="col-7">
-                            <p>{{showTime}}</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-5">
-                            <h6 class="text-right">Seats: </h6>
-                        </div>
-                        <div class="col-7">
-                            <p>
+                    <table class="table table-sm table-borderless text-center">
+                        <tr>
+                            <td><h6>Show Date:</h6></td>
+                            <td>{{showDate}}</td>
+                        </tr>
+                        <tr>
+                            <td><h6>Show Time:</b></td>
+                            <td>{{showTime}}</td>
+                        </tr>
+                        <tr>
+                            <td><h6>Seats:</h6></td>
+                            <td>
                             {{#each seats}}
-                                {{this}} 
+                                {{this}}
+                                {{#unless @last}}, {{/unless}}
                             {{/each}}
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-5">
-                            <h6 class="text-right">Total Cost: </h6>
-                        </div>
-                        <div class="col-7">
-                            <p>Php {{totalCost}}</p>
-                        </div>
-                    </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h6>Total Cost:</h6></td>
+                            <td>PHP {{totalCost}}</td>
+                        </tr>
+                    </table>
                 {{/with}}
 
             </div>

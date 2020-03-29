@@ -10,6 +10,19 @@
 }
 
 
+/*--- For profile photos used on userprofile and sidebar partial------*/
+/* #profilepic {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+    height: 150px;
+} */
+
+#profilepic {
+    max-height: 35vh;
+}
+
 /* anw this is what i did para isang CSS file parin :<
 since it will be under a "schedules" div, supposedly ito kukunin nya :<
 diko parin maayos grrr bat ganon*/

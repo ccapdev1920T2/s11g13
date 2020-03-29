@@ -21,14 +21,14 @@ const indexFunctions = {
             pageName: "Movies",
             current: "Movies",
             movies: [
-                {title: "P.S. I Still Love You", imageurl: "assets/MoviePosters/psIStillLoveYou.jpg"},
-                {title:"The Conjuring", imageurl: "assets/MoviePosters/TheConjuring.jpg"},
-                {title: "The Lightning Thief", imageurl: "assets/MoviePosters/PercyJacksonTheLightningThief.jpg"},
-                {title: "It", imageurl: "assets/MoviePosters/it.jpg"},
-                {title: "Taken", imageurl: "assets/MoviePosters/Taken.jpg"},
-                {title: "Avengers: Civil War", imageurl: "assets/carousel/AvengersCivilWar.png"},
-                {title: "Captain America: The Winter Soldier", imageurl: "assets/carousel/CaptainAmericaTheWinterSoldier.jpeg"},
-                {title: "Doctor Who - The Day of the Doctor", imageurl: "assets/carousel/DoctorWhoTheDayOfTheDoctor.jpg"},
+                {title: "P.S. I Still Love You", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
+                {title:"The Conjuring", imageurl: "/assets/MoviePosters/TheConjuring.jpg"},
+                {title: "The Lightning Thief", imageurl: "/assets/MoviePosters/PercyJacksonTheLightningThief.jpg"},
+                {title: "It", imageurl: "/assets/MoviePosters/it.jpg"},
+                {title: "Taken", imageurl: "/assets/MoviePosters/Taken.jpg"},
+                {title: "Avengers: Civil War", imageurl: "/assets/carousel/AvengersCivilWar.png"},
+                {title: "Captain America: The Winter Soldier", imageurl: "/assets/carousel/CaptainAmericaTheWinterSoldier.jpeg"},
+                {title: "Doctor Who - The Day of the Doctor", imageurl: "/assets/carousel/DoctorWhoTheDayOfTheDoctor.jpg"},
             ],
         })
     }, 
@@ -178,7 +178,60 @@ const indexFunctions = {
         })
     },
 
+    getViewMovie: (req, res, next)=>{
+        let movieDetails = {};
+        let review;
 
+        let movies = [
+            {title: "P.S. I Still Love You", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
+            {title:"The Conjuring", imageurl: "/assets/MoviePosters/TheConjuring.jpg"},
+            {title: "The Lightning Thief", imageurl: "/assets/MoviePosters/PercyJacksonTheLightningThief.jpg"},
+            {title: "It", imageurl: "/assets/MoviePosters/it.jpg"},
+            {title: "Taken", imageurl: "/assets/MoviePosters/Taken.jpg"},
+            {title: "Avengers: Civil War", imageurl: "/assets/carousel/AvengersCivilWar.png"},
+            {title: "Captain America: The Winter Soldier", imageurl: "/assets/carousel/CaptainAmericaTheWinterSoldier.jpeg"},
+            {title: "Doctor Who - The Day of the Doctor", imageurl: "/assets/carousel/DoctorWhoTheDayOfTheDoctor.jpg"},
+        ];
+
+        //sample data retrieved from db
+        if (req.params.movieID == "00023"){
+            movieDetails = {
+                title: "To All The Boys P.S. I Love You",
+                genre: "Romance",
+                moviecover: "/assets/MoviePosters/psIStillLoveYou.jpg",
+                rating: 4.4,
+                synopsis: "Lara Jean is officially Peter’s girlfriend, so everything should be perfect, right? But feelings grow complicated when an old crush reenters her life.",
+                cast: ["Lana Condor", "Noah Centineo", "Jordan Fisher"],
+            }
+
+            review = [
+                {fName: "John Henry", lName: "Cagaoan", profilepic: "/assets/profpic.png", date: "February 14, 2020",
+                rating: 5, commentTitle: "Would watch again", comment: "Solid! Made me cry",},
+                
+                {fName: "Bianca", lName: "Ganda", profilepic: "/assets/profpic.png", date: "February 20, 2020",
+                rating: 5, commentTitle: "Kiligss", comment: "Ang cute :(( Choosing Peter was the right choice!",},
+                
+                {fName: "Arren", lName: "Antioquia", profilepic: "/assets/profpic.png", date: "February 24, 2020",
+                rating: 5, commentTitle: "Nice Movie", comment: "I'll recommend this to my students in CCAPDEV.",},
+                
+                {fName: "Howard", lName: "Montecillo", profilepic: "/assets/profpic.png", date: "February 29, 2020",
+                rating: 5, commentTitle: "Good", comment: "Recommended by my prof. It was worth it.",},
+
+                {fName: "Sean", lName: "Potato", profilepic: "/assets/profpic.png", date: "February 29, 2020",
+                rating: 5, commentTitle: "Super Good", comment: "Haven't watched romance in a while. Definitely a good movie to watch.",},
+
+                {fName: "Chuan-chen", lName: "Chu", profilepic: "/assets/profpic.png", date: "March 22, 2020",
+                rating: 5, commentTitle: "What", comment: "Maling movie ata napanood ko",},
+            ]
+        }
+
+        res.render("movie-view", {
+            pageName: movieDetails.title,
+            movieDetails,
+            review,
+            movies,
+        });
+    },
 
 
     getAsdf: function(req, res, next) {

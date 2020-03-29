@@ -5,14 +5,35 @@
 
 .movie-cover
 {
-    max-height: 350px;
+    max-height: 60vh;
     max-width: 75rem;
 }
+
 
 /* anw this is what i did para isang CSS file parin :<
 since it will be under a "schedules" div, supposedly ito kukunin nya :<
 diko parin maayos grrr bat ganon*/
-.schedules .movie-cover{
-    max-height: 250px;
+
+/*------------ For movie-view -------------*/
+.movie-poster
+{
+    max-height: 450px;
+}
+
+.review-dp
+{
+    max-width: 3rem;
+}
+
+/*Override*/
+.pre-scrollable
+{
+    max-height: 30rem;
+}
+
+/*to render other movies*/
+.schedules > .movie-cover
+{
+    max-height: 75vh;
     max-width: 75rem;
 }

@@ -37,6 +37,7 @@ app.use('/', indexRouter);
 /* To access static folder where CSS and assets are located  */
 app.use(express.static(__dirname + '\\static'))
 
+/** Server online **/
 app.listen(port, ()=>{
     console.log("Server ready.");
     console.log(`App listening at port ${port}`);

@@ -30,7 +30,8 @@
 					<i class="fa fa-dropdown" aria-hidden="true"></i>
 					</a>
 					<div class="dropdown-menu" aria-labelledby="RegLogIn">
-						<a class="dropdown-item" href="/cart">View Tickets</a>
+						<a class="dropdown-item" href={{userHrefBuilder username "tickets"}}>View Tickets</a>
+						<a class="dropdown-item" href={{userHrefBuilder username "cart"}}>View Cart</a>
 						<a class="dropdown-item" href="/home">Log out</a>
 					</div>
 				</li>

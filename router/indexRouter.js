@@ -30,7 +30,7 @@ router.get('/seats', controller.getSeats);
 //this path is to '/userprofile/:username'
 router.get('/userprofile/:username', controller.getUserProfile);
 //this path is to '/userprofile/:username/ticket'
-router.get('/userprofile/:username/ticket', controller.getUserTicket);
+router.get('/userprofile/:username/tickets', controller.getUserTicket);
 
 // TESTER FOR CART
 //this path is to '/userprofile/:username/cart'

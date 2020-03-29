@@ -29,13 +29,35 @@ hbs.registerHelper("navBuilder", (activeLoc, headerName, url)=>{
 hbs.registerHelper('ticketBorder', (status)=>{
     let x = "";
     if(status=="bought"){
-        x = '<div class="card border-success mb-4 mx-2" style="width: 17rem;">';
+        x = '<div class="card border-success mb-4 mx-2" style="width: 19rem;">';
     }
     else if(status=="booked"){
-        x = '<div class="card border-warning mb-4 mx-2" style="width: 17rem;">'
+        x = '<div class="card border-warning mb-4 mx-2" style="width: 19rem;">'
     }
 
     return new hbs.SafeString(x);
+});
+
+hbs.registerHelper('userHrefBuilder', (username, loc)=>{
+    let string = "";
+    string += '/userprofile/' + username + '/' + loc;
+    return string;
+});
+
+hbs.registerHelper('bookedTicketsArray', (tickets)=>{
+    let bookedTickets = [];
+    tickets.forEach(element => {
+        if(element.status == "booked"){
+            bookedTickets.push(element);
+        }
+    });
+    // console.table(bookedTickets);
+    return bookedTickets;
+});
+
+hbs.registerHelper('ticketNumber', (i)=>{
+    i++;
+    return i;
 });
 
 /* Purge this code with holy water oh my God */

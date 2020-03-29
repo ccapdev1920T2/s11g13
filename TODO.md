@@ -11,9 +11,9 @@
 
 - [ ] admin
 - [X] calendar
-- [] seats
+- [ ] seats
 - [X] movie-view
-- [] userprofile - input type file >> to check
+- [ ] userprofile - input type file >> to check
 
 ## Upcoming
 - MVC

@@ -5,7 +5,7 @@
 
 .movie-cover
 {
-    max-height: 350px;
+    max-height: 60vh;
     max-width: 75rem;
 }
 
@@ -17,7 +17,7 @@ diko parin maayos grrr bat ganon*/
 /*------------ For movie-view -------------*/
 .movie-poster
 {
-    max-height: 500px;
+    max-height: 450px;
 }
 
 .review-dp
@@ -25,9 +25,15 @@ diko parin maayos grrr bat ganon*/
     max-width: 3rem;
 }
 
+/*Override*/
+.pre-scrollable
+{
+    max-height: 30rem;
+}
+
 /*to render other movies*/
 .schedules > .movie-cover
 {
-    max-height: 250px;
+    max-height: 75vh;
     max-width: 75rem;
 }

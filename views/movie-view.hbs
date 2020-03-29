@@ -17,10 +17,10 @@
     {{>header}}
 
     <!-- Main content -->
-    <div class="container-fluid mt-4 px-4">
+    <div class="container mt-4 px-4">
         <div class="row">
             <!-- Movie Details -->
-            <div class="col-md-9" id="movieInfo">
+            <div class="col-md-8" id="movieInfo">
                 {{#with movieDetails}}
                     <h3>{{title}}</h3>
                     <h5 class="text-secondary">{{genre}}</h5>
@@ -34,7 +34,7 @@
                         </div>
 
                         <!-- Movie Information -->
-                        <div class="col-md-7">
+                        <div class="col-md-7 my-auto">
                             <div class="container">
                                 <!-- Helper function for rating below-->
                                 <!-- Placeholder for now-->
@@ -87,144 +87,57 @@
             </div>
 
             <!-- Ratings -->
-            <div class="col-md-3">
-                {{#with review}}
-                <div class="card bg-light mb-2">
-                    <div class="container-fluid">
-                        <div class="card-body p-1">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <image class="review-dp" src={{profilepic}}>
-                                    <small>{{fName}} {{lName}}</small>
-                                </div>
-                                <div class="col-md-9">
-                                    <small>
-                                        <h6>{{commentTitle}}</h6>
-                                        <p>{{comment}}</p>
-                                    </small>
+            <div class="col-md-4 overflow-auto pre-scrollable mt-4">
+                <h6 class="text-center mb-0"> Reviews </h6>
+                <hr class="mt-0">
+
+                {{#each review}}
+                    <div class="card bg-light mb-2">
+                        <div class="container-fluid">
+                            <div class="card-body p-1">
+                                <div class="row no-gutters">
+                                    <div class="col-3">
+                                        <div class="row">
+                                            <image class="review-dp mx-auto rounded-circle" src={{profilepic}}>
+                                        </div>
+                                        <div class="row">
+                                            <small class="mx-auto">{{fName}}</small>
+                                        </div>
+                                        <div class="row">
+                                            <small class="mx-auto">{{lName}}</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="row">
+                                            <!--Helper for rating here, use "rating" as parameter--> 
+                                        </div>
+                                        <div class="row">
+                                            <small class="pl-3"><h6>{{commentTitle}}</h6></small>
+                                        </div>
+                                        <div class="row">
+                                            <small class="pl-3"><p>{{comment}}</p></small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="card-footer py-0 pl-1 pr-0">
+                            <small class="text-muted">{{date}}</small>
+                        </div>
                     </div>
-                    <div class="card-footer py-0 pl-1 pr-0">
-                        <small class="text-muted">{{date}}</small>
-                    </div>
-                </div>
-                {{/with}}
+                {{/each}}
             </div>
         </div>
 
 
-    </div>
-
-
-
-
-
-
-
-    {{!-- bodehhhh --}}
-    <div class="d-flex flex-row w-100">
-        <!-- Movie Information -->
-        <!-- EDITED -->
-        <div id="movieInfo" class="d-flex flex-row">
-            <div class="w-75 p-3">
-                <div id="title" class="w-100">
-                    <h3>{{title}}</h3>
-                </div>
-                <div id="genre" class="w-100">
-                    <h4>{{genre}}</h4>
-                </div>
-                <div class="d-flex flex-row p-3">
-                    <div id = "movie-cover" class="w-25 justify-content-center" style="height: 400px;">
-                        <img src={{imageurl}} alt="psily-movie" height="100%">
-                    </div>
-                    <div class="w-75">
-                        <!-- Rating -->
-                        <!-- need javascript for this... append ang idea ko :< pero dunno pa how ill do it -->
-                        <div class="container">
-                            <h2 class="bold padding-bottom-7">4.4 <small>/ 5</small></h2>
-                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-grey btn-sm" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                        
-                        <!-- Synopsis -->
-                        <div id="synopsis" class="padded">
-                            <h6>{{synopsis}}</h6>
-                        </div>
-                        
-                        <!-- cast -->
-                        <div id="cast" class="padded">
-                            <h6>{{cast}}</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="w-100" type="button" class="btn btn-success" id="seeTrailer">See Trailer</button>
-                <button class="w-100" type="button" class="btn btn-success" id="buyTicket">Buy Ticket</button>
-            </div>
-
-            <!-- Reviews -->
-            <div class="w-25 review-block pre-scrollable overflow-auto">
-            <!-- use whole keme for 'each' -->
-            {{#each review}}
-                <hr>
-                <div class="w-100 d-flex flex-row">
-                    <div class="w-25">
-                        <img src={{imageurl}} class="img-rounded">
-                        <div class="review-block-name"><a href="#">{{name}}</a></div>
-                        <div class="review-block-date">{{date}}<br/>...</div>
-                    </div>
-                    <div class="w-75">
-                        {{!-- hindi pa naeedit, need ata javascript here --}}
-                        {{!-- di pa gumagana ung star --}}
-                        <div id= "review-block-rate" class="review-block-rate">
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                            <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
-                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                        <div class="review-block-title">{{cTitle}}</div>
-                        <div class="review-block-description">{{comment}}</div>
-                    </div>
-                </div>
-            {{/each}}
-            <!-- end keme for each -->
-                <hr>
-                <!-- source: https://bootsnipp.com/snippets/40pMm -->
-            </div>
-        </div>
-    </div>
-    
     <!-- Showing Schedules -->
     <!-- EDITED -->
-    <div class="schedules w-100">
+    <div class="schedules">
         {{>displayMovies}}   
     </div>
+    </div>
+
+    
 
     <!-- BS4 Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

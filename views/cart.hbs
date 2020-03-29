@@ -12,74 +12,83 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Font Awesome 4 Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="/css/HBS-images.css">
 </head>
 <body>
     {{>header}}
 
-    <div class="container d-flex flex-row w-100">
-        <div class="w-25 justify-content-center">
-            <br><br><br>
-            <img id="profilepic" src={{pic}} style="height: 100px; width: auto">
-            <hr><br>
-            <h4>{{fname}} {{lname}}</h4>
-            <br>
-            <h5>{{username}}</h5>
+    <div class="container-fluid mt-4">
+		<div class="row">
+			<!-- Sidebar -->
+			<div class="col-sm-3">
+				{{>profileSidebar}}
+			</div>
 
-        </div>
-        <div class="col-md-2">
-
-        </div>
-        <div class="w-50">
-            <br><br>
-            {{#each tickets}}
-                <br>
-                <h6> Ticket No. 
-                {{#ticketNumber @key}}
-                {{this}}
-                {{/ticketNumber}}
-                </h6>
-                <!-- Ticket -->
-                <div class="ticket">
-                <!-- Movie Title -->
-                <div class="box ">
-                    <label class="col-md-5">Movie Title : </label>
-                    <label id="title"> {{title}}</label>
+			<!--Tickets-->
+			<div class="col-sm-9">
+                <div class="row">
+                    <h3 class="text-danger mb-0">Your Cart</h3>	
                 </div>
-                <!-- Show Date -->
-                <div class="box">
-                    <label class="col-md-5">Show Date : </label>
-                    <label id="showDate"> {{showDate}}</label>
-                </div>
-                <!-- Show Time -->
-                <div class="box">
-                    <label class="col-md-5">Show Time : </label>
-                    <label id="showTime"> {{showTime}}</label>
-                </div>
-                <!--Seat Number-->
-                <div class="box">
-                    <label class="col-md-5">Seat Number: </label>
-                    <label id="seatNum"> {{seatNum}}</label>
-                </div>
-                <!--Price-->
-                <div class="box">
-                    <label class="col-md-5">Price : </label>
-                    <label id="price"> {{price}}</label>
-                </div>
-                </div>
-                {{!-- Buttons --}}
-                <div class="d-flex flex-row justify-content-center">
-                    <div>
-                        <button class="btn btn-block btn-danger" style="width: 100px;" type="submit">Remove</button>
-                    </div>
-                    <div>
-                        <button class="btn btn-block btn-success" style="width: 100px;" type="submit">Checkout</button>
-                    </div>
-                </div>
-                <br>
                 <hr>
-            {{/each}}
+                <div class="row">
+                    {{#each (bookedTicketsArray tickets)}}
+                        {{ticketBorder status}}		
+                            <div class="card-header py-2">
+                                <h5 class="mb-0">{{title}}</h5>
+                            </div>
+
+                            <div class="card-body p-0">
+                                <table class="table table-sm table-borderless text-center mb-0">
+                                    <tr>
+                                        <td><h6>Show Date:</h6></td>
+                                        <td>{{showDate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Show Time:</b></td>
+                                        <td>{{showTime}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Seats:</h6></td>
+                                        <td>
+                                        {{#each seats}}
+                                            {{this}}
+                                            {{#unless @last}}, {{/unless}}
+                                        {{/each}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><h6>Total Cost:</h6></td>
+                                        <td>{{totalCost}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-6 mb-2">
+                                        <button class="btn btn-block btn-danger" type="submit">
+                                            <i class="fa fa-trash"></i> Remove
+                                            </button>
+                                    </div>
+
+                                    <div class="col-md-6 mb-2">
+                                        <button class="btn btn-block btn-success" type="submit">
+                                            <i class="fa fa-shopping-cart"></i> Checkout
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> <!-- Dangling div because ticketborder helper creates div with border -->
+                    {{/each}}
+                </div>
+
+            </div>
         </div>
-    </div>  
+    </div>
+
+    
 
     <!-- BS4 Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

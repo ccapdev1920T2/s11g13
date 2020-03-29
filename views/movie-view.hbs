@@ -11,10 +11,117 @@
     <!-- Font Awesome 4 Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    <link rel="stylesheet" href="css/HBS-images.css">
+    <link rel="stylesheet" href="/css/HBS-images.css">
 </head>
 <body>
     {{>header}}
+
+    <!-- Main content -->
+    <div class="container-fluid mt-4 px-4">
+        <div class="row">
+            <!-- Movie Details -->
+            <div class="col-md-9" id="movieInfo">
+                {{#with movieDetails}}
+                    <h3>{{title}}</h3>
+                    <h5 class="text-secondary">{{genre}}</h5>
+
+                    <div class="row">
+                        <!-- Movie Cover -->
+                        <div class="col-md-5">
+                            <div class="card my-2">
+                                <img class="movie-poster img-thumbnail" src={{moviecover}}>
+                            </div>
+                        </div>
+
+                        <!-- Movie Information -->
+                        <div class="col-md-7">
+                            <div class="container">
+                                <!-- Helper function for rating below-->
+                                <!-- Placeholder for now-->
+                                <div class="row">
+                                    <h4>4.4/<small>5</small></h4>
+                                </div>
+                                <div class="row">
+                                    <span>
+                                        <i class="fa fa-minus text-warning"></i>
+                                        <i class="fa fa-minus text-warning"></i>
+                                        <i class="fa fa-minus text-warning"></i>
+                                        <i class="fa fa-minus text-secondary"></i>
+                                        <i class="fa fa-minus text-secondary"></i>
+                                    </span>
+                                </div>
+
+
+                                <div class="row mt-4">
+                                    <h6 class="text-justify">{{synopsis}}</h6>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <h6>Starring: </h6> &nbsp;
+                                    <h6> 
+                                        {{#each cast}}
+                                            {{this}}
+                                            {{#unless @last}}, {{/unless}}
+                                        {{/each}}
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <hr>
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-5 mb-2">
+                            <button class="btn btn-block btn-danger" type="submit">View Trailer</button>
+                        </div>
+                        
+                        <div class="col-md-5 mb-2">
+                            <button class="btn btn-block btn-danger" type="submit">Buy Ticket</button>
+                        </div>
+                    </div>
+
+                
+                {{/with}}
+            </div>
+
+            <!-- Ratings -->
+            <div class="col-md-3">
+                {{#with review}}
+                <div class="card bg-light mb-2">
+                    <div class="container-fluid">
+                        <div class="card-body p-1">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <image class="review-dp" src={{profilepic}}>
+                                    <small>{{fName}} {{lName}}</small>
+                                </div>
+                                <div class="col-md-9">
+                                    <small>
+                                        <h6>{{commentTitle}}</h6>
+                                        <p>{{comment}}</p>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer py-0 pl-1 pr-0">
+                        <small class="text-muted">{{date}}</small>
+                    </div>
+                </div>
+                {{/with}}
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
 
     {{!-- bodehhhh --}}
     <div class="d-flex flex-row w-100">
@@ -34,23 +141,23 @@
                     </div>
                     <div class="w-75">
                         <!-- Rating -->
-                        {{!-- need javascript for this... append ang idea ko :< pero dunno pa how ill do it --}}
+                        <!-- need javascript for this... append ang idea ko :< pero dunno pa how ill do it -->
                         <div class="container">
                             <h2 class="bold padding-bottom-7">4.4 <small>/ 5</small></h2>
                             <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                             </button>
                             <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                             </button>
                             <button type="button" class="btn btn-warning btn-grey btn-sm" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                             </button>
                             <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                             </button>
                         </div>
                         

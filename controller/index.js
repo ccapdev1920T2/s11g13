@@ -178,7 +178,39 @@ const indexFunctions = {
         })
     },
 
+    getViewMovie: (req, res, next)=>{
+        let movieDetails = {};
+        let ratings = {};
 
+        //sample data retrieved from db
+        if (req.params.movieID == "00023"){
+            movieDetails = {
+                title: "To All The Boys P.S. I Love You",
+                genre: "Romance",
+                moviecover: "/assets/MoviePosters/psIStillLoveYou.jpg",
+                rating: 4.4,
+                synopsis: "Lara Jean is officially Peter’s girlfriend, so everything should be perfect, right? But feelings grow complicated when an old crush reenters her life.",
+                cast: ["Lana Condor", "Noah Centineo", "Jordan Fisher"],
+            }
+
+            review = {
+                fName: "John Henry",
+                lName: "Cagaoan",
+                profilepic: "/assets/profpic.png",
+                date: "February 14, 2020",
+                rating: 5,
+                commentTitle: "Would watch again",
+                comment: "Solid! Made me cry",
+            }
+        }
+
+        res.render("movie-view", {
+            pageName: movieDetails.title,
+            movieDetails,
+            review,
+        
+        });
+    },
 
 
     getAsdf: function(req, res, next) {

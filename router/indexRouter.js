@@ -5,9 +5,10 @@ const router = express();
 const controller = require('../controller/index');
 
 ////// ROUTING /////////
-// this path is to '/'
+// Handles home and /
 router.get(["/", "/home"], controller.getHome);
 
+//Route to see all movies
 router.get("/movies", controller.getMovies);
 
 router.get("/calendar", controller.getCalendar);
@@ -19,6 +20,8 @@ router.get("/login", controller.getLogin);
 router.post("/login", controller.postLogin);
 
 router.get("/payment", controller.getPayment);
+
+router.get("/movies/view/:movieID", controller.getViewMovie);
 
 // this path is to '/asdf'
 router.get('/asdf', controller.getAsdf);

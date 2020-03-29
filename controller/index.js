@@ -140,7 +140,7 @@ const indexFunctions = {
                 pic: "/assets/profpic.png",
                 fname: "Howard",
                 lname: "Montecillo",
-                username,
+                username: "howardg",
                 email: "howard_montecillo@dlsu.edu.ph",
                 phone: "09876543210",
             }

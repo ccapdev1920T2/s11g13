@@ -293,6 +293,8 @@ const indexFunctions = {
         
         res.render('admin', {
             pageName: "Admin Dashboard",
+            isSignedIn: true,
+            username: "Bh0sZxCArr3n",
             show: [
                 {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 1, date: '04-12-20', time: '12:45 - 14:15'},
                 {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 1, date: '04-12-20', time: '12:45 - 14:15'},

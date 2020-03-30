@@ -27,63 +27,64 @@
 
 			<!--Tickets-->
 			<div class="col-sm-9">
-                <div class="row">
-                    <h3 class="text-danger mb-0">Your Cart</h3>	
-                </div>
-                <hr>
-                <div class="row">
-                    {{#each (bookedTicketsArray tickets)}}
-                        {{ticketBorder status}}		
-                            <div class="card-header py-2">
-                                <h5 class="mb-0">{{title}}</h5>
-                            </div>
+                <div class="container">
+                    <div class="row">
+                        <h3 class="text-danger mb-0">Your Cart</h3>	
+                    </div>
+                    <hr>
+                    <div class="row">
+                        {{#each (bookedTicketsArray tickets)}}
+                            {{ticketBorder status}}		
+                                <div class="card-header py-2">
+                                    <h5 class="mb-0">{{title}}</h5>
+                                </div>
 
-                            <div class="card-body p-0">
-                                <table class="table table-sm table-borderless text-center mb-0">
-                                    <tr>
-                                        <td><h6>Show Date:</h6></td>
-                                        <td>{{showDate}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><h6>Show Time:</b></td>
-                                        <td>{{showTime}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><h6>Seats:</h6></td>
-                                        <td>
-                                        {{#each seats}}
-                                            {{this}}
-                                            {{#unless @last}}, {{/unless}}
-                                        {{/each}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><h6>Total Cost:</h6></td>
-                                        <td>{{totalCost}}</td>
-                                    </tr>
-                                </table>
-                            </div>
+                                <div class="card-body p-0">
+                                    <table class="table table-sm table-borderless text-center mb-0">
+                                        <tr>
+                                            <td><h6>Show Date:</h6></td>
+                                            <td>{{showDate}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><h6>Show Time:</b></td>
+                                            <td>{{showTime}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><h6>Seats:</h6></td>
+                                            <td>
+                                            {{#each seats}}
+                                                {{this}}
+                                                {{#unless @last}}, {{/unless}}
+                                            {{/each}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><h6>Total Cost:</h6></td>
+                                            <td>{{totalCost}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
 
-                            <div class="card-footer">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6 mb-2">
-                                        <button class="btn btn-block btn-danger" type="submit">
-                                            <i class="fa fa-trash"></i> Remove
-                                            </button>
-                                    </div>
+                                <div class="card-footer">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-6 mb-2">
+                                            <button class="btn btn-block btn-danger" type="submit">
+                                                <i class="fa fa-trash"></i> Remove
+                                                </button>
+                                        </div>
 
-                                    <div class="col-md-6 mb-2">
-                                        <button class="btn btn-block btn-success" type="submit">
-                                            <i class="fa fa-shopping-cart"></i> Checkout
-                                            </button>
+                                        <div class="col-md-6 mb-2">
+                                            <button class="btn btn-block btn-success" type="submit">
+                                                <i class="fa fa-shopping-cart"></i> Checkout
+                                                </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div> <!-- Dangling div because ticketborder helper creates div with border -->
-                    {{/each}}
+                            </div> <!-- Dangling div because ticketborder helper creates div with border -->
+                        {{/each}}
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>

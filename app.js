@@ -65,4 +65,13 @@ app.listen(port, ()=>{
 })
 
 db.createDatabase();
-db.createCollection("myWorld");
+db.createCollection("USERS");
+db.createCollection("TRANSACTIONS");
+db.createCollection("CCINFO");
+db.createCollection("CART");
+db.createCollection("TICKETS");
+db.createCollection("SHOWS");
+db.createCollection("MEDIA");
+db.createCollection("SEATS");
+db.createCollection("MOVIES");
+db.createCollection("RATINGS");

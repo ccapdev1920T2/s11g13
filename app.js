@@ -36,12 +36,12 @@ hbs.registerHelper('rateBuilder', function(rating) {
     var x = '';
 
     while (arren<=rate){
-        x += '<span class="fa fa-star on"></span>\n';
+        x += '<i class="fa fa-star text-warning"></i>\n';
         arren++;
     }
 
     while (arren<=5){
-        x += '<span class="fa fa-star"></span>\n';
+        x += '<i class="fa fa-star"></i>\n';
         arren++;
     }
 

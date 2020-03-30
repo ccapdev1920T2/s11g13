@@ -295,6 +295,17 @@ const indexFunctions = {
             pageName: "Admin Dashboard",
             isSignedIn: true,
             username: "Bh0sZxCArr3n",
+            movies:[
+                {title: "To All The Boys P.S. I Still Love You", movie_id:23},
+                {title: "The Lightning Thief", movie_id:101},
+                {title: "Ice Age", movie_id:103},
+                {title: "The Conjuring", movie_id: 156},
+                {title: "It", movie_id: 256},
+                {title: "Taken", movie_id: 269},
+                {title: "Avengers: Civil War", movie_id: 298},
+                {title: "Captain America: The Winter Soldier", movie_id: 302},
+                {title: "Doctor Who - The Day of the Doctor", movie_id: 307},
+            ],
             show: [
                 {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 1, date: '04-12-20', time: '12:45 - 14:15'},
                 {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 1, date: '04-12-20', time: '12:45 - 14:15'},

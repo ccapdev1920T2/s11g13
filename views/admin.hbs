@@ -25,7 +25,7 @@
                 <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#Main">Movie List</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-danger active" data-toggle="tab" role="tab" href="#Add">Add Movie/Show</a>
+                <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#Add">Add Movie/Show</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#EditRemove">Edit/Remove Showing</a>
@@ -33,15 +33,33 @@
         </ul>
         <!-- Panel Contents -->
         <div class="tab-content border border-top-0">
+            <div class="tab-pane fade container-fluid py-4 show active">
+            <h3 class="text-danger">Admin Dashboard</h3>
+            <hr>
+            <h5>Welcome, {{username}}.</h6>
+            <h6>Click on any tab to get started.</h6>
+            </div>
             <!-- Staring Screen -->
             <div class="tab-pane fade container-fluid py-4" id="Main">
-                <h3 class="text-danger">Admin Dashboard</h3>
+                <h3 class="text-danger">Movie List</h3>
                 <hr>
-                <h5>Welcome, {{username}}.</h5>
-                <p>Click on other tabs to begin.</p>
+                <div class="row justify-content-center">
+                    <div class="card w-75">
+                        <table class="table table-sm table-striped text-center mb-0">
+                            <tr>
+                                <th>Movie Title</th><th>Movie ID</th>
+                            </tr>
+                            {{#each movies}}
+                                <tr><td>{{title}}</td><td>{{movie_id}}</td></tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="tab-pane fade container-fluid py-4 show active" id="Add">
+            <!-- Adding movies or shows -->
+            <div class="tab-pane fade container-fluid py-4" id="Add">
                 <h3 class="text-danger">Add new Movies or Shows</h3>
                 <hr>
                 <div class="container">
@@ -160,7 +178,7 @@
                             Days <i class="fa fa-caret-down"></i>
                         </button>
 
-                        <div class="collapse navbar-collapse" id="DaySelector">
+                        <div class="collapse navbar-collapse mb-4" id="DaySelector">
                             <ul class="nav flex-column nav-pills" role="tablist">
                                 <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#SunShow">Sunday</a></li>
                                 <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#MonShow">Monday</a></li>
@@ -177,6 +195,7 @@
                     <div class="col-sm-10">
                         <div class="container-fluid tab-content">
                             <div class="tab-pane fade" role="tabpanel" id="SunShow">
+                                <h5 class="text-danger">Sunday shows</h5>
                                 <table class="table table-hover table-responsive-sm">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
@@ -189,14 +208,11 @@
                                             <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
                                         </tr> 
                                     {{/each}}
-                                    <tr>
-                                        <td colspan="6"></td>
-                                        <td><button type="button" class="btn btn-danger" id="add">Add</button></td>
-                                    </tr>
                                 </table>
                             </div>
 
                             <div class="tab-pane fade" role="tabpanel" id="MonShow">
+                                <h5 class="text-danger">Monday shows</h5>
                                 <table class="table table-hover table-responsive-sm">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
@@ -209,14 +225,11 @@
                                             <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
                                         </tr> 
                                     {{/each}}
-                                    <tr>
-                                        <td colspan="6"></td>
-                                        <td><button type="button" class="btn btn-danger" id="add">Add</button></td>
-                                    </tr>
                                 </table>
                             </div>
 
                             <div class="tab-pane fade" role="tabpanel" id="TueShow">
+                                <h5 class="text-danger">Tuesday shows</h5>
                                 <table class="table table-hover table-responsive-sm">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
@@ -229,14 +242,11 @@
                                             <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
                                         </tr> 
                                     {{/each}}
-                                    <tr>
-                                        <td colspan="6"></td>
-                                        <td><button type="button" class="btn btn-danger" id="add">Add</button></td>
-                                    </tr>
                                 </table>
                             </div>
 
                             <div class="tab-pane fade" role="tabpanel" id="WedShow">
+                                <h5 class="text-danger">Wednesday shows</h5>
                                 <table class="table table-hover table-responsive-sm">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
@@ -249,14 +259,11 @@
                                             <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
                                         </tr> 
                                     {{/each}}
-                                    <tr>
-                                        <td colspan="6"></td>
-                                        <td><button type="button" class="btn btn-danger" id="add">Add</button></td>
-                                    </tr>
                                 </table>
                             </div>
 
                             <div class="tab-pane fade" role="tabpanel" id="ThuShow">
+                                <h5 class="text-danger">Thursday shows</h5>
                                 <table class="table table-hover table-responsive-sm">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
@@ -269,14 +276,11 @@
                                             <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
                                         </tr> 
                                     {{/each}}
-                                    <tr>
-                                        <td colspan="6"></td>
-                                        <td><button type="button" class="btn btn-danger" id="add">Add</button></td>
-                                    </tr>
                                 </table>
                             </div>
 
                             <div class="tab-pane fade" role="tabpanel" id="FriShow">
+                                <h5 class="text-danger">Friday shows</h5>
                                 <table class="table table-hover table-responsive-sm">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
@@ -289,14 +293,11 @@
                                             <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
                                         </tr> 
                                     {{/each}}
-                                    <tr>
-                                        <td colspan="6"></td>
-                                        <td><button type="button" class="btn btn-danger" id="add">Add</button></td>
-                                    </tr>
                                 </table>
                             </div>
 
                             <div class="tab-pane fade" role="tabpanel" id="SatShow">
+                                <h5 class="text-danger">Saturday shows</h5>
                                 <table class="table table-hover table-responsive-sm">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
@@ -309,18 +310,11 @@
                                             <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
                                         </tr> 
                                     {{/each}}
-                                    <tr>
-                                        <td colspan="6"></td>
-                                        <td><button type="button" class="btn btn-danger" id="add">Add</button></td>
-                                    </tr>
                                 </table>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                
-
             </div>
         </div>
     </div>
@@ -337,6 +331,12 @@
     
     <script type="text/javascript">
         $(document).ready(function(){
+
+            //Hide other days on click
+            $('#DaySelector').find("a").click(()=>{
+                $('#DaySelector').collapse('hide');
+            })
+
             $('[data-toggle="tooltip"]').tooltip(); //initialize tooltip for Add Show movieID
 
             /*Populate values for Dropdown on Add Show*/

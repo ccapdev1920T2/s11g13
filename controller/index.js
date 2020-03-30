@@ -284,6 +284,11 @@ const indexFunctions = {
             movScore =
             movSynopsis =
             movCast =
+
+            FORM: New Show
+            movieID = 
+            date = 
+            time = 
         */
         
         res.render('admin', {

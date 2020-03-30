@@ -36,6 +36,30 @@
 <body>
     {{>header}}
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var day = 1;
+            var y = 0;
+            $("#addShow").hide();
+            
+            $("#add").click(function(){
+                if (y == 0){
+                    $("#addShow").show(500);
+                    y++;
+                }
+                else {
+                    $("#addShow").hide(500);
+                    y--;
+                }
+            });
+
+            $(".nav-item").click(function(){
+                $("#addShow").hide();
+            });
+        });
+    </script>
+
+
     <div class="container justify-content-center mt-5">
         <div class="form-group">
             <ul class="nav nav-tabs nav-justified">
@@ -97,6 +121,10 @@
                                                 </td>
                                             </tr> 
                                         {{/each}}
+                                        <tr>
+                                            <td></td><td></td><td></td><td></td><td></td><td></td>
+                                            <td><button type="button" class="btn btn-danger" id="add">Add</button></td>
+                                        </tr>
                                     </table>
                                 </div>
 
@@ -274,12 +302,15 @@
                                     </table>
                                 </div>
 
+                                <div class="container-fluid" id="addShow">
+                                        {{>formNewShow}}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="tab-pane fade container-fluid justify-content-left" id="Add">
+                <div class="tab-pane fade container-fluid justify-content-right" id="Add">
                     <h2> Add Movie</h2>
                     <hr>
                     <div class="col-md-3">

@@ -41,7 +41,7 @@ hbs.registerHelper('ticketBorder', (status)=>{
 
 hbs.registerHelper('userHrefBuilder', (username, loc)=>{
     let string = "";
-    string += '/userprofile/' + username + '/' + loc;
+    string += '/user/' + username + '/' + loc;
     return string;
 });
 
@@ -153,14 +153,14 @@ app.listen(port, ()=>{
     console.log(`Access at localhost:${port}/`);
 })
 
-db.createDatabase();
-db.createCollection("USERS");
-db.createCollection("TRANSACTIONS");
-db.createCollection("CCINFO");
-db.createCollection("CART");
-db.createCollection("TICKETS");
-db.createCollection("SHOWS");
-db.createCollection("MEDIA");
-db.createCollection("SEATS");
-db.createCollection("MOVIES");
-db.createCollection("RATINGS");
+// db.createDatabase();
+// db.createCollection("USERS");
+// db.createCollection("TRANSACTIONS");
+// db.createCollection("CCINFO");
+// db.createCollection("CART");
+// db.createCollection("TICKETS");
+// db.createCollection("SHOWS");
+// db.createCollection("MEDIA");
+// db.createCollection("SEATS");
+// db.createCollection("MOVIES");
+// db.createCollection("RATINGS");

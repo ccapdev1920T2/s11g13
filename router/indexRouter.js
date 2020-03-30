@@ -28,13 +28,13 @@ router.get('/asdf', controller.getAsdf);
 //this path is to '/seats'
 router.get('/seats', controller.getSeats);
 //this path is to '/userprofile/:username'
-router.get('/userprofile/:username', controller.getUserProfile);
+router.get('/user/:username', controller.getUserProfile);
 //this path is to '/userprofile/:username/ticket'
-router.get('/userprofile/:username/tickets', controller.getUserTicket);
+router.get('/user/:username/tickets', controller.getUserTicket);
 
 // TESTER FOR CART
 //this path is to '/userprofile/:username/cart'
-router.get('/userprofile/:username/cart', controller.getCart);
+router.get('/user/:username/cart', controller.getCart);
 
 //TESTER FOR ADMIN
 ///this path is to '/admin'

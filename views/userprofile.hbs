@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- This page's CSS -->
-	<link rel="stylesheet" type="text/css" href="../css/userprofile.css">
+	<link rel="stylesheet" type="text/css" href="/css/HBS-images.css">
 
 </head>
 <body>
@@ -22,84 +22,102 @@
 		<div class="row">
 			<!-- Profile photo -->
 			<div class="col-md-3">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="main_content">
-							<img id="profilepic" src={{pic}}>
-						</div>
-					</div>
+				{{>profileSidebar}}
 
-					<div class="form-group">
-						<input type="file" name="File" id="File" class="btn btn-block hidden" accept="image/*" 
-						value="Upload Photo" onchange="document.getElementById('profilepic').src = window.URL.createObjectURL(this.files[0])">
-					</div>
+				<div class="form-group">
+					<input type="file" name="File" id="File" class="btn btn-block d-none" accept="image/*" 
+					value="Upload Photo" onchange="document.getElementById('profilepic').src = window.URL.createObjectURL(this.files[0])">
 				</div>
+				
 			</div>
 			<!-- Other contents -->
 			<div class="col-md-9">
-				<form class="form-horizontal">
-					<!-- Name -->
-					<div class="form-group row">
-						<label class="control-label col-md-2">Name: </label>
-						<div class="col-md-5">
-							<input type="text" name="fName" id="fName" class="form-control" value={{fname}} readonly>
+				<div class="card border-0 justify-content-center">
+					<form class="form-horizontal">
+						<!-- Name -->
+						<div class="form-group row">
+							<label class="control-label col-md-2">Name: </label>
+							<div class="col-md-5">
+								<input type="text" readonly name="fName" id="fName" class="form-control" value={{fname}}>
+							</div>
+							<div class="col-md-5">
+								<input type="text" readonly name="lName" id="lName" class="form-control" value={{lname}}>
+							</div>
 						</div>
-						<div class="col-md-5">
-							<input type="text" name="lName" id="lName" class="form-control" value={{lname}} readonly>
-						</div>
-					</div>
 
-					<!-- Username -->
-					<div class="form-group row">
-						<label for="UName" class="control-label col-md-2">Username</label>
-						<div class="col-md-10">
-							<input type="text" name="UName" id="UName" class="form-control" value={{username}} readonly>
+						<!-- Username -->
+						<div class="form-group row">
+							<label for="UName" class="control-label col-md-2">Username</label>
+							<div class="col-md-10">
+								<input type="text" readonly name="UName" id="UName" class="form-control-plaintext pl-2" value={{username}}>
+							</div>
 						</div>
-					</div>
 
-					<!-- Email address -->
-					<div class="form-group row">
-						<label for="Email" class="control-label col-md-2">Email address</label>
-						<div class="col-md-10">
-							<input type="email" name="Email" id="Email" class="form-control" value={{email}} readonly>
+						<!-- Email address -->
+						<div class="form-group row">
+							<label for="Email" class="control-label col-md-2">Email address</label>
+							<div class="col-md-10">
+								<input type="email" readonly name="Email" id="Email" class="form-control" value={{email}}>
+							</div>
 						</div>
-					</div>
 
-					<!-- Phone number -->
-					<div class="form-group row">
-						<label for="Mobile" class="control-label col-md-2">Mobile number</label>
-						<div class="col-md-10">
-							<input type="nuber" name="Mobile" id="Mobile" class="form-control" value={{mobileNum}} readonly>
+						<!-- Phone number -->
+						<div class="form-group row">
+							<label for="Mobile" class="control-label col-md-2">Mobile number</label>
+							<div class="col-md-10">
+								<input type="nuber" readonly name="Mobile" id="Mobile" class="form-control" value={{phone}}>
+							</div>
 						</div>
-					</div>
 
-				<!-- Controls -->
-				<div class="form-group row">
-					<div class="col-md-5"></div>
-					<div class="col-md-3">
-						<input type="button" name="Edit" id="Edit" class="btn btn-default btn-block" value="Edit">
-						<input type="button" name="Save" id="Save" class="btn btn-default btn-block hidden" value="Save">
-						<a name="ViewTicket" id="ViewTicket" class="btn btn-default btn-block button" href="/userprofile/{{username}}/ticket">View Ticket</a>
-
+					<!-- Controls -->
+						<div class="form-group row justify-content-center">
+							<button type="button" id="Edit" class="btn btn-danger">Edit</button>
+							<button type="button" id="Save" class="btn btn-danger d-none">Save</button>
 						</div>
-					
-				</form>
+					</form>
+				</div>
+				<div class="form-group row justify-content-center">
+					<a name="ViewTicket" id="ViewTicket" class="btn btn-default btn-danger mx-2" href="/user/{{username}}/tickets">View Tickets</a>
+					<a name="ViewCart" id="ViewCart" class="btn btn-default btn-danger mx-2" href="/user/{{username}}/cart">Go to Cart</a>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="scripts/bootstrap.min.js"></script>
-    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
-    <!-- <script src="offcanvas.js"></script> -->
-	<!-- Main JS handler for this html page -->
-	<script type="text/javascript" src="../scripts/userprofile.js"></script>
+    <!-- BS4 Scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$(document).ready(()=>{
+			$("#profilepic").css("pointerEvents","none");
+
+			$("#Edit").click(()=>{
+				$("#Edit").hide();
+				$("#Save").show();
+				$("#File").show();
+				$(".d-none").removeClass("d-none");
+				$("#fName").removeAttr("readonly");
+				$("#lName").removeAttr("readonly");
+				$("#Email").removeAttr("readonly");
+				$("#Mobile").removeAttr("readonly");
+				$("#profilepic").css("pointerEvents","auto");
+
+			})
+
+			$("#Save").click(()=>{
+				$("#Edit").show();
+				$("#Save").hide();
+				$("#File").hide();
+
+				$("#fName").prop("readonly", true);
+				$("#lName").prop("readonly", true);
+				$("#Email").prop("readonly", true);
+				$("#Mobile").prop("readonly", true);
+				$("#profilepic").css("pointerEvents","none");
+			})
+		})
+	</script>
 		
 </body>
 </html>

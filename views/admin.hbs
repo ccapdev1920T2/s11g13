@@ -12,68 +12,113 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Font Awesome 4 Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    {{!-- <style>
-        /* not active */
-        .nav-pills .pill .nav-link:not(.active) {
-            background-color: rgb(255, 255, 255);
-            color: rgb(255, 0, 0);
-        }
-
-        /* active (faded) */
-        .nav-pills .pill .nav-link {
-            background-color: rgb(255, 0, 0);
-            color: white;
-        }
-
-        .on
-        {
-            color:orange;
-        }
-
-    </style> --}}
 </head>
 <body>
     {{>header}}
 
-
-
     <div class="container-fluid mt-4 p-2">
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
             <li class="nav-item">
-                <a class="nav-link text-danger active" data-toggle="tab" role="tab" href="#Main">Main</a>
+                <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#Main">Movie List</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#Add">Add Movie</a>
+                <a class="nav-link text-danger active" data-toggle="tab" role="tab" href="#Add">Add Movie/Show</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#EditRemove">Edit/Removing Showing</a>
+                <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#EditRemove">Edit/Remove Showing</a>
             </li>
         </ul>
         <!-- Panel Contents -->
         <div class="tab-content border border-top-0">
             <!-- Staring Screen -->
-            <div class="tab-pane fade show active container pt-4" id="Main">
+            <div class="tab-pane fade container-fluid py-4" id="Main">
                 <h3 class="text-danger">Admin Dashboard</h3>
                 <hr>
-                <h5 >Welcome, {{username}}.</h5>
+                <h5>Welcome, {{username}}.</h5>
                 <p>Click on other tabs to begin.</p>
+            </div>
+
+            <div class="tab-pane fade container-fluid py-4 show active" id="Add">
+                <h3 class="text-danger">Add new Movies or Shows</h3>
+                <hr>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <ul class="nav nav-pills nav-fill" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link bg-danger text-light mx-2 active" data-toggle="tab" role="tab" href="#AddMovieForm">Add Movie</a> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link bg-danger text-light mx-2" data-toggle="tab" role="tab" href="#AddShowForm">Add Show</a> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tab-content container border border-muted mt-4 pt-4">
+                    <div class="tab-pane fade show active" id="AddMovieForm">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <form name="AddMovie" id="AddMovie"class="form-horizontal" method="POST">
+                                    <div class="form-group row">
+                                        <label for="movTitle" class="col-form-label col-md-3 text-right">Movie Title</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="movTitle" id="movTitle" class="form-control" placeholder="Title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="movGenre" class="col-form-label col-md-3 text-right">Genres</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="movGenre" id="movGenre" class="form-control" placeholder="Genre1, Genre2">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="movScore" class="col-form-label col-md-3 text-right">Score</label>
+                                        <div class="col-md-9">
+                                            <input type="number" name="movScore" id="movScore" class="form-control" placeholder="Out of 5">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="movSynopsis" class="col-form-label col-md-3 text-right">Synopsis</label>
+                                        <div class="col-md-9">
+                                            <textarea name="movSynopsis" id="movSynopsis" rows="5" class="form-control" placeholder="Movie Synopsis here" style="resize:none"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="movCast" class="col-form-label col-md-3 text-right">Cast</label>
+                                        <div class="col-md-9">
+                                            <textarea name="movCast" id="movCast" rows="5" class="form-control" placeholder="Starring: " style="resize:none"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row justify-content-center">
+                                        <button type="button" name="Upload" id="Upload" class="btn btn-danger"> 
+                                            <i class="fa fa-upload"></i> Upload Movie
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="AddShowForm">
+                        
+                    </div>
+                </div>
+
+
             </div>
 
             <!-- Edit / remove movies -->
             <div class="tab-pane fade container-fluid py-4" id="EditRemove">
-                <h3 class="text-danger">Edit / Remove Showing Movies</h3>
+                <h3 class="text-danger">Edit or Remove Showing Movies</h3>
                 <hr>
-
                 <div class="row">
                     <!-- Controls -->
                     <div class="col-sm-2">
-                        <button class="navbar-toggler text-danger" type="button" data-toggle="collapse" data-target="#DaySelector">
+                        <button class="btn btn-block btn-outline-danger mb-4" type="button" data-toggle="collapse" data-target="#DaySelector">
                             Days <i class="fa fa-caret-down"></i>
                         </button>
 
                         <div class="collapse navbar-collapse" id="DaySelector">
-                        </div>
                             <ul class="nav flex-column nav-pills" role="tablist">
                                 <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#SunShow">Sunday</a></li>
                                 <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#MonShow">Monday</a></li>
@@ -83,6 +128,7 @@
                                 <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#FriShow">Friday</a></li>
                                 <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#SatShow">Saturday</a></li>
                             </ul>
+                        </div>
                     </div>
                     
                     <!-- Movies --> 
@@ -235,6 +281,7 @@
 
             </div>
 
+
         </div>
 
 
@@ -250,45 +297,7 @@
 
                     </div>
                     <div class="col-md-9">
-                        <form name="AddMovie" id="AddMovie"class="form-horizontal">
-                            <div class="form-group">
-                                <label for="movTitle" class="control-label col-md-3">Movie Title</label>
-                                <div class="col-md-9">
-                                    <input type="text" name="movTitle" id="movTitle" class="form-control" placeholder="Title">
-                                </div>
-                            </div>
-                            <div class="form-group" class="form-horizontal">
-                                <label for="movGenre" class="control-label col-md-3">Genres</label>
-                                <div class="col-md-9">
-                                    <input type="text" name="movGenre" id="movGenre" class="form-control" placeholder="Genre1, Genre2">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="movScore" class="control-label col-md-3">Score</label>
-                                <div class="col-md-9">
-                                    <input type="number" name="movScore" id="movScore" class="form-control" placeholder="Out of 5">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="movSynopsis" class="control-label col-md-3">Synopsis</label>
-                                <div class="col-md-9">
-                                    <textarea name="movSynopsis" id="movSynopsis" rows="5" class="form-control" placeholder="Movie Synopsis here" style="resize:none"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="movCast" class="control-label col-md-3">Cast</label>
-                                <div class="col-md-9">
-                                    <textarea name="movCast" id="movCast" rows="5" class="form-control" placeholder="Starring: " style="resize:none"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4">
-                                    <input type="button" name="Upload" id="Upload" class="btn btn-danger btn-block" value="Upload">
-                                </div>
-                                <div class="col-md-4"></div>
-                            </div>
-                        </form> 
+                         
                     </div>
             </div>
         </div>

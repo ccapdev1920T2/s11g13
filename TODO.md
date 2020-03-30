@@ -1,19 +1,21 @@
 # To Do
 ## Important
 
-- [ ] Cart -> cancel booking
+- [X] Cart -> cancel booking button
+- [ ] functionality for cancel booking
 - [X] View tickets 
-- [ ] add review button on movie-view when logged in
-- [ ] remove review under movie-view
+- [X] add review button on movie-view when logged in
+- [ ] functionality for add review
+- [X] remove review under movie-view
 - [X] Calendar to show movies
 
 ## To convert to hbs and bs4 || revamp ui for consistency:
 
-- [ ] admin
+- [X] admin
 - [X] calendar
 - [ ] seats
 - [X] movie-view
-- [ ] userprofile - input type file >> to check
+- [X] userprofile - input type file >> to check
 
 ## Upcoming
 - MVC

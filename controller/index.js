@@ -206,22 +206,22 @@ const indexFunctions = {
             }
 
             review = [
-                {fName: "John Henry", lName: "Cagaoan", profilepic: "/assets/profpic.png", date: "February 14, 2020",
+                {fName: "John Henry", lName: "Cagaoan", username: "jhcagaoan", profilepic: "/assets/profpic.png", date: "February 14, 2020",
                 rating: 5, commentTitle: "Would watch again", comment: "Solid! Made me cry",},
                 
-                {fName: "Bianca", lName: "Ganda", profilepic: "/assets/profpic.png", date: "February 20, 2020",
+                {fName: "Bianca", lName: "Ganda", username: "biancarb", profilepic: "/assets/profpic.png", date: "February 20, 2020",
                 rating: 5, commentTitle: "Kiligss", comment: "Ang cute :(( Choosing Peter was the right choice!",},
                 
-                {fName: "Arren", lName: "Antioquia", profilepic: "/assets/profpic.png", date: "February 24, 2020",
+                {fName: "Arren", lName: "Antioquia", username: "Bh0sZxCArr3n", profilepic: "/assets/profpic.png", date: "February 24, 2020",
                 rating: 5, commentTitle: "Nice Movie", comment: "I'll recommend this to my students in CCAPDEV.",},
                 
-                {fName: "Howard", lName: "Montecillo", profilepic: "/assets/profpic.png", date: "February 29, 2020",
+                {fName: "Howard", lName: "Montecillo", username: "howardg", profilepic: "/assets/profpic.png", date: "February 29, 2020",
                 rating: 5, commentTitle: "Good", comment: "Recommended by my prof. It was worth it.",},
 
-                {fName: "Sean", lName: "Potato", profilepic: "/assets/profpic.png", date: "February 29, 2020",
+                {fName: "Sean", lName: "Potato", username: "babalatanKoSiSarah", profilepic: "/assets/profpic.png", date: "February 29, 2020",
                 rating: 5, commentTitle: "Super Good", comment: "Haven't watched romance in a while. Definitely a good movie to watch.",},
 
-                {fName: "Chuan-chen", lName: "Chu", profilepic: "/assets/profpic.png", date: "March 22, 2020",
+                {fName: "Chuan-chen", lName: "Chu", username: "ChuanChenChun", profilepic: "/assets/profpic.png", date: "March 22, 2020",
                 rating: 3, commentTitle: "What", comment: "Maling movie ata napanood ko",},
             ]
         }
@@ -231,6 +231,8 @@ const indexFunctions = {
             movieDetails,
             review,
             movies,
+            isSignedIn: true,   //sample also
+            username: "jhcagaoan", //Sample only, dapat sa comment ko lang may delete button
         });
     },
 

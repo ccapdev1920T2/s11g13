@@ -39,11 +39,20 @@ hbs.registerHelper('ticketBorder', (status)=>{
     return new hbs.SafeString(x);
 });
 
+//For navbar and userprofile.hbs
 hbs.registerHelper('userHrefBuilder', (username, loc)=>{
     let string = "";
     string += '/user/' + username + '/' + loc;
     return string;
 });
+
+//movie-view delete comment button
+hbs.registerHelper('deleteBtnBuilder', (loggedIn, commentUname)=>{
+    if(loggedIn==commentUname){
+        return new hbs.SafeString('<button class="btn btn-sm btn-danger" onclick="$(this).parents(\'.card\').remove()">Delete</button>');
+    }
+});
+
 
 hbs.registerHelper('bookedTicketsArray', (tickets)=>{
     let bookedTickets = [];

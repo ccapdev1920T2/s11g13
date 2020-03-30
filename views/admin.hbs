@@ -16,7 +16,7 @@
 <body>
     {{>header}}
 
-    <div class="container-fluid mt-4 p-2">
+    <div class="container mt-4 p-2">
         <ul class="nav nav-tabs nav-justified" role="tablist">
             <li class="nav-item">
                 <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#Main">Movie List</a>
@@ -58,40 +58,40 @@
                     <div class="tab-pane fade show active" id="AddMovieForm">
                         <div class="row justify-content-center">
                             <div class="col-md-8">
-                                <form name="AddMovie" id="AddMovie"class="form-horizontal" method="POST">
+                                <form name="AddMovie" id="AddMovie" class="form-horizontal" method="POST">
                                     <div class="form-group row">
-                                        <label for="movTitle" class="col-form-label col-md-3 text-right">Movie Title</label>
+                                        <label for="addMovieTitle" class="col-form-label col-md-3 text-center">Movie Title</label>
                                         <div class="col-md-9">
-                                            <input type="text" name="movTitle" id="movTitle" class="form-control" placeholder="Title">
+                                            <input type="text" name="addMovieTitle" id="addMovieTitle" class="form-control" placeholder="Title">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="movGenre" class="col-form-label col-md-3 text-right">Genres</label>
+                                        <label for="addMovieGenre" class="col-form-label col-md-3 text-center">Genres</label>
                                         <div class="col-md-9">
-                                            <input type="text" name="movGenre" id="movGenre" class="form-control" placeholder="Genre1, Genre2">
+                                            <input type="text" name="addMovieGenre" id="addMovieGenre" class="form-control" placeholder="Genre1, Genre2">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="movScore" class="col-form-label col-md-3 text-right">Score</label>
+                                        <label for="addMovieScore" class="col-form-label col-md-3 text-center">Score</label>
                                         <div class="col-md-9">
-                                            <input type="number" name="movScore" id="movScore" class="form-control" placeholder="Out of 5">
+                                            <input type="number" name="addMovieScore" id="addMovieScore" class="form-control" placeholder="Out of 5">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="movSynopsis" class="col-form-label col-md-3 text-right">Synopsis</label>
+                                        <label for="addMovieSynopsis" class="col-form-label col-md-3 text-center">Synopsis</label>
                                         <div class="col-md-9">
-                                            <textarea name="movSynopsis" id="movSynopsis" rows="5" class="form-control" placeholder="Movie Synopsis here" style="resize:none"></textarea>
+                                            <textarea name="addMovieSynopsis" id="addMovieSynopsis" rows="5" class="form-control" placeholder="Movie Synopsis here" style="resize:none"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="movCast" class="col-form-label col-md-3 text-right">Cast</label>
+                                        <label for="addMovieCast" class="col-form-label col-md-3 text-center">Cast</label>
                                         <div class="col-md-9">
-                                            <textarea name="movCast" id="movCast" rows="5" class="form-control" placeholder="Starring: " style="resize:none"></textarea>
+                                            <textarea name="addMovieCast" id="addMovieCast" rows="5" class="form-control" placeholder="Starring: " style="resize:none"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row justify-content-center">
-                                        <button type="button" name="Upload" id="Upload" class="btn btn-danger"> 
-                                            <i class="fa fa-upload"></i> Upload Movie
+                                        <button type="button" name="addMovieUpload" id="addMovieUpload" class="btn btn-danger"> 
+                                            <i class="fa fa-upload"></i> Upload Movie Details
                                         </button>
                                     </div>
                                 </form>
@@ -100,7 +100,40 @@
                     </div>
 
                     <div class="tab-pane fade" id="AddShowForm">
-                        
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <form name="AddMovie" id="AddMovie" class="form-horizontal" method="POST">
+                                    <div class="form-group row">
+                                        <label for="showMovieID" class="col-form-label col-md-3 text-center">Movie Title <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Refer to Movie List Tab"></i></label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="showMovieID" id="showMovieID" class="form-control" placeholder="Movie ID">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="showMovieDate" class="col-form-label col-md-3 text-center">Show Day</label>
+                                        <div class="col-md-9">
+                                            <select name="showMovieDate" id="showMovieDate" class="form-control" placeholder="Select Day">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="showMovieTime" class="col-form-label col-md-3 text-center">Show Time</label>
+                                        <div class="col-md-9">
+                                            <select name="showMovieTime" id="showMovieTime" class="form-control" placeholder="Select Day">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row justify-content-center">
+                                        <button type="button" name="addMovieUpload" id="addMovieUpload" class="btn btn-danger"> 
+                                            <i class="fa fa-upload"></i> Add Show Schedule
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -280,31 +313,8 @@
                 
 
             </div>
-
-
         </div>
-
-
-        <br><br><br>
-
-        <div class="tab-content" style="border: 1px solid #ddd; border-top: 0px;">
-                
-
-                <div class="tab-pane fade container-fluid justify-content-right" id="Add">
-                    <h2> Add Movie</h2>
-                    <hr>
-                    <div class="col-md-3">
-
-                    </div>
-                    <div class="col-md-9">
-                         
-                    </div>
-            </div>
-        </div>
-
     </div>
-
-    <br>
 
     <!-- BS4 Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -312,6 +322,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
     <script type="text/javascript">
         $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip(); //initialize tooltip for Add Show movieID
+
+            /*Populate values for Dropdown on Add Show*/
+            let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            let times = ["09:15 - 10:45", "11:00 - 12:30", "12:45 - 14:15", "1430 - 1600", "1615 - 1745", "1800 - 1930", "1945 - 2115"];
+
+            for(let i = 1; i <= 7; i++)
+            {
+                let x = document.createElement("option");
+                x.setAttribute("value", i);
+                $(x).text(days[i-1]);
+                $("#showMovieDate").append(x);
+            }
+
+            for(let i = 0; i < times.length; i++){
+                let x = document.createElement("option");
+                x.setAttribute("value", times[i]);
+                $(x).text(times[i]);
+                $("#showMovieTime").append(x);
+            }
+
+
+
+
+
+            
             var day = 1;
             var y = 0;
             $("#addShow").hide();

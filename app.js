@@ -143,8 +143,8 @@ hbs.registerHelper('showDay', function(shows, val) {
 const indexRouter = require('./router/indexRouter');
 app.use('/', indexRouter);
 
-/* To access static folder where CSS and assets are located  */
-app.use(express.static(__dirname + '\\static'))
+/* To access public folder where CSS and assets are located  */
+app.use(express.static(__dirname + '\\public'))
 
 /** Server online **/
 app.listen(port, ()=>{

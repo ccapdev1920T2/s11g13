@@ -56,184 +56,224 @@
                 <div class="tab-pane fade container-fluid" id="EditRemove">
                     <h2>Currently Showing</h2>
                     <hr>
-                    <div class=" d-flex flex-row">
-                        <div class="w-25 border-right">
-                            <ul class="nav flex-column nav-pills">
-                                <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#SunShow">Sunday</a></li>
-                                <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#MonShow">Monday</a></li>
-                                <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#TueShow">Tuesday</a></li>
-                                <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#WedShow">Wednesday</a></li>
-                                <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#ThuShow">Thursday</a></li>
-                                <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#FriShow">Friday</a></li>
-                                <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#SatShow">Saturday</a></li>
-                            </ul>
-                        </div>
-                        <!-- Individual movies; fold this part to see next sections -->
-                        <div class="w-75">
-                            <div class="container-fluid ">
-                                <div class="tab-content">
-                                    <div class="tab-pane fade" id="SunShow">
-                                        <table class="table table-hover" id="movies">
+                    <div class="col-md-2 border-right" style="background-color: blue;">
+                        <ul class="nav flex-column nav-pills">
+                            <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#SunShow">Sunday</a></li>
+                            <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#MonShow">Monday</a></li>
+                            <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#TueShow">Tuesday</a></li>
+                            <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#WedShow">Wednesday</a></li>
+                            <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#ThuShow">Thursday</a></li>
+                            <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#FriShow">Friday</a></li>
+                            <li class="nav-item pill"><a class="nav-link" data-toggle="tab" href="#SatShow">Saturday</a></li>
+                        </ul>
+                    </div>
+                    <!-- Individual movies; fold this part to see next sections -->
+                    <div class="col-md-10" style="background-color: chartreuse;">
+                        <div class="container-fluid ">
+                            <div class="tab-content">
+                                <div class="tab-pane fade" id="SunShow">
+                                    <table class="table table-hover" id="movies">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                        </tr>
+                                        {{#each (showDay show 1)}}
                                             <tr>
-                                                <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
-                                            </tr>
-                                            {{#each (showDay show 1)}}
-                                                <tr>
-                                                    <td>{{title}}</td>
-                                                    <td>{{genre}}</td>
-                                                    <td> 
-                                                        {{rateBuilder rating}}
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Edit">
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
-                                                    </td>
-                                                </tr> 
-                                            {{/each}}
-                                        </table>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="MonShow">
-                                        <table class="table table-hover" id="movies">
-                                            <tr>
-                                                <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
-                                            </tr>
-                                            {{#each (showDay show 2)}}
-                                                <tr>
-                                                    <td>{{title}}</td>
-                                                    <td>{{genre}}</td>
-                                                    <td> 
-                                                        {{rateBuilder rating}}
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Edit">
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
-                                                    </td>
-                                                </tr> 
-                                            {{/each}}
-                                        </table>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="TueShow">
-                                        <table class="table table-hover" id="movies">
-                                            <tr>
-                                                <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
-                                            </tr>
-                                            {{#each (showDay show 3)}}
-                                                <tr>
-                                                    <td>{{title}}</td>
-                                                    <td>{{genre}}</td>
-                                                    <td> 
-                                                        {{rateBuilder rating}}
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Edit">
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
-                                                    </td>
-                                                </tr> 
-                                            {{/each}}
-                                        </table>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="WedShow">
-                                        <table class="table table-hover" id="movies">
-                                            <tr>
-                                                <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
-                                            </tr>
-                                            {{#each (showDay show 4)}}
-                                                <tr>
-                                                    <td>{{title}}</td>
-                                                    <td>{{genre}}</td>
-                                                    <td> 
-                                                        {{rateBuilder rating}}
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Edit">
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
-                                                    </td>
-                                                </tr> 
-                                            {{/each}}
-                                        </table>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="ThuShow">
-                                        <table class="table table-hover" id="movies">
-                                            <tr>
-                                                <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
-                                            </tr>
-                                            {{#each (showDay show 5)}}
-                                                <tr>
-                                                    <td>{{title}}</td>
-                                                    <td>{{genre}}</td>
-                                                    <td> 
-                                                        {{rateBuilder rating}}
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Edit">
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
-                                                    </td>
-                                                </tr> 
-                                            {{/each}}
-                                        </table>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="FriShow">
-                                        <table class="table table-hover" id="movies">
-                                            <tr>
-                                                <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
-                                            </tr>
-                                            {{#each (showDay show 6)}}
-                                                <tr>
-                                                    <td>{{title}}</td>
-                                                    <td>{{genre}}</td>
-                                                    <td> 
-                                                        {{rateBuilder rating}}
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Edit">
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
-                                                    </td>
-                                                </tr> 
-                                            {{/each}}
-                                        </table>
-                                    </div>
-
-                                    <div class="tab-pane fade" id="SatShow">
-                                        <table class="table table-hover" id="movies">
-                                            <tr>
-                                                <th>Title</th><th>Genre</th><th>Rating</th><th colspan="2"></th>
-                                            </tr>
-                                            {{#each (showDay show 7)}}
-                                                <tr>
-                                                    <td>{{title}}</td>
-                                                    <td>{{genre}}</td>
-                                                    <td> 
-                                                        {{rateBuilder rating}}
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Edit">
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
-                                                    </td>
-                                                </tr> 
-                                            {{/each}}
-                                        </table>
-                                    </div>
-
+                                                <td>{{title}}</td>
+                                                <td>{{genre}}</td>
+                                                <td> 
+                                                    {{rateBuilder rating}}
+                                                </td>
+                                                <td> 
+                                                    {{date}}
+                                                </td>
+                                                <td> 
+                                                    {{time}}
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Edit">
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
+                                                </td>
+                                            </tr> 
+                                        {{/each}}
+                                    </table>
                                 </div>
+
+                                <div class="tab-pane fade" id="MonShow">
+                                    <table class="table table-hover" id="movies">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                        </tr>
+                                        {{#each (showDay show 2)}}
+                                            <tr>
+                                                <td>{{title}}</td>
+                                                <td>{{genre}}</td>
+                                                <td> 
+                                                    {{rateBuilder rating}}
+                                                </td>
+                                                <td> 
+                                                    {{date}}
+                                                </td>
+                                                <td> 
+                                                    {{time}}
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Edit">
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
+                                                </td>
+                                            </tr> 
+                                        {{/each}}
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="TueShow">
+                                    <table class="table table-hover" id="movies">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                        </tr>
+                                        {{#each (showDay show 3)}}
+                                            <tr>
+                                                <td>{{title}}</td>
+                                                <td>{{genre}}</td>
+                                                <td> 
+                                                    {{rateBuilder rating}}
+                                                </td>
+                                                <td> 
+                                                    {{date}}
+                                                </td>
+                                                <td> 
+                                                    {{time}}
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Edit">
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
+                                                </td>
+                                            </tr> 
+                                        {{/each}}
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="WedShow">
+                                    <table class="table table-hover" id="movies">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                        </tr>
+                                        {{#each (showDay show 4)}}
+                                            <tr>
+                                                <td>{{title}}</td>
+                                                <td>{{genre}}</td>
+                                                <td> 
+                                                    {{rateBuilder rating}}
+                                                </td>
+                                                <td> 
+                                                    {{date}}
+                                                </td>
+                                                <td> 
+                                                    {{time}}
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Edit">
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
+                                                </td>
+                                            </tr> 
+                                        {{/each}}
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="ThuShow">
+                                    <table class="table table-hover" id="movies">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                        </tr>
+                                        {{#each (showDay show 5)}}
+                                            <tr>
+                                                <td>{{title}}</td>
+                                                <td>{{genre}}</td>
+                                                <td> 
+                                                    {{rateBuilder rating}}
+                                                </td>
+                                                <td> 
+                                                    {{date}}
+                                                </td>
+                                                <td> 
+                                                    {{time}}
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Edit">
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
+                                                </td>
+                                            </tr> 
+                                        {{/each}}
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="FriShow">
+                                    <table class="table table-hover" id="movies">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                        </tr>
+                                        {{#each (showDay show 6)}}
+                                            <tr>
+                                                <td>{{title}}</td>
+                                                <td>{{genre}}</td>
+                                                <td> 
+                                                    {{rateBuilder rating}}
+                                                </td>
+                                                <td> 
+                                                    {{date}}
+                                                </td>
+                                                <td> 
+                                                    {{time}}
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Edit">
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
+                                                </td>
+                                            </tr> 
+                                        {{/each}}
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="SatShow">
+                                    <table class="table table-hover" id="movies">
+                                        <tr>
+                                            <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                        </tr>
+                                        {{#each (showDay show 7)}}
+                                            <tr>
+                                                <td>{{title}}</td>
+                                                <td>{{genre}}</td>
+                                                <td> 
+                                                    {{rateBuilder rating}}
+                                                </td>
+                                                <td> 
+                                                    {{date}}
+                                                </td>
+                                                <td> 
+                                                    {{time}}
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Edit">
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-danger" value="Remove" onclick="deleteRow(this)" >
+                                                </td>
+                                            </tr> 
+                                        {{/each}}
+                                    </table>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -286,7 +326,7 @@
                             </div>
                         </form> 
                     </div>
-                </div>
+            </div>
         </div>
 
     </div>

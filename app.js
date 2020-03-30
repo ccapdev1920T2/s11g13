@@ -36,18 +36,18 @@ hbs.registerHelper('rateBuilder', function(rating) {
     var x = '';
 
     while (arren<=rate){
-        x += '<i class="fa fa-minus text-warning"></i>\n';
+        x += '<span class="fa fa-star on"></span>\n';
         arren++;
     }
 
     while (arren<=5){
-        x += '<i class="fa fa-minus text-secondary"></i>\n';
+        x += '<span class="fa fa-star"></span>\n';
         arren++;
     }
 
     /*  Di pa gumagana sa ngayon:
-        <span class="fa fa-star on"></span>
-        <span class="fa fa-star"></span>
+        
+        
     */
     
     return new hbs.SafeString(x);
@@ -60,7 +60,12 @@ hbs.registerHelper('showDay', function(shows, val) {
     
     for(let i = 0; i < shows.length; i++){
         if (shows[i].day == day){
-          obj= { title: shows[i].title, genre: shows[i].genre, rating: shows[i].rating};
+          obj= {
+            title: shows[i].title,
+            genre: shows[i].genre,
+            rating: shows[i].rating,
+            date: shows[i].date,
+            time: shows[i].time};
           x.push(obj);  
         }
       }

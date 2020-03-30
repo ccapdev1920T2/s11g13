@@ -1,6 +1,7 @@
 const express = require("express");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
+const db = require('./database');
 
 const app = express();
 const port = 3000;
@@ -62,3 +63,6 @@ app.listen(port, ()=>{
     console.log(`App listening at port ${port}`);
     console.log(`Access at localhost:${port}/`);
 })
+
+db.createDatabase();
+db.createCollection("myWorld");

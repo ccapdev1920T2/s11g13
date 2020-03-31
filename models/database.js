@@ -97,4 +97,4 @@ const database = {
 
 }
 
-model.exports = database;
+module.exports = database;

@@ -1,12 +1,22 @@
 const express = require("express");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
-const db = require('./database');
+
+const db = require('./models/database.js');
 
 const app = express();
 const port = 3000;
 
+/********* Routing *********/
+const routes = require('./router/routes');
+app.use('/', routes);
+
+/* To access public folder where CSS and assets are located  */
+app.use(express.static(__dirname + '\\public'))
+
+
 app.set("view engine", "hbs");
+
 // Middlewares
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -65,45 +75,6 @@ hbs.registerHelper('bookedTicketsArray', (tickets)=>{
     return bookedTickets;
 });
 
-hbs.registerHelper('ticketNumber', (i)=>{
-    i++;
-    return i;
-});
-
-/* Purge this code with holy water oh my God */
-// hbs.registerHelper('ticketSeatsBuilder', (seats)=>{
-//     let string = "";
-//     seats.forEach(element => {
-//         string += element + " ";
-//     });
-//     console.log(string);
-//     return string;
-// })
-
-// hbs.registerHelper('ticketBuilder', (status, seats, details)=>{
-//     let x = "";
-//     let y = '<div class="card-header py-2"><h5 class="mb-0">'+ details.title + '</h5></div><div class="card-body p-0">'+
-//     '<table class="table table-sm table-borderless text-center mb-0"><tr><td><h6>Show Date:</h6></td><td>'+ details.showDate +
-//     '</td></tr><tr><td><h6>Show Time:</b></td><td>'+ details.showTime +'</td></tr><tr><td><h6>Seats:</h6></td><td>' + seats +
-//     '</td></tr><tr><td><h6>Total Cost:</h6></td><td> PHP'+ details.totalCost +
-//     '</td></tr></table></div><div class="card-footer py-1"><small class="text-muted">Booked: ' + details.dateBooked + '</small></div></div>'
-    
-//     console.log(status=="booked");
-//     if(status=="bought"){
-//         x = '<div class="card border-success mb-4" style="width: 20rem;">';
-//     }
-//     else if(status=="booked"){
-//         x = '<div class="card border-warning mb-4" style="width: 20rem;">'
-//     }
-//     else{
-//         x = ""; y = "";
-//     }
-
-//    return new hbs.SafeString(x+y);
-// });
-
-
-
 hbs.registerHelper('rateBuilder', function(rating) {
     var arren = 1;
     var rate = parseInt(rating, 10);
@@ -118,11 +89,6 @@ hbs.registerHelper('rateBuilder', function(rating) {
         x += '<i class="fa fa-star"></i>\n';
         arren++;
     }
-
-    /*  Di pa gumagana sa ngayon:
-        
-        
-    */
     
     return new hbs.SafeString(x);
 });
@@ -148,12 +114,8 @@ hbs.registerHelper('showDay', function(shows, val) {
 });
 
 
-/********* Routing *********/
-const indexRouter = require('./router/indexRouter');
-app.use('/', indexRouter);
-
-/* To access public folder where CSS and assets are located  */
-app.use(express.static(__dirname + '\\public'))
+//Connecting to db
+db.connect();
 
 /** Server online **/
 app.listen(port, ()=>{

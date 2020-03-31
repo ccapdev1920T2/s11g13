@@ -1,15 +1,18 @@
 const mongodb = require('mongodb');
-const client = mongodb.MongoClient;
 
+const client = mongodb.MongoClient;
 const url = "mongodb://localhost:27017";
 
-const options = {useUnifiedTopology: true};
+const options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+};
 
 const databaseName = "TicketLeaveItDB"; //Database Name
 const tableUsers = 'users';
 
-module.exports = {
-
+//module.exports  = {
+const db = {
     createDatabase: function(){
         client.connect(url, options, (err, db)=>{
             if(err) throw err;
@@ -199,5 +202,4 @@ module.exports = {
             });
         });
     }
-
 }

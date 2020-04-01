@@ -2,6 +2,7 @@ const express = require("express");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
 
+//comment out database_old in the future; database.js connects to other models
 const db = require('./models/database.js');
 const db2 = require('./models/database_old.js');
 
@@ -113,6 +114,14 @@ hbs.registerHelper('showDay', function(shows, val) {
     
     return x;
 });
+
+
+//TODO: Error page
+/*
+app.use((req, res)=>{
+    res.render("error"); //rename to hbs name, serves as handler for invalid situations
+})
+*/
 
 
 //Connecting to db

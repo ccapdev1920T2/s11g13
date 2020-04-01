@@ -33,6 +33,8 @@ const indexController = {
         })
     }, 
 
+    
+
     getCalendar: function(req, res, next) {
         res.render("calendar", {
             pageName: "Calendar",
@@ -106,9 +108,12 @@ const indexController = {
             {title: "April 5, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
             {title: "April 6, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
         ];
+        //Step 1: Check from db for matching titles
 
+        //Step 2: Retrieve from DB
         //sample data retrieved from db
-        if (req.params.movieID == "00023"){
+        console.log(req.query.movieID);
+        if (req.query.movieID == "P.S. I Love You"){
             movieDetails = {
                 title: "To All The Boys P.S. I Love You",
                 genre: "Romance",
@@ -138,6 +143,9 @@ const indexController = {
                 rating: 3, commentTitle: "What", comment: "Maling movie ata napanood ko",},
             ]
         }
+        else movieDetails = {
+            title: "Not found"
+        }
 
         res.render("movie-view", {
             pageName: movieDetails.title,
@@ -149,5 +157,7 @@ const indexController = {
         });
     },
 };
+
+
 
 module.exports = indexController;

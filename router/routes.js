@@ -16,12 +16,11 @@ router.get(["/", "/home"], controller.getHome);
 
 //Route to see all movies
 router.get("/movies", controller.getMovies);
+router.get("/movies/view", controller.getViewMovie);
 
 router.get("/calendar", controller.getCalendar);
 
 router.get("/payment", controller.getPayment);
-
-router.get("/movies/view/:movieID", controller.getViewMovie);
 
 //this path is to '/seats'
 router.get('/seats', controller.getSeats);

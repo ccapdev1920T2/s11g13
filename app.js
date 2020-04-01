@@ -3,9 +3,14 @@ const hbs = require("hbs");
 const bodyParser = require("body-parser");
 
 const db = require('./models/database.js');
+const db2 = require('./models/database_old.js');
 
 const app = express();
 const port = 3000;
+
+// Middlewares
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 /********* Routing *********/
 const routes = require('./router/routes');
@@ -16,10 +21,6 @@ app.use(express.static(__dirname + '\\public'))
 
 
 app.set("view engine", "hbs");
-
-// Middlewares
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
 
 
 /**** Set partials here ****/
@@ -124,14 +125,14 @@ app.listen(port, ()=>{
     console.log(`Access at localhost:${port}/`);
 })
 
-// db.createDatabase();
-// db.createCollection("USERS");
-// db.createCollection("TRANSACTIONS");
-// db.createCollection("CCINFO");
-// db.createCollection("CART");
-// db.createCollection("TICKETS");
-// db.createCollection("SHOWS");
-// db.createCollection("MEDIA");
-// db.createCollection("SEATS");
-// db.createCollection("MOVIES");
-// db.createCollection("RATINGS");
+ //db2.createDatabase();
+ //db2.createCollection("users");
+ //db2.createCollection("transactions");
+ //db2.createCollection("ccinfo");
+ //db2.createCollection("cart");
+ //db2.createCollection("tickets");
+ //db2.createCollection("shows");
+ //db2.createCollection("media");
+ //db2.createCollection("seats");
+ //db2.createCollection("movies");
+ //db2.createCollection("ratings");

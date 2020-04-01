@@ -73,7 +73,17 @@ const adminController = {
         }
         */
 
-        console.log(req.body);
+        let retrievedData = {
+            genre: req.body.addMovieGenre,
+            title: req.body.addMovieTitle,
+            aveScore: req.body.addMovieScore,
+            synopsis: req.body.addMovieSynopsis,
+            cast: req.body.addMovieCast,
+            posterUrl:null,
+            trailerUrl:null,
+        }
+
+        db.insertOne(Movies,retrievedData);
         res.render('admin', {
             pageName: "Admin Dashboard",
             isSignedIn: true,

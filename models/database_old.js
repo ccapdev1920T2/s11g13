@@ -11,8 +11,8 @@ const options = {
 const databaseName = "TicketLeaveItDB"; //Database Name
 const tableUsers = 'users';
 
-//module.exports  = {
-const db = {
+module.exports  = {
+//const db2 = {
     createDatabase: function(){
         client.connect(url, options, (err, db)=>{
             if(err) throw err;

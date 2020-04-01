@@ -49,5 +49,6 @@ router.get('/user/:username/cart', userController.getCart);
 
 ///this path is to '/admin'
 router.get('/admin', adminController.getAdminBoard);
+router.post('/admin',adminController.postAdminBoard);
 
 module.exports = router;

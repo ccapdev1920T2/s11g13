@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" href="../../css/HBS-seats.css">
-	<link rel="stylesheet" href="../../css/seats.css">
+	<link rel="stylesheet" href="../../MPPhase1/css/seats.css">
 	
 </head>
 <body>
@@ -44,7 +44,7 @@
 		<div class="container" id="seatContainer">
 
 		</div>
-
+<form name="reserveSeats" id="reserveSeats" method="POST">
     <div class="containerOld">
       <ol>
         {{#each seatRow}}
@@ -52,13 +52,13 @@
           {{#each this}}
             {{#if this.isTaken}}
               <li class="seat">
-                <input type="checkbox" id={{this.seatName}}+1>
-                <label id={{this.seatName}} for={{this.seatName}}+1>{{this.seatName}}</label>
+                <input type="checkbox" name = {{this.seatName}} id={{this.seatName}}>
+                <label for={{this.seatName}}>{{this.seatName}}</label>
               </li>
               {{else}}
               <li class="seat">
-                <input type="checkbox" disabled id={{this.seatName}}+1>
-                <label style="background-color: red;"id={{this.seatName}} for={{this.seatName}}+1>{{this.seatName}}</label>
+                <input type="checkbox" disabled name = {{this.seatName}} id={{this.seatName}}>
+                <label style="background-color: red;" for={{this.seatName}}>{{this.seatName}}</label>
               </li>
             {{/if}}
           {{/each}}
@@ -68,11 +68,11 @@
     </div>
 
     <div class="containerOld">
-      <input type="button" id="reserve" value="Reserve" class="btn btn-default" style="margin:0 auto;">
+      <input type="submit" id="reserve" value="Reserve" class="btn btn-default" style="margin:0 auto;">
     </div>
 
 	</div>
-
+</form>
 
     <!-- BS4 Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

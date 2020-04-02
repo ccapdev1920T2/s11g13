@@ -2,6 +2,7 @@
 // const express = require('express');
 // const router = express.Router();
 const mongoose = require('mongoose');
+const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 const User = require('../models/UsersModel.js');
@@ -9,6 +10,11 @@ const User = require('../models/UsersModel.js');
 
 //Functions for userController
 const registerController = {
+    getRegister: function(req, res, next){
+        res.render("register", {
+            pageName: "Register",
+        })
+    },
 
     postRegister: (req, res, next)=>{
         User.find({email: req.body.regEmail})
@@ -75,11 +81,14 @@ const registerController = {
         
     },
 
-    getRegister: function(req, res, next){
-        res.render("register", {
-            pageName: "Register",
-        })
-    },
+    checkUName: (req, res)=>{
+        let uname = req.query.username;
+        User.find({username: uname})
+        .exec()
+        .then(result=>{
+            res.send(result);
+        })        
+    }
 
     // postRegister: (req, res, next)=>{
     //     let {

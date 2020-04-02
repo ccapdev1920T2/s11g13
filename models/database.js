@@ -4,6 +4,7 @@ const url = "mongodb://localhost:27017/TicketLeaveItDB";
 
 // Insert modules of schemas here
 //const userSchema = require("./schema.js")
+<<<<<<< Updated upstream
 //const user= require("./UsersModel.js");
 const users = require("./UsersModel.js");
 const cart = require("./CartModel.js");
@@ -16,6 +17,8 @@ const shows = require("./ShowsModel.js");
 const tickets = require("./TicketsModel.js");
 const transactions = require("./TransactionsModel.js");
 
+=======
+>>>>>>> Stashed changes
 
 const options = {
     useUnifiedTopology: true,

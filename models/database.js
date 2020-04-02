@@ -4,7 +4,7 @@ const url = "mongodb://localhost:27017/TicketLeaveItDB";
 
 // Insert modules of schemas here
 //const userSchema = require("./schema.js")
-const user//= require("./UsersModel.js");
+const users = require("./UsersModel.js");
 const cart = require("./CartModel.js");
 const ccinfos = require("./CCInfosModel.js");
 const movies = require("./MoviesModel.js");

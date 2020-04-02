@@ -2,7 +2,6 @@ const express = require("express");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
 
-//comment out database_old in the future; database.js connects to other models
 const db = require('./models/database.js');
 const db2 = require('./models/database_old.js');
 
@@ -12,6 +11,11 @@ const port = 3000;
 // Middlewares
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+/********* Routing *********/
+const routes = require('./router/routes');
+app.use('/', routes);
+app.use('/register', routes);
 
 /* To access public folder where CSS and assets are located  */
 app.use(express.static(__dirname + '\\public'))

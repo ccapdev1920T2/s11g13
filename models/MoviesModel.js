@@ -2,7 +2,8 @@
 // import module `mongoose`
 var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// defines the schema for collection `movies`
+
+// defines the schema for collection `users`
 var MoviesSchema = new mongoose.Schema({
     _id: Schema.Types.ObjectId, //movieID
     title: {

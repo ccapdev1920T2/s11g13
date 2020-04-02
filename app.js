@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 /********* Routing *********/
 const routes = require('./router/routes');
 app.use('/', routes);
+app.use('/register', routes);
 
 /* To access public folder where CSS and assets are located  */
 app.use(express.static(__dirname + '\\public'))

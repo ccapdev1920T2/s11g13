@@ -7,8 +7,8 @@ const logController = require("../controllers/loginController");
 const regController = require("../controllers/registerController");
 const userController = require("../controllers/userController");
 const adminController = require("../controllers/adminController");
-
-
+const adminAddMovie = require("../controllers/addMovie.js");
+const adminAddShow = require("../controllers/addShow.js");
 
 ////// ROUTING /////////
 // Handles home and '/'
@@ -48,6 +48,10 @@ router.get('/user/:username/cart', userController.getCart);
 
 ///this path is to '/admin'
 router.get('/admin', adminController.getAdminBoard);
-router.post('/admin',adminController.postAdminBoard);
+//add show
+router.post('/admin/addShow',adminAddShow.postShow);
+//add movie
+router.post('/admin/addMovie',adminAddMovie.postMovie);
+
 
 module.exports = router;

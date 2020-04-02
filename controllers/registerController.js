@@ -88,7 +88,16 @@ const registerController = {
         .then(result=>{
             res.send(result);
         })        
-    }
+    },
+
+    checkEmail: (req, res)=>{
+        let email = req.query.email;
+        User.find({email: email})
+        .exec()
+        .then(result=>{
+            res.send(result);
+        })        
+    },
 
     // postRegister: (req, res, next)=>{
     //     let {

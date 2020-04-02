@@ -105,35 +105,4 @@ const registerController = {
     // },
 };
 
-function uniqueUser(req){
-    User.find({email: req.body.regEmail})
-        .exec()
-        .then(user => {
-            if(user.length >= 1){
-                return res.status(409).json({
-                    message: 'Mail exists'
-                });
-                //can be any of the two errors:
-                //409 -conflict with data
-                //402 -unprocessable data
-            } else{
-                User.find({username: req.body.regUName})
-                .exec()
-                .then(user => {
-                    if(user.length >= 1){
-                        return res.status(409).json({
-                            message: 'Username exists'
-                        });
-                        //can be any of the two errors:
-                        //409 -conflict with data
-                        //402 -unprocessable data
-                    } else{
-                        return true;
-                    }
-                })
-            }
-        })
-};
-
-
 module.exports = registerController;

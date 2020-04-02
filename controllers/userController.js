@@ -47,6 +47,13 @@ const userController = {
             }
             // next("/userprofile/" + username, retrievedData);
         }
+        else 
+            retrievedData ={
+                pageName: "User Profile",
+                isSignedIn: true,
+                pic: "/assets/profpic.png",
+                email: req.body.email,
+            }
         
         res.render('userprofile', retrievedData);
     },

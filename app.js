@@ -13,10 +13,6 @@ const port = 3000;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-/********* Routing *********/
-const routes = require('./router/routes');
-app.use('/', routes);
-
 /* To access public folder where CSS and assets are located  */
 app.use(express.static(__dirname + '\\public'))
 
@@ -115,13 +111,39 @@ hbs.registerHelper('showDay', function(shows, val) {
     return x;
 });
 
+/********* Routing *********/
+const indexRoutes = require('./router/indexRoutes');
+const registerRoutes = require('./router/registerRoutes');
+const loginRoutes = require("./router/loginRoutes");
+const adminRoutes = require("./router/adminRoutes");
+const userRoutes = require("./router/userRoutes");
+const movieRoutes = require("./router/moviesRoutes")
+
+app.use('/', indexRoutes);
+app.use('/register', registerRoutes);
+app.use('/login', loginRoutes);
+app.use('/admin', adminRoutes);
+app.use("/user/:username", userRoutes)
+app.use('/movies', movieRoutes)
 
 //TODO: Error page
-/*
-app.use((req, res)=>{
-    res.render("error"); //rename to hbs name, serves as handler for invalid situations
+
+app.use((req, res, next)=>{
+    const error = new Error("The resource you are looking for does not exist, have been removed, renamed, or is temporarily unavailable. ")
+    error.status =404;
+    next(error);
 })
-*/
+
+app.use((err, req, res, next)=>{
+    res.status(err.status || 500);
+    res.render("error", {
+        pageName: "Error",
+        error: {
+            status: err.status,
+            message: err.message
+        }
+    });
+})
 
 
 //Connecting to db

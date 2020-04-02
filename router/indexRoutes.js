@@ -18,6 +18,6 @@ router.get('/seats', controller.getSeats);
 
 /* Ajax routes */
 router.get('/asyncFindUName', regController.checkUName)
-
+router.get('/asyncFindEmail', regController.checkEmail)
 
 module.exports = router;

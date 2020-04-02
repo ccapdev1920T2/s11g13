@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 // defines the schema for collection `movies`
 var MoviesSchema = new mongoose.Schema({
     movieID: {
-        type: Number
+        type: String
     },
     title: {
         type: String
@@ -25,10 +25,9 @@ var MoviesSchema = new mongoose.Schema({
     trailerUrl: {
         type: String
     },
-    cast: [{
-        fname: String,
-        lname: String,
-    }]
+    cast: {
+        type: String
+    }
 });
 
 // exports a mongoose.model object based on `UserSchema` (defined above)

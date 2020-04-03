@@ -12,6 +12,51 @@ const port = 3000;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+/*=============================create admin=============================*/
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const User = require('./models/UsersModel.js');
+
+User.find({userType: "Admin"})
+    .exec()
+    .then(user => {
+        if(user.length >= 1){
+            User.deleteOne({userType: 'Admin'}, function (err) {})
+        }
+    }) 
+    
+    bcrypt.hash("p455w0rd", 10, (err, hash)=>{
+        if (err){
+            return res.status(500).json({
+                error:err
+            });
+        } else {
+            const user = new User({
+                _id: new mongoose.Types.ObjectId(),
+                email: 'admin@dlsu.edu.ph',
+                username: 'bh0zXsArR3n',
+                password: hash, 
+                userType: 'Admin',
+                firstName: 'Admin',
+                lastName: 'Manager',
+                pic: '/assets/profpic.png',
+            });
+            user
+            .save()
+            .then(result =>{
+                console.log("Admin created!")
+            })
+            .catch(err=>{
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                });
+            });
+        }
+    });
+/*====================================================================*/
+
+
 /********* Routing *********/
 const routes = require('./router/routes');
 app.use('/', routes);

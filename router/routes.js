@@ -9,6 +9,7 @@ const userController = require("../controllers/userController");
 const adminController = require("../controllers/adminController");
 const adminAddMovie = require("../controllers/addMovie.js");
 const adminAddShow = require("../controllers/addShow.js");
+const adminDeleteShow = require("../controllers/removeShow.js")
 
 ////// ROUTING /////////
 // Handles home and '/'
@@ -52,6 +53,8 @@ router.get('/admin', adminController.getAdminBoard);
 router.post('/admin/addShow',adminAddShow.postShow);
 //add movie
 router.post('/admin/addMovie',adminAddMovie.postMovie);
+//delete show
+router.delete('/admin/removeShow',adminDeleteShow.deleteShow);
 
 
 module.exports = router;

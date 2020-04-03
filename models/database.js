@@ -55,7 +55,7 @@ const database = {
         model.findOne(query, projection, function(error, result) {
             if(error) throw error;
             return callback(result);
-        }).populate('movieID');
+        });
     },
 
     // searches for multiple documents based on the model `model`

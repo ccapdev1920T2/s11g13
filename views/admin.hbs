@@ -190,7 +190,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <!-- Movies --> 
                     <div class="col-sm-10">
                         <div class="container-fluid tab-content">
@@ -201,12 +201,17 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 1)}}
-                                        <tr>
+                                    <form>
+                                        <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
                                             <td><button type="button" class="btn btn-warning">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
-                                        </tr> 
+                                            <td><button type="button" class="btn btn-danger"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
+                                        </tr>
+                                        </form> 
                                     {{/each}}
                                 </table>
                             </div>
@@ -218,11 +223,14 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 2)}}
-                                        <tr>
+                                        <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
                                             <td><button type="button" class="btn btn-warning">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
+                                            <td><button type="button" class="btn btn-danger"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
                                         </tr> 
                                     {{/each}}
                                 </table>
@@ -235,11 +243,14 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 3)}}
-                                        <tr>
+                                        <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
                                             <td><button type="button" class="btn btn-warning">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
+                                            <td><button type="button" class="btn btn-danger"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
                                         </tr> 
                                     {{/each}}
                                 </table>
@@ -252,11 +263,14 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 4)}}
-                                        <tr>
+                                        <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
                                             <td><button type="button" class="btn btn-warning">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
+                                            <td><button type="button" class="btn btn-danger"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
                                         </tr> 
                                     {{/each}}
                                 </table>
@@ -269,11 +283,14 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 5)}}
-                                        <tr>
+                                        <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
                                             <td><button type="button" class="btn btn-warning">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
+                                            <td><button type="button" class="btn btn-danger"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
                                         </tr> 
                                     {{/each}}
                                 </table>
@@ -286,11 +303,14 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 6)}}
-                                        <tr>
+                                        <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
                                             <td><button type="button" class="btn btn-warning">Edit</button>
-                                            <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
+                                            <td><button type="button" class="btn btn-danger"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
                                         </tr> 
                                     {{/each}}
                                 </table>
@@ -303,11 +323,14 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 7)}}
-                                        <tr>
+                                        <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
                                             <td><button type="button" class="btn btn-warning">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"onclick="deleteRow(this)">Remove</button></td>
+                                            <td><button type="button" class="btn btn-danger"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
                                         </tr> 
                                     {{/each}}
                                 </table>
@@ -320,13 +343,15 @@
     </div>
 
     <!-- BS4 Scripts -->
+    <!--
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
     <!--Tempus Dominus BS4 datepicker widget-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" type="text/javascript"></script> <!--Dependendant of TDBS4-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-
     
     
     <script type="text/javascript">
@@ -362,11 +387,6 @@
                 $("#showMovieTime").append(x);
             }
 
-
-
-
-
-            
             var day = 1;
             var y = 0;
             $("#addShow").hide();
@@ -386,6 +406,22 @@
                 $("#addShow").hide();
             });
         });
+
+        function deleteRow(movieID){
+            $('#'+ movieID).remove();
+            { $.ajax({
+                url: '/admin/removeShow',
+                method: 'DELETE',
+                data: {
+                    movieID: movieID
+                }
+            })
+            .done(function() {
+                console.log('deleted');
+                window.location.reload(true);
+            })};
+        }
+
     </script>
 
 </body>

@@ -99,6 +99,7 @@ hbs.registerHelper('showDay', function(shows, val) {
     for(let i = 0; i < shows.length; i++){
         if (shows[i].day == day){
           obj= {
+            movieID: shows[i].movieID,
             title: shows[i].title,
             genre: shows[i].genre,
             rating: shows[i].rating,

@@ -39,6 +39,7 @@ const addShow = {
                         formattedDate = year + '-' + month + '-' + dt; //formatted date yyyy-mm-dd
                         showObj = 
                             {
+                                movieID: s[i]._id,
                                 title: s[i].movieID.title,
                                 genre: s[i].movieID.genre,
                                 rating: s[i].movieID.aveScore,

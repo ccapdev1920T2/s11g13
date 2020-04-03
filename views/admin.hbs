@@ -205,7 +205,7 @@
                                         <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning">Edit</button></td>
+                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
@@ -226,7 +226,7 @@
                                         <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning">Edit</button></td>
+                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
@@ -246,7 +246,7 @@
                                         <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning">Edit</button></td>
+                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
@@ -266,7 +266,7 @@
                                         <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning">Edit</button></td>
+                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
@@ -286,7 +286,7 @@
                                         <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning">Edit</button></td>
+                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
@@ -303,11 +303,11 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 6)}}
-                                        <tr id={{movieID}}>
+                                        <tr id={{movieID}} contenteditable="false">
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning">Edit</button>
-                                            <td><button type="button" class="btn btn-danger"
+                                            <td><button type="button" class="btn btn-warning" contenteditable="false" onclick="editRow('{{movieID}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
                                                                 deleteRow('{{movieID}}')}">Remove</button></td>
@@ -326,7 +326,7 @@
                                         <tr id={{movieID}}>
                                             <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
                                             <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning">Edit</button></td>
+                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
                                             <td><button type="button" class="btn btn-danger"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
@@ -412,6 +412,31 @@
             { $.ajax({
                 url: '/admin/removeShow',
                 method: 'DELETE',
+                data: {
+                    movieID: movieID
+                }
+            })
+            .done(function() {
+                console.log('deleted');
+                window.location.reload(true);
+            })};
+        }
+
+        function editRow(movieID){
+            value = $('#'+ movieID).attr('contenteditable');
+            console.log(value);
+                if (value == 'false') {
+                    $('#'+ movieID).attr('contenteditable','true');
+                    alert('You can now edit!');
+                }
+                else {
+                    $('#'+ movieID).attr('contenteditable','false');
+                    alert('Data are now saved!');
+                }
+
+            { $.ajax({
+                url: '/admin/changeShow',
+                method: 'PUT',
                 data: {
                     movieID: movieID
                 }

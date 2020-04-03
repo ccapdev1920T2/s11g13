@@ -2,7 +2,6 @@
 // const express = require('express');
 // const router = express.Router();
 const mongoose = require('mongoose');
-const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 const User = require('../models/UsersModel.js');

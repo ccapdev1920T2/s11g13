@@ -3,7 +3,9 @@ const router = express();
 
 // controllers that provide functions depending on post or get
 const controller = require('../controllers/indexController');
-const regController = require("../controllers/registerController");
+// const regController = require("../controllers/registerController");
+
+const formchecker = require("../middlewares/form-validation")
 
 ////// ROUTING /////////
 // Handles home and '/'
@@ -17,7 +19,8 @@ router.get("/payment", controller.getPayment);
 router.get('/seats', controller.getSeats);
 
 /* Ajax routes */
-router.get('/asyncFindUName', regController.checkUName)
-router.get('/asyncFindEmail', regController.checkEmail)
+router.get('/checkUniqueUName', formchecker.uniqueUsername)
+router.get('/checkEmail', [formchecker.isInvalidEmail, formchecker.uniqueEmail])
+// router.get("/checkEmail", )
 
 module.exports = router;

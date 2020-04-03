@@ -9,6 +9,7 @@ const userController = require("../controllers/userController");
 const adminController = require("../controllers/adminController");
 const adminAddMovie = require("../controllers/addMovie.js");
 const adminAddShow = require("../controllers/addShow.js");
+const checkAuth = require('../middleware/check-auth');
 
 ////// ROUTING /////////
 // Handles home and '/'
@@ -32,7 +33,7 @@ router.post("/register", regController.postRegister);
 
 /////////Routes under Login////////
 router.get("/login", logController.getLogin);
-router.post("/login", logController.postLogin);
+router.post("/login",logController.postLogin, checkAuth );
 
 ///////Routes Involving user//////////
 

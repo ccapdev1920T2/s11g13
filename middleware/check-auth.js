@@ -1,5 +1,4 @@
-const jwt = require('jsonwetoken');
-
+const jwt = require('jsonwebtoken');
 // path to use this checkAuth:
 // const checkAuth = require('../middleware/heck-auth');
 
@@ -12,7 +11,7 @@ module.exports = (req, res, next) => {
         next();
     } catch (error){
         return res.status(401).json({
-            message: 'Authentication failed'
+            message: 'huh'
         });
     }
 };

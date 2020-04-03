@@ -7,9 +7,18 @@ const Shows = require('../models/ShowsModel.js');
 //Functions for updateShow
 const updateShow = {
     
-    deleteShow: function(req, res, next) {
+    updateShow: function(req, res, next) {
 
-        db.updateOne(Shows,{"_id": req.body.movieID});
+        d = new Date(req.body.date);
+        day = d.getDay()+1;
+
+        console.log(day);
+
+        db.updateOne(Shows,{_id: req.body.showID},{
+            dayOfWeek: day,
+            date: req.body.date,
+            time: req.body.time,
+        });
 
         //display
         db.findMany(Movies,{},'title _id',function(movie){
@@ -40,7 +49,7 @@ const updateShow = {
                         }
                     show.push(showObj); //push object to array
                 }
-                
+                    res.redirect('/admin');
             })
         })
     }

@@ -201,17 +201,17 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 1)}}
-                                    <form>
-                                        <tr id={{movieID}}>
-                                            <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
-                                            <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
                                                                 deleteRow('{{movieID}}')}">Remove</button></td>
-                                        </tr>
-                                        </form> 
+                                        </tr> 
                                     {{/each}}
                                 </table>
                             </div>
@@ -223,11 +223,13 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 2)}}
-                                        <tr id={{movieID}}>
-                                            <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
-                                            <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
                                                                 deleteRow('{{movieID}}')}">Remove</button></td>
@@ -243,11 +245,13 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 3)}}
-                                        <tr id={{movieID}}>
-                                            <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
-                                            <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
                                                                 deleteRow('{{movieID}}')}">Remove</button></td>
@@ -263,11 +267,13 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 4)}}
-                                        <tr id={{movieID}}>
-                                            <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
-                                            <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
                                                                 deleteRow('{{movieID}}')}">Remove</button></td>
@@ -283,11 +289,13 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 5)}}
-                                        <tr id={{movieID}}>
-                                            <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
-                                            <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
                                                                 deleteRow('{{movieID}}')}">Remove</button></td>
@@ -304,9 +312,11 @@
                                     </tr>
                                     {{#each (showDay show 6)}}
                                         <tr id={{movieID}} contenteditable="false">
-                                            <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
-                                            <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning" contenteditable="false" onclick="editRow('{{movieID}}');">Edit</button>
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
                                             <td><button type="button" class="btn btn-danger" contenteditable="false"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
@@ -323,11 +333,13 @@
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
                                     {{#each (showDay show 7)}}
-                                        <tr id={{movieID}}>
-                                            <td>{{title}}</td><td>{{genre}}</td><td>{{rateBuilder rating}}</td>
-                                            <td>{{date}}</td><td>{{time}}</td>
-                                            <td><button type="button" class="btn btn-warning" onclick="alert('You can now edit!');">Edit</button></td>
-                                            <td><button type="button" class="btn btn-danger"
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
                                                 onclick=" var result = confirm('Are you sure you want to delete?');
                                                             if (result) {
                                                                 deleteRow('{{movieID}}')}">Remove</button></td>
@@ -407,13 +419,13 @@
             });
         });
 
-        function deleteRow(movieID){
-            $('#'+ movieID).remove();
+        function deleteRow(showID){
+            $('#'+ showID).remove();
             { $.ajax({
                 url: '/admin/removeShow',
                 method: 'DELETE',
                 data: {
-                    movieID: movieID
+                    showID: showID
                 }
             })
             .done(function() {
@@ -422,29 +434,41 @@
             })};
         }
 
-        function editRow(movieID){
-            value = $('#'+ movieID).attr('contenteditable');
-            console.log(value);
+        function rateBuilder(rating){
+            string = '';
+            for (var i=0;i<rating;i++)
+            {
+                string += '<i class="fa fa-star text-warning"></i>\n';
+            }
+            return string;
+        }
+
+        function editRow(showID, date, time){
+            value = $('#'+ showID).attr('contenteditable');
                 if (value == 'false') {
-                    $('#'+ movieID).attr('contenteditable','true');
+                    $('#'+ showID).attr('contenteditable','true');
                     alert('You can now edit!');
+                    $('#'+ showID+4).text("Save");
+                    //$('#'+showID+1).text(rating + '/5');
                 }
                 else {
-                    $('#'+ movieID).attr('contenteditable','false');
+                    $('#'+ showID).attr('contenteditable','false');
                     alert('Data are now saved!');
+                    $('#'+ showID+4).text("Edit");
+                    //$('#'+showID+1).html(rateBuilder(rating));
+                    location.reload(true);
                 }
 
             { $.ajax({
                 url: '/admin/changeShow',
                 method: 'PUT',
                 data: {
-                    movieID: movieID
+                    showID: showID,
+                    date: $('#'+ showID+2).html(),
+                    time: $('#'+ showID+3).html(),
                 }
             })
-            .done(function() {
-                console.log('deleted');
-                window.location.reload(true);
-            })};
+            };
         }
 
     </script>

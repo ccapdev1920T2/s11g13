@@ -11,89 +11,46 @@ const Shows = require('../models/ShowsModel.js');
 const adminController = {
     /*
         VARIABLES:
-        show = title, genre, rating, day, date, time
-            = list of showing movies this week
         
-        FORM: New Movie
-        movTitle = 
-        movGenre =
-        movScore =
-        movSynopsis =
-        movCast =
-    
-        FORM: New Show
-        movieID = 
-        date = 
-        time = 
     */
-    getAdminBoard: function(req, res, next) {
-        db.findMany(Movies,{},'title movieID',function(movie){
-            db.findMany(Shows,{},'movieID date time',function(show){
-                res.render('admin', {
-                 pageName: "Admin Dashboard",
-                 isSignedIn: true,
-                 username: "Bh0sZxCArr3n",
-                 movies: movie,
-                 show: [{title: 'null', genre: 'Comedy, Adventure', rating: '4', day: 1, date: '04-12-20', time: '12:45 - 14:15'}]
-                 /*[
-                     {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 1, date: '04-12-20', time: '12:45 - 14:15'},
-                     {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 1, date: '04-12-20', time: '12:45 - 14:15'},
-                     {title: 'MovieMysteryAdventure', genre: 'Mystery, Adventure', rating: '3', day: 1, date: '04-12-20', time: '12:45 - 14:15'},
-                     {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 2, date: '04-13-20', time: '12:45 - 14:15'},
-                     {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 2, date: '04-13-20', time: '12:45 - 14:15'},
-                     {title: 'MovieMysteryAdventure', genre: 'Mystery, Adventure', rating: '3', day: 2, date: '04-13-20', time: '12:45 - 14:15'},
-                     {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 3, date: '04-14-20', time: '12:45 - 14:15'},
-                     {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 3, date: '04-14-20', time: '12:45 - 14:15'},
-                     {title: 'MovieThrillerPsychological', genre: 'Thriller, Psychological', rating: '4', day: 3, date: '04-14-20', time: '12:45 - 14:15'},
-                     {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 4, date: '04-15-20', time: '12:45 - 14:15'},
-                     {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 5, date: '04-16-20', time: '12:45 - 14:15'},
-                     {title: 'MovieThrillerPsychological', genre: 'Thriller, Psychological', rating: '4', day: 6, date: '04-17-20', time: '12:45 - 14:15'},
-                     {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 6, date: '04-17-20', time: '12:45 - 14:15'},
-                     {title: 'MovieThrillerPsychological', genre: 'Thriller, Psychological', rating: '4', day: 7, date: '04-18-20', time: '12:45 - 14:15'},
-                     {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 7, date: '04-18-20', time: '12:45 - 14:15'},
-                 ]*/,
-                }) 
+    getAdminBoard: function(req, res, next) {                   
+            
+            db.findMany(Movies,{},'title _id',function(movie){
+                Shows.find().select("time date dayOfWeek").populate('movieID').exec().then(s=>{
+                    let show = [];
+                    for (let i=0;i<s.length;i++)
+                    {
+                        var d = new Date(s[i].date); //ISODate
+                        year = d.getFullYear(); //year of ISODate
+                        month = d.getMonth()+1 //month of ISODate
+                        dt = d.getDate(); //day of ISOdate
+                        if (dt < 10) { //get number of days
+                          dt = '0' + dt;
+                        }
+                        if (month < 10) { //get number of months
+                          month = '0' + month;
+                        }
+                        formattedDate = year + '-' + month + '-' + dt; //formatted date yyyy-mm-dd
+                        showObj = 
+                            {
+                                title: s[i].movieID.title,
+                                genre: s[i].movieID.genre,
+                                rating: s[i].movieID.aveScore,
+                                day: s[i].dayOfWeek,
+                                date: formattedDate,
+                                time: s[i].time,
+                            }
+                        show.push(showObj); //push object to array
+                    }
+                    res.render('admin', {
+                     pageName: "Admin Dashboard",
+                     isSignedIn: true,
+                     username: "Bh0sZxCArr3n",
+                     movies: movie,
+                     show: show
+                    }) 
+                })
             })
-                   
-                });
-        
-        /*
-        res.render('admin', {
-            pageName: "Admin Dashboard",
-            isSignedIn: true,
-            username: "Bh0sZxCArr3n",
-            movies: a
-                
-                {title: "To All The Boys P.S. I Still Love You", movie_id:23},
-                {title: "The Lightning Thief", movie_id:101},
-                {title: "Ice Age", movie_id:103},
-                {title: "The Conjuring", movie_id: 156},
-                {title: "It", movie_id: 256},
-                {title: "Taken", movie_id: 269},
-                {title: "Avengers: Civil War", movie_id: 298},
-                {title: "Captain America: The Winter Soldier", movie_id: 302},
-                {title: "Doctor Who - The Day of the Doctor", movie_id: 307},
-                
-            ,
-            show: [
-                {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 1, date: '04-12-20', time: '12:45 - 14:15'},
-                {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 1, date: '04-12-20', time: '12:45 - 14:15'},
-                {title: 'MovieMysteryAdventure', genre: 'Mystery, Adventure', rating: '3', day: 1, date: '04-12-20', time: '12:45 - 14:15'},
-                {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 2, date: '04-13-20', time: '12:45 - 14:15'},
-                {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 2, date: '04-13-20', time: '12:45 - 14:15'},
-                {title: 'MovieMysteryAdventure', genre: 'Mystery, Adventure', rating: '3', day: 2, date: '04-13-20', time: '12:45 - 14:15'},
-                {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 3, date: '04-14-20', time: '12:45 - 14:15'},
-                {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 3, date: '04-14-20', time: '12:45 - 14:15'},
-                {title: 'MovieThrillerPsychological', genre: 'Thriller, Psychological', rating: '4', day: 3, date: '04-14-20', time: '12:45 - 14:15'},
-                {title: 'MovieComAdventure', genre: 'Comedy, Adventure', rating: '4', day: 4, date: '04-15-20', time: '12:45 - 14:15'},
-                {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 5, date: '04-16-20', time: '12:45 - 14:15'},
-                {title: 'MovieThrillerPsychological', genre: 'Thriller, Psychological', rating: '4', day: 6, date: '04-17-20', time: '12:45 - 14:15'},
-                {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 6, date: '04-17-20', time: '12:45 - 14:15'},
-                {title: 'MovieThrillerPsychological', genre: 'Thriller, Psychological', rating: '4', day: 7, date: '04-18-20', time: '12:45 - 14:15'},
-                {title: 'MovieDramaAction', genre: 'Drama, Action', rating: '5', day: 7, date: '04-18-20', time: '12:45 - 14:15'},
-            ],
-        }
-        )*/
     }
 }
 

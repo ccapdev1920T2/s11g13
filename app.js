@@ -123,7 +123,7 @@ app.use('/', indexRoutes);
 app.use('/register', registerRoutes);
 app.use('/login', loginRoutes);
 app.use('/admin', adminRoutes);
-app.use("/user/:username", userRoutes)
+app.use("/user", userRoutes)
 app.use('/movies', movieRoutes)
 
 //TODO: Error page
@@ -135,7 +135,9 @@ app.use((req, res, next)=>{
 })
 
 app.use((err, req, res, next)=>{
-    res.status(err.status || 500);
+    if (err.status != 404)
+        res.status(500);
+    else res.status(err.status);
     res.render("error", {
         pageName: "Error",
         error: {

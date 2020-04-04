@@ -1,5 +1,9 @@
 //Insert db model dependencies here
+const db = require('../models/database.js');
+const User = require('../models/UsersModel.js');
 
+//Insert other module dependencies here
+const mongoose = require('mongoose');
 
 
 //Functions for userController
@@ -7,55 +11,31 @@ const userController = {
     getUserProfile: function(req, res, next) {
         let retrievedData = {};
         let username = req.params.username;
-
-        if(username=="jhcagaoan"){
-            retrievedData = {
-                pageName: "User Profile",
-                isSignedIn: true,
-                pic: "/assets/profpic.png",
-                fname: "John Henry",
-                lname: "Cagaoan",
-                username,
-                email: "john_henry_cagaoan@dlsu.edu.ph",
-                phone: "09273667542",
-            }
-            // next("/userprofile/" + username, retrievedData);
-        }
-        else if(username=="biancarb"){
-            retrievedData = {
-                pageName: "User Profile",
-                isSignedIn: true,
-                pic: "/assets/profpic.png",
-                fname: "Bianca Joy",
-                lname: "Benedictos",
-                username,
-                email: "bianca_benedictos@dlsu.edu.ph",
-                phone: "09123456789",
-            }
-            // next("/userprofile/" + username, retrievedData);
-        }
-        else if(username=="howardg"){
-            retrievedData = {
-                pageName: "User Profile",
-                isSignedIn: true,
-                pic: "/assets/profpic.png",
-                fname: "Howard",
-                lname: "Montecillo",
-                username: "howardg",
-                email: "howard_montecillo@dlsu.edu.ph",
-                phone: "09876543210",
-            }
-            // next("/userprofile/" + username, retrievedData);
-        }
-        else 
-            retrievedData ={
-                pageName: "User Profile",
-                isSignedIn: true,
-                pic: "/assets/profpic.png",
-                email: req.body.email,
-            }
-        
-        res.render('userprofile', retrievedData);
+        User.findOne({username: username}, 'username firstName lastName email mobileNumber pic')
+            .exec()
+            .then(result=>{
+                if (result){
+                    result = result.toObject();
+                    console.log(result)
+                    retrievedData = {
+                        pageName: "User Profile", 
+                        isSignedIn: true,
+                        fname: result.firstName,
+                        lname: result.lastName,
+                        uname: result.username,
+                        email: result.email,
+                        phone: result.mobileNumber,
+                        pic: result.pic,
+                    }
+                    console.log(retrievedData)
+                    
+                    res.render('userprofile', retrievedData);
+                }
+                else{
+                    console.log("No match found");
+                    return res.status(404).redirect("/error");
+                }
+            })
     },
 
     getUserTicket: function(req, res, next) {

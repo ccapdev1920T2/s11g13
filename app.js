@@ -1,7 +1,7 @@
 const express = require("express");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
-const session = required('express-session');
+const session = require('express-session');
 
 const db = require('./models/database.js');
 const db2 = require('./models/database_old.js');
@@ -35,7 +35,8 @@ app.use(session({
 app.use((req, res, next)=>{
     const {userId} = req.session
     if(userId){
-        res.locals.user = db.findOne({/**INSERT AGUEMENTS 32:14 of vid */})
+
+        res.locals.user = User.find({username: req.session.userId})
     }
     next();
 })

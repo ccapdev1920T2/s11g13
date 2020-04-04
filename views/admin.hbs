@@ -450,25 +450,40 @@
                     alert('You can now edit!');
                     $('#'+ showID+4).text("Save");
                     //$('#'+showID+1).text(rating + '/5');
+                    $('#'+showID+2).html(
+                        '<div contenteditable="false" class="input-group date" id='+showID+5+' data-target-input="nearest">' +
+                            '<input type="text" contenteditable="false" id='+showID+2+' class="form-control datetimepicker-input" data-target="#'+showID+5+'"/>' + 
+                            '<div class="input-group-append" data-target="#'+showID+5+'" data-toggle="datetimepicker">' +
+                                '<div contenteditable="false" class="input-group-text"> <i class="fa fa-calendar"> </i> </div>' +
+                            '</div> </div>'
+                        ); //add date picker
+
+                    $('#'+showID+5).datetimepicker({ //format of date
+                        format: 'L'
+                    });
+
                 }
                 else {
                     $('#'+ showID).attr('contenteditable','false');
                     alert('Data are now saved!');
                     $('#'+ showID+4).text("Edit");
                     //$('#'+showID+1).html(rateBuilder(rating));
+                    $('#'+showID+2).text($('#'+showID+2).find("input").val()); //get date
+
+                    { $.ajax({
+                        url: '/admin/changeShow',
+                        method: 'PUT',
+                        data: {
+                            showID: showID,
+                            date: $('#'+ showID+2).html(),
+                            time: $('#'+ showID+3).html(),
+                        }
+                    })
+                    };
+
                     location.reload(true);
                 }
 
-            { $.ajax({
-                url: '/admin/changeShow',
-                method: 'PUT',
-                data: {
-                    showID: showID,
-                    date: $('#'+ showID+2).html(),
-                    time: $('#'+ showID+3).html(),
-                }
-            })
-            };
         }
 
     </script>

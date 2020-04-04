@@ -12,8 +12,6 @@ const updateShow = {
         d = new Date(req.body.date);
         day = d.getDay()+1;
 
-        console.log(day);
-
         db.updateOne(Shows,{_id: req.body.showID},{
             dayOfWeek: day,
             date: req.body.date,
@@ -49,7 +47,7 @@ const updateShow = {
                         }
                     show.push(showObj); //push object to array
                 }
-                    res.redirect('/admin');
+                    
             })
         })
     }

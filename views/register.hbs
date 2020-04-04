@@ -14,104 +14,124 @@
 </head>
 <body>
     {{>header}}
-    
-    <br>
-    <div class="container justify-content-center">
-        <div class="card m-auto p-3" style="max-width: 450px">
-            <h4 class="card-title text-center">Register</h4>
-            <p class="text-center mb-0">Create an account now to book tickets</p>
-            <hr>
-
-            <form name="register" id="register" method="POST">
-                <!-- Name -->
-                <div class="form-row">
-                    <div class="form-group col-md-6 input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-user"></i></span>
-                        </div>
-                        <label for="regFName" class="sr-only">First Name</label>
-                        <input required type="text" name="regFName" id="regFName" class="form-control" placeholder="First Name">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="regLName" class="sr-only">Last Name</label>
-                        <input required type="text" name="regLName" id="regLName" class="form-control" placeholder="Last Name">
-                    </div>
+    <div class="container justify-content-center mt-4">
+        <div class="row justify-content-center">
+        {{#if errors}}
+            <div class="col-sm-12 col-md-6">
+            {{#each errors}}
+                <div class="alert alert-danger my-1 text-center alert-dismissable fade show">
+                    <small>{{msg}}</small>
+                    <button type="button" class="close pl-3" data-dismiss="alert">
+                        <i class="fa fa-close"></i>
+                    </button>
                 </div>
-                
-                <!-- Username -->
-                <div class="form-row">
-                    <div class="form-group col-sm-12 input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">@</span>
-                        </div>
-                        <label for="regUName" class="sr-only">Username</label>
-                        <input required type="text" name="regUName" id="regUName" class="form-control" placeholder="Username">
-                        <div class="invalid-feedback" id="unamefeedback">
-                            That username is taken.
-                        </div>
-                    </div>
-                </div>
+            {{/each}}
+            </div>
+        {{/if}}
+        {{#if errors}}
+            <div class="col-sm-12 col-md-6">
+            {{else}}
+            <div class="col-sm-12 col-md-12">
+        {{/if}}
+                <div class="card m-auto p-3" id="regForm" style="max-width: 450px">
+                    <h4 class="card-title text-center">Register</h4>
+                    <p class="text-center mb-0">Create an account now to book tickets</p>
+                    <hr>
 
-                <!-- Email -->
-                <div class="form-row">
-                    <div class="form-group col-sm-12 input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                        </div>
-                        <label for="regEmail" class="sr-only">Email address</label>
-                        <input required type="email" name="regEmail" id="regEmail" class="form-control" placeholder="Email Address">
-                        <div class="invalid-feedback" id="emailfeedback">
-                            Invalid Email.
-                        </div>
-                    </div>
-                </div>
+                    <form name="register" id="register" method="POST">
+                        <!-- Name -->
+                        <div class="form-row">
+                            <div class="form-group col-md-6 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                <label for="regFName" class="sr-only">First Name</label>
+                                <input  type="text" name="regFName" id="regFName" class="form-control" placeholder="First Name">
+                            </div>
 
-                <!-- Phone number -->
-                <div class="form-row">
-                    <div class="form-group col-sm-12 input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                            <div class="form-group col-md-6">
+                                <label for="regLName" class="sr-only">Last Name</label>
+                                <input  type="text" name="regLName" id="regLName" class="form-control" placeholder="Last Name">
+                            </div>
                         </div>
-                        <label for="regPhone" class="sr-only">Phone Number</label>
-                        <input required type="text" name="regPhone" id="regPhone" class="form-control" placeholder="Phone number">
-                    </div>
-                </div>
-
-                <!-- Password -->
-                <div class="form-row">
-                    <div class="form-group col-sm-12 input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-lock"></i><span>
+                        
+                        <!-- Username -->
+                        <div class="form-row">
+                            <div class="form-group col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@</span>
+                                </div>
+                                <label for="regUName" class="sr-only">Username</label>
+                                <input  type="text" name="regUName" id="regUName" class="form-control" placeholder="Username">
+                                <div class="invalid-feedback" id="unamefeedback">
+                                    That username is taken.
+                                </div>
+                            </div>
                         </div>
-                        <label for="regPassword" class="sr-only">Password</label>
-                        <input required type="password" name="regPassword" id="regPassword" class="form-control" placeholder="Password">
-                    </div>
-                </div>
 
-                <!-- Confirm Password -->
-                <div class="form-row">
-                    <div class="form-group col-sm-12 input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        <!-- Email -->
+                        <div class="form-row">
+                            <div class="form-group col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                </div>
+                                <label for="regEmail" class="sr-only">Email address</label>
+                                <input  type="email" name="regEmail" id="regEmail" class="form-control" placeholder="Email Address">
+                                <div class="invalid-feedback" id="emailfeedback">
+                                    Invalid Email.
+                                </div>
+                            </div>
                         </div>
-                        <label for="regConfPass" class="sr-only">Confirm Password</label>
-                        <input required type="password" name="regConfPass" id="regConfPass" class="form-control" placeholder="Confirm Password">
-                    </div>
-                </div>
 
-                <!-- Submit button -->
-                <div class="form-row">
-                    <div class="form-group col-sm-12">
-                        <button disabled type="submit" name="regRegister" id="regRegister" class="btn btn-md btn-danger btn-block">Register</button>
-                    </div>
-                </div>
-            </form>
+                        <!-- Phone number -->
+                        <div class="form-row">
+                            <div class="form-group col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                </div>
+                                <label for="regPhone" class="sr-only">Phone Number</label>
+                                <input  type="text" name="regPhone" id="regPhone" class="form-control" placeholder="Phone number">
+                            </div>
+                        </div>
 
-            <p class="text-center">Have an account? <a class="text-danger" href="/login">Log in</a></p>
+                        <!-- Password -->
+                        <div class="form-row">
+                            <div class="form-group col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-lock"></i><span>
+                                </div>
+                                <label for="regPassword" class="sr-only">Password</label>
+                                <input  type="password" name="regPassword" id="regPassword" class="form-control" placeholder="Password">
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-row">
+                            <div class="form-group col-sm-12 input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                </div>
+                                <label for="regConfPass" class="sr-only">Confirm Password</label>
+                                <input  type="password" name="regConfPass" id="regConfPass" class="form-control" placeholder="Confirm Password">
+                                <div class="invalid-feedback" id="passMatch">
+                                    Invalid Email.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" name="regRegister" id="regRegister" class="btn btn-md btn-danger btn-block">Register</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <p class="text-center">Have an account? <a class="text-danger" href="/login">Log in</a></p>
+                </div>
+            </div>
         </div>
     </div>
-
 
     <!-- BS4 Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

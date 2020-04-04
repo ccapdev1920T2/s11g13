@@ -20,7 +20,7 @@ router.get('/seats', controller.getSeats);
 
 /* Ajax routes */
 router.get('/checkUniqueUName', formchecker.uniqueUsername)
-router.get('/checkEmail', [formchecker.isInvalidEmail, formchecker.uniqueEmail])
+router.get('/checkEmail', formchecker.isInvalidEmail, formchecker.uniqueEmail)
 // router.get("/checkEmail", )
 
 module.exports = router;

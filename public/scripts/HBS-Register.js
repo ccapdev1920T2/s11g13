@@ -1,5 +1,40 @@
 $(document).ready(()=>{
-    //Username ajax to check if unique
+    function validate(){
+        if($("#regConfPass").val() == "")
+        {
+            $("#regConfPass").removeClass("is-valid")
+            $("#regConfPass").removeClass("is-invalid")
+            $("#regPassword").removeClass("is-valid")
+            $("#regPassword").removeClass("is-invalid")
+            $("#passMatch").addClass("invalid-feedback")
+            $("#passMatch").removeClass("valid-feedback")
+            $("#passMatch").hide();
+        }
+        else if ($("#regConfPass").val() != $("#regPassword").val())
+        {
+            $("#regConfPass").removeClass("is-valid")
+            $("#regConfPass").addClass("is-invalid")
+            $("#regPassword").removeClass("is-valid")
+            $("#regPassword").addClass("is-invalid")
+            $("#passMatch").addClass("invalid-feedback")
+            $("#passMatch").removeClass("valid-feedback")
+            $("#passMatch").html("Passwords do not match.")
+            $("#passMatch").show()
+        }
+        else if ($("#regConfPass").val() == $("#regPassword").val())
+        {
+            $("#regConfPass").addClass("is-valid")
+            $("#regConfPass").removeClass("is-invalid")
+            $("#regPassword").addClass("is-valid")
+            $("#regPassword").removeClass("is-invalid")
+            $("#passMatch").removeClass("invalid-feedback")
+            $("#passMatch").addClass("valid-feedback")
+            $("#passMatch").html("Passwords match.")
+            $("#passMatch").show()
+        }
+    }
+
+
     $("#regUName").blur(()=>{
         let username = $("#regUName").val()
         
@@ -24,7 +59,6 @@ $(document).ready(()=>{
                 }
             });
         }
-        
     })
 
     //email ajax to check if unique
@@ -40,7 +74,7 @@ $(document).ready(()=>{
         else{
             $.get("/checkEmail", {email: email},  (result)=>{
                 //Match found
-                console.log(result.error)
+                console.log(result)
                 if (!(result.error == "none")){
                     $("#emailfeedback").show();
                     $("#regEmail").removeClass("is-valid")
@@ -62,8 +96,28 @@ $(document).ready(()=>{
         }
     })
 
-    function isEmail(email){
-        let regex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-        return regex.test(email);
-    }
-});
+    $("#regConfPass").on(
+        "keyup blur", validate
+    )
+
+    $("#regPassword").on(
+        "blur mouseout", validate
+    )
+
+    // $('#regRegister').on(
+    //     "click", ()=>{
+    //         $.post("/")
+            
+    //     })
+    // });
+    
+    // console.log(allValid)
+
+    // let formData = {
+    //     email: $("#regEmail").val(),
+    //     username: $("#regUName").val(),
+    //     firstName: $("#regFName").val(),
+    //     lastName: $("#regLName").val(),
+    //     mobileNumber: $("#regPhone").val(),
+    // console.table(formData);
+})

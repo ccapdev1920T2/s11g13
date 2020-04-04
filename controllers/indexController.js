@@ -1,3 +1,6 @@
+const db = require('../models/database.js');
+const Seats = require('../models/SeatsModel.js');
+
 const indexController = {
     getHome: function(req, res, next) {
         res.render("home", {
@@ -66,19 +69,56 @@ const indexController = {
     },
 
     getSeats: (req, res, next)=>{
-        res.render("seats", {
+
+        let seatRow = [];
+
+        for (var i=1;i<=4;i++)
+        {
+            let seatCol = [];
+            for (var j=0;j<8;j++)
+            {
+                var letter = "";
+                if (j == 0)
+                    letter = "A";
+                else if (j == 1)
+                    letter = "B";
+                else if (j == 2)
+                    letter = "C";
+                else if (j == 3)
+                    letter = "D";
+                else if (j == 4)
+                    letter = "E";
+                else if (j == 5)
+                    letter = "F";
+                else if (j == 6)
+                    letter = "G";
+                else if (j == 7)
+                    letter = "H";
+                db.findOne(Seats,{seatNum: i+letter, showID: '5e88792b31600b21a8cb18a6'},'seatNum isTaken', function(seat){
+                    seatObj = {
+                        seatName: seat.seatNum,
+                        isTaken: seat.isTaken
+                    }
+                seatCol.push(seatObj); //push seatobj to seatrow
+                })
+            }
+            seatRow.push(seatCol);
+        }
+
+        
+        function sleep (time) {
+          return new Promise((resolve) => setTimeout(resolve, time));
+        }
+
+        sleep(800).then(() => {
+            res.render("seats", {
             pageName: "Reserve Seats",
-            seatRow: [
-                [{seatName: "1A", isTaken: true}, {seatName: "1B", isTaken: false}, {seatName: "1C", isTaken: false}, {seatName: "1D", isTaken: false},
-                {seatName: "1E", isTaken: false},{seatName: "1F", isTaken: false},{seatName: "1G", isTaken: false},{seatName: "1H", isTaken: false}],
-                [{seatName: "2A", isTaken: true},{seatName: "2B", isTaken: false},{seatName: "2C", isTaken: false},{seatName: "2D", isTaken: false},
-                {seatName: "2E", isTaken: false},{seatName: "2F", isTaken: true},{seatName: "2G", isTaken: true},{seatName: "2H", isTaken: false}],
-                [{seatName: "3A", isTaken: true},{seatName: "3B", isTaken: false},{seatName: "3C", isTaken: false},{seatName: "3D", isTaken: false},
-                {seatName: "3E", isTaken: false},{seatName: "3F", isTaken: false},{seatName: "3G", isTaken: false},{seatName: "3H", isTaken: false}],
-                [{seatName: "4A", isTaken: true},{seatName: "4B", isTaken: false},{seatName: "4C", isTaken: false},{seatName: "4D", isTaken: true},
-                {seatName: "4E", isTaken: false},{seatName: "4F", isTaken: false},{seatName: "4G", isTaken: false},{seatName: "4H", isTaken: false}]
-            ]
+            seatRow: seatRow
         })
+        });
+
+
+
     },
 
     getPayment: function(req, res, next){

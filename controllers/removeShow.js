@@ -2,6 +2,7 @@ const db = require('../models/database.js');
 const mongoose = require('mongoose');
 const Movies = require('../models/MoviesModel.js');
 const Shows = require('../models/ShowsModel.js');
+const Seats = require('../models/SeatsModel.js');
 
 
 //Functions for removeShow
@@ -9,9 +10,9 @@ const removeShow = {
     
     deleteShow: function(req, res, next) {
 
-        db.deleteOne(Shows,{"_id": req.body.movieID});
-        console.log(req.body.movieID);
-
+        db.deleteMany(Seats,({"showID": req.body.movieID})); //movieID is showID
+        db.deleteOne(Shows,{"_id": req.body.movieID}); //movieID is showID
+        
         //display
         db.findMany(Movies,{},'title _id',function(movie){
             Shows.find().select("time date dayOfWeek").populate('movieID').exec().then(s=>{

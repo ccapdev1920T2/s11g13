@@ -47,10 +47,14 @@ const loginController = {
                             //     token: token;
                             // });
                             if(user[0].userType.localeCompare("User")){
-                                return res.render("admin");
+                                req.session.userId = user[0].username;
+                                res.locals.user = user[0];
+                                return res.redirect("/admin");
                             }
                             else{
-                                return res.render("userprofile");
+                                req.session.userId = user[0].username;
+                                console.log('User Logged In');
+                                return res.redirect("/user/"+user[0].username);
                             };
                         }
                         res.status(401).json({

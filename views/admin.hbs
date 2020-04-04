@@ -425,13 +425,10 @@
                 url: '/admin/removeShow',
                 method: 'DELETE',
                 data: {
-                    showID: showID
+                    movieID: showID
                 }
-            })
-            .done(function() {
-                console.log('deleted');
-                window.location.reload(true);
-            })};
+              })
+            };
         }
 
         function rateBuilder(rating){
@@ -450,15 +447,47 @@
                     alert('You can now edit!');
                     $('#'+ showID+4).text("Save");
                     //$('#'+showID+1).text(rating + '/5');
+
+                    //current date
+                    copiedDate = $('#'+showID+2).text();
+                    currDate = new Date(copiedDate);
+                    currYear = currDate.getFullYear();
+                    currMonth = currDate.getMonth()+1;
+                    currDay = currDate.getDate();
+                    console.log("date is " + currYear + "/" + currMonth + "/" + currDay);
+                    d = currMonth + "/" + currDay + "/" + currYear;
+
+
+                    //date picker
                     $('#'+showID+2).html(
                         '<div contenteditable="false" class="input-group date" id='+showID+5+' data-target-input="nearest">' +
-                            '<input type="text" contenteditable="false" id='+showID+2+' class="form-control datetimepicker-input" data-target="#'+showID+5+'"/>' + 
+                            '<input type="text" id='+showID+2+' class="form-control datetimepicker-input" data-target="#'+showID+5+'" value="'+d+'"/>' + 
                             '<div class="input-group-append" data-target="#'+showID+5+'" data-toggle="datetimepicker">' +
                                 '<div contenteditable="false" class="input-group-text"> <i class="fa fa-calendar"> </i> </div>' +
                             '</div> </div>'
-                        ); //add date picker
+                        );
 
-                    $('#'+showID+5).datetimepicker({ //format of date
+                    //time
+                    currTime=$('#'+showID+3).text();
+
+                    //time picker
+                    $('#'+showID+3).html(
+                        '<select id="'+showID+6+'" class="form-control"></select>'
+                        ); 
+
+                    //time slot options
+                    let times = ["09:15 - 10:45", "11:00 - 12:30", "12:45 - 14:15", "1430 - 1600", "1615 - 1745", "1800 - 1930", "1945 - 2115"];
+                    for(let i = 0; i < times.length; i++){ 
+                        let x = document.createElement("option");
+                        x.setAttribute("value", times[i]);
+                        if (times[i] == currTime)
+                            x.setAttribute('selected','selected');
+                        $(x).text(times[i]);
+                        $("#"+showID+6).append(x);
+                    }
+
+                    //format of date
+                    $('#'+showID+5).datetimepicker({
                         format: 'L'
                     });
 
@@ -469,6 +498,8 @@
                     $('#'+ showID+4).text("Edit");
                     //$('#'+showID+1).html(rateBuilder(rating));
                     $('#'+showID+2).text($('#'+showID+2).find("input").val()); //get date
+                    $('#'+showID+3).text($('#'+showID+6).children("option:selected").val()); //get time
+
 
                     { $.ajax({
                         url: '/admin/changeShow',
@@ -480,7 +511,6 @@
                         }
                     })
                     };
-
                     location.reload(true);
                 }
 

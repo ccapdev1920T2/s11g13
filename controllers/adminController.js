@@ -30,7 +30,7 @@ const adminController = {
                         if (month < 10) { //get number of months
                           month = '0' + month;
                         }
-                        formattedDate = year + '-' + month + '-' + dt; //formatted date yyyy-mm-dd
+                        formattedDate = month + '/' + dt + '/' + year; //formatted date mm-dd-yyyy
                         showObj = 
                             {
                                 movieID: s[i]._id,

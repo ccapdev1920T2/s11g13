@@ -1,18 +1,75 @@
 const express = require("express");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
+const session = required('express-session');
 
 const db = require('./models/database.js');
 const db2 = require('./models/database_old.js');
 
+const TWO_HOURS = 1000 * 60 * 60 * 2
+
 const app = express();
-const port = 3000;
+const {
+    port = 3000,
+    NODE_ENV = 'development',
+
+    SESS_NAME = 'sid',
+    SESS_SECRET = 'ssh!quiet,it\'sasecret',
+    SESS_LIFETIME = TWO_HOURS
+} = process.env;
+
+const IN_PROD = NODE_ENV === 'production'
+
+app.use(session({
+    name: SESS_NAME,
+    resave: false,
+    saveUninitialized: false,
+    secret: SESS_SECRET,
+    cookie:{
+        maxAge: SESS_LIFETIME,
+        sameSite: true,
+        secure: IN_PROD
+    }
+}))
+
+app.use((req, res, next)=>{
+    const {userId} = req.session
+    if(userId){
+        res.locals.user = db.findOne({/**INSERT AGUEMENTS 32:14 of vid */})
+    }
+    next();
+})
+
+/**1.) insert sa login:
+ * const {userID} = req.session
+ * 
+ * 2.) create redirection route checking if there's a 
+ * session/userid currently logged in - 
+ * apply it to alll authenticated routes for redirection
+ * 
+ * 3.) insert this somewhere to update chuchu of session
+ * const {user} = res.locals
+ * 
+ * 4.) FOR LOGIN (if successful/the user exists with right pass):
+ * req.session.userId = username (orwhateverIDwewannause)
+ * 
+ * 5.) LOGOUT:
+ * 
+ * req.session.destroy(err => {
+ *      if(err){
+ *          return.redirect('<somewhere></somewhere>');
+ *      }
+ *      
+ *      res.clearCookie(SESS_NAME);
+ *      res.redirect('<somewhere></somewhere>');
+ * })
+*/
 
 // Middlewares
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-/*=============================create admin=============================*/
+/*============================= CREATE ADMIN =============================*/
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('./models/UsersModel.js');

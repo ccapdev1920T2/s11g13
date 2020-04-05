@@ -52,13 +52,13 @@
           {{#each this}}
             {{#if this.isTaken}}
               <li class="seat">
-                <input type="checkbox" name = {{this.seatName}} id={{this.seatName}}>
-                <label for={{this.seatName}}>{{this.seatName}}</label>
+                <input type="checkbox" disabled name = {{this.seatName}} id={{this.seatName}}>
+                <label style="background-color: red;" for={{this.seatName}}>{{this.seatName}}</label>
               </li>
               {{else}}
               <li class="seat">
-                <input type="checkbox" disabled name = {{this.seatName}} id={{this.seatName}}>
-                <label style="background-color: red;" for={{this.seatName}}>{{this.seatName}}</label>
+                <input type="checkbox" name = {{this.seatName}} id={{this.seatName}}>
+                <label for={{this.seatName}}>{{this.seatName}}</label>
               </li>
             {{/if}}
           {{/each}}

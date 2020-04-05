@@ -27,6 +27,7 @@
     "express-hbs": "^2.3.1",
     "express-validator": "^6.4.0",
     "hbs": "^4.1.0",
+    "jquery": "^3.4.1",
     "mongodb": "^3.5.5",
     "mongoose": "^5.9.6",
     "validator": "^13.0.0"

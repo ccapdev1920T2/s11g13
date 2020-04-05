@@ -1,12 +1,10 @@
 
 // import module `mongoose`
 var mongoose = require('mongoose');
-
+const Schema = mongoose.Schema;
 // defines the schema for collection `movies`
 var MoviesSchema = new mongoose.Schema({
-    movieID: {
-        type: String
-    },
+    _id: Schema.Types.ObjectId, //movieID
     title: {
         type: String
     },
@@ -26,8 +24,9 @@ var MoviesSchema = new mongoose.Schema({
         type: String
     },
     cast: {
-        type: String
-    }
+        type: Array
+    },
+    //shows: [{type: Schema.Types.ObjectId, ref: 'Shows'}]
 });
 
 // exports a mongoose.model object based on `UserSchema` (defined above)

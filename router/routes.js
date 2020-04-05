@@ -9,8 +9,11 @@ const userController = require("../controllers/userController");
 const adminController = require("../controllers/adminController");
 const adminAddMovie = require("../controllers/addMovie.js");
 const adminAddShow = require("../controllers/addShow.js");
-const checkAuth = require('../middleware/check-auth');
+// const checkAuth = require('../middleware/check-auth');
 // const redirectLogin = require('../middleware/redirectLogin');
+
+const mongoose = require('mongoose');
+const User = require('../models/UsersModel.js');
 
 /* redirect if not logged in */
 const redirectLogin = (req, res, next) =>{
@@ -36,7 +39,17 @@ const redirectHome = (req, res, next) =>{
 }
 
 const checkAdmin = (req,res,next)=>{
-    
+    User.find({token: req.session.userId})
+        .exec()
+        .then(user=>{
+            if(user[0].userType.localeCompare("User")){
+                //means user is indeed an admin usertype
+                next();
+            }
+            else{
+                return res.redirect('/user/'+user[0].username);
+            };
+        })
 }
 
 ////// ROUTING /////////
@@ -61,7 +74,7 @@ router.post("/register", regController.postRegister);
 
 /////////Routes under Login////////
 router.get("/login", redirectHome, logController.getLogin);
-router.post("/login",logController.postLogin, checkAuth );
+router.post("/login",logController.postLogin/*, checkAuth*/ );
 
 ///////Routes Involving user//////////
 

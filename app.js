@@ -126,6 +126,7 @@ app.use('/login', loginRoutes);
 app.use("/user", userRoutes)
 app.use('/movies', movieRoutes)
 app.use('/admin', adminRoutes);
+// app.get("/emailverification", (req, res, next)=>{res.render("confirmEmail", {pageName: "Confirm Email"})})
 //TODO: Error page
 
 app.use((req, res, next)=>{

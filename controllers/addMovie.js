@@ -27,7 +27,7 @@ const addMovie = {
             if (!err){  
                 console.log(req.file.destination);
                     var textABox = req.body.addMovieCast;
-                    var castArray = textABox.split(/\n*/);
+                    var castArray = textABox.split(/\n+/);
                     let retrievedData = {
                         _id: new mongoose.Types.ObjectId(),
                         genre: req.body.addMovieGenre,

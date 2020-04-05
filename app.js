@@ -123,10 +123,9 @@ const movieRoutes = require("./router/moviesRoutes")
 app.use('/', indexRoutes);
 app.use('/register', registerRoutes);
 app.use('/login', loginRoutes);
-app.use('/admin', adminRoutes);
 app.use("/user", userRoutes)
 app.use('/movies', movieRoutes)
-
+app.use('/admin', adminRoutes);
 //TODO: Error page
 
 app.use((req, res, next)=>{

@@ -7,7 +7,9 @@ const url = "mongodb://localhost:27017/TicketLeaveItDB";
 
 const options = {
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true
 };
 
 const database = {

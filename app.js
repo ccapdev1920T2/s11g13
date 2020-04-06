@@ -34,10 +34,13 @@ app.use(session({
 
 app.use((req, res, next)=>{
     const {userId} = req.session;
-    console.log("Current User: " + userId);
+    console.log('req.session: ' + req.session);
+    console.log('req.session.userId: ' + req.session.userId);
+    console.log('userId: ' + userId);
     if(userId){
         res.locals.user = User.find({username: req.session.userId})
     }
+    console.log('res.locals.user: ' + res.locals.user);
     next();
 })
 

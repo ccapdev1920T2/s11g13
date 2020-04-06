@@ -67,34 +67,38 @@ const indexController = {
                 let movieArraySa = []; //7
                 for (let i=0;i<s.length;i++)
                 {
+                    movieObj = {
+                        movieUrl : s[i].movieID.posterUrl,
+                        title: s[i].movieID.title,
+                    }
                     //push posterUrl to the array
                     if (s[i].dayOfWeek == 1)
                     {
-                        movieArraySu.push(s[i].movieID.posterUrl); //Sunday
+                        movieArraySu.push(movieObj); //Sunday
                     }
                     else if (s[i].dayOfWeek == 2)
                     {
-                        movieArrayM.push(s[i].movieID.posterUrl); //Monday
+                        movieArrayM.push(movieObj); //Monday
                     }
                     else if (s[i].dayOfWeek == 3)
                     {
-                        movieArrayT.push(s[i].movieID.posterUrl); //Tuesday
+                        movieArrayT.push(movieObj); //Tuesday
                     }
                     else if (s[i].dayOfWeek == 4)
                     {
-                        movieArrayW.push(s[i].movieID.posterUrl); //Wednesday
+                        movieArrayW.push(movieObj); //Wednesday
                     }
                     else if (s[i].dayOfWeek == 5)
                     {
-                        movieArrayH.push(s[i].movieID.posterUrl); //Thursday
+                        movieArrayH.push(movieObj); //Thursday
                     }
                     else if (s[i].dayOfWeek == 6)
                     {
-                        movieArrayF.push(s[i].movieID.posterUrl); //Friday
+                        movieArrayF.push(movieObj); //Friday
                     }
                     else if (s[i].dayOfWeek == 7)
                     {
-                        movieArraySa.push(s[i].movieID.posterUrl); //Saturday
+                        movieArraySa.push(movieObj); //Saturday
                     }
                 }
                 res.render("calendar", {

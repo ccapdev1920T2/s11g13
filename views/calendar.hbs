@@ -88,18 +88,18 @@
 
                                 <!-- Movies -->
                                 <div>
-                                    <a href="#">
                                         <div class="">
                                             <div class="slider" id="slider1">
                                             
                                             {{#each moviePicSu}}
+                                            <a href="/movie/view/">
                                             <img src={{this}}>
+                                            </a>
                                             {{/each}}
 
                                         </div>
                                         <div style="text-align:center;"><button id="leftButton1"><</button> <button id="rightButton1">></button></div>
                                         </div>
-                                    </a>
                                 </div>
 
                             </div>
@@ -117,18 +117,18 @@
 
                                 <!-- Movies -->
                                 <div>
-                                    <a href="#">
                                         <div class="">
                                             <div class="slider" id="slider2">
                                             
                                             {{#each moviePicM}}
-                                            <img src={{this}}>
+                                            <a href="/movies/view/{{title}}">
+                                                <img src={{movieUrl}}>
+                                            </a>
                                             {{/each}}
 
                                         </div>
                                         <div style="text-align:center;"><button id="leftButton2"><</button> <button id="rightButton2">></button></div>
                                         </div>
-                                    </a>
                                 </div>
 
                             </div>
@@ -144,18 +144,18 @@
                             </div>
 
                             <div>
-                                <a href="#">
                                     <div class="">
                                         <div class="slider" id="slider3">
                                         
                                         {{#each moviePicT}}
-                                        <img src={{this}}>
+                                        <a href="/movies/view/{{title}}">
+                                            <img src={{movieUrl}}>
+                                        </a>
                                         {{/each}}
 
                                     </div>
                                     <div style="text-align:center;"><button id="leftButton3"><</button> <button id="rightButton3">></button></div>
                                     </div>
-                                </a>
                             </div>
 
                         </div>
@@ -169,18 +169,18 @@
                             </div>
 
                             <div>
-                                <a href="#">
                                     <div class="">
                                         <div class="slider" id="slider4">
                                         
                                         {{#each moviePicW}}
-                                        <img src={{this}}>
+                                        <a href="/movies/view/{{title}}">
+                                            <img src={{movieUrl}}>
+                                        </a>
                                         {{/each}}
 
                                     </div>
                                     <div style="text-align:center;"><button id="leftButton4"><</button> <button id="rightButton4">></button></div>
                                     </div>
-                                </a>
                             </div>
 
                         </div>
@@ -194,18 +194,18 @@
                             </div>
 
                             <div>
-                                <a href="#">
                                     <div class="">
                                         <div class="slider" id="slider5">
                                         
                                         {{#each moviePicH}}
-                                        <img src={{this}}>
+                                        <a href="/movies/view/{{title}}">
+                                            <img src={{movieUrl}}>
+                                        </a>
                                         {{/each}}
 
                                     </div>
                                     <div style="text-align:center;"><button id="leftButton5"><</button> <button id="rightButton5">></button></div>
                                     </div>
-                                </a>
                             </div>
 
                         </div>
@@ -219,18 +219,16 @@
                             </div>
 
                             <div>
-                                <a href="#">
                                     <div class="">
                                         <div class="slider" id="slider6">
-                                        
                                         {{#each moviePicF}}
-                                        <img src={{this}}>
+                                        <a href="/movies/view/{{title}}">
+                                            <img src={{movieUrl}}>
+                                        </a>
                                         {{/each}}
-
                                     </div>
                                     <div style="text-align:center;"><button id="leftButton6"><</button> <button id="rightButton6">></button></div>
                                     </div>
-                                </a>
                             </div>
 
                         </div>
@@ -244,18 +242,16 @@
                             </div>
 
                             <div>
-                                <a href="#">
                                     <div class="">
                                         <div class="slider" id="slider7">
-                                        
-                                        {{#each moviePicSa}}
-                                        <img src={{this}}>
-                                        {{/each}}
-
+                                            {{#each moviePicSa}}
+                                            <a href="/movies/view/{{title}}">
+                                            <img src={{movieUrl}}>
+                                            </a>
+                                            {{/each}}
+                                        </div>
+                                        <div style="text-align:center;"><button id="leftButton7"><</button> <button id="rightButton7">></button></div>
                                     </div>
-                                    <div style="text-align:center;"><button id="leftButton7"><</button> <button id="rightButton7">></button></div>
-                                    </div>
-                                </a>
                             </div>
 
                         </div>

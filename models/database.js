@@ -19,7 +19,9 @@ const transactions = require("./TransactionsModel.js");
 
 const options = {
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true
 };
 
 const database = {

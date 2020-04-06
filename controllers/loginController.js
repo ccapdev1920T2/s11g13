@@ -28,7 +28,7 @@ const loginController = {
                                 //password dont match
                                 message: 'Authentication failed'
                             });
-                        }
+                        } 
                         if (result) {
                             const ntoken = jwt.sign(
                                 {
@@ -48,16 +48,19 @@ const loginController = {
                             
                             User.findOneAndUpdate({username: user[0].username}, {token: ntoken}, {upsert: true}, function(err, doc) {
                                 if (err) return res.send(500, {error: err});
+                                console.log('token updated!');
                                 //return res.send('Succesfully saved.');
                             });
 
+                            req.session.userId = ntoken;
+                            res.locals.user = user[0];
+                            //req.session.userId = user[0].username;
+
                             if(user[0].userType.localeCompare("User")){
-                                req.session.userId = ntoken;
-                                res.locals.user = user[0];
+                                console.log('Admin Logged In');
                                 return res.redirect("/admin");
                             }
                             else{
-                                req.session.userId = user[0].username;
                                 console.log('User Logged In');
                                 return res.redirect("/user/"+user[0].username);
                             };

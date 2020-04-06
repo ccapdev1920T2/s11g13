@@ -2,6 +2,8 @@ const db = require('../models/database.js');
 const Seats = require('../models/SeatsModel.js');
 const Movies = require('../models/MoviesModel.js');
 const Shows = require('../models/ShowsModel.js');
+const Users = require('../models/UsersModel.js');
+const Ratings = require('../models/RatingsModel.js');
 
 const indexController = {
     getHome: function(req, res, next) {
@@ -53,33 +55,62 @@ const indexController = {
     
 
     getCalendar: function(req, res, next) {
-        res.render("calendar", {
-            pageName: "Calendar",
-            current: "Calendar",
-            moviePicM: ["assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg"],
-            moviePicT: ["assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg"],
-            moviePicW: ["assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg"],
-            moviePicH: ["assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg"],
-            moviePicF: ["assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg"],
-            moviePicSa: ["assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg"],
-            moviePicSu: ["assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg",
-            "assets/MoviePosters/it.jpg","assets/MoviePosters/TheConjuring.jpg","assets/MoviePosters/Taken.jpg"]
-            
-            // isSignedIn: true,
+
+        db.findMany(Movies,{},'posterUrl',function(movie){
+            Shows.find().select("dayOfWeek movieID").populate('movieID').exec().then(s=>{
+                let movieArraySu = []; //1
+                let movieArrayM  = []; //2
+                let movieArrayT  = []; //3
+                let movieArrayW  = []; //4
+                let movieArrayH  = []; //5
+                let movieArrayF  = []; //6
+                let movieArraySa = []; //7
+                for (let i=0;i<s.length;i++)
+                {
+                    //push posterUrl to the array
+                    if (s[i].dayOfWeek == 1)
+                    {
+                        movieArraySu.push(s[i].movieID.posterUrl); //Sunday
+                    }
+                    else if (s[i].dayOfWeek == 2)
+                    {
+                        movieArrayM.push(s[i].movieID.posterUrl); //Monday
+                    }
+                    else if (s[i].dayOfWeek == 3)
+                    {
+                        movieArrayT.push(s[i].movieID.posterUrl); //Tuesday
+                    }
+                    else if (s[i].dayOfWeek == 4)
+                    {
+                        movieArrayW.push(s[i].movieID.posterUrl); //Wednesday
+                    }
+                    else if (s[i].dayOfWeek == 5)
+                    {
+                        movieArrayH.push(s[i].movieID.posterUrl); //Thursday
+                    }
+                    else if (s[i].dayOfWeek == 6)
+                    {
+                        movieArrayF.push(s[i].movieID.posterUrl); //Friday
+                    }
+                    else if (s[i].dayOfWeek == 7)
+                    {
+                        movieArraySa.push(s[i].movieID.posterUrl); //Saturday
+                    }
+                }
+                res.render("calendar", {
+                    pageName: "Calendar",
+                    current: "Calendar",
+                    moviePicSu: movieArraySu,
+                    moviePicM: movieArrayM,
+                    moviePicT: movieArrayT,
+                    moviePicW: movieArrayW,
+                    moviePicH: movieArrayH,
+                    moviePicF: movieArrayF,
+                    moviePicSa: movieArraySa,
+                })
+            })
         })
+
     },
 
     getSeats: (req, res, next)=>{
@@ -173,13 +204,14 @@ const indexController = {
                     dashDate = year + '-' + d.getMonth() + '-' + dt; //for sorting
                     formattedDate = month + ' ' + dt + ', ' + year; //for displaying
 
-                    showObj = 
-                        {
-                            date: dashDate,
-                            title: formattedDate,
-                            imageurl: s[i].movieID.posterUrl,
-                        }
-                    show.push(showObj); //push object to array
+                //show object
+                showObj = 
+                    {
+                        date: dashDate,
+                        title: formattedDate,
+                        imageurl: s[i].movieID.posterUrl,
+                    }
+                show.push(showObj); //push object to array
                 }
 
                 //sort ascending order movie date
@@ -187,6 +219,7 @@ const indexController = {
                   return new Date(a.date) - new Date(b.date);
                 });
 
+                //movie details object
                 movieDetails = {
                     title: movie.title,
                     genre: movie.genre,
@@ -196,44 +229,81 @@ const indexController = {
                     cast: movie.cast,
                 }
 
-                console.log(movieDetails);
+                db.findMany(Users,{},'',function(user){
+                    Ratings.find({movieID: movie._id, userID: user._id}).populate('movieID').populate('userID').exec().then(r=>{
+                        let review = [];
+                        for (let i=0;i<r.length;i++)
+                        {
+                            var d = new Date(r[i].date); //ISODate
+                            year = d.getFullYear(); //year of ISODate
+                            month = d.toLocaleString('default', { month: 'long' });
+                            dt = d.getDate(); //day of ISOdate
+                            if (dt < 10) { //get number of days
+                              dt = '0' + dt;
+                            }
+                            if (month < 10) { //get number of months
+                              month = '0' + month;
+                            }
+                            formattedDate = month + ' ' + dt + ', ' + year; //for displaying 
+                            //review object
+                            reviewObj = 
+                                {
+                                    fName: r[i].userID.firstName,
+                                    lName: r[i].userID.lastName,
+                                    username: r[i].userID.username,
+                                    profilepic: r[i].userID.pic,
+                                    date: formattedDate,
+                                    rating: r[i].starRating,
+                                    commentTitle: r[i].commenttitle,
+                                    comment: r[i].comment,
+                                }
+                            review.push(reviewObj); //push object to array
+                            }
+                            //example
+                            rev1 =
+                            {
+                                fName: "John Henry",
+                                lName: "Cagaoan",
+                                username: "jhcagaoan", 
+                                profilepic: "/assets/MoviePosters/profpic.png", 
+                                date: "February 14, 2020",
+                                rating: 5, 
+                                commentTitle: "Would watch again", 
+                                comment: "Solid! Made me cry",
+                            }
+                            review.push(rev1);
+                            rev2 = {
+                                fName: "Bianca", 
+                                lName: "Ganda", 
+                                username: "biancarb", 
+                                profilepic: "/assets/MoviePosters/profpic.png", 
+                                date: "February 20, 2020",
+                                rating: 5, 
+                                commentTitle: "Kiligss", 
+                                comment: "Ang cute :(( Choosing Peter was the right choice!",
+                            }
+                            review.push(rev2);
+                            console.log(review);
+                            //sort ascending order movie date
+                            show.sort(function(a,b){
+                              return new Date(a.date) - new Date(b.date);
+                            });
 
-                res.render("movie-view", {
-                    pageName: movieDetails.title,
-                    movieDetails: movieDetails,
-                    review,
-                    movies: show,
-                    isSignedIn: true,   //sample also
-                    username: "jhcagaoan", //Sample only, dapat sa comment ko lang may delete button
-                });
+                            res.render("movie-view", {
+                                pageName: movieDetails.title,
+                                movieDetails: movieDetails,
+                                review: review,
+                                movies: show,
+                                isSignedIn: true,   //sample also
+                                username: "jhcagaoan", //Sample only, dapat sa comment ko lang may delete button
+                            });
+
+
+                    })
+                })
             })
         })
-
-            review = [
-                {fName: "John Henry", lName: "Cagaoan", username: "jhcagaoan", profilepic: "/assets/profpic.png", date: "February 14, 2020",
-                rating: 5, commentTitle: "Would watch again", comment: "Solid! Made me cry",},
-                
-                {fName: "Bianca", lName: "Ganda", username: "biancarb", profilepic: "/assets/profpic.png", date: "February 20, 2020",
-                rating: 5, commentTitle: "Kiligss", comment: "Ang cute :(( Choosing Peter was the right choice!",},
-                
-                {fName: "Arren", lName: "Antioquia", username: "Bh0sZxCArr3n", profilepic: "/assets/profpic.png", date: "February 24, 2020",
-                rating: 5, commentTitle: "Nice Movie", comment: "I'll recommend this to my students in CCAPDEV.",},
-                
-                {fName: "Howard", lName: "Montecillo", username: "howardg", profilepic: "/assets/profpic.png", date: "February 29, 2020",
-                rating: 5, commentTitle: "Good", comment: "Recommended by my prof. It was worth it.",},
-
-                {fName: "Sean", lName: "Potato", username: "babalatanKoSiSarah", profilepic: "/assets/profpic.png", date: "February 29, 2020",
-                rating: 5, commentTitle: "Super Good", comment: "Haven't watched romance in a while. Definitely a good movie to watch.",},
-
-                {fName: "Chuan-chen", lName: "Chu", username: "ChuanChenChun", profilepic: "/assets/profpic.png", date: "March 22, 2020",
-                rating: 3, commentTitle: "What", comment: "Maling movie ata napanood ko",},
-            ]
-        }
-        else movieDetails = {
-            title: "Not found"
-        }
-
-    },
+    }
 };
 
 

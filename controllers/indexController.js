@@ -1,39 +1,53 @@
 const db = require('../models/database.js');
 const Seats = require('../models/SeatsModel.js');
+const Movies = require('../models/MoviesModel.js');
+const Shows = require('../models/ShowsModel.js');
 
 const indexController = {
     getHome: function(req, res, next) {
-        res.render("home", {
-            pageName: "Home",
-            current: "Home",
-            movies: [
-                {title: "P.S. I Still Love You", imageurl: "assets/MoviePosters/psIStillLoveYou.jpg"},
-                {title:"The Conjuring", imageurl: "assets/MoviePosters/TheConjuring.jpg"},
-                {title: "The Lightning Thief", imageurl: "assets/MoviePosters/PercyJacksonTheLightningThief.jpg"},
-                {title: "It", imageurl: "assets/MoviePosters/it.jpg"},
-                {title: "Taken", imageurl: "assets/MoviePosters/Taken.jpg"},
-                {title: "Avengers: Civil War", imageurl: "assets/carousel/AvengersCivilWar.png"},
-                {title: "Captain America: The Winter Soldier", imageurl: "assets/carousel/CaptainAmericaTheWinterSoldier.jpeg"},
-                {title: "Doctor Who - The Day of the Doctor", imageurl: "assets/carousel/DoctorWhoTheDayOfTheDoctor.jpg"},
-            ],
+
+        db.findMany(Movies,{},'title posterUrl', function(movie){
+            let movieArray = [];
+            for (let i=0;i<movie.length;i++)
+            {
+                movieObj = 
+                    {
+                        title: movie[i].title,
+                        imageurl: movie[i].posterUrl
+                    }
+                movieArray.push(movieObj);
+            }
+
+            res.render("home", {
+                pageName: "Home",
+                current: "Home",
+                movies: movieArray,
+            })
         })
+
     },
 
     getMovies: function(req, res, next) {
-        res.render("movies", {
+
+        db.findMany(Movies,{},'title posterUrl', function(movie){
+            let movieArray = [];
+            for (let i=0;i<movie.length;i++)
+            {
+                movieObj = 
+                    {
+                        title: movie[i].title,
+                        imageurl: movie[i].posterUrl
+                    }
+                movieArray.push(movieObj);
+            }
+            
+            res.render("movies", {
             pageName: "Movies",
             current: "Movies",
-            movies: [
-                {title: "P.S. I Still Love You", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
-                {title:"The Conjuring", imageurl: "/assets/MoviePosters/TheConjuring.jpg"},
-                {title: "The Lightning Thief", imageurl: "/assets/MoviePosters/PercyJacksonTheLightningThief.jpg"},
-                {title: "It", imageurl: "/assets/MoviePosters/it.jpg"},
-                {title: "Taken", imageurl: "/assets/MoviePosters/Taken.jpg"},
-                {title: "Avengers: Civil War", imageurl: "/assets/carousel/AvengersCivilWar.png"},
-                {title: "Captain America: The Winter Soldier", imageurl: "/assets/carousel/CaptainAmericaTheWinterSoldier.jpeg"},
-                {title: "Doctor Who - The Day of the Doctor", imageurl: "/assets/carousel/DoctorWhoTheDayOfTheDoctor.jpg"},
-            ],
+            movies: movieArray,
+            })
         })
+
     }, 
 
     
@@ -141,27 +155,59 @@ const indexController = {
         let movieDetails = {};
         let review;
 
-        let movies = [
-            {title: "April 2, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
-            {title: "April 3, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
-            {title: "April 4, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
-            {title: "April 5, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
-            {title: "April 6, 2020", imageurl: "/assets/MoviePosters/psIStillLoveYou.jpg"},
-        ];
-        //Step 1: Check from db for matching titles
+        db.findOne(Movies,{title: req.params.title},'',function(movie){
+            Shows.find({movieID: movie._id}).select("time date dayOfWeek").populate('movieID').exec().then(s=>{
+                let show = [];
+                for (let i=0;i<s.length;i++)
+                {
+                    var d = new Date(s[i].date); //ISODate
+                    year = d.getFullYear(); //year of ISODate
+                    month = d.toLocaleString('default', { month: 'long' });
+                    dt = d.getDate(); //day of ISOdate
+                    if (dt < 10) { //get number of days
+                      dt = '0' + dt;
+                    }
+                    if (month < 10) { //get number of months
+                      month = '0' + month;
+                    }
+                    dashDate = year + '-' + d.getMonth() + '-' + dt; //for sorting
+                    formattedDate = month + ' ' + dt + ', ' + year; //for displaying
 
-        //Step 2: Retrieve from DB
-        //sample data retrieved from db
-        console.log(req.query.movieID);
-        if (req.query.movieID == "P.S. I Love You"){
-            movieDetails = {
-                title: "To All The Boys P.S. I Love You",
-                genre: "Romance",
-                moviecover: "/assets/MoviePosters/psIStillLoveYou.jpg",
-                rating: 4.6,
-                synopsis: "Lara Jean is officially Peter’s girlfriend, so everything should be perfect, right? But feelings grow complicated when an old crush reenters her life.",
-                cast: ["Lana Condor", "Noah Centineo", "Jordan Fisher"],
-            }
+                    showObj = 
+                        {
+                            date: dashDate,
+                            title: formattedDate,
+                            imageurl: s[i].movieID.posterUrl,
+                        }
+                    show.push(showObj); //push object to array
+                }
+
+                //sort ascending order movie date
+                show.sort(function(a,b){
+                  return new Date(a.date) - new Date(b.date);
+                });
+
+                movieDetails = {
+                    title: movie.title,
+                    genre: movie.genre,
+                    moviecover: movie.posterUrl,
+                    rating: movie.aveScore,
+                    synopsis: movie.synopsis,
+                    cast: movie.cast,
+                }
+
+                console.log(movieDetails);
+
+                res.render("movie-view", {
+                    pageName: movieDetails.title,
+                    movieDetails: movieDetails,
+                    review,
+                    movies: show,
+                    isSignedIn: true,   //sample also
+                    username: "jhcagaoan", //Sample only, dapat sa comment ko lang may delete button
+                });
+            })
+        })
 
             review = [
                 {fName: "John Henry", lName: "Cagaoan", username: "jhcagaoan", profilepic: "/assets/profpic.png", date: "February 14, 2020",
@@ -187,14 +233,6 @@ const indexController = {
             title: "Not found"
         }
 
-        res.render("movie-view", {
-            pageName: movieDetails.title,
-            movieDetails,
-            review,
-            movies,
-            isSignedIn: true,   //sample also
-            username: "jhcagaoan", //Sample only, dapat sa comment ko lang may delete button
-        });
     },
 };
 

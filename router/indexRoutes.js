@@ -13,7 +13,7 @@ router.get(["/", "/home"], controller.getHome);
 
 router.get("/calendar", controller.getCalendar);
 
-router.get("/payment", controller.getPayment);
+router.post("/payment", controller.getPayment);
 
 /* Ajax routes */
 router.get('/checkUniqueUName', formchecker.uniqueUsername)

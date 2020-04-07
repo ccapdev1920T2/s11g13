@@ -121,48 +121,35 @@ const indexController = {
 
         let seatRow = [];
 
-        for (var i=1;i<=4;i++)
-        {
-            let seatCol = [];
-            for (var j=0;j<8;j++)
-            {
-                var letter = "";
-                if (j == 0)
-                    letter = "A";
-                else if (j == 1)
-                    letter = "B";
-                else if (j == 2)
-                    letter = "C";
-                else if (j == 3)
-                    letter = "D";
-                else if (j == 4)
-                    letter = "E";
-                else if (j == 5)
-                    letter = "F";
-                else if (j == 6)
-                    letter = "G";
-                else if (j == 7)
-                    letter = "H";
-                db.findOne(Seats,{seatNum: i+letter, showID: req.params.showID},'seatNum isTaken', function(seat){
-                    seatObj = {
-                        seatName: seat.seatNum,
-                        isTaken: seat.isTaken
+                db.findMany(Seats,{showID: req.params.showID},'seatNum isTaken', function(seat){
+                    n1=0;
+                    n2=8;
+                    for(var i=0;i<4;i++)
+                    {
+                        seatCol = [];
+                        for (var j=n1;j<n2;j++)
+                        {
+                            seatObj = {
+                            seatName: seat[j].seatNum,
+                            isTaken: seat[j].isTaken
+                            }
+                            seatCol.push(seatObj); //push seatobj to seatrow
+                        }
+                        seatRow.push(seatCol);
+                        n1 += 8;
+                        n2 += 8;
                     }
-                seatCol.push(seatObj); //push seatobj to seatrow
                 })
-            }
-            seatRow.push(seatCol);
-        }
-
         
         function sleep (time) {
           return new Promise((resolve) => setTimeout(resolve, time));
         }
 
-        sleep(800).then(() => {
+        sleep(500).then(() => {
             res.render("seats", {
             pageName: "Reserve Seats",
-            seatRow: seatRow
+            seatRow: seatRow,
+            showID: req.params.showID,
         })
         });
 
@@ -170,18 +157,58 @@ const indexController = {
     },
 
     getPayment: function(req, res, next){
-        res.render("payment", {
-            pageName: "Payment Gateway",
-            isSignedIn: true,
-            ticketDetails: {
-                title: "P.S. I Still Love You",
-                showDate: "04-14-2000",
-                showTime: "12:45PM - 2:15PM",
-                seats: ["1A", "1B"],
-                totalCost: 570.00,
-            },
 
-            
+        Shows.findOne({_id: req.body.showID}).populate('movieID').exec().then(s=>{
+            var seatsArray = [];
+            for (var i=1;i<=4;i++)
+            {
+                for (var j=0;j<8;j++)
+                {
+                    if (j==0)
+                        letter = 'A';
+                    else if (j==1)
+                        letter = 'B';
+                    else if (j==2)
+                        letter = 'C';
+                    else if (j==3)
+                        letter = 'D';
+                    else if (j==4)
+                        letter = 'E';
+                    else if (j==5)
+                        letter = 'F';
+                    else if (j==6)
+                        letter = 'G';
+                    else if (j==7)
+                        letter = 'H';
+                    if (req.body['checkBox'+i+letter])
+                        seatsArray.push(i+letter);
+                }
+            }
+
+            var d = new Date(s.date); //ISODate
+            year = d.getFullYear(); //year of ISODate
+            month = d.getMonth()+1 //month of ISODate
+            dt = d.getDate(); //day of ISOdate
+            if (dt < 10) { //get number of days
+              dt = '0' + dt;
+            }
+            if (month < 10) { //get number of months
+              month = '0' + month;
+            }
+            formattedDate = month + '/' + dt + '/' + year; //formatted date mm/dd/yyyy
+
+            res.render("payment", {
+                pageName: "Payment Gateway",
+                isSignedIn: true,
+                ticketDetails: {
+                    title: s.movieID.title,
+                    showDate: formattedDate,
+                    showTime: s.time,
+                    seats: seatsArray,
+                    totalCost: seatsArray.length * 200,
+                },
+
+            })  
         })
     },
 

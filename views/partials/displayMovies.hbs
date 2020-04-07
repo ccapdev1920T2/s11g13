@@ -3,12 +3,21 @@
     <!---->
     {{#each movies}}
         <div class="col mb-4">
+        {{#if date}}
+            <a href="/movies/seats/{{showID}}">
+                <div class="card h-100" onclick="reserve('{{showID}}');">
+                    <img src={{imageurl}} class="movie-cover">
+                    <h5 class="text-center card-title">{{date}}</h5>
+                </div>
+            </a>
+        {{else}}
             <a href="/movies/view/{{title}}">
                 <div class="card h-100">
                     <img src={{imageurl}} class="movie-cover">
                     <h5 class="text-center card-title">{{title}}</h5>
                 </div>
             </a>
+        {{/if}}
         </div>
     {{/each}}
     <!---->

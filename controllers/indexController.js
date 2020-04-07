@@ -143,7 +143,7 @@ const indexController = {
                     letter = "G";
                 else if (j == 7)
                     letter = "H";
-                db.findOne(Seats,{seatNum: i+letter, showID: '5e88792b31600b21a8cb18a6'},'seatNum isTaken', function(seat){
+                db.findOne(Seats,{seatNum: i+letter, showID: req.params.showID},'seatNum isTaken', function(seat){
                     seatObj = {
                         seatName: seat.seatNum,
                         isTaken: seat.isTaken
@@ -165,7 +165,6 @@ const indexController = {
             seatRow: seatRow
         })
         });
-
 
 
     },
@@ -191,7 +190,7 @@ const indexController = {
         let review;
 
         db.findOne(Movies,{title: req.params.title},'',function(movie){
-            Shows.find({movieID: movie._id}).select("time date dayOfWeek").populate('movieID').exec().then(s=>{
+            Shows.find({movieID: movie._id}).populate('movieID').exec().then(s=>{
                 let show = [];
                 for (let i=0;i<s.length;i++)
                 {
@@ -207,12 +206,12 @@ const indexController = {
                     }
                     dashDate = year + '-' + d.getMonth() + '-' + dt; //for sorting
                     formattedDate = month + ' ' + dt + ', ' + year; //for displaying
-
                 //show object
                 showObj = 
                     {
-                        date: dashDate,
-                        title: formattedDate,
+                        showID: s[i]._id,
+                        date: formattedDate,
+                        title: movie.title,
                         imageurl: s[i].movieID.posterUrl,
                     }
                 show.push(showObj); //push object to array
@@ -287,7 +286,6 @@ const indexController = {
                                 comment: "Ang cute :(( Choosing Peter was the right choice!",
                             }
                             review.push(rev2);
-                            console.log(review);
                             //sort ascending order movie date
                             show.sort(function(a,b){
                               return new Date(a.date) - new Date(b.date);

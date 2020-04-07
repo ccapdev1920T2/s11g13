@@ -7,4 +7,7 @@ const controller = require('../controllers/indexController');
 router.get("/", controller.getMovies);
 router.get("/view/:title", controller.getViewMovie);
 
+//this path is to '/seats'
+router.get('/seats/:showID', controller.getSeats);
+
 module.exports = router;

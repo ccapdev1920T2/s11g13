@@ -89,9 +89,7 @@ const registerController = {
                 }
             })
         
-    }
-            
-        
+        }    
     },
 
     checkUName: (req, res)=>{

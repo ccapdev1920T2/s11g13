@@ -1,40 +1,24 @@
 //Insert db model dependencies here
-const db = require('../models/database.js');
-const User = require('../models/UsersModel.js');
-
-//Insert other module dependencies here
 const mongoose = require('mongoose');
-
+const User = require('../models/UsersModel.js');
 
 //Functions for userController
 const userController = {
     getUserProfile: function(req, res, next) {
         let retrievedData = {};
-        let username = req.params.username;
-        User.findOne({username: username}, 'username firstName lastName email mobileNumber pic')
-            .exec()
-            .then(result=>{
-                if (result){
-                    result = result.toObject();
-                    console.log(result)
-                    retrievedData = {
-                        pageName: "User Profile", 
-                        isSignedIn: true,
-                        fname: result.firstName,
-                        lname: result.lastName,
-                        uname: result.username,
-                        email: result.email,
-                        phone: result.mobileNumber,
-                        pic: result.pic,
-                    }
-                    console.log(retrievedData)
-                    
-                    res.render('userprofile', retrievedData);
+        let un = req.params.username;
+        User.find({username: un})
+            .then(user=>{
+                retrievedData = {
+                    pageName: "User Profile",
+                    pic: user[0].pic,
+                    fname: user[0].firstName,
+                    lname: user[0].lastName,
+                    username: user[0].username,
+                    email: user[0].email,
+                    phone: user[0].mobileNumber,
                 }
-                else{
-                    console.log("No match found");
-                    return res.status(404).redirect("/error");
-                }
+                res.render('userprofile', retrievedData);
             })
     },
 

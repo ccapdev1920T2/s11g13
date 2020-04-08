@@ -20,6 +20,8 @@ const {
 
 const IN_PROD = NODE_ENV === 'production'
 
+var active;
+
 app.use(session({
     name: SESS_NAME,
     resave: false,
@@ -34,15 +36,33 @@ app.use(session({
 
 app.use((req, res, next)=>{
     const {userId} = req.session;
-    console.log('req.session: ' + req.session);
-    console.log('req.session.userId: ' + req.session.userId);
-    console.log('userId: ' + userId);
+    // console.log('req.session: ' + req.session);
+    // console.log('req.session.userId: ' + req.session.userId);
+    // console.log('userId: ' + userId);
     if(userId){
-        res.locals.user = User.find({username: req.session.userId})
+        active = true;
+        res.locals.user = User.find({username: req.session.userId});
     }
-    console.log('res.locals.user: ' + res.locals.user);
+    else {
+        active = false;
+        res.clearCookie(SESS_NAME);
+    }
+    // console.log('res.locals.user: ' + res.locals.user);
     next();
 })
+
+// app.use((req, res, next)=>{
+//     const {userId} = req.session;
+//     console.log('req.session: ' + req.session);
+//     console.log('req.session.userId: ' + req.session.userId);
+//     console.log('userId: ' + userId);
+//     if(userId){
+//         let user = User.find({token: req.session.userId});
+//         res.locals.user = user[0].username;
+//     }
+//     console.log('res.locals.user.username: ' + res.locals.user);
+//     next();
+// })
 
 /**1.) insert sa login:
  * const {userID} = req.session
@@ -222,6 +242,10 @@ hbs.registerHelper('showDay', function(shows, val) {
     return x;
 });
 
+hbs.registerHelper('ActiveSession', function() {
+    return active;
+});
+
 /********* Routing *********/
 const indexRoutes = require('./router/indexRoutes');
 const registerRoutes = require('./router/registerRoutes');
@@ -257,7 +281,6 @@ app.use((err, req, res, next)=>{
         }
     });
 })
-
 
 //Connecting to db
 db.connect();

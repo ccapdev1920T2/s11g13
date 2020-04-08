@@ -9,15 +9,15 @@ const User = require('../models/UsersModel.js');
 
 //Functions for userController
 const registerController = {
-
     postRegister: (req, res, next)=>{
         User.find({email: req.body.regEmail})
         .exec()
         .then(user => {
             if(user.length >= 1){
-                return res.status(409).json({
-                    message: 'Mail exists'
-                });
+                // return res.status(409).json({
+                //     message: 'Mail exists'
+                // });
+                alert('Mail already exists');
                 //can be any of the two errors:
                 //409 -conflict with data
                 //402 -unprocessable data

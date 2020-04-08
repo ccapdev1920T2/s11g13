@@ -18,16 +18,18 @@ const loginController = {
                 .exec()
                 .then(user=>{
                     if (user.length < 1){
-                        return res.status(401).json({
-                            message: 'Authentication failed'
-                        });
+                        // return res.status(401).json({
+                        //     message: 'Authentication failed'
+                        // });
+                        alert('Authentication failed');
                     }
                     bcrypt.compare(req.body.password, user[0].password, (err,result)=>{
                         if(err){
-                            return res.status(401).json({
-                                //password dont match
-                                message: 'Authentication failed'
-                            });
+                            // return res.status(401).json({
+                            //     //password dont match
+                            //     message: 'Authentication failed'
+                            // });
+                            alert('Authentication failed');
                         } 
                         if (result) {
                             const ntoken = jwt.sign(
@@ -71,10 +73,11 @@ const loginController = {
                     })
                 })
                 .catch(err=>{
-                    console.log(err);
-                    res.status(500).json({
-                        error:err
-                    });
+                    // console.log(err);
+                    // res.status(500).json({
+                    //     error:err
+                    // });
+                    alert('Authentication failed');
                 });
         },
 }

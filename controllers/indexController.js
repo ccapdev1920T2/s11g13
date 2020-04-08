@@ -121,7 +121,7 @@ const indexController = {
 
         let seatRow = [];
 
-                db.findMany(Seats,{showID: req.params.showID},'seatNum isTaken', function(seat){
+                db.findMany(Seats,{showID: req.body.showID},'seatNum isTaken', function(seat){
                     n1=0;
                     n2=8;
                     for(var i=0;i<4;i++)
@@ -149,7 +149,7 @@ const indexController = {
             res.render("seats", {
             pageName: "Reserve Seats",
             seatRow: seatRow,
-            showID: req.params.showID,
+            showID: req.body.showID,
         })
         });
 

@@ -4,12 +4,13 @@
     {{#each movies}}
         <div class="col mb-4">
         {{#if date}}
-            <a href="/movies/seats/{{showID}}">
-                <div class="card h-100" onclick="reserve('{{showID}}');">
-                    <img src={{imageurl}} class="movie-cover">
+            <form method="POST" action="/movies/seats">
+                <div class="card h-100" ">
+                    <input type="image" src={{imageurl}} class="movie-cover" alt="Submit" value="{{showID}}">
                     <h5 class="text-center card-title">{{date}}</h5>
+                    <input type = "hidden" name = "showID" value = "{{showID}}"/>
                 </div>
-            </a>
+            </form>
         {{else}}
             <a href="/movies/view/{{title}}">
                 <div class="card h-100">

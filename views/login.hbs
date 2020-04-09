@@ -19,6 +19,18 @@
         <div class="card m-auto p-3" style="max-width: 450px">
             <h4 class="card-title text-center mb-0">Log In</h4>
             <hr>
+            {{#if errors}}
+                <div class="col-sm-12">
+                {{#each errors}}
+                    <div class="alert alert-danger my-1 text-center alert-dismissable fade show mb-4 mt-0">
+                        <small>{{msg}}</small>
+                        <button type="button" class="close pl-3" data-dismiss="alert">
+                            <i class="fa fa-close"></i>
+                        </button>
+                    </div>
+                {{/each}}
+                </div>
+            {{/if}}
 
             <form name="login" id="login" method="POST">
                 <!-- Username -->
@@ -52,6 +64,7 @@
             </form>
 
             <p class="text-center">New User? <a class="text-danger" href="/register">Sign up</a></p>
+
         </div>
     </div>
 

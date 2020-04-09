@@ -81,7 +81,7 @@ const registerController = {
                                     .save()
                                     .then(result =>{
                                         console.log("User account created.")
-                                        return res.redirect(401, '/login')
+                                        return res.redirect('/confirmEmail')
                                     })
                                     .catch(err=>{
                                         console.log(err);

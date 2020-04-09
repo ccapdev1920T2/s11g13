@@ -57,6 +57,17 @@ const checker = {
         ]
     },
 
+    /***************Login validator*******************/
+    loginValidation: ()=>{
+        return [
+            check('username')
+            .not().isEmpty().withMessage("Invalid credentials")
+            .isAlphanumeric().withMessage("Invalid credentials"),
+
+            check('password')
+            .escape()
+        ]
+    },
 
     /***************** AJAX middleware *****************/
 

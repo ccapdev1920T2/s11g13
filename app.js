@@ -1,17 +1,142 @@
 const express = require("express");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
+const session = require('express-session');
 
-//comment out database_old in the future; database.js connects to other models
 const db = require('./models/database.js');
 const db2 = require('./models/database_old.js');
 
+const TWO_HOURS = 1000 * 60 * 60 * 2
+
 const app = express();
-const port = 3000;
+const {
+    port = 3000,
+    NODE_ENV = 'development',
+    SESS_NAME = 'sid',
+    SESS_SECRET = 'ssh!quiet,it\'sasecret',
+    SESS_LIFETIME = TWO_HOURS
+} = process.env;
+
+// Middlewares
+const IN_PROD = NODE_ENV === 'production'
+
+var active;
+
+app.use(session({
+    name: SESS_NAME,
+    resave: false,
+    saveUninitialized: false,
+    secret: SESS_SECRET,
+    cookie:{
+        maxAge: SESS_LIFETIME,
+        sameSite: true,
+        secure: IN_PROD
+    }
+}))
+
+app.use((req, res, next)=>{
+    const {userId} = req.session;
+    // console.log('req.session: ' + req.session);
+    // console.log('req.session.userId: ' + req.session.userId);
+    // console.log('userId: ' + userId);
+    if(userId){
+        active = true;
+        res.locals.user = User.find({username: req.session.userId});
+    }
+    else {
+        active = false;
+        res.clearCookie(SESS_NAME);
+    }
+    // console.log('res.locals.user: ' + res.locals.user);
+    next();
+})
+
+// app.use((req, res, next)=>{
+//     const {userId} = req.session;
+//     console.log('req.session: ' + req.session);
+//     console.log('req.session.userId: ' + req.session.userId);
+//     console.log('userId: ' + userId);
+//     if(userId){
+//         let user = User.find({token: req.session.userId});
+//         res.locals.user = user[0].username;
+//     }
+//     console.log('res.locals.user.username: ' + res.locals.user);
+//     next();
+// })
+
+/**1.) insert sa login:
+ * const {userID} = req.session
+ * 
+ * 2.) create redirection route checking if there's a 
+ * session/userid currently logged in - 
+ * apply it to alll authenticated routes for redirection
+ *
+ * 3.) insert this somewhere to update chuchu of session
+ * const {user} = res.locals
+ * 
+ * 4.) FOR LOGIN (if successful/the user exists with right pass):
+ * req.session.userId = username (orwhateverIDwewannause)
+ *
+ * 5.) LOGOUT:
+ *
+ * req.session.destroy(err => {
+ *      if(err){
+ *          return.redirect('<somewhere></somewhere>');
+ *      }
+ *      
+ *      res.clearCookie(SESS_NAME);
+ *      res.redirect('<somewhere></somewhere>');
+ * })
+*/
 
 // Middlewares
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+/*============================= CREATE ADMIN =============================*/
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const User = require('./models/UsersModel.js');
+
+User.find({userType: "Admin"})
+    .exec()
+    .then(user => {
+        if(user.length >= 1){
+            User.deleteOne({userType: 'Admin'}, function (err) {})
+        }
+    }) 
+    
+    bcrypt.hash("p455w0rd", 10, (err, hash)=>{
+        if (err){
+            return res.status(500).json({
+                error:err
+            });
+        } else {
+            const user = new User({
+                _id: new mongoose.Types.ObjectId(),
+                email: 'admin@dlsu.edu.ph',
+                username: 'bh0zXsArR3n',
+                password: hash, 
+                userType: 'Admin',
+                firstName: 'Admin',
+                lastName: 'Manager',
+                pic: '/assets/profpic.png',
+            });
+            user
+            .save()
+            .then(result =>{
+                console.log("Admin created!")
+            })
+            .catch(err=>{
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                });
+            });
+        }
+    });
+/*====================================================================*/
+
 
 /* To access public folder where CSS and assets are located  */
 app.use(express.static(__dirname + '\\public'))
@@ -112,6 +237,10 @@ hbs.registerHelper('showDay', function(shows, val) {
     return x;
 });
 
+hbs.registerHelper('ActiveSession', function() {
+    return active;
+});
+
 /********* Routing *********/
 const indexRoutes = require('./router/indexRoutes');
 const registerRoutes = require('./router/registerRoutes');
@@ -119,6 +248,11 @@ const loginRoutes = require("./router/loginRoutes");
 const adminRoutes = require("./router/adminRoutes");
 const userRoutes = require("./router/userRoutes");
 const movieRoutes = require("./router/moviesRoutes")
+
+/********* Routing *********/
+const routes = require('./router/routes'); //FIXME: Check
+app.use('/', routes);   //FIXME: CHECK
+app.use('/register', routes); //FIXME: CHECK
 
 app.use('/', indexRoutes);
 app.use('/register', registerRoutes);

@@ -1,62 +1,84 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
+const User = require('../models/UsersModel.js');
+const jwt = require('jsonwebtoken');
 
 const loginController = {
         //Render login page
         getLogin: function(req, res, next){
             res.render("login", {
                 pageName: "Log In",
-                
             })
         },
     
         postLogin: (req, res, next)=>{
-            let {
-                username,
-            } = req.body;
-    
-            let retrievedData = {};
-    
-            if(username=="jhcagaoan"){
-                retrievedData = {
-                    pageName: "User Profile",
-                    isSignedIn: true,
-                    pic: "/assets/profpic.png",
-                    fname: "John Henry",
-                    lname: "Cagaoan",
-                    username,
-                    email: "john_henry_cagaoan@dlsu.edu.ph",
-                    phone: "09273667542",
-                }
-                // next("/userprofile/" + username, retrievedData);
-            }
-            else if(username=="biancarb"){
-                retrievedData = {
-                    pageName: "User Profile",
-                    isSignedIn: true,
-                    pic: "/assets/profpic.png",
-                    fname: "Bianca Joy",
-                    lname: "Benedictos",
-                    username,
-                    email: "bianca_benedictos@dlsu.edu.ph",
-                    phone: "09123456789",
-                }
-                // next("/userprofile/" + username, retrievedData);
-            }
-            else if(username=="howardg"){
-                retrievedData = {
-                    pageName: "User Profile",
-                    isSignedIn: true,
-                    pic: "/assets/profpic.png",
-                    fname: "Howard",
-                    lname: "Montecillo",
-                    username: "howardg",
-                    email: "howard_montecillo@dlsu.edu.ph",
-                    phone: "09876543210",
-                }
-                // next("/userprofile/" + username, retrievedData);
-            }
-    
-            res.render("userprofile", retrievedData);
+            // console.log('yes');
+            User.find({username: req.body.username})
+                .exec()
+                .then(user=>{
+                    if (user.length < 1){
+                        // return res.status(401).json({
+                        //     message: 'Authentication failed'
+                        // });
+                        alert('Authentication failed');
+                    }
+                    bcrypt.compare(req.body.password, user[0].password, (err,result)=>{
+                        if(err){
+                            // return res.status(401).json({
+                            //     //password dont match
+                            //     message: 'Authentication failed'
+                            // });
+                            alert('Authentication failed');
+                        } 
+                        if (result) {
+                            const ntoken = jwt.sign(
+                                {
+                                email: user[0].email,
+                                username: user[0].username,
+                                userId: user[0]._id
+                                },
+                                process.env.JWT_KEY,
+                                {
+                                    expiresIn: "2h"
+                                }
+                            );
+                            // return res.status(200).json({
+                            //     message: 'Authentication successful',
+                            //     token: token;
+                            // });
+                            
+                            User.findOneAndUpdate({username: user[0].username}, {token: ntoken}, {upsert: true}, function(err, doc) {
+                                if (err) return res.send(500, {error: err});
+                                console.log('token updated!');
+                                //return res.send('Succesfully saved.');
+                            });
+
+                            req.session.userId = ntoken;
+                            res.locals.user = user[0];
+                            //req.session.userId = user[0].username;
+
+                            if(user[0].userType.localeCompare("User")){
+                                console.log('Admin Logged In');
+                                return res.redirect("/admin");
+                            }
+                            else{
+                                console.log('User Logged In');
+                                return res.redirect("/user/"+user[0].username);
+                            };
+                        }
+                        res.status(401).json({
+                            message: 'Authentication failed'
+                        });
+                    })
+                })
+                .catch(err=>{
+                    // console.log(err);
+                    // res.status(500).json({
+                    //     error:err
+                    // });
+                    alert('Authentication failed');
+                });
         },
 }
 

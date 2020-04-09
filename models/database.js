@@ -31,6 +31,14 @@ const database = {
         });
     },
 
+    close: function(){
+        console.log("Disconnecting. . .")
+        mongoose.disconnect((err)=>{
+            if (err) throw err
+            console.log("Disconnected to database.")
+        });
+    },
+
     // inserts a single `doc` to the database based on the model `model`
     insertOne: function(model, doc) {
         model.create(doc, function(error, result) {

@@ -1,3 +1,5 @@
+const User = require('../models/UsersModel.js');
+
 const authenticator = {
     rlActiveSession: (req, res, next) =>{
         if (req.session.userId){

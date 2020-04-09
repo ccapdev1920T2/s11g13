@@ -250,10 +250,6 @@ const userRoutes = require("./router/userRoutes");
 const movieRoutes = require("./router/moviesRoutes")
 
 /********* Routing *********/
-const routes = require('./router/routes'); //FIXME: Check
-app.use('/', routes);   //FIXME: CHECK
-app.use('/register', routes); //FIXME: CHECK
-
 app.use('/', indexRoutes);
 app.use('/register', registerRoutes);
 app.use('/login', loginRoutes);
@@ -261,7 +257,6 @@ app.use("/user", userRoutes)
 app.use('/movies', movieRoutes)
 app.use('/admin', adminRoutes);
 // app.get("/emailverification", (req, res, next)=>{res.render("confirmEmail", {pageName: "Confirm Email"})})
-//TODO: Error page
 
 app.use((req, res, next)=>{
     const error = new Error("The resource you are looking for does not exist, have been removed, renamed, or is temporarily unavailable. ")

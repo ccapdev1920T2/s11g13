@@ -343,6 +343,12 @@ const indexController = {
                 })
             })
         })
+    },
+
+    getConfirmEmail: (req, res, next)=>{
+        res.render("confirmEmail", {
+            pageName: "Confirm Email",
+        })
     }
 };
 

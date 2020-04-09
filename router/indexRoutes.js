@@ -20,6 +20,8 @@ router.post('/:username/cart', controller.addTicket);
 
 router.get('/logout', session_auth.logout);
 
+router.get('/confirmEmail', controller.getConfirmEmail);
+
 /* Ajax routes */
 router.get('/checkUniqueUName', formchecker.uniqueUsername)
 router.get('/checkEmail', formchecker.isInvalidEmail, formchecker.uniqueEmail)

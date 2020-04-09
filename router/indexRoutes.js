@@ -15,6 +15,8 @@ router.get("/calendar", controller.getCalendar);
 
 router.post("/payment", controller.getPayment);
 
+router.post('/:username/cart', controller.addTicket);
+
 /* Ajax routes */
 router.get('/checkUniqueUName', formchecker.uniqueUsername)
 router.get('/checkEmail', formchecker.isInvalidEmail, formchecker.uniqueEmail)

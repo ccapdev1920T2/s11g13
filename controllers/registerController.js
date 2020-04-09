@@ -33,9 +33,13 @@ const registerController = {
             .exec()
             .then(user => {
                 if(user.length >= 1){
-                    return res.status(409).json({
-                        message: 'Mail exists'
-                    });
+                    // return res.status(409).json({
+                    //     message: 'Mail exists'
+                    // });
+                    return res.status(409).render("register", {
+                        pageName: "Register",
+                        errors: [{msg: "Email address unavailable"}],
+                    })
                     //can be any of the two errors:
                     //409 -conflict with data
                     //402 -unprocessable data
@@ -44,9 +48,13 @@ const registerController = {
                     .exec()
                     .then(user => {
                         if(user.length >= 1){
-                            return res.status(409).json({
-                                message: 'Username exists'
-                            });
+                            // return res.status(409).json({
+                            //     message: 'Username exists'
+                            // });
+                            return res.status(422).render("register", {
+                                pageName: "Register",
+                                errors: [{msg: "Username unavailable"}],
+                            })
                             //can be any of the two errors:
                             //409 -conflict with data
                             //402 -unprocessable data
@@ -72,26 +80,23 @@ const registerController = {
                                     user
                                     .save()
                                     .then(result =>{
-                                        res.status(201).json({
-                                            message: 'User created'
-                                        });
+                                        console.log("User account created.")
+                                        return res.redirect(401, '/login')
                                     })
                                     .catch(err=>{
                                         console.log(err);
-                                        res.status(500).json({
-                                            error: err
-                                        });
+                                        // res.status(500).json({
+                                        //     error: err
+                                        return res.redirect(500, '/error');
                                     });
-                                }
-                            });
+                                };
+                            })
                         }
                     })
+        
                 }
             })
-        
-    }
-            
-        
+        }
     },
 
     checkUName: (req, res)=>{

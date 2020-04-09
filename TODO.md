@@ -1,6 +1,11 @@
 # To Do
 ## Important
 
+@Bianca
+- [ ] transaction
+- [ ] cleanup of error messages for unsuccessful attempts
+----------------
+
 - [X] Cart -> cancel booking button
 - [ ] functionality for cancel booking
 - [X] View tickets 

@@ -17,7 +17,7 @@ Entering the following commands in your CLI:
 
 1. Clone the repository through 
 ```
-https://github.com/ccapdev1920T2/s11g1.git
+https://github.com/ccapdev1920T2/s11g13.git
 ```
 
 2. Install all needed dependencies through `npm install`
@@ -25,15 +25,23 @@ https://github.com/ccapdev1920T2/s11g1.git
 3. Run the web server with `node app` 
 
 ## Dependencies
-[Bootstrap 4.4.1](https://getbootstrap.com/) - Frontend framework
 
-[Express](https://www.npmjs.com/package/express) - server
+| Dependency | Description |
+|:---:|---|
+| [Bcrypt](https://www.npmjs.com/package/bcrypt) | Password hashing |
+| [Bootstrap 4.4.1](https://getbootstrap.com/) | Frontend framework |
+| [body-parser](https://www.npmjs.com/package/body-parser) | Form data parsing |
+| [busyboy](https://www.npmjs.com/package/busboy) | Form data parser for files |
+| [Express](https://www.npmjs.com/package/express) | Easy Server development |
+| [Express-hbs](https://www.npmjs.com/package/express-hbs) | Integrated handlebars to express package - dynamic content rendering |
+| [Express-validator](https://www.npmjs.com/package/express-validator) | Wrapper for validator to allow for input validation and sanitization |
+| [Handlebars](https://www.npmjs.com/package/hbs) | view engine for dynamic data rendering |
+| [jquery](https://www.npmjs.com/package/jquery) | Easier DOM manipulation + AJAX functions + Bootstrap dependency |
+| [MongoDB](https://www.npmjs.com/package/mongodb) | Driver to connect to MongoDB Database |
+| [Mongoose](https://www.npmjs.com/package/mongoose) | Object Modelling tool for MongoDB |
+| [Multer](https://www.npmjs.com/package/multer) | Middleware for handling multipart/form-data |
+| [Validator](https://www.npmjs.com/package/validator) | Library for string validation and sanitization |
 
-[body-parser](https://www.npmjs.com/package/body-parser) - for easy form data parsing
-
-[Handlebars](https://www.npmjs.com/package/hbs) - view engine for dynamic data rendering
-
-[MongoDB](https://www.npmjs.com/package/mongodb) - to connect to the MongoDB Database
 
 ## Authors
 [Bianca Joy Benedictos](https://fb.me/biancajoyrb)

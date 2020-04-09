@@ -14,6 +14,7 @@ const loginController = {
     
         postLogin: (req, res, next)=>{
             // console.log('yes');
+            console.log(req.body.username)
             User.find({username: req.body.username})
                 .exec()
                 .then(user=>{
@@ -21,15 +22,24 @@ const loginController = {
                         // return res.status(401).json({
                         //     message: 'Authentication failed'
                         // });
-                        alert('Authentication failed');
+                        console.log('Authentication failed: User length <1?' + user);
                     }
-                    bcrypt.compare(req.body.password, user[0].password, (err,result)=>{
+                    bcrypt.compare(
+                        bcrypt.hash(req.body.password, 10, (err, hash)=>{
+                            if (err) throw err;
+                            else{ 
+                                console.log("Hash from req.body: "+ hash);
+                                return hash
+                            };
+                        }), user[0].password, (err,result)=>{
                         if(err){
                             // return res.status(401).json({
                             //     //password dont match
                             //     message: 'Authentication failed'
                             // });
-                            alert('Authentication failed');
+                            console.log("Hash from database: "+ user[0].password)
+                            console.log('Authentication failed: in bcrypt: compare');
+                            console.log(result)
                         } 
                         if (result) {
                             const ntoken = jwt.sign(
@@ -77,7 +87,7 @@ const loginController = {
                     // res.status(500).json({
                     //     error:err
                     // });
-                    alert('Authentication failed');
+                    console.log('Authentication failed');
                 });
         },
 }

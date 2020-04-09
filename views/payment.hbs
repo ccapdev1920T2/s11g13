@@ -67,7 +67,7 @@
             <div class="tab-content">
                 <!-- Card -->
                 <div id="cardWrapper" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tabCard">
-                    <form name="payCard" id="payCard" method="POST">
+                    <form name="payCard" id="payCard" method="POST" action="/undefined/cart">
                         
                         <!-- Card Number -->
                         <div class="form-row">
@@ -107,7 +107,13 @@
                                 <input type="number" name="cardCIV" id="cardCIV" class="form-control" placeholder="XXX">
                             </div>
                         </div>
-                        
+                        <!--     hidden input to be passed to cart       -->
+                        <input type = "hidden" name = "showID" value = "{{ticketDetails.showID}}"/>
+                        <!--<input type = "hidden" name = "userID" value = ""/>
+                        <input type = "hidden" name = "transID" value = ""/> -->
+                        <input type = "hidden" name = "status" value = "booked"/>
+                        <input type = "hidden" name = "seats" value = "{{ticketDetails.seats}}"/>
+                        <input type = "hidden" name = "totalPrice" value = "{{ticketDetails.totalCost}}"/>
                         <!-- Submit -->
                         <div class="form-group">
                             <button type="submit" name="cardSubmit" id="cardSubmit" class="btn btn-md btn-danger btn-block">Pay with Card</button>
@@ -117,7 +123,7 @@
             
                 <!-- Over the counter -->
                 <div id="otcWrapper" class="tab-pane fade" role="tabpanel" aria-labelledby="tabOTC">
-                    <form name="payOTC" id="payOTC">
+                    <form name="payOTC" id="payOTC" method="POST" action="/undefined/cart">
                         <!-- Email -->
                         <div class="form-row">
                             <div class="form-group col-md-12">
@@ -130,7 +136,13 @@
                                 </div>
                             </div>
                         </div>
-            
+                        <!--     hidden input to be passed to cart       -->
+                        <input type = "hidden" name = "showID" value = "{{ticketDetails.showID}}"/>
+                        <input type = "hidden" name = "userID" value = "userID"/>
+                        <input type = "hidden" name = "transID" value = "transID"/>
+                        <input type = "hidden" name = "status" value = "booked"/>
+                        <input type = "hidden" name = "seats" value = "{{ticketDetails.seats}}"/>
+                        <input type = "hidden" name = "totalPrice" value = "{{ticketDetails.totalCost}}"/>
                         <!-- Submit -->
                         <div class="form-group">
                             <button type="submit" name="otcSubmit" id="otcSubmit" class="btn btn-md btn-danger btn-block">Send</button>

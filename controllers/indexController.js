@@ -1,9 +1,11 @@
 const db = require('../models/database.js');
+const mongoose = require('mongoose');
 const Seats = require('../models/SeatsModel.js');
 const Movies = require('../models/MoviesModel.js');
 const Shows = require('../models/ShowsModel.js');
 const Users = require('../models/UsersModel.js');
 const Ratings = require('../models/RatingsModel.js');
+const Tickets = require('../models/TicketsModel.js');
 
 const indexController = {
     getHome: function(req, res, next) {
@@ -201,15 +203,24 @@ const indexController = {
                 pageName: "Payment Gateway",
                 isSignedIn: true,
                 ticketDetails: {
+                    showID: s._id,
                     title: s.movieID.title,
                     showDate: formattedDate,
                     showTime: s.time,
                     seats: seatsArray,
-                    totalCost: seatsArray.length * 200,
+                    totalCost: seatsArray.length * 200, //set price here
                 },
 
             })  
         })
+    },
+
+    addTicket: (req, res, next)=>{
+        createdTicketID = new mongoose.Types.ObjectId();
+        db.insertOne(Tickets,{_id: createdTicketID, showID:req.body.showID, userID: req.body.userID, transID: req.body.transID,
+         status: req.body.status, seats: req.body.seats, totalPrice: req.body.totalPrice});
+        //display
+        res.redirect("/");
     },
 
     getViewMovie: (req, res, next)=>{

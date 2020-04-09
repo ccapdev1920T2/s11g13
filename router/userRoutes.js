@@ -12,4 +12,5 @@ router.get('/:username/tickets', session_auth.validUser, userController.getUserT
 //this path is to '/userprofile/:username/cart'
 router.get('/:username/cart', session_auth.validUser, userController.getCart);
 
+
 module.exports = router;

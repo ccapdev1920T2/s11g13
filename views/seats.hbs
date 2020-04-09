@@ -81,26 +81,6 @@
 
 	<script type="text/javascript">
 
-      function reserve(showID) {
-        if (confirm("Are you sure you want to reserve these seats?"))
-        {
-          window.location.href = "/payment";
-          console.log("yes ");
-          {
-            { $.ajax({
-                url: '/payment',
-                method: 'GET',
-                data: {
-                    showID: showID,
-                }
-            })
-            };
-
-          }
-        }
-        else
-          console.log("no");
-      }
 
 	</script>
 </body>

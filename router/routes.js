@@ -7,8 +7,8 @@ const logController = require("../controllers/loginController");
 const regController = require("../controllers/registerController");
 const userController = require("../controllers/userController");
 const adminController = require("../controllers/adminController");
-const adminAddMovie = require("../controllers/addMovie.js");
-const adminAddShow = require("../controllers/addShow.js");
+//const adminAddMovie = require("../controllers/addMovie.js");
+//const adminAddShow = require("../controllers/addShow.js");
 const mongoose = require('mongoose');
 const User = require('../models/UsersModel.js');
 
@@ -101,8 +101,8 @@ router.get('/user/:username/cart', validUser, userController.getCart);
 /* this path is to '/admin' */
 router.get('/admin', validAdmin, adminController.getAdminBoard);
 /* add show and add movie */
-router.post('/admin/addShow', adminAddShow.postShow);
-router.post('/admin/addMovie', adminAddMovie.postMovie);
+router.post('/admin/addShow', adminController.postShow);
+router.post('/admin/addMovie', adminController.postMovie);
 
 /* LOGOUT */
 router.get('/logout', logout);

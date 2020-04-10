@@ -67,7 +67,7 @@
             <div class="tab-content">
                 <!-- Card -->
                 <div id="cardWrapper" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tabCard">
-                    <form name="payCard" id="payCard" method="POST" action="/undefined/cart">
+                    <form name="payCard" id="payCard" method="POST" action="/addTicketSuccess">
                         
                         <!-- Card Number -->
                         <div class="form-row">
@@ -123,7 +123,7 @@
             
                 <!-- Over the counter -->
                 <div id="otcWrapper" class="tab-pane fade" role="tabpanel" aria-labelledby="tabOTC">
-                    <form name="payOTC" id="payOTC" method="POST" action="/undefined/cart">
+                    <form name="payOTC" id="payOTC" method="POST" action="/addTicketSuccess">
                         <!-- Email -->
                         <div class="form-row">
                             <div class="form-group col-md-12">
@@ -138,8 +138,8 @@
                         </div>
                         <!--     hidden input to be passed to cart       -->
                         <input type = "hidden" name = "showID" value = "{{ticketDetails.showID}}"/>
-                        <input type = "hidden" name = "userID" value = "userID"/>
-                        <input type = "hidden" name = "transID" value = "transID"/>
+                        <!--<input type = "hidden" name = "userID" value = ""/>
+                        <input type = "hidden" name = "transID" value = ""/> -->
                         <input type = "hidden" name = "status" value = "booked"/>
                         <input type = "hidden" name = "seats" value = "{{ticketDetails.seats}}"/>
                         <input type = "hidden" name = "totalPrice" value = "{{ticketDetails.totalCost}}"/>

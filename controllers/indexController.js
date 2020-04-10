@@ -216,11 +216,32 @@ const indexController = {
     },
 
     addTicket: (req, res, next)=>{
-        createdTicketID = new mongoose.Types.ObjectId();
-        db.insertOne(Tickets,{_id: createdTicketID, showID:req.body.showID, userID: req.body.userID, transID: req.body.transID,
-         status: req.body.status, seats: req.body.seats, totalPrice: req.body.totalPrice});
-        //display
-        res.redirect("/");
+        Users.find({token:req.session.userId}).exec().then(user=>{
+            createdTicketID = new mongoose.Types.ObjectId();
+            db.findOne(Users,{username: user[0].username},'_id', function(u){
+                //insert ticket into db
+                db.insertOne(Tickets,{
+                        _id: createdTicketID, 
+                        showID:req.body.showID, 
+                        userID: u._id, 
+                        status: req.body.status, 
+                        seats: req.body.seats, 
+                        totalPrice: req.body.totalPrice
+                    });
+            })
+            //update all selected seats to taken
+            var seatArray = req.body.seats.split(',');
+            for (var i=0;i<seatArray.length;i++)
+            {
+                db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true});
+            }
+
+            //display
+            res.render("addTicketSuccess",{
+                pageName: "Ticket Reserved Successfully",
+                isSignedIn: true,
+            });
+        })
     },
 
     getViewMovie: (req, res, next)=>{

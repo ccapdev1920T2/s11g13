@@ -71,6 +71,9 @@ const logout = (req, res, next) =>{
 // Handles home and '/'
 router.get(["/", "/home"], controller.getHome);
 
+//path to '/addTicketSuccess'
+router.post('/addTicketSuccess', controller.addTicket);
+
 //Route to see all movies
 router.get("/movies", controller.getMovies);
 router.get("/movies/view/:title", controller.getViewMovie);

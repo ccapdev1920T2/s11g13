@@ -6,7 +6,9 @@ const session = require('express-session');
 const db = require('./models/database.js');
 const db2 = require('./models/database_old.js');
 
-const TWO_HOURS = 1000 * 60 * 60 * 2
+const TWO_HOURS = 1000 * 60 * 60 * 2;
+
+require("dotenv").config();
 
 const app = express();
 const {

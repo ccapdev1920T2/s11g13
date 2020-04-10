@@ -1,17 +1,22 @@
 //Insert db model dependencies here
 const db = require('../models/database.js');
-const User = require('../models/UsersModel.js');
+const mongoose = require('mongoose');
+const Users = require('../models/UsersModel.js');
+const Tickets = require('../models/TicketsModel.js');
+const Movies = require('../models/MoviesModel.js');
+const Shows = require('../models/ShowsModel.js');
+const Seats = require('../models/SeatsModel.js');
+const Ratings = require('../models/RatingsModel.js');
+
 
 //Insert other module dependencies here
-const mongoose = require('mongoose');
-
 
 //Functions for userController
 const userController = {
     getUserProfile: function(req, res, next) {
         let retrievedData = {};
         let un = req.params.username;
-        User.find({username: un})
+        Users.find({username: un})
             .then(user=>{
                 retrievedData = {
                     pageName: "User Profile",
@@ -27,6 +32,74 @@ const userController = {
     },
     
     getUserTicket: function(req, res, next) {
+
+        Users.find({token:req.session.userId}).exec().then(user=>{ //username
+            createdTicketID = new mongoose.Types.ObjectId();
+            db.findOne(Users,{username: user[0].username},'_id pic', function(u){ //userID
+                Tickets.find({userID: u._id}).populate('userID').populate({
+                        path : 'showID', 
+                        populate : {
+                            path : 'movieID' }}).exec().then(t=>{ //ticket filtered by userID
+                    ticketArray = [];
+                    for (var i=0;i<t.length;i++)
+                    {
+                        var d = new Date(t[i].showID.date); //ISODate
+                        year = d.getFullYear(); //year of ISODate
+                        month = d.getMonth()+1 //month of ISODate
+                        dt = d.getDate(); //day of ISOdate
+                        if (dt < 10) { //get number of days
+                            dt = '0' + dt;
+                        }
+                        if (month < 10) { //get number of months
+                            month = '0' + month;
+                        }
+                        formattedDate = month + '-' + dt + '-' + year; //formatted date mm-dd-yyyy
+
+                        ticketObj = {
+                            status: t[i].status,
+                            title: t[i].showID.movieID.title,
+                            showDate: formattedDate,
+                            showTime: t[i].showID.time,
+                            seats: t[i].seats,
+                            totalCost: t[i].totalPrice,
+                            dateBooked: "04-09-2020",
+                        }
+                            ticketArray.push(ticketObj);
+                    }
+                    let fname = "";
+                    let lname ="";
+                    
+                    let retrievedData = {};
+
+                    if(req.params.username == "biancarb"){
+                        fname = "Bianca Joy";
+                        lname = "Benedictos";
+                    }
+                    else if(req.params.username == "jhcagaoan"){
+                        fname = "John Henry";
+                        lname = "Cagaoan";
+                    }
+                    else if(req.params.username == "howardg"){
+                        fname = "Howard";
+                        lname = "Montecillo";
+                    }
+
+
+                    res.render('ticket', {
+                        pageName: "View Tickets",
+                        isSignedIn: true,
+                        pic: u.pic,
+                        username: req.params.username,
+                        fname,
+                        lname,
+                        tickets: ticketArray,
+                    })
+                })
+            })
+
+        })
+
+        /*
         let tickets = [
             {
                 status: "booked", 
@@ -74,35 +147,8 @@ const userController = {
                 dateBooked: "04-10-2020",
             },
         ];
-
-        let fname = "";
-        let lname ="";
+        */
         
-        let retrievedData = {};
-
-        if(req.params.username == "biancarb"){
-            fname = "Bianca Joy";
-            lname = "Benedictos";
-        }
-        else if(req.params.username == "jhcagaoan"){
-            fname = "John Henry";
-            lname = "Cagaoan";
-        }
-        else if(req.params.username == "howardg"){
-            fname = "Howard";
-            lname = "Montecillo";
-        }
-
-
-        res.render('ticket', {
-            pageName: "View Tickets",
-            isSignedIn: true,
-            pic: "/assets/profpic.png",
-            username: req.params.username,
-            fname,
-            lname,
-            tickets,
-        })
     },
 
     getCart: function(req, res, next) {

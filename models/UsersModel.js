@@ -24,4 +24,4 @@ const userSchema = mongoose.Schema({
     // saka ko na lagay ksks
 });
 
-module.exports = mongoose.model('USERS', userSchema);
+module.exports = mongoose.model('users', userSchema);

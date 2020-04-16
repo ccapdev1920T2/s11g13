@@ -149,7 +149,6 @@ const adminController = {
         db.findMany(Movies,{},'title _id',function(movie){
             Shows.find().select("time date dayOfWeek").populate('movieID').exec().then(s=>{
                 let show = [];
-                console.log(s);
                 for (let i=0;i<s.length;i++)
                 {
                     var d = new Date(s[i].date); //ISODate

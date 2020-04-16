@@ -200,7 +200,7 @@
                         <div class="container-fluid tab-content">
                             <div class="tab-pane fade" role="tabpanel" id="SunShow">
                                 <h5 class="text-danger">Sunday shows</h5>
-                                <table class="table table-hover table-responsive-sm">
+                                <table class="table table-hover table-responsive-sm" id="SunContent">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
@@ -222,7 +222,7 @@
 
                             <div class="tab-pane fade" role="tabpanel" id="MonShow">
                                 <h5 class="text-danger">Monday shows</h5>
-                                <table class="table table-hover table-responsive-sm">
+                                <table class="table table-hover table-responsive-sm" id="MonContent">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
@@ -244,7 +244,7 @@
 
                             <div class="tab-pane fade" role="tabpanel" id="TueShow">
                                 <h5 class="text-danger">Tuesday shows</h5>
-                                <table class="table table-hover table-responsive-sm">
+                                <table class="table table-hover table-responsive-sm" id="TueContent">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
@@ -266,7 +266,7 @@
 
                             <div class="tab-pane fade" role="tabpanel" id="WedShow">
                                 <h5 class="text-danger">Wednesday shows</h5>
-                                <table class="table table-hover table-responsive-sm">
+                                <table class="table table-hover table-responsive-sm" id="WedContent">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
@@ -288,7 +288,7 @@
 
                             <div class="tab-pane fade" role="tabpanel" id="ThuShow">
                                 <h5 class="text-danger">Thursday shows</h5>
-                                <table class="table table-hover table-responsive-sm">
+                                <table class="table table-hover table-responsive-sm" id="ThuContent">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
@@ -310,7 +310,7 @@
 
                             <div class="tab-pane fade" role="tabpanel" id="FriShow">
                                 <h5 class="text-danger">Friday shows</h5>
-                                <table class="table table-hover table-responsive-sm">
+                                <table class="table table-hover table-responsive-sm" id="FriContent">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
@@ -332,7 +332,7 @@
 
                             <div class="tab-pane fade" role="tabpanel" id="SatShow">
                                 <h5 class="text-danger">Saturday shows</h5>
-                                <table class="table table-hover table-responsive-sm">
+                                <table class="table table-hover table-responsive-sm" id="SatContent">
                                     <tr>
                                         <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
                                     </tr>
@@ -504,7 +504,7 @@
                     $('#'+showID+2).text($('#'+showID+2).find("input").val()); //get date
                     $('#'+showID+3).text($('#'+showID+6).children("option:selected").val()); //get time
 
-
+                    
                     { $.ajax({
                         url: '/admin/changeShow',
                         method: 'PUT',
@@ -515,7 +515,14 @@
                         }
                     })
                     };
-                    location.reload(true);
+                    //these codes load the content once edited
+                    $("#SunContent").load("/admin #SunContent");
+                    $("#MonContent").load("/admin #MonContent");
+                    $("#TueContent").load("/admin #TueContent");
+                    $("#WedContent").load("/admin #WedContent");
+                    $("#ThuContent").load("/admin #ThuContent");
+                    $("#FriContent").load("/admin #FriContent");
+                    $("#SatContent").load("/admin #SatContent");
                 }
 
         }

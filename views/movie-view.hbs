@@ -133,13 +133,64 @@
                                 </div>
                             </div>
                         {{/each}}
+
+
+                    </div>
+                    <div class="col-12 mt-4">
+                        <form name="AddReview" id="AddReview" class="form-horizontal" method="post" action='/AddReview'>
+                            {{!-- ito ung try ko --}}
+                            <i type = "button" class="fa fa-star btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1"></i>
+                            <i type = "button" class="fa fa-star btnrating btn btn-default btn-lg" data-attr="2" id="rating-star-2"></i>
+                            <i type = "button" class="fa fa-star btnrating btn btn-default btn-lg" data-attr="3" id="rating-star-3"></i>
+                            <i type = "button" class="fa fa-star btnrating btn btn-default btn-lg" data-attr="4" id="rating-star-4"></i>
+                            <i type = "button" class="fa fa-star btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5"></i>
+                            
+                            {{!-- ito ung sa online --}}
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="2" id="rating-star-2">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="3" id="rating-star-3">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="4" id="rating-star-4">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+
+                            {{!-- <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </button>
+                             --}}
+                            <div class="form-group row">
+                                {{!-- <label for="AddReview" class="col-form-label col-md-3 text-center">Review Title</label> --}}
+                                <div class="col-md-9">
+                                    <input type="text" name="ReviewTitle" class="form-control" placeholder="Title">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                {{!-- <label for="AddReview" class="col-form-label col-md-3 text-center">Review </label> --}}
+                                <div class="col-md-9">
+                                    <input type="text" name="Review" class="form-control" placeholder="Comment">
+                                </div>
+                            </div>
+
+                            <div class="form-group row justify-content-center">
+                                <button type="submit" id="addReview" class="btn btn-danger"> Add Comment </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="row justify-content-center">
+                {{!-- <div class="row justify-content-center">
                     {{#if isSignedIn}}
                         <button class="btn btn-danger">Add review</button>
                     {{/if}}
-                </div>
+                </div> --}}
             </div>
         </div>
 
@@ -157,8 +208,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    {{!--  
+    source: https://bootsnipp.com/snippets/WaXlr
+    --}}
     <script type="text/javascript">
-        
+        	jQuery(document).ready(function($){
+	    
+                $(".btnrating").on('click',(function(e) {
+                
+                var previous_value = $("#selected_rating").val();
+                
+                var selected_value = $(this).attr("data-attr");
+                $("#selected_rating").val(selected_value);
+                
+                $(".selected-rating").empty();
+                $(".selected-rating").html(selected_value);
+                
+                for (i = 1; i <= selected_value; i++) {
+                $("#rating-star-"+i).toggleClass('btn-warning');
+                $("#rating-star-"+i).toggleClass('btn-default');
+                }
+                
+                for (ix = 1; ix <= previous_value; ++ix) {
+                $("#rating-star-"+ix).toggleClass('btn-warning');
+                $("#rating-star-"+ix).toggleClass('btn-default');
+                }
+                
+                }));
+                
+                    
+            });
     </script>
 </body>
 </html>

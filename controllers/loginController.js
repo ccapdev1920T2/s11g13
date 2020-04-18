@@ -76,10 +76,12 @@ const loginController = {
 
                         if(user[0].userType.localeCompare("User")){
                             console.log('Admin Logged In');
+                            req.session.notAdmin = false;
                             return res.redirect("/admin");
                         }
                         else{
                             console.log('User Logged In');
+                            req.session.notAdmin = true;
                             return res.redirect("/user/"+user[0].username);
                         };
                     }

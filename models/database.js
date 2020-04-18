@@ -47,7 +47,8 @@ const database = {
                 console.log(error)
                 return callback(false);
             } 
-            console.log('Added ' + result);
+            console.log('Added:');
+            console.table(result.toObject());
             return callback(true);
         });
     },
@@ -56,7 +57,8 @@ const database = {
     insertMany: function(model, docs, callback) {
         model.insertMany(docs, function(error, result) {
             if(error) return callback(false);
-            console.log('Added ' + result);
+            console.log('Added:');
+            console.table(result.toObject());
             return callback(true);
         });
     },

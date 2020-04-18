@@ -27,6 +27,13 @@
                 </div>
             {{/each}}
             </div>
+            {{#with initValues}}
+                <div id="fnholder" class="d-none">{{regFName}}</div>
+                <div id="lnholder" class="d-none">{{regLName}}</div>
+                <div id="unholder" class="d-none">{{regUName}}</div>
+                <div id="emailholder" class="d-none">{{regEmail}}</div>
+                <div id="phoneholder" class="d-none">{{regPhone}}</div>
+            {{/with}}
         {{/if}}
         {{#if errors}}
             <div class="col-sm-12 col-md-6">

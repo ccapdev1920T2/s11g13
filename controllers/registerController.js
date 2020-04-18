@@ -1,6 +1,7 @@
 //Insert db model dependencies here
 // const express = require('express');
 // const router = express.Router();
+const db = require("../models/database.js")
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const {validationResult} = require("express-validator");
@@ -25,10 +26,60 @@ const registerController = {
             return res.status(422).render("register", {
                 pageName: "Register",
                 errors: errors,
+                initValues: req.body
             })
         }
         else {
             console.log("No errors!")
+
+            db.findOne(User, {email: req.body.regEmail}, null, result=>{
+                if (result){
+                    return res.status(422).render("register", {
+                        pageName: "Register",
+                        errors: [{msg: "Username unavailable"}],
+                    })
+                    //can be any of the two errors:
+                    //409 -conflict with data
+                    //402 -unprocessable data
+                }
+
+                else {
+                    bcrypt.hash(req.body.regPassword, 10, (err, hash)=>{
+                        if (err){
+                            return res.status(500).json({
+                                error:err
+                            });
+                        } else {
+                            const user = new User({
+                                password: hash,
+                                _id: new mongoose.Types.ObjectId(),
+                                email: req.body.regEmail,
+                                username: req.body.regUName,
+                                password: hash,
+                                userType: "User",
+                                firstName: req.body.regFName,
+                                lastName: req.body.regLName,
+                                mobileNumber: req.body.regPhone,
+                                pic: "./assets/profpic.png",
+                            });
+                            
+                            return db.insertOne(User, user, result=>{
+                                if (result){
+                                    console.log("User account created!");
+                                    return res.redirect("/confirmEmail");
+                                }
+                                else {
+                                    console.log("Error in creating user account")
+                                    return res.status(500).redirect("/error")
+                                }
+                            })
+                        };
+                    })
+                }
+            })
+
+
+            /*
             User.find({email: req.body.regEmail})
             .exec()
             .then(user => {
@@ -96,6 +147,7 @@ const registerController = {
         
                 }
             })
+            */
         }
     },
 

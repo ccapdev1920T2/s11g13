@@ -40,18 +40,24 @@ const database = {
     },
 
     // inserts a single `doc` to the database based on the model `model`
-    insertOne: function(model, doc) {
+    insertOne: function(model, doc, callback) {
         model.create(doc, function(error, result) {
-            if(error) throw error;
+            if(error){
+                console.log("In insertion:")
+                console.log(error)
+                return callback(false);
+            } 
             console.log('Added ' + result);
+            return callback(true);
         });
     },
 
     // inserts multiple `docs` to the database based on the model `model`
-    insertMany: function(model, docs) {
+    insertMany: function(model, docs, callback) {
         model.insertMany(docs, function(error, result) {
-            if(error) throw error;
+            if(error) return callback(false);
             console.log('Added ' + result);
+            return callback(true);
         });
     },
 
@@ -61,7 +67,7 @@ const database = {
     // callback function is called after the execution of findOne() function
     findOne: function(model, query, projection, callback) {
         model.findOne(query, projection, function(error, result) {
-            if(error) throw error;
+            if(error) return callback(false);
             return callback(result);
         });
     },
@@ -72,7 +78,7 @@ const database = {
     // callback function is called after the execution of findMany() function
     findMany: function(model, query, projection, callback) {
         model.find(query, projection, function(error, result) {
-            if(error) throw error;
+            if(error) return callback(false);
             return callback(result);
         });
     },
@@ -80,38 +86,42 @@ const database = {
     // updates the value defined in the object `update`
     // on a single document based on the model `model`
     // filtered by the object `filter`
-    updateOne: function(model, filter, update) {
+    updateOne: function(model, filter, update, callback) {
         model.updateOne(filter, update, function(error, result) {
-            if(error) throw error;
+            if(error) return callback(false);
             console.log('Document modified: ' + result.nModified);
+            return callback(true);
         });
     },
 
     // updates the value defined in the object `update`
     // on multiple documents based on the model `model`
     // filtered using the object `filter`
-    updateMany: function(model, filter, update) {
+    updateMany: function(model, filter, update, callback) {
         model.updateMany(filter, update, function(error, result) {
-            if(error) throw error;
+            if(error) return callback(false);
             console.log('Documents modified: ' + result.nModified);
+            return callback(true);
         });
     },
 
     // deletes a single document based on the model `model`
     // filtered using the object `conditions`
-    deleteOne: function(model, conditions) {
+    deleteOne: function(model, conditions, callback) {
         model.deleteOne(conditions, function (error, result) {
-            if(error) throw error;
+            if(error) return callback(false);
             console.log('Document deleted: ' + result.deletedCount);
+            return callback(true);
         });
     },
 
     // deletes multiple documents based on the model `model`
     // filtered using the object `conditions`
-    deleteMany: function(model, conditions) {
+    deleteMany: function(model, conditions, callback) {
         model.deleteMany(conditions, function (error, result) {
-            if(error) throw error;
+            if(error) return callback(false);
             console.log('Document deleted: ' + result.deletedCount);
+            return callback(true);
         });
     }
 

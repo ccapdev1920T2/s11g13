@@ -256,27 +256,30 @@ const indexController = {
                 let show = [];
                 for (let i=0;i<s.length;i++)
                 {
-                    var d = new Date(s[i].date); //ISODate
-                    year = d.getFullYear(); //year of ISODate
-                    month = d.toLocaleString('default', { month: 'long' });
-                    dt = d.getDate(); //day of ISOdate
-                    if (dt < 10) { //get number of days
-                      dt = '0' + dt;
-                    }
-                    if (month < 10) { //get number of months
-                      month = '0' + month;
-                    }
-                    dashDate = year + '-' + d.getMonth() + '-' + dt; //for sorting
-                    formattedDate = month + ' ' + dt + ', ' + year; //for displaying
-                //show object
-                showObj = 
+                    if (s[i].date >= new Date(Date.now()))
                     {
-                        showID: s[i]._id,
-                        date: formattedDate,
-                        title: movie.title,
-                        imageurl: s[i].movieID.posterUrl,
+                        var d = new Date(s[i].date); //ISODate
+                        year = d.getFullYear(); //year of ISODate
+                        month = d.toLocaleString('default', { month: 'long' });
+                        dt = d.getDate(); //day of ISOdate
+                        if (dt < 10) { //get number of days
+                          dt = '0' + dt;
+                        }
+                        if (month < 10) { //get number of months
+                          month = '0' + month;
+                        }
+                        dashDate = year + '-' + d.getMonth() + '-' + dt; //for sorting
+                        formattedDate = month + ' ' + dt + ', ' + year; //for displaying
+                        //show object
+                        showObj = 
+                            {
+                                showID: s[i]._id,
+                                date: formattedDate,
+                                title: movie.title,
+                                imageurl: s[i].movieID.posterUrl,
+                            }
+                        show.push(showObj); //push object to array
                     }
-                show.push(showObj); //push object to array
                 }
 
                 //sort ascending order movie date

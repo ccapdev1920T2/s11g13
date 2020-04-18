@@ -295,6 +295,7 @@ const indexController = {
                     rating: movie.aveScore,
                     synopsis: movie.synopsis,
                     cast: movie.cast,
+                    trailerUrl: movie.trailerUrl,
                 }
 
                 db.findMany(Users,{},'',function(user){

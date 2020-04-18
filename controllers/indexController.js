@@ -58,8 +58,8 @@ const indexController = {
 
     getCalendar: function(req, res, next) {
 
-        db.findMany(Movies,{},'posterUrl',function(movie){
-            Shows.find().select("dayOfWeek movieID").populate('movieID').exec().then(s=>{
+        
+            Shows.find().select("dayOfWeek movieID date").populate('movieID').exec().then(s=>{
                 let movieArraySu = []; //1
                 let movieArrayM  = []; //2
                 let movieArrayT  = []; //3
@@ -69,38 +69,41 @@ const indexController = {
                 let movieArraySa = []; //7
                 for (let i=0;i<s.length;i++)
                 {
-                    movieObj = {
-                        movieUrl : s[i].movieID.posterUrl,
-                        title: s[i].movieID.title,
-                    }
-                    //push posterUrl to the array
-                    if (s[i].dayOfWeek == 1)
+                    if (s[i].date >= new Date(Date.now()) && s[i].date <= new Date(Date.now() + 6 * 24 * 60 * 60 * 1000)) //if date is date.now or 6 days later
                     {
-                        movieArraySu.push(movieObj); //Sunday
-                    }
-                    else if (s[i].dayOfWeek == 2)
-                    {
-                        movieArrayM.push(movieObj); //Monday
-                    }
-                    else if (s[i].dayOfWeek == 3)
-                    {
-                        movieArrayT.push(movieObj); //Tuesday
-                    }
-                    else if (s[i].dayOfWeek == 4)
-                    {
-                        movieArrayW.push(movieObj); //Wednesday
-                    }
-                    else if (s[i].dayOfWeek == 5)
-                    {
-                        movieArrayH.push(movieObj); //Thursday
-                    }
-                    else if (s[i].dayOfWeek == 6)
-                    {
-                        movieArrayF.push(movieObj); //Friday
-                    }
-                    else if (s[i].dayOfWeek == 7)
-                    {
-                        movieArraySa.push(movieObj); //Saturday
+                        movieObj = {
+                            movieUrl : s[i].movieID.posterUrl,
+                            title: s[i].movieID.title,
+                        }
+                        //push posterUrl to the array
+                        if (s[i].dayOfWeek == 1)
+                        {
+                            movieArraySu.push(movieObj); //Sunday
+                        }
+                        else if (s[i].dayOfWeek == 2)
+                        {
+                            movieArrayM.push(movieObj); //Monday
+                        }
+                        else if (s[i].dayOfWeek == 3)
+                        {
+                            movieArrayT.push(movieObj); //Tuesday
+                        }
+                        else if (s[i].dayOfWeek == 4)
+                        {
+                            movieArrayW.push(movieObj); //Wednesday
+                        }
+                        else if (s[i].dayOfWeek == 5)
+                        {
+                            movieArrayH.push(movieObj); //Thursday
+                        }
+                        else if (s[i].dayOfWeek == 6)
+                        {
+                            movieArrayF.push(movieObj); //Friday
+                        }
+                        else if (s[i].dayOfWeek == 7)
+                        {
+                            movieArraySa.push(movieObj); //Saturday
+                        }
                     }
                 }
                 res.render("calendar", {
@@ -115,7 +118,7 @@ const indexController = {
                     moviePicSa: movieArraySa,
                 })
             })
-        })
+        
 
     },
 

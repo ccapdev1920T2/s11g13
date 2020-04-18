@@ -76,11 +76,11 @@ const adminController = {
                         _id: new mongoose.Types.ObjectId(),
                         genre: req.body.addMovieGenre,
                         title: req.body.addMovieTitle,
-                        aveScore: req.body.addMovieScore,
+                        aveScore: 0,
                         synopsis: req.body.addMovieSynopsis,
                         cast: castArray,
                         posterUrl:req.file.destination + req.file.originalname,
-                        trailerUrl:null, //havent done this yet
+                        trailerUrl:req.body.addMovieTrailer,
                     }
                     db.insertOne(Movies,retrievedData);
 

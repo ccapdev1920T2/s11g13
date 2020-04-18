@@ -12,11 +12,11 @@ const session_auth = require("../middlewares/session-auth");
 // Handles home and '/'
 router.get(["/", "/home"], controller.getHome);
 
-router.get("/calendar", controller.getCalendar);
+router.get("/calendar", controller.getCalendar, session_auth.validUser);
 
 router.post("/payment", controller.getPayment);
 
-router.post('/:username/cart', controller.addTicket);
+//router.post('/:username/cart', controller.addTicket);
 
 router.get('/logout', session_auth.logout);
 

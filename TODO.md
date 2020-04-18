@@ -1,26 +1,7 @@
 # To Do
 ## Important
 
-@Bianca
-- [ ] transaction
-- [ ] cleanup of error messages for unsuccessful attempts
 ----------------
-
-- [X] Cart -> cancel booking button
-- [ ] functionality for cancel booking
-- [X] View tickets 
-- [X] add review button on movie-view when logged in
-- [ ] functionality for add review
-- [X] remove review under movie-view
-- [X] Calendar to show movies
-
-## To convert to hbs and bs4 || revamp ui for consistency:
-
-- [X] admin
-- [X] calendar
-- [ ] seats
-- [X] movie-view
-- [X] userprofile - input type file >> to check
 
 ## Upcoming
 - MVC
@@ -30,6 +11,14 @@
 - using post and get functions appropriately
 - validation system for register
 
+## TO-DO
+- [] User picture where to store?
+- [] Schema recheck all required
+- [] Credit card function (?)
+- [] Review function
+- [] Rating of all user reviews update to db
+- [] Fix seats promise
+- [] Fix bug where users not logged in can still reserve seats (userID is under admin)
 
 #### Phase 1:
 > HTML, CSS, JS for all sites

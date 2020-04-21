@@ -32,7 +32,7 @@ const registerController = {
         else {
             console.log("No errors!")
 
-            db.findOne(User, {email: req.body.regEmail}, null, result=>{
+            db.findOne(User, {email: req.body.regEmail}, '', function(result){
                 if (result){
                     return res.status(422).render("register", {
                         pageName: "Register",
@@ -63,7 +63,7 @@ const registerController = {
                                 pic: "./assets/profpic.png",
                             });
                             
-                            return db.insertOne(User, user, result=>{
+                            return db.insertOne(User, user, function(result){
                                 if (result){
                                     console.log("User account created!");
                                     return res.redirect("/confirmEmail");
@@ -153,20 +153,26 @@ const registerController = {
 
     checkUName: (req, res)=>{
         let uname = req.query.username;
-        User.find({username: uname})
-        .exec()
-        .then(result=>{
+        db.findOne(User, {username: uname}, '', function(result){
             res.send(result);
-        })        
+        })
+        // User.find({username: uname})
+        // .exec()
+        // .then(result=>{
+        //     res.send(result);
+        // })        
     },
 
     checkEmail: (req, res)=>{
         let email = req.query.email;
-        User.find({email: email})
-        .exec()
-        .then(result=>{
+        db.findOne(User, {email: email}, '', function(result){
             res.send(result);
-        })        
+        })
+        // User.find({email: email})
+        // .exec()
+        // .then(result=>{
+        //     res.send(result);
+        // })        
     },
 
     // postRegister: (req, res, next)=>{

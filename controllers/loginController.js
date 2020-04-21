@@ -1,7 +1,7 @@
 // const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const {validationResult} = require("express-validator");
-const db = require("../models/database.js")
+const db = require("../models/database.js");
 const User = require('../models/UsersModel.js');
 
 const loginController = {
@@ -25,7 +25,7 @@ const loginController = {
             })
         }
         else{
-            db.findOne(User, {username: req.body.username}, null, (user)=>{
+            db.findOne(User, {username: req.body.username}, '', function(user){
                 if (user){
                     bcrypt.compare(req.body.password, user.password, (err,result)=>{
                         if(err){
@@ -37,6 +37,7 @@ const loginController = {
                         if (result) {
                             req.session.userId = user.username;
                             res.locals.user = user;
+                            console.log(req.session.userId);
 
                             if(user.userType.localeCompare("User")){
                                 console.log('Admin Logged In');
@@ -47,11 +48,6 @@ const loginController = {
                                 return res.redirect("/user/"+user.username);
                             };
                         }
-                        
-                        // return res.status(401).render("login", {
-                        //     pageName: "Register",
-                        //     errors: [{msg: "Invalid credentials"}],
-                        // })
                     })
                 }
                 else{

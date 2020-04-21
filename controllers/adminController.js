@@ -104,29 +104,44 @@ const adminController = {
 
             createdShowID = new mongoose.Types.ObjectId(); //generated showID to insert in show schema
 
-            db.insertOne(Shows,{_id: createdShowID, movieID: movie._id,dayOfWeek: day,date: req.body.showMovieDate, time: req.body.showMovieTime});
+            db.insertOne(Shows,{
+                _id: createdShowID, 
+                movieID: movie._id,
+                dayOfWeek: day,
+                date: req.body.showMovieDate, 
+                time: req.body.showMovieTime
+            }, result=>{
+                if (result)
+                    console.log("Successfully added document to Shows collection.");
+                else console.log("Error inserting to Shows collection");
+            });
+
+
             for (var i=1;i<=4;i++)
             {
                 for (var j=0;j<8;j++)
                 {
-                    var letter = "";
-                    if (j == 0)
-                        letter = "A";
-                    else if (j == 1)
-                        letter = "B";
-                    else if (j == 2)
-                        letter = "C";
-                    else if (j == 3)
-                        letter = "D";
-                    else if (j == 4)
-                        letter = "E";
-                    else if (j == 5)
-                        letter = "F";
-                    else if (j == 6)
-                        letter = "G";
-                    else if (j == 7)
-                        letter = "H";
-                    db.insertOne(Seats,{_id: new mongoose.Types.ObjectId(), showID: createdShowID, seatNum: i+letter, seatPrice: 200, isTaken: false});
+                    let letter = String.fromCharCode(65 + j);
+                    /* var letter = "";
+                    if (j == 0) letter = "A";
+                    else if (j == 1) letter = "B";
+                    else if (j == 2) letter = "C";
+                    else if (j == 3) letter = "D";
+                    else if (j == 4) letter = "E";
+                    else if (j == 5) letter = "F";
+                    else if (j == 6) letter = "G";
+                    else if (j == 7) letter = "H"; */
+                    db.insertOne(Seats,{
+                        _id: new mongoose.Types.ObjectId(), 
+                        showID: createdShowID, 
+                        seatNum: i+letter, 
+                        seatPrice: 200, 
+                        isTaken: false
+                    }, result=>{
+                        if (result)
+                            console.log("Successfully added document to Seats collection.");
+                        else console.log("Error inserting to Seats collection");
+                    });
                 }
             }
         });

@@ -9,164 +9,168 @@ const Tickets = require('../models/TicketsModel.js');
 
 const indexController = {
     getHome: function(req, res, next) {
-        Users.find({token:req.session.userId}).exec().then(user=>{ //username
-            db.findMany(Movies,{},'title posterUrl', function(movie){
-                let movieArray = [];
-                for (let i=0;i<movie.length;i++)
-                {
-                    movieObj = 
-                        {
-                            title: movie[i].title,
-                            imageurl: movie[i].posterUrl
-                        }
-                    movieArray.push(movieObj);
-                }
-                
-                    res.render("home", {
-                        pageName: "Home",
-                        current: "Home",
-                        movies: movieArray,
-                        username: user[0].username,
-                    })
-                
+        db.findMany(Movies, {}, 'title posterUrl', movie=>{
+            let movieArray = [];
+            for (let i=0;i<movie.length;i++){
+                movieObj = {
+                        title: movie[i].title,
+                        imageurl: movie[i].posterUrl
+                    }
+                movieArray.push(movieObj);
+            }
+
+            let un;
+            un = (req.session.userId)? req.session.userId: '';
+        
+            res.render("home", {
+                pageName: "Home",
+                current: "Home",
+                movies: movieArray,
+                username: un,
             })
         })
     },
 
     getMovies: function(req, res, next) {
-        Users.find({token:req.session.userId}).exec().then(user=>{ //username
-            db.findMany(Movies,{},'title posterUrl', function(movie){
-                let movieArray = [];
-                for (let i=0;i<movie.length;i++)
-                {
-                    movieObj = 
-                        {
-                            title: movie[i].title,
-                            imageurl: movie[i].posterUrl
-                        }
-                    movieArray.push(movieObj);
-                }
+        db.findMany(Movies, {}, 'title posterUrl', movie=>{
+            let movieArray = [];
+            for (let i=0;i<movie.length;i++){
+                movieObj = {
+                        title: movie[i].title,
+                        imageurl: movie[i].posterUrl
+                    }
+                movieArray.push(movieObj);
+            }
+            
+            let un;
+            un = (req.session.userId)? req.session.userId: '';
                 
-                    res.render("movies", {
-                    pageName: "Movies",
-                    current: "Movies",
-                    movies: movieArray,
-                    username: user[0].username
-                    })
-                
+            res.render("movies", {
+                pageName: "Movies",
+                current: "Movies",
+                movies: movieArray,
+                username: un
             })
         })
     }, 
 
     getCalendar: function(req, res, next) {
-        Users.find({token:req.session.userId}).exec().then(user=>{ //username
-            Shows.find().select("dayOfWeek movieID date").populate('movieID').exec().then(s=>{
-                let movieArraySu = []; //1
-                let movieArrayM  = []; //2
-                let movieArrayT  = []; //3
-                let movieArrayW  = []; //4
-                let movieArrayH  = []; //5
-                let movieArrayF  = []; //6
-                let movieArraySa = []; //7
-                for (let i=0;i<s.length;i++)
+        Shows.find().select("dayOfWeek movieID date").populate('movieID').exec().then(s=>{
+            let movieArraySu = []; //1
+            let movieArrayM  = []; //2
+            let movieArrayT  = []; //3
+            let movieArrayW  = []; //4
+            let movieArrayH  = []; //5
+            let movieArrayF  = []; //6
+            let movieArraySa = []; //7
+            for (let i=0;i<s.length;i++)
+            {
+                if (s[i].date >= new Date(Date.now()) && s[i].date <= new Date(Date.now() + 6 * 24 * 60 * 60 * 1000)) //if date is date.now or 6 days later
                 {
-                    if (s[i].date >= new Date(Date.now()) && s[i].date <= new Date(Date.now() + 6 * 24 * 60 * 60 * 1000)) //if date is date.now or 6 days later
+                    movieObj = {
+                        movieUrl : s[i].movieID.posterUrl,
+                        title: s[i].movieID.title,
+                    }
+                    //push posterUrl to the array
+                    if (s[i].dayOfWeek == 1)
                     {
-                        movieObj = {
-                            movieUrl : s[i].movieID.posterUrl,
-                            title: s[i].movieID.title,
-                        }
-                        //push posterUrl to the array
-                        if (s[i].dayOfWeek == 1)
-                        {
-                            movieArraySu.push(movieObj); //Sunday
-                        }
-                        else if (s[i].dayOfWeek == 2)
-                        {
-                            movieArrayM.push(movieObj); //Monday
-                        }
-                        else if (s[i].dayOfWeek == 3)
-                        {
-                            movieArrayT.push(movieObj); //Tuesday
-                        }
-                        else if (s[i].dayOfWeek == 4)
-                        {
-                            movieArrayW.push(movieObj); //Wednesday
-                        }
-                        else if (s[i].dayOfWeek == 5)
-                        {
-                            movieArrayH.push(movieObj); //Thursday
-                        }
-                        else if (s[i].dayOfWeek == 6)
-                        {
-                            movieArrayF.push(movieObj); //Friday
-                        }
-                        else if (s[i].dayOfWeek == 7)
-                        {
-                            movieArraySa.push(movieObj); //Saturday
-                        }
+                        movieArraySu.push(movieObj); //Sunday
+                    }
+                    else if (s[i].dayOfWeek == 2)
+                    {
+                        movieArrayM.push(movieObj); //Monday
+                    }
+                    else if (s[i].dayOfWeek == 3)
+                    {
+                        movieArrayT.push(movieObj); //Tuesday
+                    }
+                    else if (s[i].dayOfWeek == 4)
+                    {
+                        movieArrayW.push(movieObj); //Wednesday
+                    }
+                    else if (s[i].dayOfWeek == 5)
+                    {
+                        movieArrayH.push(movieObj); //Thursday
+                    }
+                    else if (s[i].dayOfWeek == 6)
+                    {
+                        movieArrayF.push(movieObj); //Friday
+                    }
+                    else if (s[i].dayOfWeek == 7)
+                    {
+                        movieArraySa.push(movieObj); //Saturday
                     }
                 }
-                    res.render("calendar", {
-                        pageName: "Calendar",
-                        current: "Calendar",
-                        moviePicSu: movieArraySu,
-                        moviePicM: movieArrayM,
-                        moviePicT: movieArrayT,
-                        moviePicW: movieArrayW,
-                        moviePicH: movieArrayH,
-                        moviePicF: movieArrayF,
-                        moviePicSa: movieArraySa,
-                        username: user[0].username,
-                    })
-                
-            })  
+            }
+
+            let un;
+            un = (req.session.userId)? req.session.userId: '';
+            
+            res.render("calendar", {
+                pageName: "Calendar",
+                current: "Calendar",
+                moviePicSu: movieArraySu,
+                moviePicM: movieArrayM,
+                moviePicT: movieArrayT,
+                moviePicW: movieArrayW,
+                moviePicH: movieArrayH,
+                moviePicF: movieArrayF,
+                moviePicSa: movieArraySa,
+                username: un
+            })
+            
         })
-        
     },
 
     getSeats: (req, res, next)=>{
         let seatRow = [];
-        Users.find({token:req.session.userId}).exec().then(user=>{ //username
-            db.findMany(Seats,{showID: req.body.showID},'seatNum isTaken', function(seat){
-                n1=0;
-                n2=8;
-                for(var i=0;i<4;i++)
+        db.findMany(Seats,{showID: req.body.showID},'seatNum isTaken', function(seat){
+            n1=0;
+            n2=8;
+            for(var i=0;i<4;i++)
+            {
+                seatCol = [];
+                for (var j=n1;j<n2;j++)
                 {
-                    seatCol = [];
-                    for (var j=n1;j<n2;j++)
-                    {
-                        seatObj = {
-                        seatName: seat[j].seatNum,
-                        isTaken: seat[j].isTaken
-                        }
-                        seatCol.push(seatObj); //push seatobj to seatrow
+                    seatObj = {
+                    seatName: seat[j].seatNum,
+                    isTaken: seat[j].isTaken
                     }
-                    seatRow.push(seatCol);
-                    n1 += 8;
-                    n2 += 8;
+                    seatCol.push(seatObj); //push seatobj to seatrow
                 }
-            })
-        
-            function sleep (time) {
-              return new Promise((resolve) => setTimeout(resolve, time));
+                seatRow.push(seatCol);
+                n1 += 8;
+                n2 += 8;
             }
 
-            sleep(500).then(() => {
-                
-                res.render("seats", {
+            let un;
+            un = (req.session.userId)? req.session.userId: '';
+
+            res.render("seats", {
                 pageName: "Reserve Seats",
                 seatRow: seatRow,
                 showID: req.body.showID,
-                username: user[0].username, 
-                })
-            });
+                username: un
+            })
         })
+    
+        // function sleep (time) {
+        //   return new Promise((resolve) => setTimeout(resolve, time));
+        // }
+
+        // sleep(500).then(() => {
+            
+        //     res.render("seats", {
+        //     pageName: "Reserve Seats",
+        //     seatRow: seatRow,
+        //     showID: req.body.showID,
+        //     username: req.session.userId
+        //     })
+        // });
 
     },
 
     getPayment: function(req, res, next){
-    Users.find({token:req.session.userId}).exec().then(user=>{ //username
         Shows.findOne({_id: req.body.showID}).populate('movieID').exec().then(s=>{
             var seatsArray = [];
             for (var i=1;i<=4;i++)
@@ -199,12 +203,16 @@ const indexController = {
             month = d.getMonth()+1 //month of ISODate
             dt = d.getDate(); //day of ISOdate
             if (dt < 10) { //get number of days
-              dt = '0' + dt;
+            dt = '0' + dt;
             }
             if (month < 10) { //get number of months
-              month = '0' + month;
+            month = '0' + month;
             }
             formattedDate = month + '/' + dt + '/' + year; //formatted date mm/dd/yyyy
+            
+            let un;
+            un = (req.session.userId)? req.session.userId: '';
+
             res.render("payment", {
                 pageName: "Payment Gateway",
                 isSignedIn: true,
@@ -216,54 +224,102 @@ const indexController = {
                     seats: seatsArray,
                     totalCost: seatsArray.length * 200, //set price here
                 },
-                username: user[0].username,
+                username: un,
             })
         })
-    })
     },
 
     addTicket: (req, res, next)=>{
-        Users.find({token:req.session.userId}).exec().then(user=>{
-            createdTicketID = new mongoose.Types.ObjectId();
-            db.findOne(Users,{username: user[0].username},'_id', function(u){
-                //insert ticket into db
-                db.insertOne(Tickets,{
-                        _id: createdTicketID, 
-                        showID:req.body.showID, 
-                        userID: u._id, 
-                        status: req.body.status, 
-                        seats: req.body.seats, 
-                        totalPrice: req.body.totalPrice
-                    });
-            })
-            //update all selected seats to taken
-            var seatArray = req.body.seats.split(',');
-            for (var i=0;i<seatArray.length;i++)
-            {
-                db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true});
-            }
-
-            //display
-            res.render("addTicketSuccess",{
-                pageName: "Ticket Reserved Successfully",
-                isSignedIn: true,
-                username: user[0].username,
-            });
+        createdTicketID = new mongoose.Types.ObjectId();
+        db.findOne(Users,{username:req.userId},'_id', function(u){
+            //insert ticket into db
+            db.insertOne(Tickets,{
+                    _id: createdTicketID, 
+                    showID:req.body.showID, 
+                    userID: u._id, 
+                    status: req.body.status, 
+                    seats: req.body.seats, 
+                    totalPrice: req.body.totalPrice
+                }, result=>{
+                    if (result) console.log("Successfully inserted document to Tickets collection");
+                    else console.log("Error inserting to Tickets collection");
+                    
+                });
         })
+        //update all selected seats to taken
+        var seatArray = req.body.seats.split(',');
+        for (var i=0;i<seatArray.length;i++)
+        {
+            db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true});
+        }
+
+        let un;
+        un = (req.session.userId)? req.session.userId: '';
+        //display
+        res.render("addTicketSuccess",{
+            pageName: "Ticket Reserved Successfully",
+            // isSignedIn: true,
+            username: un,
+        });
     },
 
     getViewMovie: (req, res, next)=>{
         let movieDetails = {};
         let review;
-        Users.find({token:req.session.userId}).exec().then(user=>{
-            db.findOne(Movies,{title: req.params.title},'',function(movie){
-                Shows.find({movieID: movie._id}).populate('movieID').exec().then(s=>{
-                    let show = [];
-                    for (let i=0;i<s.length;i++)
+        
+        db.findOne(Movies,{title: req.params.title},'',function(movie){
+            Shows.find({movieID: movie._id}).populate('movieID').exec().then(s=>{
+                let show = [];
+                for (let i=0;i<s.length;i++)
+                {
+                    if (s[i].date >= new Date(Date.now()))
                     {
-                        if (s[i].date >= new Date(Date.now()))
+                        var d = new Date(s[i].date); //ISODate
+                        year = d.getFullYear(); //year of ISODate
+                        month = d.toLocaleString('default', { month: 'long' });
+                        dt = d.getDate(); //day of ISOdate
+                        if (dt < 10) { //get number of days
+                          dt = '0' + dt;
+                        }
+                        if (month < 10) { //get number of months
+                          month = '0' + month;
+                        }
+                        dashDate = year + '-' + d.getMonth() + '-' + dt; //for sorting
+                        formattedDate = month + ' ' + dt + ', ' + year; //for displaying
+                        //show object
+                        showObj = 
+                            {
+                                showID: s[i]._id,
+                                date: formattedDate,
+                                title: movie.title,
+                                imageurl: s[i].movieID.posterUrl,
+                            }
+                        show.push(showObj); //push object to array
+                    }
+                }
+
+                //sort ascending order movie date
+                show.sort(function(a,b){
+                  return new Date(a.date) - new Date(b.date);
+                });
+
+                //movie details object
+                movieDetails = {
+                    title: movie.title,
+                    genre: movie.genre,
+                    moviecover: movie.posterUrl,
+                    rating: movie.aveScore,
+                    synopsis: movie.synopsis,
+                    cast: movie.cast,
+                    trailerUrl: movie.trailerUrl,
+                }
+
+                db.findMany(Users,{},'',function(user){
+                    Ratings.find({movieID: movie._id, userID: user._id}).populate('movieID').populate('userID').exec().then(r=>{
+                        let review = [];
+                        for (let i=0;i<r.length;i++)
                         {
-                            var d = new Date(s[i].date); //ISODate
+                            var d = new Date(r[i].date); //ISODate
                             year = d.getFullYear(); //year of ISODate
                             month = d.toLocaleString('default', { month: 'long' });
                             dt = d.getDate(); //day of ISOdate
@@ -273,104 +329,62 @@ const indexController = {
                             if (month < 10) { //get number of months
                               month = '0' + month;
                             }
-                            dashDate = year + '-' + d.getMonth() + '-' + dt; //for sorting
-                            formattedDate = month + ' ' + dt + ', ' + year; //for displaying
-                            //show object
-                            showObj = 
+                            formattedDate = month + ' ' + dt + ', ' + year; //for displaying 
+                            //review object
+                            reviewObj = 
                                 {
-                                    showID: s[i]._id,
+                                    fName: r[i].userID.firstName,
+                                    lName: r[i].userID.lastName,
+                                    username: r[i].userID.username,
+                                    profilepic: r[i].userID.pic,
                                     date: formattedDate,
-                                    title: movie.title,
-                                    imageurl: s[i].movieID.posterUrl,
+                                    rating: r[i].starRating,
+                                    commentTitle: r[i].commenttitle,
+                                    comment: r[i].comment,
                                 }
-                            show.push(showObj); //push object to array
-                        }
-                    }
-
-                    //sort ascending order movie date
-                    show.sort(function(a,b){
-                      return new Date(a.date) - new Date(b.date);
-                    });
-
-                    //movie details object
-                    movieDetails = {
-                        title: movie.title,
-                        genre: movie.genre,
-                        moviecover: movie.posterUrl,
-                        rating: movie.aveScore,
-                        synopsis: movie.synopsis,
-                        cast: movie.cast,
-                        trailerUrl: movie.trailerUrl,
-                    }
-
-                    db.findMany(Users,{},'',function(user){
-                        Ratings.find({movieID: movie._id, userID: user._id}).populate('movieID').populate('userID').exec().then(r=>{
-                            let review = [];
-                            for (let i=0;i<r.length;i++)
+                            review.push(reviewObj); //push object to array
+                            }
+                            example
+                            rev1 =
                             {
-                                var d = new Date(r[i].date); //ISODate
-                                year = d.getFullYear(); //year of ISODate
-                                month = d.toLocaleString('default', { month: 'long' });
-                                dt = d.getDate(); //day of ISOdate
-                                if (dt < 10) { //get number of days
-                                  dt = '0' + dt;
-                                }
-                                if (month < 10) { //get number of months
-                                  month = '0' + month;
-                                }
-                                formattedDate = month + ' ' + dt + ', ' + year; //for displaying 
-                                //review object
-                                reviewObj = 
-                                    {
-                                        fName: r[i].userID.firstName,
-                                        lName: r[i].userID.lastName,
-                                        username: r[i].userID.username,
-                                        profilepic: r[i].userID.pic,
-                                        date: formattedDate,
-                                        rating: r[i].starRating,
-                                        commentTitle: r[i].commenttitle,
-                                        comment: r[i].comment,
-                                    }
-                                review.push(reviewObj); //push object to array
-                                }
-                                //example
-                                rev1 =
-                                {
-                                    fName: "John Henry",
-                                    lName: "Cagaoan",
-                                    username: "jhcagaoan", 
-                                    profilepic: "/assets/MoviePosters/profpic.png", 
-                                    date: "February 14, 2020",
-                                    rating: 5, 
-                                    commentTitle: "Would watch again", 
-                                    comment: "Solid! Made me cry",
-                                }
-                                review.push(rev1);
-                                rev2 = {
-                                    fName: "Bianca", 
-                                    lName: "Ganda", 
-                                    username: "biancarb", 
-                                    profilepic: "/assets/MoviePosters/profpic.png", 
-                                    date: "February 20, 2020",
-                                    rating: 5, 
-                                    commentTitle: "Kiligss", 
-                                    comment: "Ang cute :(( Choosing Peter was the right choice!",
-                                }
-                                review.push(rev2);
-                                //sort ascending order movie date
-                                show.sort(function(a,b){
-                                  return new Date(a.date) - new Date(b.date);
-                                });
+                                fName: "John Henry",
+                                lName: "Cagaoan",
+                                username: "jhcagaoan", 
+                                profilepic: "/assets/MoviePosters/profpic.png", 
+                                date: "February 14, 2020",
+                                rating: 5, 
+                                commentTitle: "Would watch again", 
+                                comment: "Solid! Made me cry",
+                            }
+                            review.push(rev1);
+                            rev2 = {
+                                fName: "Bianca", 
+                                lName: "Ganda", 
+                                username: "biancarb", 
+                                profilepic: "/assets/MoviePosters/profpic.png", 
+                                date: "February 20, 2020",
+                                rating: 5, 
+                                commentTitle: "Kiligss", 
+                                comment: "Ang cute :(( Choosing Peter was the right choice!",
+                            }
+                            review.push(rev2);
+                            //sort ascending order movie date
+                            show.sort(function(a,b){
+                              return new Date(a.date) - new Date(b.date);
+                            });
 
-                                res.render("movie-view", {
-                                    pageName: movieDetails.title,
-                                    movieDetails: movieDetails,
-                                    review: review,
-                                    movies: show,
-                                    isSignedIn: true,
-                                    username: user[0].username
-                                });
-                        })
+
+                            let un;
+                            un = (req.session.userId)? req.session.userId: '';
+
+                            res.render("movie-view", {
+                                pageName: movieDetails.title,
+                                movieDetails: movieDetails,
+                                review: review,
+                                movies: show,
+                                //isSignedIn: true,
+                                username: un
+                            });
                     })
                 })
             })
@@ -378,10 +392,10 @@ const indexController = {
     },
 
     getConfirmEmail: (req, res, next)=>{
-        Users.find({token:req.session.userId}).exec().then(user=>{
+        db.findOne(Users, {username: req.session.userId}, '', function(user){
             res.render("confirmEmail", {
                 pageName: "Confirm Email",
-                username: user[0].username
+                username: user.username
             })
         })
     }

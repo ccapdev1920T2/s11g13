@@ -1,13 +1,12 @@
 const User = require('../models/UsersModel.js');
+const db = require("../models/database.js");
 
 const authenticator = {
     rlActiveSession: (req, res, next) =>{
         if (req.session.userId){
-            User.find({token: req.session.userId})
-                .then(user=>{
-                    console.log('userfound');
-                    return res.redirect('user/'+ user[0].username);
-                })
+            db.findOne(User, {username: req.session.userId}, '', function(user){
+                return res.redirect('user/'+ user.username);
+            })
         }else{
             return next();
         }
@@ -15,18 +14,17 @@ const authenticator = {
     
     validUser: (req, res, next) =>{
         if (req.session.userId){
-            User.find({token: req.session.userId})
-                .then(user=>{
-                    if (user[0].username == req.params.username){
-                        if (user[0].userType == "User"){
-                            return next();
-                        } else {
-                            res.redirect('/admin');
-                        }
+            db.findOne(User, {username: req.session.userId}, '', function(user){
+                if (user.username == req.params.username){
+                    if (user.userType == "User"){
+                        return next();
                     } else {
-                        return res.redirect('/user/'+ user[0].username);
+                        res.redirect('/admin');
                     }
-                })
+                } else {
+                    return res.redirect('/user/'+ user.username);
+                }
+            });
         }else{
             return res.redirect('/login');
         }
@@ -34,14 +32,14 @@ const authenticator = {
     
     validAdmin: (req, res, next) =>{
         if (req.session.userId){
-            User.find({token: req.session.userId})
-                .then(user=>{
-                    if (user[0].userType == "Admin"){
-                        return next();
-                    } else {
-                        return res.redirect('user/'+ user[0].username);
-                    }
-                })
+            db.findOne(User, {username: req.session.userId}, '', function(user){
+                if(user.userType == "Admin"){
+                    return next();
+                }
+                else{
+                    return res.redirect('user/'+ user.username);
+                }
+            });
         }else{
             return res.redirect('/login');
         }
@@ -49,10 +47,9 @@ const authenticator = {
     
     logout: (req, res, next) =>{
         req.session.destroy(err => {
-            if(err){
-                return res.redirect('/home');
-            }
-                res.redirect('/home');
+            if(err) throw err;
+            
+            return res.redirect('/home');
         })
     }
 }

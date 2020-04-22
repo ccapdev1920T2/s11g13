@@ -256,14 +256,14 @@ const registerRoutes = require('./router/registerRoutes');
 const loginRoutes = require("./router/loginRoutes");
 const adminRoutes = require("./router/adminRoutes");
 const userRoutes = require("./router/userRoutes");
-const movieRoutes = require("./router/moviesRoutes")
+const movieRoutes = require("./router/moviesRoutes");
 
 /********* Routing *********/
 app.use('/', indexRoutes);
 app.use('/register', registerRoutes);
 app.use('/login', loginRoutes);
-app.use("/user", userRoutes)
-app.use('/movies', movieRoutes)
+app.use("/user", userRoutes);
+app.use('/movies', movieRoutes);
 app.use('/admin', adminRoutes);
 // app.get("/emailverification", (req, res, next)=>{res.render("confirmEmail", {pageName: "Confirm Email"})})
 

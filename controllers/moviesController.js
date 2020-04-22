@@ -70,7 +70,9 @@ const moviesController = {
                 let show = [];
                 for (let i=0;i<s.length;i++)
                 {
-                    if (s[i].date >= new Date(Date.now()))
+                    var now = new Date(Date.now());
+                    now.setHours(0,0,0,0); //set time of date.now to all 0 to match with database
+                    if (s[i].date >= now)
                     {
                         var d = new Date(s[i].date); //ISODate
                         year = d.getFullYear(); //year of ISODate

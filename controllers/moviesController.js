@@ -192,25 +192,28 @@ const moviesController = {
         rate = req.body.rating;
         reviewTitle = req.body.ReviewTitle;
         review = req.body.Review;
+        movieTitle = req.body.movieTitle;
 
-        db.findOne(Movies, {title: req.params.title}, '', function(movie){
+        console.log(rate);
+        console.log(reviewTitle);
+        console.log(review);
+        
+        db.findOne(Movies, {title: movieTitle},'',function(movie){
             if (movie){
                 db.insertOne(Ratings,{
-                userID: req.session.userId,
-                movieID: movie._id,
-                date: '01-01-0000',
-                starRating: rate,
-                commentTitle: reviewTitle,
-                comment: review,
-                })
+                    userID: req.session.userId,
+                    movieID: movie._id,
+                    date: '01-01-0000',
+                    starRating: rate,
+                    commentTitle: reviewTitle,
+                    comment: review,
+                });
+                return res.redirect('/movies/view/' + movie.title);
             }
             else{
-                console.log(req.params.title);
-                
+                console.log(req.body.movieTitle);    
             }
         })
-
-        res.render('/movies/view/' + req.params.title)
     },
 };
 

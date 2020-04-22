@@ -29,6 +29,7 @@
             <!-- Movie Details -->
             <div class="col-md-8" id="movieInfo">
                 {{#with movieDetails}}
+                    <div id="movieTitle" class="d-none"> {{title}} </div>
                     <h3>{{title}}</h3>
                     <h5 class="text-secondary">{{genre}}</h5>
 
@@ -159,12 +160,12 @@
                     </div>
                     <div class="modal-body">
                         <div class="container">
+                            <input type="hidden" name="movieTitle"id="inputMovTitle"> 
                             {{!-- Since u want na yung stars yung nagyeyellow--}}
                             <div class="form-group row mb-0">
                                 <label class="col-form-label col-sm-4"><h5>Rating</h5></label>
-
                                 <div class="col-sm-8">
-                                    <input type="hidden" required id="selected_rating" name="rating" value="">
+                                    <input type="hidden" required id="selected_rating" name="rating" value="0">
                                     <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="1" id="rating-star-1"></i>
                                     <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="2" id="rating-star-2"></i>
                                     <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="3" id="rating-star-3"></i>
@@ -179,7 +180,7 @@
                             </div>
                         
                             <div class="form-group row">
-                                <label for="Review" class="sr-only">Review Title</label>
+                                <label for="Review" class="sr-only">Review</label>
                                 <input type="text" name="Review" class="form-control" placeholder="Comment">
                             </div>
                         </div>
@@ -211,8 +212,7 @@
     source: https://bootsnipp.com/snippets/WaXlr
     --}}
     <script type="text/javascript">
-        jQuery(document).ready(function($){
-    
+        jQuery(document).ready(function($){  
             $(".btnrating").on('click',(function(e) {
             
                 var previous_value = $("#selected_rating").val();
@@ -232,11 +232,15 @@
                 $("#rating-star-"+ix).toggleClass('text-warning');
                 $("#rating-star-"+ix).toggleClass('text-default');
                 }
-            
             }));
             
-                
+            $("#inputMovTitle").prop("value", $("#movieTitle").html());
+            $("#movieTitle").remove();       
         });
     </script>
+    <script>
+        
+    </script>
+
 </body>
 </html>

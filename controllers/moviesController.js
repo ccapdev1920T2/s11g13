@@ -66,42 +66,9 @@ const moviesController = {
         let movieDetails = {};
         
         db.findOne(Movies,{title: req.params.title},'',function(movie){
-            Shows.find({movieID: movie._id}).populate('movieID').exec().then(s=>{
+            if (movie){
                 let show = [];
-                for (let i=0;i<s.length;i++)
-                {
-                    var now = new Date(Date.now());
-                    now.setHours(0,0,0,0); //set time of date.now to all 0 to match with database
-                    if (s[i].date >= now)
-                    {
-                        var d = new Date(s[i].date); //ISODate
-                        year = d.getFullYear(); //year of ISODate
-                        month = d.toLocaleString('default', { month: 'long' });
-                        dt = d.getDate(); //day of ISOdate
-                        if (dt < 10) { //get number of days
-                          dt = '0' + dt;
-                        }
-                        if (month < 10) { //get number of months
-                          month = '0' + month;
-                        }
-                        dashDate = year + '-' + d.getMonth() + '-' + dt; //for sorting
-                        formattedDate = month + ' ' + dt + ', ' + year; //for displaying
-                        //show object
-                        showObj = 
-                            {
-                                showID: s[i]._id,
-                                date: formattedDate,
-                                title: movie.title,
-                                imageurl: s[i].movieID.posterUrl,
-                            }
-                        show.push(showObj); //push object to array
-                    }
-                }
-
-                //sort ascending order movie date
-                show.sort(function(a,b){
-                  return new Date(a.date) - new Date(b.date);
-                });
+                let review = [];
 
                 //movie details object
                 movieDetails = {
@@ -115,56 +82,82 @@ const moviesController = {
                     trailerUrl: movie.trailerUrl,
                 }
 
-                db.findMany(Users,{},'',function(user){
-                    Ratings.find({movieID: movie._id, userID: user._id}).populate('movieID').populate('userID').exec().then(r=>{
-                        let review = [];
-                        for (let i=0;i<r.length;i++)
+                db.findMany(Shows, {movieID: movie._id}, '', function(s){
+                    for (let i=0; i<s.length; i++){
+                        var now = new Date(Date.now());
+                        now.setHours(0,0,0,0); //set time of date.now to all 0 to match with database
+                        if (s[i].date >= now)
                         {
-                            var d = new Date(r[i].date); //ISODate
+                            var d = new Date(s[i].date); //ISODate
                             year = d.getFullYear(); //year of ISODate
                             month = d.toLocaleString('default', { month: 'long' });
                             dt = d.getDate(); //day of ISOdate
                             if (dt < 10) { //get number of days
-                              dt = '0' + dt;
+                            dt = '0' + dt;
                             }
                             if (month < 10) { //get number of months
-                              month = '0' + month;
+                            month = '0' + month;
                             }
-                            formattedDate = month + ' ' + dt + ', ' + year; //for displaying 
-                            //review object
-                            reviewObj = 
+                            dashDate = year + '-' + d.getMonth() + '-' + dt; //for sorting
+                            formattedDate = month + ' ' + dt + ', ' + year; //for displaying
+                            //show object
+                            showObj = 
                                 {
-                                    fName: r[i].userID.firstName,
-                                    lName: r[i].userID.lastName,
-                                    username: r[i].userID.username,
-                                    profilepic: r[i].userID.pic,
+                                    showID: s[i]._id,
                                     date: formattedDate,
-                                    rating: r[i].starRating,
-                                    commentTitle: r[i].commenttitle,
-                                    comment: r[i].comment,
+                                    title: movieDetails.title,
+                                    imageurl: movieDetails.moviecover,
                                 }
-                            review.push(reviewObj); //push object to array
-                            }
-
-                            //sort ascending order movie date
-                            show.sort(function(a,b){
-                              return new Date(a.date) - new Date(b.date);
-                            });
-
-
-                            let un;
-                            un = (req.session.userId)? req.session.userId: '';
-
-                            res.render("movie-view", {
-                                pageName: movieDetails.title,
-                                movieDetails: movieDetails,
-                                review: review,
-                                movies: show,
-                                username: un
-                            });
-                    })
+                            show.push(showObj); //push object to array
+                        }
+                    }
                 })
-            })
+
+                Ratings.find({movieID: movie._id}).populate('userID').exec().then(r=>{
+                        
+                    for (let i=0;i<r.length;i++)
+                    {
+                        var d = new Date(r[i].date); //ISODate
+                        year = d.getFullYear(); //year of ISODate
+                        month = d.toLocaleString('default', { month: 'long' });
+                        dt = d.getDate(); //day of ISOdate
+                        if (dt < 10) { //get number of days
+                        dt = '0' + dt;
+                        }
+                        if (month < 10) { //get number of months
+                        month = '0' + month;
+                        }
+                        formattedDate = month + ' ' + dt + ', ' + year; //for displaying 
+                        //review object
+                        reviewObj = 
+                            {
+                                fName: r[i].userID.firstName,
+                                lName: r[i].userID.lastName,
+                                username: r[i].userID.username,
+                                profilepic: r[i].userID.pic,
+                                date: formattedDate,
+                                rating: r[i].starRating,
+                                commentTitle: r[i].commenttitle,
+                                comment: r[i].comment,
+                            }
+                        review.push(reviewObj); //push object to array
+                    }
+
+                        let un;
+                        un = (req.session.userId)? req.session.userId: '';
+
+                        res.render("movie-view", {
+                            pageName: movieDetails.title,
+                            movieDetails: movieDetails,
+                            review: review,
+                            movies: show,
+                            username: un
+                        });
+                })
+            }
+            else
+                return res.redirect('/');
+            
         })
     },
     
@@ -186,12 +179,11 @@ const moviesController = {
         db.findOne(Movies, {_id: movieTitle},'',function(movie){
             if (movie){
                 console.log("movie found!");
-                
                 var d = new Date();
                 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 var date = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
                 // console.log(date.toString());
-
+                
                 db.insertOne(Ratings,{
                     userID: userID,
                     movieID: movie._id,
@@ -200,11 +192,32 @@ const moviesController = {
                     commentTitle: reviewTitle,
                     comment: review,
                 },result=>{
-                    if (result)
-                        console.log("Successfully added document to Shows collection.");
-                    else console.log("Error inserting to Shows collection");
+                    if (result){
+                        console.log("Successfully added document to Ratings collection.");
+                        db.findMany(Ratings, {movieID: movie._id}, '', function(r){
+                            let total = 0;
+        
+                            for (let i=0; i<r.length; i++){
+                                total += r[0].starRating;
+                                console.log(total);
+                            }
+        
+                            total = total/r.length;
+                            console.log(total);
+        
+                            db.updateOne(Movies,{_id: movie._id},{
+                                aveScore: total
+                            }, result=>{
+                                if (result)
+                                    console.log("Successfully changed starRating of Movie");
+                                else console.log("Error updating starRating of Movie");
+                            });
+        
+                        })
+                    }
+                    else console.log("Error inserting to Ratings collection");
                 });
-                
+             
                 return res.redirect('/movies/view/' + movie.title);
             }
             else{
@@ -212,6 +225,8 @@ const moviesController = {
             }
         })
     },
+
+    
 };
 
 

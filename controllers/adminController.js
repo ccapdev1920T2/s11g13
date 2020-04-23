@@ -153,8 +153,8 @@ const adminController = {
             dayOfWeek: day,
             date: req.body.date,
             time: req.body.time,
-        });
-
+        },show=>{});
+        /*
         //display
         db.findMany(Movies,{},'title _id',function(movie){
             Shows.find().select("time date dayOfWeek").populate('movieID').exec().then(s=>{
@@ -187,13 +187,15 @@ const adminController = {
                     
             })
         })
+        */
     },
 
     deleteShow: function(req, res, next) {
 
-        db.deleteMany(Seats,({"showID": req.body.movieID})); //movieID is showID
-        db.deleteOne(Shows,{"_id": req.body.movieID}); //movieID is showID
+        db.deleteMany(Seats,({"showID": req.body.movieID},show=>{})); //movieID is showID
+        db.deleteOne(Shows,{"_id": req.body.movieID},show=>{}); //movieID is showID
         
+        /*
         //display
         db.findMany(Movies,{},'title _id',function(movie){
             Shows.find().select("time date dayOfWeek").populate('movieID').exec().then(s=>{
@@ -226,6 +228,7 @@ const adminController = {
                 
             })
         })
+        */
     }
 
 

@@ -195,10 +195,10 @@ const moviesController = {
                     if (result){
                         console.log("Successfully added document to Ratings collection.");
                         db.findMany(Ratings, {movieID: movie._id}, '', function(r){
-                            let total = 0;
+                            var total = 0;
         
                             for (let i=0; i<r.length; i++){
-                                total += r[0].starRating;
+                                total = total + r[i].starRating;
                                 console.log(total);
                             }
         

@@ -165,7 +165,7 @@ const indexController = {
 
     addTicket: (req, res, next)=>{
         createdTicketID = new mongoose.Types.ObjectId();
-        db.findOne(Users,{username:req.userId},'_id', function(u){
+        db.findOne(Users,{username:req.session.userId},'_id', function(u){
             //insert ticket into db
             db.insertOne(Tickets,{
                     _id: createdTicketID, 
@@ -184,7 +184,7 @@ const indexController = {
         var seatArray = req.body.seats.split(',');
         for (var i=0;i<seatArray.length;i++)
         {
-            db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true});
+            db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true},seat=>{});
         }
 
         let un;

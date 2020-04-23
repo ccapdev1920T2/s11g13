@@ -20,7 +20,7 @@ const loginController = {
         console.table(errors)
         if (errors.length > 0){
             return res.status(403).render("login", {
-                pageName: "Register",
+                pageName: "Login",
                 errors: errors,
             })
         }
@@ -28,9 +28,11 @@ const loginController = {
             db.findOne(User, {username: req.body.username}, '', function(user){
                 if (user){
                     bcrypt.compare(req.body.password, user.password, (err,result)=>{
+                        console.log("Err exists?" + err);
+                        console.log("result?: "+ result)
                         if(err){
                             return res.status(401).render("login", {
-                                pageName: "Register",
+                                pageName: "Login",
                                 errors: [{msg: "Invalid credentials"}],
                             })
                         } 
@@ -47,6 +49,12 @@ const loginController = {
                                 console.log('User Logged In');
                                 return res.redirect("/user/"+user.username);
                             };
+                        }
+                        else{
+                            return res.status(401).render("login", {
+                                pageName: "Login",
+                                errors: [{msg: "Invalid credentials"}],
+                            })
                         }
                     })
                 }

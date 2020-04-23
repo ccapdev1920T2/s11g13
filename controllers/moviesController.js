@@ -103,6 +103,7 @@ const moviesController = {
 
                 //movie details object
                 movieDetails = {
+                    id: movie._id,
                     title: movie.title,
                     genre: movie.genre,
                     moviecover: movie.posterUrl,
@@ -142,30 +143,7 @@ const moviesController = {
                                 }
                             review.push(reviewObj); //push object to array
                             }
-                            //example
-                            rev1 =
-                            {
-                                fName: "John Henry",
-                                lName: "Cagaoan",
-                                username: "jhcagaoan", 
-                                profilepic: "/assets/MoviePosters/profpic.png", 
-                                date: "February 14, 2020",
-                                rating: 5, 
-                                commentTitle: "Would watch again", 
-                                comment: "Solid! Made me cry",
-                            }
-                            review.push(rev1);
-                            rev2 = {
-                                fName: "Bianca", 
-                                lName: "Ganda", 
-                                username: "biancarb", 
-                                profilepic: "/assets/MoviePosters/profpic.png", 
-                                date: "February 20, 2020",
-                                rating: 5, 
-                                commentTitle: "Kiligss", 
-                                comment: "Ang cute :(( Choosing Peter was the right choice!",
-                            }
-                            review.push(rev2);
+
                             //sort ascending order movie date
                             show.sort(function(a,b){
                               return new Date(a.date) - new Date(b.date);
@@ -189,25 +167,42 @@ const moviesController = {
     },
     
     postAddReview: (req, res, next)=>{
-        rate = req.body.rating;
-        reviewTitle = req.body.ReviewTitle;
-        review = req.body.Review;
-        movieTitle = req.body.movieTitle;
+        var rate = req.body.rating;
+        var reviewTitle = req.body.ReviewTitle;
+        var review = req.body.Review;
+        var movieTitle = req.body.movieTitle;
+        var userID = '';
 
         console.log(rate);
         console.log(reviewTitle);
         console.log(review);
+
+        db.findOne(Users, {username: req.session.userId}, '', function(user){
+            userID = user._id;
+        })
         
-        db.findOne(Movies, {title: movieTitle},'',function(movie){
+        db.findOne(Movies, {_id: movieTitle},'',function(movie){
             if (movie){
+                console.log("movie found!");
+                
+                var d = new Date();
+                var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                var date = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+                // console.log(date.toString());
+
                 db.insertOne(Ratings,{
-                    userID: req.session.userId,
+                    userID: userID,
                     movieID: movie._id,
-                    date: '01-01-0000',
+                    date: date,
                     starRating: rate,
                     commentTitle: reviewTitle,
                     comment: review,
+                },result=>{
+                    if (result)
+                        console.log("Successfully added document to Shows collection.");
+                    else console.log("Error inserting to Shows collection");
                 });
+                
                 return res.redirect('/movies/view/' + movie.title);
             }
             else{

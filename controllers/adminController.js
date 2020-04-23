@@ -122,15 +122,6 @@ const adminController = {
                 for (var j=0;j<8;j++)
                 {
                     let letter = String.fromCharCode(65 + j);
-                    /* var letter = "";
-                    if (j == 0) letter = "A";
-                    else if (j == 1) letter = "B";
-                    else if (j == 2) letter = "C";
-                    else if (j == 3) letter = "D";
-                    else if (j == 4) letter = "E";
-                    else if (j == 5) letter = "F";
-                    else if (j == 6) letter = "G";
-                    else if (j == 7) letter = "H"; */
                     db.insertOne(Seats,{
                         _id: new mongoose.Types.ObjectId(), 
                         showID: createdShowID, 

@@ -124,6 +124,12 @@ const checker = {
         })
     },
 
+    isValidCCNum: (req, res, next)=>{
+        let ccnum = req.query.cardNum;
+        if (validators.isCreditCard(validators.trim(ccnum)))
+            return res.send(true);
+        else return res.send(false);   
+    }
     
 }
 

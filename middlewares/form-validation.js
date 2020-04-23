@@ -68,6 +68,21 @@ const checker = {
             .escape()
         ]
     },
+    /***************Credit card validator*******************/
+    //FIXME: No sanitation for loginvalidation.username
+    ccinfovalidation: ()=>{
+        return [
+            check('cardNum')
+            .not().isEmpty().withMessage("Credit card number cannot be blank.")
+            .isCreditCard().withMessage("Invalid credit card number.")
+            .trim().escape(),
+
+            check('cardCIV')
+            .not().isEmpty().withMessage("CVV cannot be blank.")
+            .isLength({min:3, max:4}).withMessage("Invalid CVV")
+            .trim().escape()
+        ]
+    },
 
     /***************** AJAX middleware *****************/
 

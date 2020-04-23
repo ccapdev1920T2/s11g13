@@ -43,7 +43,11 @@ const indexController = {
             let movieArraySa = []; //7
             for (let i=0;i<s.length;i++)
             {
-                if (s[i].date >= new Date(Date.now()) && s[i].date <= new Date(Date.now() + 6 * 24 * 60 * 60 * 1000)) //if date is date.now or 6 days later
+                var now = new Date(Date.now());
+                    now.setHours(0,0,0,0); //set time of date.now to all 0 to match with database
+                var sixDaysLater = new Date(Date.now() + 6 * 24 * 60 * 60 * 1000);
+                    sixDaysLater.setHours(0,0,0,0);
+                if (s[i].date >= now && s[i].date <= sixDaysLater) //if date is date.now or 6 days later
                 {
                     movieObj = {
                         movieUrl : s[i].movieID.posterUrl,

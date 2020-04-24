@@ -11,15 +11,13 @@
     <!-- Font Awesome 4 Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<link rel="stylesheet" href="../../css/HBS-seats.css">
-	<link rel="stylesheet" href="../../MPPhase1/css/seats.css">
-	
+	<link rel="stylesheet" href="../../css/HBS-seats.css">	
 </head>
 <body>
     {{>header}}
-{{movieID}}
-{{titleSlot}}
-{{dateSlot}}
+	{{movieID}}
+	{{titleSlot}}
+	{{dateSlot}}
 
 	<div class="container mt-3">
 		<div class="row mb-4">
@@ -40,49 +38,43 @@
 		</div>
 	
 		<div class="jumbotron bg-dark"><h3 class="text-center text-light">Screen</h3></div>
-	
-		<div class="container" id="seatContainer">
 
-		</div>
-<form name="reserveSeats" id="reserveSeats" method="POST" action='/payment'>
-    <div class="containerOld">
-      <ol>
-        {{#each seatRow}}
-        <ol class="seats">
-          {{#each this}}
-            {{#if this.isTaken}}
-              <li class="seat">
-                <input type="checkbox" disabled name = checkBox{{this.seatName}} id={{this.seatName}}>
-                <label style="background-color: red;" for={{this.seatName}}>{{this.seatName}}</label>
-              </li>
-              {{else}}
-              <li class="seat">
-                <input type="checkbox" name = checkBox{{this.seatName}} id={{this.seatName}}>
-                <label for={{this.seatName}}>{{this.seatName}}</label>
-              </li>
-            {{/if}}
-          {{/each}}
-        </ol>
-        {{/each}}
-      </ol>
-    </div>
-    <input type = "hidden" name = "showID" value = "{{showID}}"/>
-    <div class="containerOld">
-      <input type="submit"  value="Reserve" class="btn btn-default" style="margin:0 auto;" >
-    </div>
-
+		<form name="reserveSeats" id="reserveSeats" method="POST" action='/payment'>
+			<div class="containerOld">
+				<ol class="my-0 mx-auto p-0 list-unstyled">
+					<!--TODO: Modify to become mobile-responsive--> 
+					{{#each seatRow}}
+					<ol class="seats m-0 p-0 list-unstyled">
+					{{#each this}}
+						{{#if this.isTaken}}
+						<li class="seat">
+							<input type="checkbox" disabled name = checkBox{{this.seatName}} id={{this.seatName}}>
+							<label class="bg-danger text-light" for={{this.seatName}}>{{this.seatName}}</label>
+						</li>
+						{{else}}
+						<li class="seat">
+							<input type="checkbox" name = checkBox{{this.seatName}} id={{this.seatName}}>
+							<label for={{this.seatName}}>{{this.seatName}}</label>
+						</li>
+						{{/if}}
+					{{/each}}
+					</ol>
+					{{/each}}
+				</ol>
+			</div>
+			<input type = "hidden" name = "showID" value = "{{showID}}"/>
+			<div class="container mt-4">
+				<div class="row justify-content-center">
+					<button type="submit" class="btn btn-danger mx-auto">Reserve</button>
+				</div>
+			</div>
+		</form>
 	</div>
-</form>
 
     <!-- BS4 Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
-
-	<script type="text/javascript">
-
-
-	</script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
 

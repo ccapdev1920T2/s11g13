@@ -83,11 +83,20 @@ const adminController = {
                         posterUrl:req.file.destination + req.file.originalname,
                         trailerUrl:req.body.addMovieTrailer,
                     }
-                    db.insertOne(Movies, retrievedData, result=>{
-                        if (result)
-                            console.log("Successfully added document to Movies collection.");
-                        else console.log("Error inserting to Movies collection");
-                    });
+                    
+                    db.findOne(Movies,{title: req.body.addMovieTitle},'', movie=>{
+                        if (movie){
+                            db.insertOne(Movies, retrievedData, result=>{
+                            if (result)
+                                console.log("Successfully added document to Movies collection.");
+                            else console.log("Error inserting to Movies collection");
+                        });
+                        }
+                        else
+                        {
+                            console.log("Movie title taken");
+                        }
+                    })
 
                     //display
                     res.redirect('/admin');

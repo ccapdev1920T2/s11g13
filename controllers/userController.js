@@ -84,6 +84,7 @@ const userController = {
             lastName: req.body.lName,
             mobileNumber: req.body.Mobile,
             email: req.body.Email,
+            pic: req.body.pic,
         },profile=>{});
 
     },

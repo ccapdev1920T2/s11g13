@@ -166,7 +166,7 @@ const indexController = {
 
     addTicket: (req, res, next)=>{
         createdTicketID = new mongoose.Types.ObjectId();
-        db.findOne(Users,{username:req.session.userId},'_id', function(u){
+        db.findOne(Users,{username:req.session.userId},'_id email', function(u){
             //insert ticket into db
             db.insertOne(Tickets,{
                     _id: createdTicketID, 
@@ -180,46 +180,46 @@ const indexController = {
                     else console.log("Error inserting to Tickets collection");
                     
                 });
+            //Add credit card to db
+            // if (req.body.payCard){
+                //Form date first
+                let month = req.body.expiryMonth;
+                let year = req.body.expiryYear;
+                let day;
+                switch(req.body.expiryMonth){
+                    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                        day = "31";
+                        break;
+                    case 9: case 4: case 6: case 11:
+                        day = "30";
+                        break;
+                    case 2:
+                        //leap year
+                        if (year%4 == 0 && year%100 != 0)
+                            day = "29";
+                        else day = "28";
+                        break;
+                }
+                //0 based index for month
+                let expdate = new Date(year, month - 1, day)
+                let creditCard = new CCInfos({
+                    email: u.email,
+                    ccnumber: req.body.cardNum,
+                    ccexpdate: expdate
+                });
+
+                db.insertOne(CCInfos, creditCard, result=>{
+                    if (result)
+                        console.log("Successfully inserted ccinfo")
+                    else console.log("Error in inserting to ccinfo")
+                })
+            // }
         })
         //update all selected seats to taken
         var seatArray = req.body.seats.split(',');
         for (var i=0;i<seatArray.length;i++)
         {
             db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true},seat=>{});
-        }
-
-        //Add credit card to db
-        if (req.body.payCard){
-            //Form date first
-            let month = req.body.expiryMonth;
-            let year = req.body.expiryYear;
-            let date;
-            switch(req.body.expiryMonth){
-                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-                    date = "31";
-                    break;
-                case 9: case 4: case 6: case 11:
-                    date = "30";
-                    break;
-                case 2:
-                    //leap year
-                    if (year%4 == 0 && year%100 != 0)
-                        date = "29";
-                    else date = "28";
-                    break;
-            }
-
-            let creditCard = new CCInfos({
-                email: req.session.email,
-                ccnumber: req.body.cardNum,
-                ccexpdate: SOMEVALUE,
-            });
-
-            db.insertOne(CCInfos, creditCard, result=>{
-                if (result)
-                    console.log("Successfully inserted ccinfo")
-                else console.log("Error in inserting to ccinfo")
-            })
         }
 
         let un;

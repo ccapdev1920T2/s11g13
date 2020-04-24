@@ -1,4 +1,5 @@
 const db = require('./models/database.js');
+const db2 = require('./models/database_old.js');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const Users = require('./models/UsersModel.js');
@@ -11,7 +12,41 @@ const multer = require('multer');
 
 db.connect();
 
-console.log("START");
+db2.createDatabase();
+db2.createCollection("users");
+db2.createCollection("ccinfo");
+db2.createCollection("tickets");
+db2.createCollection("shows");
+db2.createCollection("seats");
+db2.createCollection("movies");
+db2.createCollection("ratings");
+
+//Admin
+bcrypt.hash("p455w0rd", 10, (err, hash)=>{
+        if (err){
+            return res.status(500).json({
+                error:err
+            });
+        } else {
+            const userDoc = new Users({
+                _id: new mongoose.Types.ObjectId(),
+                email: 'admin@dlsu.edu.ph',
+                username: 'bh0zXsArR3n',
+                password: hash, 
+                userType: 'Admin',
+                firstName: 'Admin',
+                lastName: 'Manager',
+                pic: '/assets/profpic.png',
+            });
+            
+
+            db.insertOne(Users, userDoc, isInserted=>{
+                if(isInserted)
+                  console.log("Admin account created successfully.")
+            })
+
+        }
+    });
 
 //Users
 bcrypt.hash('123123', 10, (err, hash)=>{

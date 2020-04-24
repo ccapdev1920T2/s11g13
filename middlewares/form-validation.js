@@ -126,9 +126,19 @@ const checker = {
 
     isValidCCNum: (req, res, next)=>{
         let ccnum = req.query.cardNum;
-        if (validators.isCreditCard(validators.trim(ccnum)))
+        ccnum = validators.trim(ccnum)
+        if (validators.isCreditCard(ccnum))
             return res.send(true);
         else return res.send(false);   
+    },
+
+    isValidCVV: (req, res, next)=>{
+        let cvv = req.query.cardCVV;
+        cvv = validators.trim(cvv)
+        if (validators.isLength(cvv, {min:3, max:4}) && validators.isNumeric(cvv)){
+            return res.send(true);
+        }
+        else return res.send(false);
     }
     
 }

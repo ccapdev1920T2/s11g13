@@ -65,4 +65,30 @@ $(document).ready(()=>{
         }
     })
 
+    $("#otcEmail").on("keyup blur", ()=>{
+        let email = $("#otcEmail").val();
+        
+        if (email == ""){
+            $("#emailfeedback").hide();
+            $("#otcEmail").removeClass("is-valid")
+            $("#otcEmail").removeClass("is-invalid")
+        }
+        else{
+            $.get('/checkPaymentEmail', {cardCVV: cardCVV}, result=>{
+                if (result){
+                    $("#emailfeedback").hide();
+                    $("#otcEmail").removeClass("is-invalid")
+                    $("#otcEmail").addClass("is-valid")
+                }
+                else {
+                    $("#emailfeedback").show();
+                    $("#otcEmail").removeClass("is-valid")
+                    $("#otcEmail").addClass("is-invalid")
+                }
+            })
+        }
+    })
+
+    
+
 })

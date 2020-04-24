@@ -32,6 +32,7 @@ router.get('/checkEmail', formchecker.isInvalidEmail, formchecker.uniqueEmail)
 
 router.get('/checkCCNumber', formchecker.isValidCCNum);
 router.get('/checkCVV', formchecker.isValidCVV);
+router.get('/checkPaymentEmail', formchecker.isValidEmailFormat);
 
 
 module.exports = router;

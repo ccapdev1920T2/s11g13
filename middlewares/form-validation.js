@@ -99,7 +99,7 @@ const checker = {
         //json({uniqueUsername: false})
         //json({uniqueUsername: true})
     },
-
+    //For registration - chained middlewares
     isInvalidEmail: (req, res, next)=>{
         let email = req.query.email;
         if (validators.isEmail(email)){
@@ -138,6 +138,14 @@ const checker = {
         if (validators.isLength(cvv, {min:3, max:4}) && validators.isNumeric(cvv)){
             return res.send(true);
         }
+        else return res.send(false);
+    },
+
+    isValidEmailFormat: (req, res, next)=>{
+        let email = req.query.email;
+        email = validators.trim(email);
+        if (validators.isEmail(email))
+            return res.send(true);
         else return res.send(false);
     }
     

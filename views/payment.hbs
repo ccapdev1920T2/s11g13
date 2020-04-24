@@ -11,7 +11,6 @@
     <!-- Font Awesome 4 Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-    {{!-- <script src="/scripts/HBS-payment.js"></script> --}}
 </head>
 <body>
     {{>header}}
@@ -81,6 +80,7 @@
                                         <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
                                     </div>
                                 <input type="text" name="cardNum" id="cardNum" class="form-control" placeholder="1111 2222 3333 4444">
+                                <div id="ccnumfeedback" class="invalid-feedback">Invalid Credit Card number.</div>
                                 </div>
                             </div>
                         </div>
@@ -105,8 +105,9 @@
 
                             <!-- CIV -->
                             <div class="form-group col-md-4 col-xs-12">
-                                <label for="cardCIV">CIV</label>
+                                <label for="cardCIV">CVV <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Check the back of your card; It has 3 digits for VISA and MasterCard and 4 digits for American Express."></i></label>
                                 <input type="number" name="cardCIV" id="cardCIV" class="form-control" placeholder="XXX">
+                                <div id="cvvfeedback" class="invalid-feedback">Invalid CVV.</div>
                             </div>
                         </div>
                         <!--     hidden input to be passed to cart       -->
@@ -160,32 +161,12 @@
 
 
     <!-- BS4 Scripts -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
     
-    <!-- Dropdown data population -->
-    <script type="text/javascript">
-        $(document).ready(()=>{
-            for(let i = 1; i <= 12; i++){
-                let x = document.createElement("option");
-                x.setAttribute("value", i);
-                $(x).html(i);
-                $("#expiryMonth").append(x);
-            }
-
-            let currYear = new Date().getFullYear();
-
-            for(let i = 0; i <=15; i++){
-                let x = document.createElement("option");
-                x.setAttribute("value", currYear + i);
-                $(x).html(currYear + i);
-                $("#expiryYear").append(x);
-            }
-
-        })
-
-
-    </script>
+    <!-- Dropdown data population and frontend validation-->
+    <script src="/scripts/HBS-payment.js"></script>
 </body>
 </html>

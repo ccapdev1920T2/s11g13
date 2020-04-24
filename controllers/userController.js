@@ -17,7 +17,6 @@ const userController = {
         let retrievedData = {};
         let un = req.params.username;
         db.findOne(Users, {username: un}, '', function(user){
-            console.log(user.pic);
             retrievedData = {
                 pageName: "User Profile",
                 pic: user.pic,

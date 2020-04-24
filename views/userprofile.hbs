@@ -107,6 +107,50 @@
 			})
 
 			$("#Save").click(()=>{
+				emptyChecker();
+			})
+
+			function emptyChecker(){
+				valid=true;
+				if ($("#fName").val() == ''){
+					$("#fName").css('borderColor','#dc3545');
+					valid=false;
+				}
+				else{
+					$("#fName").css('borderColor','#ced4da');
+					console.log("not empty");
+				}
+				if ($("#lName").val() == ''){
+					$("#lName").css('borderColor','#dc3545');
+					valid=false;
+				}
+				else{
+					$("#lName").css('borderColor','#ced4da');
+				}
+				if ($("#Email").val() == ''){
+					$("#Email").css('borderColor','#dc3545');
+					valid=false;
+				}
+				else{
+					$("#Email").css('borderColor','#ced4da');
+				}
+				if ($("#Mobile").val() == ''){
+					$("#Mobile").css('borderColor','#dc3545');
+					valid=false;
+				}
+				else{
+					$("#Mobile").css('borderColor','#ced4da');
+				}
+				console.log("valid " + valid);
+				if (valid == true){
+					save();
+				}
+				else{
+					alert("Fill in the missing blanks!");
+				}
+			}
+
+			function save(){
 				$("#Edit").show();
 				$("#Save").hide();
 				$("#File").hide();
@@ -129,8 +173,7 @@
 				    }
 				})
 				};
-
-			})
+			}
 		})
 	</script>
 		

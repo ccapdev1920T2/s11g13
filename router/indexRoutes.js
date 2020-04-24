@@ -30,4 +30,8 @@ router.get('/checkUniqueUName', formchecker.uniqueUsername)
 router.get('/checkEmail', formchecker.isInvalidEmail, formchecker.uniqueEmail)
 // router.get("/checkEmail", )
 
+router.get('/checkCCNumber', formchecker.isValidCCNum);
+router.get('/checkCVV', formchecker.isValidCVV);
+
+
 module.exports = router;

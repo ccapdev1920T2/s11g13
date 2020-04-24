@@ -24,7 +24,8 @@ const moviesController = {
                 pageName: "Movies",
                 current: "Movies",
                 movies: movieArray,
-                username: un
+                username: un,
+                error: res.locals.error
             })
         })
     }, 
@@ -161,6 +162,20 @@ const moviesController = {
         })
     },
     
+    getSearch: (req, res, next)=>{
+        db.findOne(Movies, {title: req.query.movieTitle}, '', result=>{
+            console.log(result)
+            if (result){
+                return res.redirect('/movies/view/' + req.query.movieTitle);
+            }
+            else{
+                let notfound = "No movie found with title \"" + req.query.movieTitle +"\""
+                res.locals.error = notfound;
+                return next();
+            }
+        })
+    },
+
     postAddReview: (req, res, next)=>{
         var rate = req.body.rating;
         var reviewTitle = req.body.ReviewTitle;

@@ -6,6 +6,7 @@ const Shows = require('../models/ShowsModel.js');
 const Users = require('../models/UsersModel.js');
 const Ratings = require('../models/RatingsModel.js');
 const Tickets = require('../models/TicketsModel.js');
+const CCInfos = require('../models/CCInfosModel.js');
 
 const indexController = {
     getHome: function(req, res, next) {
@@ -185,6 +186,40 @@ const indexController = {
         for (var i=0;i<seatArray.length;i++)
         {
             db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true},seat=>{});
+        }
+
+        //Add credit card to db
+        if (req.body.payCard){
+            //Form date first
+            let month = req.body.expiryMonth;
+            let year = req.body.expiryYear;
+            let date;
+            switch(req.body.expiryMonth){
+                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                    date = "31";
+                    break;
+                case 9: case 4: case 6: case 11:
+                    date = "30";
+                    break;
+                case 2:
+                    //leap year
+                    if (year%4 == 0 && year%100 != 0)
+                        date = "29";
+                    else date = "28";
+                    break;
+            }
+
+            let creditCard = new CCInfos({
+                email: req.session.email,
+                ccnumber: req.body.cardNum,
+                ccexpdate: SOMEVALUE,
+            });
+
+            db.insertOne(CCInfos, creditCard, result=>{
+                if (result)
+                    console.log("Successfully inserted ccinfo")
+                else console.log("Error in inserting to ccinfo")
+            })
         }
 
         let un;

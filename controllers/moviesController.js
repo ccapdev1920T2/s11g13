@@ -65,7 +65,7 @@ const moviesController = {
 
     getViewMovie: (req, res, next)=>{
         let movieDetails = {};
-        
+      
         db.findOne(Movies,{title: req.params.title},'',function(movie){
             if (movie){
                 let show = [];
@@ -115,7 +115,8 @@ const moviesController = {
                 })
 
                 Ratings.find({movieID: movie._id}).populate('userID').exec().then(r=>{
-                        
+                    var flag = false;
+                    var userReviewObj = {};
                     for (let i=0;i<r.length;i++)
                     {
                         var d = new Date(r[i].date); //ISODate
@@ -130,7 +131,20 @@ const moviesController = {
                         }
                         formattedDate = month + ' ' + dt + ', ' + year; //for displaying 
                         //review object
-                        reviewObj = 
+                        if (r[i].userID.username == req.session.userId){
+                            flag = true;
+                            userReviewObj ={
+                                fName: r[i].userID.firstName,
+                                lName: r[i].userID.lastName,
+                                username: r[i].userID.username,
+                                profilepic: r[i].userID.pic,
+                                date: formattedDate,
+                                rating: r[i].starRating,
+                                commentTitle: r[i].commentTitle,
+                                comment: r[i].comment,
+                            }
+                        } else{
+                            reviewObj = 
                             {
                                 fName: r[i].userID.firstName,
                                 lName: r[i].userID.lastName,
@@ -138,10 +152,11 @@ const moviesController = {
                                 profilepic: r[i].userID.pic,
                                 date: formattedDate,
                                 rating: r[i].starRating,
-                                commentTitle: r[i].commenttitle,
+                                commentTitle: r[i].commentTitle,
                                 comment: r[i].comment,
                             }
-                        review.push(reviewObj); //push object to array
+                            review.push(reviewObj); //push object to array
+                        }
                     }
 
                         let un;
@@ -152,7 +167,9 @@ const moviesController = {
                             movieDetails: movieDetails,
                             review: review,
                             movies: show,
-                            username: un
+                            username: un,
+                            flag: flag,
+                            userRev: userReviewObj,
                         });
                 })
             }

@@ -16,19 +16,15 @@ router.get("/calendar", controller.getCalendar, session_auth.validUser);
 
 router.post("/payment", controller.getPayment);
 
-//router.post('/:username/cart', controller.addTicket);
-
 router.get('/logout', session_auth.logout);
 
 router.get('/confirmEmail', controller.getConfirmEmail);
 
-//path to '/addTicketSuccess'
 router.post('/addTicketSuccess', controller.addTicket);
 
 /* Ajax routes */
 router.get('/checkUniqueUName', formchecker.uniqueUsername)
 router.get('/checkEmail', formchecker.isInvalidEmail, formchecker.uniqueEmail)
-// router.get("/checkEmail", )
 
 router.get('/checkCCNumber', formchecker.isValidCCNum);
 router.get('/checkCVV', formchecker.isValidCVV);

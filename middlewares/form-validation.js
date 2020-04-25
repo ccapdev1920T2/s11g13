@@ -68,6 +68,21 @@ const checker = {
             .escape()
         ]
     },
+    /***************Credit card validator*******************/
+    //FIXME: No sanitation for loginvalidation.username
+    ccinfovalidation: ()=>{
+        return [
+            check('cardNum')
+            .not().isEmpty().withMessage("Credit card number cannot be blank.")
+            .isCreditCard().withMessage("Invalid credit card number.")
+            .trim().escape(),
+
+            check('cardCIV')
+            .not().isEmpty().withMessage("CVV cannot be blank.")
+            .isLength({min:3, max:4}).withMessage("Invalid CVV")
+            .trim().escape()
+        ]
+    },
 
     /***************** AJAX middleware *****************/
 
@@ -84,7 +99,7 @@ const checker = {
         //json({uniqueUsername: false})
         //json({uniqueUsername: true})
     },
-
+    //For registration - chained middlewares
     isInvalidEmail: (req, res, next)=>{
         let email = req.query.email;
         if (validators.isEmail(email)){
@@ -109,6 +124,30 @@ const checker = {
         })
     },
 
+    isValidCCNum: (req, res, next)=>{
+        let ccnum = req.query.cardNum;
+        ccnum = validators.trim(ccnum)
+        if (validators.isCreditCard(ccnum))
+            return res.send(true);
+        else return res.send(false);   
+    },
+
+    isValidCVV: (req, res, next)=>{
+        let cvv = req.query.cardCVV;
+        cvv = validators.trim(cvv)
+        if (validators.isLength(cvv, {min:3, max:4}) && validators.isNumeric(cvv)){
+            return res.send(true);
+        }
+        else return res.send(false);
+    },
+
+    isValidEmailFormat: (req, res, next)=>{
+        let email = req.query.email;
+        email = validators.trim(email);
+        if (validators.isEmail(email))
+            return res.send(true);
+        else return res.send(false);
+    }
     
 }
 

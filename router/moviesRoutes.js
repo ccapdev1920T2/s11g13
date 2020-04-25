@@ -10,6 +10,9 @@ router.get("/view/:title", controller.getViewMovie);
 //this path is to '/seats'
 router.post('/seats', controller.getSeats);
 
+//last middleware will handle movie not found
+router.get('/search', controller.getSearch, controller.getMovies)
+
 //this path is to '/AddReview'
 router.post('/AddReview', controller.postAddReview);
 

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Movies = require('../models/MoviesModel.js');
 const Shows = require('../models/ShowsModel.js');
 const Seats = require('../models/SeatsModel.js');
+const Tickets = require('../models/TicketsModel.js');
 const multer = require('multer');
 
 
@@ -82,11 +83,20 @@ const adminController = {
                         posterUrl:req.file.destination + req.file.originalname,
                         trailerUrl:req.body.addMovieTrailer,
                     }
-                    db.insertOne(Movies, retrievedData, result=>{
-                        if (result)
-                            console.log("Successfully added document to Movies collection.");
-                        else console.log("Error inserting to Movies collection");
-                    });
+                    
+                    db.findOne(Movies,{title: req.body.addMovieTitle},'', movie=>{
+                        if (movie){
+                            db.insertOne(Movies, retrievedData, result=>{
+                            if (result)
+                                console.log("Successfully added document to Movies collection.");
+                            else console.log("Error inserting to Movies collection");
+                        });
+                        }
+                        else
+                        {
+                            console.log("Movie title taken");
+                        }
+                    })
 
                     //display
                     res.redirect('/admin');
@@ -191,9 +201,10 @@ const adminController = {
     },
 
     deleteShow: function(req, res, next) {
-
-        db.deleteMany(Seats,({"showID": req.body.movieID},show=>{})); //movieID is showID
-        db.deleteOne(Shows,{"_id": req.body.movieID},show=>{}); //movieID is showID
+        //movieID is showID
+        db.deleteMany(Seats,{"showID": req.body.movieID},show=>{}); //deletes all seats of the show
+        db.deleteOne(Shows,{"_id": req.body.movieID},show=>{}); //deletes the show
+        db.deleteMany(Tickets,{"showID": req.body.movieID},show=>{})
         
         /*
         //display

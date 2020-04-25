@@ -6,6 +6,7 @@ const Shows = require('../models/ShowsModel.js');
 const Users = require('../models/UsersModel.js');
 const Ratings = require('../models/RatingsModel.js');
 const Tickets = require('../models/TicketsModel.js');
+const CCInfos = require('../models/CCInfosModel.js');
 
 const indexController = {
     getHome: function(req, res, next) {
@@ -165,7 +166,7 @@ const indexController = {
 
     addTicket: (req, res, next)=>{
         createdTicketID = new mongoose.Types.ObjectId();
-        db.findOne(Users,{username:req.userId},'_id', function(u){
+        db.findOne(Users,{username:req.session.userId},'_id email', function(u){
             //insert ticket into db
             db.insertOne(Tickets,{
                     _id: createdTicketID, 
@@ -179,12 +180,40 @@ const indexController = {
                     else console.log("Error inserting to Tickets collection");
                     
                 });
+            //Add credit card to db
+            // if (req.body.payCard){
+                //Form date first
+                let month = req.body.expiryMonth;
+                let year = req.body.expiryYear;
+                let day;
+                if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+                    day = "31"
+                else if (month == 9 || month == 4 || month == 6 || month == 11)
+                    day = "30";
+                else if (month == 2){
+                    if (year%4 == 0 && year%100 != 0)
+                        day = "29";
+                    else day = "28";
+                }
+                let expdate = year + "-" + month + "-" + day;
+                let creditCard = new CCInfos({
+                    email: u.email,
+                    ccnumber: req.body.cardNum,
+                    ccexpdate: expdate
+                });
+
+                db.insertOne(CCInfos, creditCard, result=>{
+                    if (result)
+                        console.log("Successfully inserted ccinfo")
+                    else console.log("Error in inserting to ccinfo")
+                })
+            // }
         })
         //update all selected seats to taken
         var seatArray = req.body.seats.split(',');
         for (var i=0;i<seatArray.length;i++)
         {
-            db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true});
+            db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true},seat=>{});
         }
 
         let un;

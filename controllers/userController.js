@@ -68,7 +68,7 @@ const userController = {
                     pageName: "View Tickets",
                     isSignedIn: true,
                     pic: u.pic,
-                    username: u.username,
+                    username: req.session.userId,
                     fname: u.fName,
                     lname: u.lName,
                     tickets: ticketArray,
@@ -83,7 +83,8 @@ const userController = {
             lastName: req.body.lName,
             mobileNumber: req.body.Mobile,
             email: req.body.Email,
-        });
+            //pic: req.body.pic,
+        },profile=>{});
 
     },
 

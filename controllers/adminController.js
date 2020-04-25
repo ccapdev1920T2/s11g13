@@ -70,7 +70,7 @@ const adminController = {
 
         upload(req, res, (err) => {
             if (!err){  
-                console.log(req.file.destination);
+                //console.log(req.file.destination);
                     var textABox = req.body.addMovieCast;
                     var castArray = textABox.split(/\n+/);
                     let retrievedData = {
@@ -164,40 +164,6 @@ const adminController = {
             date: req.body.date,
             time: req.body.time,
         },show=>{});
-        /*
-        //display
-        db.findMany(Movies,{},'title _id',function(movie){
-            Shows.find().select("time date dayOfWeek").populate('movieID').exec().then(s=>{
-                let show = [];
-                for (let i=0;i<s.length;i++)
-                {
-                    var d = new Date(s[i].date); //ISODate
-                    year = d.getFullYear(); //year of ISODate
-                    month = d.getMonth()+1 //month of ISODate
-                    dt = d.getDate(); //day of ISOdate
-                    if (dt < 10) { //get number of days
-                      dt = '0' + dt;
-                    }
-                    if (month < 10) { //get number of months
-                      month = '0' + month;
-                    }
-                    formattedDate = month + '/' + dt + '/' + year; //formatted date mm-dd-yyyy
-                    showObj = 
-                        {
-                            movieID: s[i]._id,
-                            title: s[i].movieID.title,
-                            genre: s[i].movieID.genre,
-                            rating: s[i].movieID.aveScore,
-                            day: s[i].dayOfWeek,
-                            date: formattedDate,
-                            time: s[i].time,
-                        }
-                    show.push(showObj); //push object to array
-                }
-                    
-            })
-        })
-        */
     },
 
     deleteShow: function(req, res, next) {
@@ -205,41 +171,6 @@ const adminController = {
         db.deleteMany(Seats,{"showID": req.body.movieID},show=>{}); //deletes all seats of the show
         db.deleteOne(Shows,{"_id": req.body.movieID},show=>{}); //deletes the show
         db.deleteMany(Tickets,{"showID": req.body.movieID},show=>{})
-        
-        /*
-        //display
-        db.findMany(Movies,{},'title _id',function(movie){
-            Shows.find().select("time date dayOfWeek").populate('movieID').exec().then(s=>{
-                let show = [];
-                for (let i=0;i<s.length;i++)
-                {
-                    var d = new Date(s[i].date); //ISODate
-                    year = d.getFullYear(); //year of ISODate
-                    month = d.getMonth()+1 //month of ISODate
-                    dt = d.getDate(); //day of ISOdate
-                    if (dt < 10) { //get number of days
-                      dt = '0' + dt;
-                    }
-                    if (month < 10) { //get number of months
-                      month = '0' + month;
-                    }
-                    formattedDate = month + '/' + dt + '/' + year; //formatted date mm-dd-yyyy
-                    showObj = 
-                        {
-                            movieID: s[i]._id,
-                            title: s[i].movieID.title,
-                            genre: s[i].movieID.genre,
-                            rating: s[i].movieID.aveScore,
-                            day: s[i].dayOfWeek,
-                            date: formattedDate,
-                            time: s[i].time,
-                        }
-                    show.push(showObj); //push object to array
-                }
-                
-            })
-        })
-        */
     }
 
 

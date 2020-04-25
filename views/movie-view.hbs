@@ -341,8 +341,7 @@
                 var previous_value = $("#edit_selected_rating").val();
                 
                 var selected_value = $(this).attr("data-attr");
-                console.log($("#edit_selected_rating").val());
-
+                
                 $("#edit_selected_rating").val(selected_value);
                 
                 $(".selected-rating").empty();
@@ -375,16 +374,6 @@
             $("#review").prop("value", $("#userRevComment").html());
             $("#editReview").prop("value", $("#userRevComment").html());
             $("#userRevComment").remove();
-            
-            //TODO: Prop values from comments to form fields of modal
-
-            /*$("#editRating").on(click, e=>{
-
-            })*/
-
-            /*$(".butones").on('click',(function(){
-                window.alert('hahaha');
-            }))*/
                 
         });
 
@@ -397,8 +386,7 @@
                 }
              })
             };
-            
-            //$("#rating").load("/movies/view/"+$("#title").val()+" #rating");
+
             alert($("#title").html())
             location.href = "/movies/view/"+$("#title").html()
         }

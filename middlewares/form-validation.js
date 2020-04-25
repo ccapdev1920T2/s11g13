@@ -103,18 +103,18 @@ const checker = {
     isInvalidEmail: (req, res, next)=>{
         let email = req.query.email;
         if (validators.isEmail(email)){
-            console.log("Validation: Email is correct format");
+            // console.log("Validation: Email is correct format");
             return next();
         }
         else{
-            console.log("Validation: Email has wrong format")
+            // console.log("Validation: Email has wrong format")
             return res.send({error: "invalid"})
         }
     },
 
     uniqueEmail: (req, res, next)=>{
         let email = req.query.email;
-        console.log(email)
+        // console.log(email)
         User.find({email: email})
         .exec()
         .then(result=>{

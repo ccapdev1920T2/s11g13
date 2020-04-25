@@ -118,7 +118,6 @@
 				}
 				else{
 					$("#fName").css('borderColor','#ced4da');
-					console.log("not empty");
 				}
 				if ($("#lName").val() == ''){
 					$("#lName").css('borderColor','#dc3545');
@@ -141,7 +140,13 @@
 				else{
 					$("#Mobile").css('borderColor','#ced4da');
 				}
-				console.log("valid " + valid);
+				if ($("#File").val() == ''){
+					$("#File").css('borderColor','#dc3545');
+					valid=false;
+				}
+				else{
+					$("#File").css('borderColor','#ced4da');
+				}
 				if (valid == true){
 					save();
 				}
@@ -161,6 +166,9 @@
 				$("#Mobile").prop("readonly", true);
 				$("#profilepic").css("pointerEvents","none");
 
+				console.log(document.getElementById("File").files[0].name + " prof pic");
+				var profpic = document.getElementById("File").files[0].name
+
 				{ $.ajax({
 				    url: $('#UName').val() + '/editProfile',
 				    method: 'PUT',
@@ -170,6 +178,7 @@
 				        Email: $('#Email').val(),
 				        Mobile: $('#Mobile').val(),
 				        UName: $('#UName').val(),
+				        pic: profpic,
 				    }
 				})
 				};

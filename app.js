@@ -141,6 +141,12 @@ hbs.registerHelper('userHrefBuilder', (username, loc)=>{
     return string;
 });
 
+//Additional helper for the edit modal in movie-view
+hbs.registerHelper('editRatingHidden', (loggedIn, commentUname, rating)=>{
+    if(loggedIn==commentUname){
+        return new hbs.SafeString('<input type="hidden" id="initialRating" value="' + rating +'">');  
+    }
+});
 //movie-view delete comment button
 hbs.registerHelper('deleteBtnBuilder', (loggedIn, commentUname)=>{
     if(loggedIn==commentUname){

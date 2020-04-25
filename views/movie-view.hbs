@@ -161,6 +161,7 @@
                                             <div class="col-9">
                                                 <div class="row">
                                                     <small class="pl-3">{{rateBuilder rating}}</small>
+                                                    {{editRatingHidden ../username username rating}}
                                                 </div>
                                                 <div class="row">
                                                     <small class="pl-3"><h6>{{commentTitle}}</h6></small>
@@ -253,7 +254,7 @@
                 <div class="modal-content">
                     <form id="AddReview" class="form-horizontal" method="PUT" action="/movies/editReview">
                         <div class="modal-header">
-                            <h5 class="modal-title">Add a review</h5>
+                            <h5 class="modal-title">Edit review</h5>
                             <button type="button" class="close" data-dismiss="modal">
                                 <i class="fa fa-close"></i>
                             </button>
@@ -265,12 +266,12 @@
                                 <div class="form-group row mb-0">
                                     <label class="col-form-label col-sm-4"><h5>Rating</h5></label>
                                     <div class="col-sm-8">
-                                        <input type="hidden" required id="selected_rating" name="rating" value="0">
-                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="1" id="rating-star-1"></i>
-                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="2" id="rating-star-2"></i>
-                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="3" id="rating-star-3"></i>
-                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="4" id="rating-star-4"></i>
-                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="5" id="rating-star-5"></i>
+                                        <input type="hidden" required id="edit_selected_rating" name="rating" value="0">
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="1" id="edit_rating-star-1"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="2" id="edit_rating-star-2"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="3" id="edit_rating-star-3"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="4" id="edit_rating-star-4"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="5" id="edit_rating-star-5"></i>
                                     </div>
                                 </div>
                                 <hr class="mt-0">
@@ -334,27 +335,29 @@
             
             }));
 
+            $("#edit_selected_rating").val($("#initialRating").val()); //Developer note: check app.js editRatingHidden hbs helper
 
-            /*$("#editReview").on('click',(function(e) {
-                var previous_value = 0;
+            $(".edit_btnrating").on('click',(function(e) {
+                var previous_value = $("#edit_selected_rating").val();
                 
-                var selected_value = $("#selected_rating").val();
-                console.log($("#selected_rating").val());
-                $("#selected_rating").val(selected_value);
+                var selected_value = $(this).attr("data-attr");
+                console.log($("#edit_selected_rating").val());
+
+                $("#edit_selected_rating").val(selected_value);
                 
                 $(".selected-rating").empty();
                 $(".selected-rating").html(selected_value);
                 
                 for (i = 1; i <= selected_value; i++) {
-                $("#rating-star-"+i).toggleClass('text-warning');
-                $("#rating-star-"+i).toggleClass('text-default');
+                $("#edit_rating-star-"+i).toggleClass('text-warning');
+                $("#edit_rating-star-"+i).toggleClass('text-default');
                 }
                 
                 for (ix = 1; ix <= previous_value; ++ix) {
-                $("#rating-star-"+ix).toggleClass('text-warning');
-                $("#rating-star-"+ix).toggleClass('text-default');
+                $("#edit_rating-star-"+ix).toggleClass('text-warning');
+                $("#edit_rating-star-"+ix).toggleClass('text-default');
                 }
-            }));*/
+            }));
 
 
             $("#inputMovTitle").prop("value", $("#movieTitle").html());

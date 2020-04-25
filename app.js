@@ -56,44 +56,6 @@ app.use((req, res, next)=>{
     next();
 })
 
-// app.use((req, res, next)=>{
-//     const {userId} = req.session;
-//     console.log('req.session: ' + req.session);
-//     console.log('req.session.userId: ' + req.session.userId);
-//     console.log('userId: ' + userId);
-//     if(userId){
-//         let user = User.find({token: req.session.userId});
-//         res.locals.user = user[0].username;
-//     }
-//     console.log('res.locals.user.username: ' + res.locals.user);
-//     next();
-// })
-
-/**1.) insert sa login:
- * const {userID} = req.session
- * 
- * 2.) create redirection route checking if there's a 
- * session/userid currently logged in - 
- * apply it to alll authenticated routes for redirection
- *
- * 3.) insert this somewhere to update chuchu of session
- * const {user} = res.locals
- * 
- * 4.) FOR LOGIN (if successful/the user exists with right pass):
- * req.session.userId = username (orwhateverIDwewannause)
- *
- * 5.) LOGOUT:
- *
- * req.session.destroy(err => {
- *      if(err){
- *          return.redirect('<somewhere></somewhere>');
- *      }
- *      
- *      res.clearCookie(SESS_NAME);
- *      res.redirect('<somewhere></somewhere>');
- * })
-*/
-
 // Middlewares
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -244,8 +206,6 @@ app.use((err, req, res, next)=>{
         }
     });
 })
-
-
 
 /** Server online **/
 app.listen(port, ()=>{

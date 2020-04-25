@@ -1,24 +1,11 @@
 # To Do
 ## Important
 
-----------------
-
-## Upcoming
-- MVC
-- Email sending
-- Sessions (for user log in and log out)
-- Database (MongoDB linking)
-- using post and get functions appropriately
-- validation system for register
-
-## TO-DO
-- [] User picture where to store?
-- [] Schema recheck all required
-- [] Credit card function (?)
-- [] Review function
-- [] Rating of all user reviews update to db
-- [] Fix seats promise
-- [] Fix bug where users not logged in can still reserve seats (userID is under admin)
+- [ ] Email sending
+- [ ] Check sanitation for all input fields
+- [ ] User picture where to store?
+- [ ] Schema recheck all required
+- [ ] Fix bug where users not logged in can still reserve seats (userID is under admin)
 
 #### Phase 1:
 > HTML, CSS, JS for all sites

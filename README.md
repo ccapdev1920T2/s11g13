@@ -32,6 +32,7 @@ https://github.com/ccapdev1920T2/s11g13.git
 | [Bootstrap 4.4.1](https://getbootstrap.com/) | Frontend framework |
 | [body-parser](https://www.npmjs.com/package/body-parser) | Form data parsing |
 | [busyboy](https://www.npmjs.com/package/busboy) | Form data parser for files |
+| [dotenv](https://www.npmjs.com/package/dotenv)| dotenv |
 | [Express](https://www.npmjs.com/package/express) | Easy Server development |
 | [Express-hbs](https://www.npmjs.com/package/express-hbs) | Integrated handlebars to express package - dynamic content rendering |
 | [Express-validator](https://www.npmjs.com/package/express-validator) | Wrapper for validator to allow for input validation and sanitization |
@@ -51,7 +52,7 @@ https://github.com/ccapdev1920T2/s11g13.git
 [Howard Montecillo](https://fb.me/howard.ang.7)
 
 ## License
-This project is under the ISC Liscence.
+This project is under the MIT License.
 
 ## Acknowledgments
 - Sir Arren Antioquia, our mentor throughout the duration of CCAPDEV

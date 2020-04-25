@@ -226,6 +226,36 @@ const moviesController = {
         })
     },
 
+    deleteReview: (req, res, next)=>{
+      var movieID = req.body.movieID;
+      console.log('we here');
+      
+      db.deleteOne(Ratings, {"movieID": movieID, "userID": req.session.userId}, result=>{
+        if (result){
+            console.log('Successfully changed starRating of Movie');
+            db.findMany(Ratings, {movieID: movie._id}, '', function(r){
+                var total = 0;
+
+                for (let i=0; i<r.length; i++){
+                    total = total + r[i].starRating;
+                    console.log(total);
+                }
+
+                total = total/r.length;
+                console.log(total);
+
+                db.updateOne(Movies,{_id: movie._id},{
+                    aveScore: total
+                }, result=>{
+                    if (result)
+                        console.log("Successfully changed starRating of Movie");
+                    else console.log("Error updating starRating of Movie");
+                });
+
+            })
+        }
+      });
+    },
     
 };
 

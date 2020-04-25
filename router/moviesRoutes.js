@@ -13,4 +13,6 @@ router.post('/seats', controller.getSeats);
 //this path is to '/AddReview'
 router.post('/AddReview', controller.postAddReview);
 
+router.delete('/deleteRevew', controller.deleteReview);
+
 module.exports = router;

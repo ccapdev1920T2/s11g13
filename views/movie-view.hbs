@@ -391,8 +391,10 @@
                 }
              })
             };
-            window.alert($("#title").val());
-            $("#rating").load("/movies/view/"+$("#title").val()+" #rating");
+            
+            //$("#rating").load("/movies/view/"+$("#title").val()+" #rating");
+            alert($("#title").html())
+            location.href = "/movies/view/"+$("#title").html()
         }
         
     </script>

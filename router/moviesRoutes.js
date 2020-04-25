@@ -16,6 +16,9 @@ router.get('/search', controller.getSearch, controller.getMovies)
 //this path is to '/AddReview'
 router.post('/AddReview', controller.postAddReview);
 
+//No router.put sksksk
+router.post('/editReview', controller.editReview);
+
 router.delete('/deleteReview', controller.deleteReview);
 
 module.exports = router;

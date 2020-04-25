@@ -308,6 +308,72 @@ const moviesController = {
         });
     },
     
+    editReview: (req, res, next)=>{
+        var rate = req.body.rating;
+        var reviewTitle = req.body.ReviewTitle;
+        var review = req.body.Review;
+        var movieTitle = req.body.movieTitle;
+        var userID = '';
+
+        db.findOne(Users, {username: req.session.userId}, '', function(user){
+            userID = user._id;
+        })
+        
+        db.findOne(Movies, {_id: movieTitle},'',function(movie){
+            if (movie){
+                console.log("movie found!");
+                var d = new Date();
+                var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                var date = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+                // console.log(date.toString());
+
+                let updatedReview = {
+                    userID: userID,
+                    movieID: movie._id,
+                    date: date,
+                    starRating: rate,
+                    commentTitle: reviewTitle,
+                    comment: review,
+                }
+
+                db.updateOne(Ratings, {userID: userID,
+                    movieID: movie._id,} , updatedReview, result=>{
+                    if (result){
+                        console.log("Successfully edited document in Ratings collection.");
+                        //updateStarRating(movie._id);
+                        db.findMany(Ratings, {movieID: movie._id}, '', function(r){
+                            if (r){
+                                var total = 0;
+                                console.log(total);
+                                for (let i=0; i<r.length; i++){
+                                    total = total + r[i].starRating;
+                                    console.log(total);
+                                }
+                                
+                                total = (total/r.length).toFixed(1);
+                                console.log(total);
+                    
+                                db.updateOne(Movies,{_id: movie._id},{
+                                    aveScore: total
+                                }, result=>{
+                                    if (result)
+                                        console.log("Successfully changed starRating of Movie");
+                                    else console.log("Error updating starRating of Movie");
+                                });
+                            }
+                            else console.log("Error modifying ratings of Movie");  
+                        });
+
+                        return res.redirect('/movies/view/' + movie.title);
+                    }
+                    else console.log("Error modifying Ratings collection");
+                });
+            }
+            else{
+                console.log(req.body.movieTitle);    
+            }
+        })
+    }
 };
 
 function updateStarRating (movieID, next){

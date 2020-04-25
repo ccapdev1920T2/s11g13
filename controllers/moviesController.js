@@ -209,31 +209,34 @@ const moviesController = {
                 },result=>{
                     if (result){
                         console.log("Successfully added document to Ratings collection.");
+                        //updateStarRating(movie._id);
                         db.findMany(Ratings, {movieID: movie._id}, '', function(r){
-                            var total = 0;
-        
-                            for (let i=0; i<r.length; i++){
-                                total = total + r[i].starRating;
+                            if (r){
+                                var total = 0;
                                 console.log(total);
+                                for (let i=0; i<r.length; i++){
+                                    total = total + r[i].starRating;
+                                    console.log(total);
+                                }
+                                
+                                total = (total/r.length).toFixed(1);
+                                console.log(total);
+                    
+                                db.updateOne(Movies,{_id: movie._id},{
+                                    aveScore: total
+                                }, result=>{
+                                    if (result)
+                                        console.log("Successfully changed starRating of Movie");
+                                    else console.log("Error updating starRating of Movie");
+                                });
                             }
-        
-                            total = total/r.length;
-                            console.log(total);
-        
-                            db.updateOne(Movies,{_id: movie._id},{
-                                aveScore: total
-                            }, result=>{
-                                if (result)
-                                    console.log("Successfully changed starRating of Movie");
-                                else console.log("Error updating starRating of Movie");
-                            });
-        
-                        })
+                            else console.log("Error finding ratings of Movie");  
+                        });
+
+                        return res.redirect('/movies/view/' + movie.title);
                     }
                     else console.log("Error inserting to Ratings collection");
                 });
-             
-                return res.redirect('/movies/view/' + movie.title);
             }
             else{
                 console.log(req.body.movieTitle);    
@@ -242,37 +245,78 @@ const moviesController = {
     },
 
     deleteReview: (req, res, next)=>{
-      var movieID = req.body.movieID;
-      console.log('we here');
-      
-      db.deleteOne(Ratings, {"movieID": movieID, "userID": req.session.userId}, result=>{
-        if (result){
-            console.log('Successfully changed starRating of Movie');
-            db.findMany(Ratings, {movieID: movie._id}, '', function(r){
-                var total = 0;
-
-                for (let i=0; i<r.length; i++){
-                    total = total + r[i].starRating;
-                    console.log(total);
-                }
-
-                total = total/r.length;
-                console.log(total);
-
-                db.updateOne(Movies,{_id: movie._id},{
-                    aveScore: total
-                }, result=>{
-                    if (result)
-                        console.log("Successfully changed starRating of Movie");
-                    else console.log("Error updating starRating of Movie");
-                });
-
-            })
+        var movie = {
+            movieID: req.body.movieID,
+            title: '',
         }
-      });
+        db.findOne(Movies, {_id: movie.movieID}, '', function(m){
+            movie.title = m.title;
+        })
+        
+        db.findOne(Users, {username: req.session.userId}, '', function(user){
+            db.deleteOne(Ratings, {"movieID": movie.movieID, "userID": user._id}, result=>{
+                if (result){
+                    console.log('Successfully deleted review on Movie');
+                    //updateStarRating(movieID);
+                    db.findMany(Ratings, {movieID: movie.movieID}, '', function(r){
+                        if (r){
+                            var total = 0;
+                            console.log(total);
+                            for (let i=0; i<r.length; i++){
+                                total = total + r[i].starRating;
+                                console.log(total);
+                            }
+                            
+                            if(r.length>=1)
+                                total = (total/r.length).toFixed(1);
+                            console.log(total);
+                
+                            db.updateOne(Movies,{_id: movie.movieID},{
+                                aveScore: total
+                            }, result=>{
+                                if (result)
+                                    console.log("Successfully changed starRating of Movie");
+                                else console.log("Error updating starRating of Movie");
+
+                                console.log('huhhuhuuhuhuhuuh');
+                                return res.redirect('/movies/view/' + movie.title);                             
+                            });
+                        }
+                        else console.log("Error finding ratings of Movie");  
+                    })
+                }
+                else
+                    console.log('Error deleting review on Movie');
+            });
+        });
     },
     
 };
+
+function updateStarRating (movieID, next){
+    db.findMany(Ratings, {movieID: movieID}, '', function(r){
+        if (r){
+            var total = 0;
+            console.log(total);
+            for (let i=0; i<r.length; i++){
+                total = total + r[i].starRating;
+                console.log(total);
+            }
+
+            total = total/r.length;
+            console.log(total);
+
+            db.updateOne(Movies,{_id: movieID},{
+                aveScore: total
+            }, result=>{
+                if (result)
+                    console.log("Successfully changed starRating of Movie");
+                else console.log("Error updating starRating of Movie");
+            });
+        }
+        else console.log("Error finding ratings of Movie");  
+    })
+}
 
 
 

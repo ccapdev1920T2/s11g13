@@ -16,6 +16,6 @@ router.get('/search', controller.getSearch, controller.getMovies)
 //this path is to '/AddReview'
 router.post('/AddReview', controller.postAddReview);
 
-router.delete('/deleteRevew', controller.deleteReview);
+router.delete('/deleteReview', controller.deleteReview);
 
 module.exports = router;

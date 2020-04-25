@@ -1,30 +1,30 @@
 $(document).ready(()=>{
     if ($("#fnholder").length){
-        console.log($("#fnholder").html())
+        // console.log($("#fnholder").html())
         $("#regFName").prop("value", $("#fnholder").html())
         $("#fnholder").remove();
     }
 
     if ($("#lnholder").length){
-        console.log($("#lnholder").html())
+        // console.log($("#lnholder").html())
         $("#regLName").prop("value", $("#lnholder").html())
         $("#lnholder").remove();
     }
 
     if ($("#unholder").length){
-        console.log($("#unholder").html())
+        // console.log($("#unholder").html())
         $("#regUName").prop("value", $("#unholder").html())
         $("#unholder").remove();
     }
 
     if ($("#emailholder").length){
-        console.log($("#emailholder").html())
+        // console.log($("#emailholder").html())
         $("#regEmail").prop("value", $("#emailholder").html())
         $("#emailholder").remove();
     }
 
     if ($("#phoneholder").length){
-        console.log($("#phoneholder").html())
+        // console.log($("#phoneholder").html())
         $("#regPhone").prop("value", $("#phoneholder").html())
         $("#phoneholder").remove();
     }
@@ -104,7 +104,7 @@ $(document).ready(()=>{
         else{
             $.get("/checkEmail", {email: email},  (result)=>{
                 //Match found
-                console.log(result)
+                // console.log(result)
                 if (!(result.error == "none")){
                     $("#emailfeedback").show();
                     $("#regEmail").removeClass("is-valid")
@@ -115,8 +115,7 @@ $(document).ready(()=>{
                         $("#emailfeedback").html("Email address unavailable");
                     }
                 }
-                //Is valid email
-                // else if (isEmail(email))
+                
                 else {
                     $("#emailfeedback").hide();
                     $("#regEmail").addClass("is-valid")

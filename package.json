@@ -1,0 +1,40 @@
+{
+  "name": "s11g13",
+  "version": "1.0.0",
+  "description": "AY1920T2-CCAPDEV Machine Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccapdev1920T2/s11g13.git"
+  },
+  "keywords": [
+    "ticket",
+    "website"
+  ],
+  "author": "Bianca Benedictos, John Henry Cagaoan, Howard Montecillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccapdev1920T2/s11g13/issues"
+  },
+  "homepage": "https://github.com/ccapdev1920T2/s11g13#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "busboy": "^0.3.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-hbs": "^2.3.1",
+    "express-session": "^1.17.0",
+    "express-validator": "^6.4.0",
+    "hbs": "^4.1.0",
+    "jquery": "^3.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.6",
+    "multer": "^1.4.2",
+    "validator": "^13.0.0"
+  }
+}

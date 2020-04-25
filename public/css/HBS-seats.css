@@ -1,0 +1,51 @@
+/*this contains the seats*/
+.containerOld {
+    display:flex;
+    height: 80%;
+    width: 80%;
+    margin:0 auto;
+}
+
+.seats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.seat {
+    display: flex;
+    flex: 0 0 20%;
+    padding: 10px;
+    position: relative;
+}
+
+/*Sets the number of seats per row and margin*/
+.seat:nth-child(4) {
+    margin-right: 14.28571428571429%;
+}
+
+.seat input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+}
+
+/*Color if selected*/
+.seat input[type=checkbox]:checked + label {
+    background: #ffc107;
+}
+
+/*Design of seats*/
+.seat label {
+    display: block;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.5rem;
+    padding: 4px 0;
+    background: #28a745;
+    border-radius: 5px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}

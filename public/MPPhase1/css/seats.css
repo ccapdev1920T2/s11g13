@@ -1,0 +1,145 @@
+    /*this contains the seats*/
+    .containerOld {
+      display:flex;
+      height: 80%;
+      width: 80%;
+      margin:0 auto;
+    }
+
+    /*Labels whether it's taken, not taken, and your choice*/
+    .instructions {
+      margin:0 auto;
+      padding: 10px;
+    }
+
+    .yourChoice {
+      display: block;
+      position: relative;
+      width: 40px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.5rem;
+      padding: 4px 0;
+      background: #ffc107;
+      border-radius: 5px;
+      display:inline-block;
+    }
+
+    .taken {
+      display: block;
+      position: relative;
+      width: 40px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.5rem;
+      padding: 4px 0;
+      background: #F42536;
+      border-radius: 5px;
+      display:inline-block;
+    }
+
+    .notTaken {
+      display: block;
+      position: relative;
+      width: 40px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.5rem;
+      padding: 4px 0;
+      background: #28a745;
+      border-radius: 5px;
+      display:inline-block;
+    }
+
+    ol {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    .seats {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+    }
+
+    .seat {
+      display: flex;
+      flex: 0 0 20%;
+      padding: 10px;
+      position: relative;
+    }
+
+    /*Sets the number of seats per row and margin*/
+    .seat:nth-child(4) {
+      margin-right: 14.28571428571429%;
+    }
+    
+    .seat input[type=checkbox] {
+      position: absolute;
+      opacity: 0;
+    }
+
+    /*Color if selected*/
+    .seat input[type=checkbox]:checked + label {
+      background: #ffc107;
+    }
+
+    /*Design of seats*/
+    .seat label {
+      display: block;
+      position: relative;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.5rem;
+      padding: 4px 0;
+      background: #28a745;
+      border-radius: 5px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .marginLR {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .boxShadow {
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .text {
+      color: #4c4a37;
+      font-family: 'Source Sans Pro', sans-serif;
+      line-height: 32px;
+      margin: 0 0 24px;
+      font-size: 15px;
+      font-weight: bold;
+      display:inline;
+    }
+
+    .button {
+      width: 140px;
+      height: 45px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 15px;
+      font-weight: bold;
+      color: #000;
+      background-color: #fff;
+      border: solid rgba(0, 0, 0, .03);
+      border-radius: 50px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+      outline: none;
+    }
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }

@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-4">
+    <!---->
+    {{#each movies}}
+        <div class="col mb-4">
+        {{#if date}}
+            <form method="POST" action="/movies/seats">
+                <div class="card h-100" ">
+                    <input type="image" src={{imageurl}} class="movie-cover" alt="Submit" value="{{showID}}">
+                    <h5 class="text-center card-title">{{date}}</h5>
+                    <input type = "hidden" name = "showID" value = "{{showID}}"/>
+                </div>
+            </form>
+        {{else}}
+            <a href="/movies/view/{{title}}">
+                <div class="card h-100">
+                    <img src={{imageurl}} class="movie-cover">
+                    <h5 class="text-center card-title">{{title}}</h5>
+                </div>
+            </a>
+        {{/if}}
+        </div>
+    {{/each}}
+    <!---->
+    </div>
+</div>

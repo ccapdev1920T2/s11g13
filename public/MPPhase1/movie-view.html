@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To All The Boys P.S. I Still Love You</title>
+
+    <!-- Bootstrap css cdn -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- main.css -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    
+</head>
+<body>
+    <!-- Header main -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid theme">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="Home.html">Ticket or Leave it</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="Movies.html">Movies</a></li>
+          <li><a href="calendar.html">Calendar</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <!-- USE NODEJS AND SESSIONS IN THE FUTURE, THIS WILL CHANGE TO USERNAME WHEN LOGGED IN -->
+          <li><a href="login.html">
+            <span class="glyphicon glyphicon-user"></span>
+            Register/Log In
+          </a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- body contents -->
+    <div class="container container-unpadded">
+        <!-- Movie Information -->
+        <div class="row">
+            <!-- Movie Details -->
+            <div class="col-md-8 ">
+                <div class="flex-to-row">
+                    <div class="col-md-12">
+                        <!-- Title -->
+                        <div>
+                            <h3>To All The Boys <br> P.S. I Still Love You</h3>
+                        </div>
+                        <!-- Genre -->
+                        <div>
+                            <h4>Romance, Comedy</h4>
+                        </div>
+                    </div>
+
+                    <!-- info -->
+                    <div class="flex-to-row col-md-12">
+                        <!-- poster -->
+                        <div class="thumbnail col-md-5" >
+                            <img src="assets/MoviePosters/psIStillLoveYou.jpg" alt="psily-movie" height="100%">
+                        </div>
+
+                        <!-- description -->
+                        <div class="flex-to-row col-md-7">
+                            <div class="flex-to-col">
+                                <!-- Rating -->
+                                <div class="container">
+                                    <h2 class="bold padding-bottom-7">4.4 <small>/ 5</small></h2>
+                                    <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-grey btn-sm" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                
+                                <!-- Synopsis -->
+                                <div class="padded">
+                                    <h6>Lara Jean is officially Peter’s girlfriend, so everything should be perfect, right? But feelings grow complicated when an old crush reenters her life.
+                                    </h6>
+                                </div>
+                                
+                                <!-- more info -->
+                                <div class="padded">
+                                    <h6> 
+                                      Starring:Lana Condor, Noah Centineo, Jordan Fisher
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" >
+                        <!-- Buy Ticket Button -->
+                        <div>
+                            <button class="col-md-12" type="button" class="btn btn-success" id="buyticket">Buy Ticket</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Movie Comments -->
+            <div class="padded col-md-4 container">
+                <div class="row scrollvertical" style="height: 300px;">
+                    <div class="col-md-12 ">
+                        <hr/>
+                        <div class="review-block">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                                    <div class="review-block-name"><a href="#">John Henry Cagaoan</a></div>
+                                    <div class="review-block-date">February 14, 2020<br/>...</div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="review-block-rate">
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="review-block-title">Would watch again</div>
+                                    <div class="review-block-description">Solid! Legit made me cry.</div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                                    <div class="review-block-name"><a href="#">Bianca Ganda</a></div>
+                                    <div class="review-block-date">February 20, 2020<br/>...</div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="review-block-rate">
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="review-block-title">Kiligss</div>
+                                    <div class="review-block-description">Ang cute :(( Choosing Peter was the right choice!</div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                                    <div class="review-block-name"><a href="#">Arren Antioquia</a></div>
+                                    <div class="review-block-date">February 24, 2020<br/>...</div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="review-block-rate">
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="review-block-title">Nice Movie</div>
+                                    <div class="review-block-description">I'll recommend this to my students in CCAPDEV.</div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                                    <div class="review-block-name"><a href="#">Howard Montecillo</a></div>
+                                    <div class="review-block-date">February 29, 2020<br/>...</div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="review-block-rate">
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="review-block-title">Good</div>
+                                    <div class="review-block-description">Recommended by my prof. It was worth it.</div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                                    <div class="review-block-name"><a href="#">Sean Potato</a></div>
+                                    <div class="review-block-date">February 29, 2020<br/>...</div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="review-block-rate">
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+                                          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="review-block-title">Super Good</div>
+                                    <div class="review-block-description">Haven't watched romance in a while. Definitely a good movie to watch.</div>
+                                </div>
+                            </div>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+                <!-- source: https://bootsnipp.com/snippets/40pMm -->
+            </div>
+
+        </div>
+
+        <!-- Showing schedules -->
+        <div class="padded row">
+            <div class="flex-to-row col-md-12 shows">
+                <!-- available showing tickets descriptions -->
+                <div class="col-md-3">
+                    <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/psIStillLoveYou.jpg" alt="...">
+                        <div class="caption">
+                        <h5>PS I Still Love You</h5>
+                        <p>April 2, 2020</p>   
+                        </div>     
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/psIStillLoveYou.jpg" alt="...">
+                        <div class="caption">
+                        <h5>PS I Still Love You</h5>
+                        <p>April 3, 2020</p>   
+                        </div>     
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/psIStillLoveYou.jpg" alt="...">
+                        <div class="caption">
+                        <h5>PS I Still Love You</h5>
+                        <p>April 4, 2020</p>   
+                        </div>     
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/psIStillLoveYou.jpg" alt="...">
+                        <div class="caption">
+                        <h5>PS I Still Love You</h5>
+                        <p>April 5, 2020</p>   
+                        </div>     
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="thumbnail thumbnail-fit">
+                        <img src="assets/MoviePosters/psIStillLoveYou.jpg" alt="...">
+                        <div class="caption">
+                        <h5>PS I Still Love You</h5>
+                        <p>April 6, 2020</p>   
+                        </div>     
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <!-- Footer -->
+	<nav class="nav navbar-default">
+		<div class=" main_content footer">
+			&copy; Benedictos, Cagaoan, Montecillo, 2020.
+		</div>
+	</nav>
+	<!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="scripts/bootstrap.min.js"></script>
+  <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+  <!-- <script src="offcanvas.js"></script> -->
+  <!-- Main JS handler for this html page -->
+  <script type="text/javascript" src="scripts/main.js"></script>
+    
+</body>
+</html>

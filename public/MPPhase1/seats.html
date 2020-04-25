@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation</title>
+
+  <!-- Bootstrap css cdn -->
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+  <!-- Header and footer styles -->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <!-- This page's CSS -->
+  <link rel="stylesheet" type="text/css" href="css/seats.css">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"> </script>
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+      $("#reserve").click(function() {
+        if (confirm("Are you sure you want to reserve these seats?"))
+        {
+          window.location.href = "payment.html";
+        }
+    })
+    });
+
+  </script>
+</head>
+<body>
+          <!-- Header main -->
+          <nav class="navbar navbar-default">
+          <div class="container-fluid theme">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="Home.html">Ticket or Leave it</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li><a href="Movies.html">Movies</a></li>
+              <li><a href="calendar.html">Calendar</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <!-- USE NODEJS AND SESSIONS IN THE FUTURE, THIS WILL CHANGE TO USERNAME WHEN LOGGED IN -->
+              <li><a href="login.html">
+                <span class="glyphicon glyphicon-user"></span>
+                Register/Log In
+              </a></li>
+            </ul>
+          </div>
+        </nav>
+
+    <div class="instructions">
+      <center> <div class="text">Not taken</div> <label class="notTaken marginLR boxShadow"style="color:#bada55;">_</label>
+      <div class="text">Your choice</div> <label class="yourChoice marginLR boxShadow" style="color:#FF8C00;">_</label>
+      <div class="text">Taken</div> <label class="taken marginLR boxShadow"style="color:#F42536;">_</label></center>
+    </div>
+    <div class="container">
+      <ol>
+          <li>
+            <ol class="seats">
+              <li class="seat">
+                <input type="checkbox" id="1A" />
+                <label for="1A">1A</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="1B" />
+                <label for="1B">1B</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="1C" />
+                <label for="1C">1C</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="1D" />
+                <label for="1D">1D</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="1E" />
+                <label for="1E">1E</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="1F" />
+                <label for="1F">1F</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="1G" />
+                <label for="1G">1G</label>
+              </li>
+              <li class="seat">
+                <input type="checkbox" id="1H" />
+                <label for="1H">1H</label>
+              </li>
+            </ol>
+          </li>
+            <li>
+              <ol class="seats">
+                <li class="seat">
+                  <input type="checkbox" id="2A" />
+                  <label for="2A">2A</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="2B" />
+                  <label for="2B">2B</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="2C" />
+                  <label for="2C">2C</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="2D" />
+                  <label for="2D">2D</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="2E" />
+                  <label for="2E">2E</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="2F" />
+                  <label for="2F">2F</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="2G" />
+                  <label for="2G">2G</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="2H" />
+                  <label for="2H">2H</label>
+                </li>
+              </ol>
+            </li>
+            <li>
+              <ol class="seats">
+                <li class="seat">
+                  <input type="checkbox" id="3A" />
+                  <label for="3A">3A</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="3B" />
+                  <label for="3B">3B</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="3C" />
+                  <label for="3C">3C</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="3D" />
+                  <label for="3D">3D</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="3E" />
+                  <label for="3E">3E</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="3F" />
+                  <label for="3F">3F</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="3G" />
+                  <label for="3G">3G</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="3H" />
+                  <label for="3H">3H</label>
+                </li>
+              </ol>
+            </li>
+            <li>
+              <ol class="seats">
+                <li class="seat">
+                  <input type="checkbox" id="4A" />
+                  <label for="4A">4A</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="4B" />
+                  <label for="4B">4B</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="4C" />
+                  <label for="4C">4C</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="4D" />
+                  <label for="4D">4D</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="4E" />
+                  <label for="4E">4E</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="4F" />
+                  <label for="4F">4F</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="4G" />
+                  <label for="4G">4G</label>
+                </li>
+                <li class="seat">
+                  <input type="checkbox" id="4H" />
+                  <label for="4H">4H</label>
+                </li>
+              </ol>
+            </li>
+      </ol>
+    </div>
+    <div class="container">
+      <input type="button" id="reserve" value="Reserve" class="button"style="margin:0 auto;">
+    </div>
+
+  <!-- Footer -->
+  <nav class="nav navbar-default">
+    <div class=" main_content footer">
+      &copy; Benedictos, Cagaoan, Montecillo, 2020.
+    </div>
+  </nav>
+    
+</body>
+</html>

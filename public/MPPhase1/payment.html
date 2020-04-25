@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap css cdn -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- header and footer styles, and auth_box -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    
+    <title>Payment Gateway</title>
+</head>
+<body>
+
+    <!-- Header main -->
+    <nav class="navbar navbar-default">
+		<div class="container-fluid theme">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="Home.html">Ticket or Leave it</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="Movies.html">Movies</a></li>
+				<li><a href="calendar.html">Calendar</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<!-- USE NODEJS AND SESSIONS IN THE FUTURE, THIS WILL CHANGE TO USERNAME WHEN LOGGED IN -->
+				<li><a href="login.html">
+					<span class="glyphicon glyphicon-user"></span>
+					Register/Log In
+				</a></li>
+			</ul>
+		</div>
+	</nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main_content">
+            <div class="auth_box">
+                <!-- Tans -->
+                <div class="form-group">
+                    <ul class="nav nav-tabs nav-justified">
+                        <li class="active" id="tabCard"><a data-toggle="tab" href="#card_wrapper">Credit/Debit Card</a></li>
+                        <li id="tabLogin"><a data-toggle="tab" href="#otc_wrapper">Over the Counter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Card -->
+                    <div id="card_wrapper" class="tab-pane fade in active">
+                        <form name="payCard" id="payCard">
+                            
+                            <!-- Card Number -->
+                            <div class="form-group">
+                                <label for="cardNum">Card Number</label>
+                                <input type="number" name="cardNum" id="cardNum" class="form-control" placeholder="1111 2222 3333 4444">
+                            </div>
+
+
+                            <!-- Expiry Date -->
+                            <div class="form-group">
+                                <label>Expiry Date</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <select id="expiryMonth" class="form-control">
+                                            <option value="Month" selected>Month</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select id="expiryYear" class="form-control">
+                                            <option value="Year" selected>Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CIV -->
+                            <div class="form-group">
+                                <label for="cardNum">CIV</label>
+                                <input type="number" name="cardCIV" id="cardCIV" class="form-control" placeholder="XXX">
+                            </div>
+                            
+                            <!-- Submit -->
+                            <div class="form-group">
+                                <input type="button" name="cardSubmit" id="cardSubmit" class="btn btn-md btn-default btn-block" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                
+                    <!-- Over the counter -->
+                    <div id="otc_wrapper" class="tab-pane fade">
+                        <form name="payOTC" id="payOTC">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label for="otcEmail">Enter Email Address to send confirmation details:</label>
+                                <input type="email" name="otcEmail" id="otcEmail" class="form-control" placeholder="Email Address">
+                            </div>
+                
+                            <!-- Submit -->
+                            <div class="form-group">
+                                <input type="button" name="otcSubmit" id="otcSubmit" class="btn btn-md btn-default btn-block" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<!-- Footer -->
+	<nav class="nav navbar-default">
+		<div class=" main_content footer">
+			&copy; Benedictos, Cagaoan, Montecillo, 2020.
+		</div>
+	</nav>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <!-- <script src="offcanvas.js"></script> -->
+    <!-- Main JS handler for this html page -->
+    <!-- <script type="text/javascript" src="scripts/main.js"></script> -->
+    <script type="text/javascript">
+        $(document).ready(()=>{
+            for(let i = 1; i <= 12; i++){
+                let x = document.createElement("option");
+                x.setAttribute("value", i);
+                $(x).html(i);
+                $("#expiryMonth").append(x);
+            }
+
+            let currYear = new Date().getFullYear();
+
+            for(let i = 0; i <=15; i++){
+                let x = document.createElement("option");
+                x.setAttribute("value", currYear + i);
+                $(x).html(currYear + i);
+                $("#expiryYear").append(x);
+            }
+
+        })
+    </script>
+</body>
+</html>

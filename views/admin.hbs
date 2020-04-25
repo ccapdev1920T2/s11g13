@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{pageName}}</title>
+
+    <!-- BS4 Link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Font Awesome 4 Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Tempus Dominus BS4 datepicker widget-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+
+</head>
+<body>
+    {{>header}}
+
+    <div class="container mt-4 p-2">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#Main">Movie List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#Add">Add Movie/Show</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#EditRemove">Edit/Remove Showing</a>
+            </li>
+        </ul>
+        <!-- Panel Contents -->
+        <div class="tab-content border border-top-0">
+            <div class="tab-pane fade container-fluid py-4 show active">
+            <h3 class="text-danger">Admin Dashboard</h3>
+            <hr>
+            <h5>Welcome, {{username}}.</h6>
+            <h6>Click on any tab to get started.</h6>
+            </div>
+            <!-- Staring Screen -->
+            <div class="tab-pane fade container-fluid py-4" id="Main">
+                <h3 class="text-danger">Movie List</h3>
+                <hr>
+                <div class="row justify-content-center">
+                    <div class="card w-75">
+                        <table class="table table-sm table-striped text-center mb-0">
+                            <tr>
+                                <th>Movie Title</th><th>Movie ID</th>
+                            </tr>
+                            {{#each movies}}
+                                <tr><td>{{title}}</td><td>{{_id}}</td></tr>
+                            {{/each}}
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Adding movies or shows -->
+            <div class="tab-pane fade container-fluid py-4" id="Add">
+                <h3 class="text-danger">Add new Movies or Shows</h3>
+                <hr>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <ul class="nav nav-pills nav-fill" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link bg-danger text-light mx-2 active" data-toggle="tab" role="tab" href="#AddMovieForm">Add Movie</a> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link bg-danger text-light mx-2" data-toggle="tab" role="tab" href="#AddShowForm">Add Show</a> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tab-content container border border-muted mt-4 pt-4">
+                    <div class="tab-pane fade show active" id="AddMovieForm">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <form name="AddMovie" id="AddMovie" class="form-horizontal" method="post" action='/admin/addMovie' enctype="multipart/form-data">
+                                    <div class="form-group row">
+                                        <label for="addMovieTitle" class="col-form-label col-md-3 text-center">Movie Title</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="addMovieTitle" id="addMovieTitle" class="form-control" placeholder="Title" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="addMovieGenre" class="col-form-label col-md-3 text-center">Genres</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="addMovieGenre" id="addMovieGenre" class="form-control" placeholder="Genre1, Genre2" required>
+                                        </div>
+                                    </div>
+                                    <!--    Score Rating
+                                    <div class="form-group row">
+                                        <label for="addMovieScore" class="col-form-label col-md-3 text-center">Score</label>
+                                        <div class="col-md-9">
+                                            <input type="number" name="addMovieScore" id="addMovieScore" class="form-control" placeholder="Out of 5">
+                                        </div>
+                                    </div>
+                                    -->
+                                    <div class="form-group row">
+                                        <label for="addMovieSynopsis" class="col-form-label col-md-3 text-center">Synopsis</label>
+                                        <div class="col-md-9">
+                                            <textarea name="addMovieSynopsis" id="addMovieSynopsis" rows="5" class="form-control" placeholder="Movie Synopsis here" style="resize:none"required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="addMovieCast" class="col-form-label col-md-3 text-center">Cast</label>
+                                        <div class="col-md-9">
+                                            <textarea name="addMovieCast" id="addMovieCast" rows="5" class="form-control" placeholder="Starring: " style="resize:none" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="addMovieTrailer" class="col-form-label col-md-3 text-center">Trailer URL</label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="addMovieTrailer" id="addMovieTrailer" class="form-control" placeholder="Trailer url" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="addMoviePoster" class="col-form-label col-md-3 text-center">Movie Poster</label>
+                                        <div>
+                                            <input type="file" name="addMoviePoster" id="addMoviePoster" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row justify-content-center">
+                                        <button type="submit" id="addMovieUpload" class="btn btn-danger"> 
+                                            <i class="fa fa-upload"></i> Upload Movie Details
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="AddShowForm">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <form name="AddShow" id="AddShow" class="form-horizontal" method="post" action='/admin/addShow'>
+                                    <div class="form-group row">
+                                        <label for="showMovieID" class="col-form-label col-md-3 text-center">Movie Title <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Refer to Movie List Tab"></i></label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="showMovieID" id="showMovieID" class="form-control" placeholder="Movie ID">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="showMovieDate" class="col-form-label col-md-3 text-center">Show Day</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group date" id="datePicker" data-target-input="nearest">
+                                                <input type="text" name="showMovieDate" id="showMovieDate" class="form-control datetimepicker-input" data-target="#datePicker"/>
+                                                <div class="input-group-append" data-target="#datePicker" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                                </div>
+                                            </div>
+                                            {{!-- <select name="showMovieDate" id="showMovieDate" class="form-control" placeholder="Select Day">
+                                            </select> --}}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="showMovieTime" class="col-form-label col-md-3 text-center">Show Time</label>
+                                        <div class="col-md-9">
+                                            <select name="showMovieTime" id="showMovieTime" class="form-control" placeholder="Select Day">
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row justify-content-center">
+                                        <button type="submit" id="addShowUpload" class="btn btn-danger"> 
+                                            <i class="fa fa-upload"></i> Add Show Schedule
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Edit / remove movies -->
+            <div class="tab-pane fade container-fluid py-4" id="EditRemove">
+                <h3 class="text-danger">Edit or Remove Showing Movies</h3>
+                <hr>
+                <div class="row">
+                    <!-- Controls -->
+                    <div class="col-sm-2">
+                        <button class="btn btn-block btn-outline-danger mb-4" type="button" data-toggle="collapse" data-target="#DaySelector">
+                            Days <i class="fa fa-caret-down"></i>
+                        </button>
+
+                        <div class="collapse navbar-collapse mb-4" id="DaySelector">
+                            <ul class="nav flex-column nav-pills" role="tablist">
+                                <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#SunShow">Sunday</a></li>
+                                <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#MonShow">Monday</a></li>
+                                <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#TueShow">Tuesday</a></li>
+                                <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#WedShow">Wednesday</a></li>
+                                <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#ThuShow">Thursday</a></li>
+                                <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#FriShow">Friday</a></li>
+                                <li class="nav-item"><a class="nav-link text-center bg-danger text-light mb-1" data-toggle="pill" role="tab" href="#SatShow">Saturday</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Movies --> 
+                    <div class="col-sm-10">
+                        <div class="container-fluid tab-content">
+                            <div class="tab-pane fade" role="tabpanel" id="SunShow">
+                                <h5 class="text-danger">Sunday shows</h5>
+                                <table class="table table-hover table-responsive-sm" id="SunContent">
+                                    <tr>
+                                        <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                    </tr>
+                                    {{#each (showDay show 1)}}
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
+                                        </tr> 
+                                    {{/each}}
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" role="tabpanel" id="MonShow">
+                                <h5 class="text-danger">Monday shows</h5>
+                                <table class="table table-hover table-responsive-sm" id="MonContent">
+                                    <tr>
+                                        <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                    </tr>
+                                    {{#each (showDay show 2)}}
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
+                                        </tr> 
+                                    {{/each}}
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" role="tabpanel" id="TueShow">
+                                <h5 class="text-danger">Tuesday shows</h5>
+                                <table class="table table-hover table-responsive-sm" id="TueContent">
+                                    <tr>
+                                        <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                    </tr>
+                                    {{#each (showDay show 3)}}
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
+                                        </tr> 
+                                    {{/each}}
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" role="tabpanel" id="WedShow">
+                                <h5 class="text-danger">Wednesday shows</h5>
+                                <table class="table table-hover table-responsive-sm" id="WedContent">
+                                    <tr>
+                                        <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                    </tr>
+                                    {{#each (showDay show 4)}}
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
+                                        </tr> 
+                                    {{/each}}
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" role="tabpanel" id="ThuShow">
+                                <h5 class="text-danger">Thursday shows</h5>
+                                <table class="table table-hover table-responsive-sm" id="ThuContent">
+                                    <tr>
+                                        <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                    </tr>
+                                    {{#each (showDay show 5)}}
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
+                                        </tr> 
+                                    {{/each}}
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" role="tabpanel" id="FriShow">
+                                <h5 class="text-danger">Friday shows</h5>
+                                <table class="table table-hover table-responsive-sm" id="FriContent">
+                                    <tr>
+                                        <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                    </tr>
+                                    {{#each (showDay show 6)}}
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
+                                        </tr> 
+                                    {{/each}}
+                                </table>
+                            </div>
+
+                            <div class="tab-pane fade" role="tabpanel" id="SatShow">
+                                <h5 class="text-danger">Saturday shows</h5>
+                                <table class="table table-hover table-responsive-sm" id="SatContent">
+                                    <tr>
+                                        <th>Title</th><th>Genre</th><th>Rating</th><th>Date</th><th>Time</th><th colspan="2"></th>
+                                    </tr>
+                                    {{#each (showDay show 7)}}
+                                        <tr id={{movieID}} contenteditable="false">
+                                            <td contenteditable="false">{{title}}</td><td contenteditable="false">{{genre}}</td>
+                                            <td id='{{movieID}}1' contenteditable="false">{{rateBuilder rating}}</td>
+                                            <td id={{movieID}}2>{{date}}</td><td id={{movieID}}3>{{time}}</td>
+                                            <td><button id={{movieID}}4 type="button" class="btn btn-warning" contenteditable="false" 
+                                                onclick="editRow('{{movieID}}','{{date}}','{{time}}');">Edit</button>
+                                            <td><button type="button" class="btn btn-danger" contenteditable="false"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                            if (result) {
+                                                                deleteRow('{{movieID}}')}">Remove</button></td>
+                                        </tr> 
+                                    {{/each}}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BS4 Scripts -->
+    <!--
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+    <!--Tempus Dominus BS4 datepicker widget-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" type="text/javascript"></script> <!--Dependendant of TDBS4-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            //Hide other days on click
+            $('#DaySelector').find("a").click(()=>{
+                $('#DaySelector').collapse('hide');
+            })
+
+            $('[data-toggle="tooltip"]').tooltip(); //initialize tooltip for Add Show movieID
+
+            /*Populate values for Dropdown on Add Show*/
+            let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            let times = ["09:15 - 10:45", "11:00 - 12:30", "12:45 - 14:15", "1430 - 1600", "1615 - 1745", "1800 - 1930", "1945 - 2115"];
+
+            /*for(let i = 1; i <= 7; i++)
+            {
+                let x = document.createElement("option");
+                x.setAttribute("value", i);
+                $(x).text(days[i-1]);
+                $("#showMovieDate").append(x);
+            }*/
+
+            $('#datePicker').datetimepicker({
+                format: 'L'
+            });
+
+            for(let i = 0; i < times.length; i++){
+                let x = document.createElement("option");
+                x.setAttribute("value", times[i]);
+                $(x).text(times[i]);
+                $("#showMovieTime").append(x);
+            }
+
+            var day = 1;
+            var y = 0;
+            $("#addShow").hide();
+            
+            $("#add").click(function(){
+                if (y == 0){
+                    $("#addShow").show(500);
+                    y++;
+                }
+                else {
+                    $("#addShow").hide(500);
+                    y--;
+                }
+            });
+
+            $(".nav-item").click(function(){
+                $("#addShow").hide();
+            });
+        });
+
+        function deleteRow(showID){
+            $('#'+ showID).remove();
+            { $.ajax({
+                url: '/admin/removeShow',
+                method: 'DELETE',
+                data: {
+                    movieID: showID
+                }
+              })
+            };
+        }
+
+        function rateBuilder(rating){
+            string = '';
+            for (var i=0;i<rating;i++)
+            {
+                string += '<i class="fa fa-star text-warning"></i>\n';
+            }
+            return string;
+        }
+
+        function editRow(showID, date, time){
+            value = $('#'+ showID).attr('contenteditable');
+                if (value == 'false') {
+                    $('#'+ showID).attr('contenteditable','true');
+                    alert('You can now edit!');
+                    $('#'+ showID+4).text("Save");
+                    //$('#'+showID+1).text(rating + '/5');
+
+                    //current date
+                    copiedDate = $('#'+showID+2).text();
+                    currDate = new Date(copiedDate);
+                    currYear = currDate.getFullYear();
+                    currMonth = currDate.getMonth()+1;
+                    currDay = currDate.getDate();
+                    console.log("date is " + currYear + "/" + currMonth + "/" + currDay);
+                    d = currMonth + "/" + currDay + "/" + currYear;
+
+
+                    //date picker
+                    $('#'+showID+2).html(
+                        '<div contenteditable="false" class="input-group date" id='+showID+5+' data-target-input="nearest">' +
+                            '<input type="text" id='+showID+2+' class="form-control datetimepicker-input" data-target="#'+showID+5+'" value="'+d+'"/>' + 
+                            '<div class="input-group-append" data-target="#'+showID+5+'" data-toggle="datetimepicker">' +
+                                '<div contenteditable="false" class="input-group-text"> <i class="fa fa-calendar"> </i> </div>' +
+                            '</div> </div>'
+                        );
+
+                    //time
+                    currTime=$('#'+showID+3).text();
+
+                    //time picker
+                    $('#'+showID+3).html(
+                        '<select id="'+showID+6+'" class="form-control"></select>'
+                        ); 
+
+                    //time slot options
+                    let times = ["09:15 - 10:45", "11:00 - 12:30", "12:45 - 14:15", "1430 - 1600", "1615 - 1745", "1800 - 1930", "1945 - 2115"];
+                    for(let i = 0; i < times.length; i++){ 
+                        let x = document.createElement("option");
+                        x.setAttribute("value", times[i]);
+                        if (times[i] == currTime)
+                            x.setAttribute('selected','selected');
+                        $(x).text(times[i]);
+                        $("#"+showID+6).append(x);
+                    }
+
+                    //format of date
+                    $('#'+showID+5).datetimepicker({
+                        format: 'L'
+                    });
+
+                }
+                else {
+                    $('#'+ showID).attr('contenteditable','false');
+                    alert('Data are now saved!');
+                    $('#'+ showID+4).text("Edit");
+                    //$('#'+showID+1).html(rateBuilder(rating));
+                    $('#'+showID+2).text($('#'+showID+2).find("input").val()); //get date
+                    $('#'+showID+3).text($('#'+showID+6).children("option:selected").val()); //get time
+
+                    
+                    { $.ajax({
+                        url: '/admin/changeShow',
+                        method: 'PUT',
+                        data: {
+                            showID: showID,
+                            date: $('#'+ showID+2).html(),
+                            time: $('#'+ showID+3).html(),
+                        }
+                    })
+                    };
+                    //these codes load the content once edited
+                    $("#SunContent").load("/admin #SunContent");
+                    $("#MonContent").load("/admin #MonContent");
+                    $("#TueContent").load("/admin #TueContent");
+                    $("#WedContent").load("/admin #WedContent");
+                    $("#ThuContent").load("/admin #ThuContent");
+                    $("#FriContent").load("/admin #FriContent");
+                    $("#SatContent").load("/admin #SatContent");
+                }
+
+        }
+
+    </script>
+
+</body>
+</html>

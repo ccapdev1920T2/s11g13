@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{pageName}}</title>
+
+    <!-- BS4 Link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Font Awesome 4 Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+</head>
+<body>
+    {{>header}}
+
+    <br>
+    <div class="container justify-content-center">
+        <!-- Ticket Details -->
+        <div class="card m-auto" style="max-width: 450px">
+            <div class="card-body">
+                <h4 class="card-title text-center text-danger">Ticket Details</h4>
+                
+                {{#with ticketDetails}}
+                    <table class="table table-sm table-borderless text-center">
+                        <tr>
+                            <td><h6>Movie Title:</h6></td>
+                            <td>{{title}}</td>
+                        </tr>
+                        <tr>
+                            <td><h6>Show Date:</h6></td>
+                            <td>{{showDate}}</td>
+                        </tr>
+                        <tr>
+                            <td><h6>Show Time:</b></td>
+                            <td>{{showTime}}</td>
+                        </tr>
+                        <tr>
+                            <td><h6>Seats:</h6></td>
+                            <td>
+                            {{#each seats}}
+                                {{this}}
+                                {{#unless @last}}, {{/unless}}
+                            {{/each}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><h6>Total Cost:</h6></td>
+                            <td>PHP {{totalCost}}</td>
+                        </tr>
+                    </table>
+                {{/with}}
+
+            </div>
+        </div>
+
+        <!-- Payment -->
+        <div class="card m-auto p-3" style="max-width: 450px">
+            <!--Controls-->
+            <div class="form-group">
+                <ul class="nav nav-tabs nav-justified">
+                    <li class="nav-item">
+                        <a class="nav-link active text-danger" id="tabCard" data-toggle="tab" href="#cardWrapper" role="tab" aria-controls="cardWrapper" aria-selected="true">Credit/Debit Card</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" id="tabOTC" data-toggle="tab" href="#otcWrapper" role="tab" aria-controls="otcWrapper" aria-selected="false">Over The Counter</a>
+                    </li>
+                </ul>
+            </div>
+                
+            <div class="tab-content">
+                <!-- Card -->
+                <div id="cardWrapper" class="tab-pane fade show active" role="tabpanel" aria-labelledby="tabCard">
+                    <form name="payCard" id="payCard" method="POST" action="/addTicketSuccess">
+                        
+                        <!-- Card Number -->
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <label for="cardNum">Card Number</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+                                    </div>
+                                <input type="text" name="cardNum" id="cardNum" class="form-control" placeholder="1111 2222 3333 4444">
+                                <div id="ccnumfeedback" class="invalid-feedback">Invalid Credit Card number.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Expiry Date -->
+                        <div class="form-row">
+                            <div class="form-group col-md-8 col-xs-12 mb-0">
+                                <label>Expiry Date</label>
+                                <div class="row">
+                                    <div class="form-group col">
+                                        <select id="expiryMonth" name="expiryMonth" class="form-control">
+                                            <option value="Month" selected>Month</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col">
+                                        <select id="expiryYear" name="expiryYear" class="form-control">
+                                            <option value="Year" selected>Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CIV -->
+                            <div class="form-group col-md-4 col-xs-12">
+                                <label for="cardCIV">CVV <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Check the back of your card; It has 3 digits for VISA and MasterCard and 4 digits for American Express."></i></label>
+                                <input type="number" name="cardCIV" id="cardCIV" class="form-control" placeholder="XXX">
+                                <div id="cvvfeedback" class="invalid-feedback">Invalid CVV.</div>
+                            </div>
+                        </div>
+                        <!--     hidden input to be passed to cart       -->
+                        <input type = "hidden" name = "showID" value = "{{ticketDetails.showID}}"/>
+                        <!--<input type = "hidden" name = "userID" value = ""/>
+                        <input type = "hidden" name = "transID" value = ""/> -->
+                        <input type = "hidden" name = "status" value = "booked"/>
+                        <input type = "hidden" name = "seats" value = "{{ticketDetails.seats}}"/>
+                        <input type = "hidden" name = "totalPrice" value = "{{ticketDetails.totalCost}}"/>
+                        <!-- Submit -->
+                        <div class="form-group">
+                            <button type="submit" name="cardSubmit" id="cardSubmit" class="btn btn-md btn-danger btn-block">Pay with Card</button>
+                        </div>
+                    </form>
+                </div>
+            
+                <!-- Over the counter -->
+                <div id="otcWrapper" class="tab-pane fade" role="tabpanel" aria-labelledby="tabOTC">
+                    <form name="payOTC" id="payOTC" method="POST" action="/addTicketSuccess">
+                        <!-- Email -->
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="otcEmail">Enter Email Address to send confirmation details:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                                    </div>
+                                    <input type="email" name="otcEmail" id="otcEmail" class="form-control" placeholder="Email Address">
+                                    <div id="emailfeedback" class="invalid-feedback">Invalid email.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--     hidden input to be passed to cart       -->
+                        <input type = "hidden" name = "showID" value = "{{ticketDetails.showID}}"/>
+                        <!--<input type = "hidden" name = "userID" value = ""/>
+                        <input type = "hidden" name = "transID" value = ""/> -->
+                        <input type = "hidden" name = "status" value = "booked"/>
+                        <input type = "hidden" name = "seats" value = "{{ticketDetails.seats}}"/>
+                        <input type = "hidden" name = "totalPrice" value = "{{ticketDetails.totalCost}}"/>
+                        <!-- Submit -->
+                        <div class="form-group">
+                            <button type="submit" name="otcSubmit" id="otcSubmit" class="btn btn-md btn-danger btn-block">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <!-- BS4 Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+    
+    <!-- Dropdown data population and frontend validation-->
+    <script src="/scripts/HBS-payment.js"></script>
+</body>
+</html>

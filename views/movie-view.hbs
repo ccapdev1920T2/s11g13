@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{pageName}}</title>
+
+    <!-- BS4 Link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Font Awesome 4 Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="/css/HBS-images.css">
+
+    <style>
+        .on
+        {
+            color:orange;
+        }
+    </style>
+
+</head>
+<body>
+    {{>header}}
+
+    <!-- Main content -->
+    <div class="container mt-4 px-4">
+        <div class="row">
+            <!-- Movie Details -->
+            <div class="col-md-8" id="movieInfo">
+                {{#with movieDetails}}
+                    <div id="movieTitle" class="d-none">{{id}}</div>
+                    <h3 id="title">{{title}}</h3>
+                    <h5 class="text-secondary">{{genre}}</h5>
+
+                    <div class="row">
+                        <!-- Movie Cover -->
+                        <div class="col-md-5">
+                            <div class="card my-2">
+                                <img class="movie-poster img-thumbnail" src={{moviecover}}>
+                            </div>
+                        </div>
+
+                        <!-- Movie Information -->
+                        <div class="col-md-7 my-auto">
+                            <div class="container">
+                                <!-- Helper function for rating below-->
+                                <!-- Placeholder for now-->
+                                <div class="row">
+                                    <h4 id="rating">{{rating}}/<small>5</small></h4>
+                                </div>
+                                <div class="row">
+                                    <span>
+                                        {{rateBuilder rating}}
+                                    </span>
+                                </div>
+
+
+                                <div class="row mt-4">
+                                    <h6 class="text-justify">{{synopsis}}</h6>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <h6>Starring: </h6> &nbsp;
+                                    <h6> 
+                                        {{#each cast}}
+                                            {{this}}
+                                            {{#unless @last}}, {{/unless}}
+                                        {{/each}}
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <hr>
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-3 mb-2">
+                            <a href="{{trailerUrl}}" target="_blank" style="text-decoration: none;"> <button class="btn btn-block btn-danger">View Trailer</button> </a>
+                        </div>
+                        
+                    </div>
+
+                
+                {{/with}}
+            </div>
+
+            <!-- Ratings -->
+            <div class="col-md-4">
+                <div class="row mb-4">
+                    <div class="col-12 overflow-auto pre-scrollable mt-4">
+                        <h6 class="text-center mb-0"> Reviews </h6>
+                        <hr class="mt-0">
+                        {{#if flag}}
+                            {{#with userRev}}
+                                <div class="card bg-light mb-2">
+                                    <div class="container-fluid">
+                                        <div class="card-body p-1">
+                                            <div class="row no-gutters">
+                                                <div class="col-3">
+                                                    <div class="row">
+                                                        <image class="review-dp mx-auto rounded-circle" src={{profilepic}}>
+                                                    </div>
+                                                    <div class="row">
+                                                        <small class="mx-auto">{{fName}}</small>
+                                                    </div>
+                                                    <div class="row">
+                                                        <small class="mx-auto">{{lName}}</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-9">
+                                                    <div class="row">
+                                                        <div id="userRevRating" class="d-none">{{rating}}</div>
+                                                        <small class="pl-3">{{rateBuilder rating}}</small>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div id="userRevCommentTitle" class="d-none">{{commentTitle}}</div>
+                                                        <small class="pl-3"><h6>{{commentTitle}}</h6></small>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div id="userRevComment" class="d-none">{{comment}}</div>
+                                                        <small class="pl-3"><p class="mb-0">{{comment}}</p></small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer py-0 pl-2 pr-0">
+                                        <div class="row no-gutters">
+                                            <span class="mr-auto">
+                                                <small class="text-muted align-middle">{{date}}</small>
+                                            </span>
+                                            {{deleteBtnBuilder ../username username}}
+                                            <!--TODO: APPEND AN EDIT REVIEW button-->
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/with}}
+                            <hr class="mt-0">
+                        {{/if}}
+                        
+                        {{#each review}}
+                            <div class="card bg-light mb-2">
+                                <div class="container-fluid">
+                                    <div class="card-body p-1">
+                                        <div class="row no-gutters">
+                                            <div class="col-3">
+                                                <div class="row">
+                                                    <image class="review-dp mx-auto rounded-circle" src={{profilepic}}>
+                                                </div>
+                                                <div class="row">
+                                                    <small class="mx-auto">{{fName}}</small>
+                                                </div>
+                                                <div class="row">
+                                                    <small class="mx-auto">{{lName}}</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-9">
+                                                <div class="row">
+                                                    <small class="pl-3">{{rateBuilder rating}}</small>
+                                                    {{editRatingHidden ../username username rating}}
+                                                </div>
+                                                <div class="row">
+                                                    <small class="pl-3"><h6>{{commentTitle}}</h6></small>
+                                                </div>
+                                                <div class="row">
+                                                    <small class="pl-3"><p class="mb-0">{{comment}}</p></small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer py-0 pl-2 pr-0">
+                                    <div class="row no-gutters">
+                                        <span class="mr-auto">
+                                            <small class="text-muted align-middle">{{date}}</small>
+                                        </span>
+                                        {{deleteBtnBuilder ../username username}}
+                                        <!--TODO: APPEND AN EDIT REVIEW button-->
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+
+
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    {{#if (ActiveSession)}}
+                        {{#if flag}}
+                            <button class="btn btn-danger" id="editReview" data-toggle="modal" data-target="#editReviewModal">Edit review</button>
+                        {{else}}
+                            <button class="btn btn-danger" data-toggle="modal" data-target="#addReviewModal">Add review</button>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal for adding review -->
+        <div class="modal fade" id="addReviewModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form id="AddReview" class="form-horizontal" method="POST" action="/movies/AddReview">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add a review</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <input type="hidden" name="movieTitle" id="inputMovTitle">
+                                {{!-- Since u want na yung stars yung nagyeyellow--}}
+                                <div class="form-group row mb-0">
+                                    <label class="col-form-label col-sm-4"><h5>Rating</h5></label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" required id="selected_rating" name="rating" value="0">
+                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="1" id="rating-star-1"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="2" id="rating-star-2"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="3" id="rating-star-3"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="4" id="rating-star-4"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg btnrating" data-attr="5" id="rating-star-5"></i>
+                                    </div>
+                                </div>
+                                <hr class="mt-0">
+                                <div class="form-group row">
+                                    <label for="ReviewTitle" class="sr-only">Review Title</label>
+                                    <input type="text" name="ReviewTitle" class="form-control" placeholder="Title">
+                                </div>
+                            
+                                <div class="form-group row">
+                                    <label for="Review" class="sr-only">Review</label>
+                                    <input type="text" name="Review" class="form-control" placeholder="Comment">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancel </button>
+                            <button type="submit" class="btn btn-danger"> Upload Review </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for editing review-->
+        <div class="modal fade" id="editReviewModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form id="EditReview" class="form-horizontal" method="POST" action="/movies/editReview">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit review</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <input type="hidden" name="movieTitle" id="editMovTitle">
+                                {{!-- Since u want na yung stars yung nagyeyellow--}}
+                                <div class="form-group row mb-0">
+                                    <label class="col-form-label col-sm-4"><h5>Rating</h5></label>
+                                    <div class="col-sm-8">
+                                        <input type="hidden" required id="edit_selected_rating" name="rating" value="0">
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="1" id="edit_rating-star-1"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="2" id="edit_rating-star-2"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="3" id="edit_rating-star-3"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="4" id="edit_rating-star-4"></i>
+                                        <i role="button" class="ml-1 fa fa-star fa-lg edit_btnrating" data-attr="5" id="edit_rating-star-5"></i>
+                                    </div>
+                                </div>
+                                <hr class="mt-0">
+                                <div class="form-group row">
+                                    <label for="ReviewTitle" class="sr-only">Review Title</label>
+                                    <input type="text" name="ReviewTitle" id="editReviewTitle" class="form-control" placeholder="Title">
+                                </div>
+                            
+                                <div class="form-group row">
+                                    <label for="Review" class="sr-only">Review</label>
+                                    <input type="text" name="Review" id="editReview" class="form-control" placeholder="Comment">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"> Cancel </button>
+                            <button type="submit" class="btn btn-danger"> Update Review </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Showing Schedules -->
+        <!-- EDITED -->
+        <div class="schedules">
+            {{>displayMovies}}   
+        </div>
+    </div>
+
+    <!-- BS4 Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+    {{!--  
+    source: https://bootsnipp.com/snippets/WaXlr
+    --}}
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+    
+            $(".btnrating").on('click',(function(e) {
+            
+                var previous_value = $("#selected_rating").val();
+                
+                var selected_value = $(this).attr("data-attr");
+                $("#selected_rating").val(selected_value);
+                
+                $(".selected-rating").empty();
+                $(".selected-rating").html(selected_value);
+                
+                for (i = 1; i <= selected_value; i++) {
+                $("#rating-star-"+i).toggleClass('text-warning');
+                $("#rating-star-"+i).toggleClass('text-default');
+                }
+                
+                for (ix = 1; ix <= previous_value; ++ix) {
+                $("#rating-star-"+ix).toggleClass('text-warning');
+                $("#rating-star-"+ix).toggleClass('text-default');
+                }
+            
+            }));
+
+            $("#edit_selected_rating").val($("#initialRating").val()); //Developer note: check app.js editRatingHidden hbs helper
+
+            $(".edit_btnrating").on('click',(function(e) {
+                var previous_value = $("#edit_selected_rating").val();
+                
+                var selected_value = $(this).attr("data-attr");
+                console.log($("#edit_selected_rating").val());
+
+                $("#edit_selected_rating").val(selected_value);
+                
+                $(".selected-rating").empty();
+                $(".selected-rating").html(selected_value);
+                
+                for (i = 1; i <= selected_value; i++) {
+                $("#edit_rating-star-"+i).toggleClass('text-warning');
+                $("#edit_rating-star-"+i).toggleClass('text-default');
+                }
+                
+                for (ix = 1; ix <= previous_value; ++ix) {
+                $("#edit_rating-star-"+ix).toggleClass('text-warning');
+                $("#edit_rating-star-"+ix).toggleClass('text-default');
+                }
+            }));
+
+
+            $("#inputMovTitle").prop("value", $("#movieTitle").html());
+            $("#editMovTitle").prop("value", $("#movieTitle").html());
+            $("#movieTitle").remove();
+
+            /*userRev*/
+            $("#selected_rating").prop("value", $("#userRevRating").html());
+            $("#userRevRating").remove();
+
+            $("#reviewTitle").prop("value", $("#userRevCommentTitle").html());
+            $("#editReviewTitle").prop("value", $("#userRevCommentTitle").html());
+            $("#userRevRating").remove();
+            //TODO: FSR values from  userRevComment does not get propped to #editReview
+            $("#review").prop("value", $("#userRevComment").html());
+            $("#editReview").prop("value", $("#userRevComment").html());
+            $("#userRevComment").remove();
+            
+            //TODO: Prop values from comments to form fields of modal
+
+            /*$("#editRating").on(click, e=>{
+
+            })*/
+
+            /*$(".butones").on('click',(function(){
+                window.alert('hahaha');
+            }))*/
+                
+        });
+
+        function deleteRev(){
+            {$.ajax({
+                url: '/movies/deleteReview',
+                method: 'DELETE',
+                data: {
+                movieID: $("#inputMovTitle").val(),
+                }
+             })
+            };
+            
+            //$("#rating").load("/movies/view/"+$("#title").val()+" #rating");
+            alert($("#title").html())
+            location.href = "/movies/view/"+$("#title").html()
+        }
+        
+    </script>
+    
+</body>
+</html>

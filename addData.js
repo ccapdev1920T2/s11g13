@@ -36,7 +36,7 @@ bcrypt.hash("p455w0rd", 10, (err, hash)=>{
                 userType: 'Admin',
                 firstName: 'Admin',
                 lastName: 'Manager',
-                pic: '/assets/profpic.png',
+                pic: '/assets/ProfilePictures/profpic.png',
             });
             
 
@@ -66,7 +66,7 @@ bcrypt.hash('123123', 10, (err, hash)=>{
             firstName: 'Megan',
             lastName: 'Knox',
             mobileNumber: '09564468746',
-            pic: "/assets/profpic.jpg",
+            pic: "/assets/ProfilePictures/profpic.jpg",
         });
         
         db.insertOne(Users, user, function(result){
@@ -84,7 +84,7 @@ bcrypt.hash('123123', 10, (err, hash)=>{
             firstName: 'Carolyn',
             lastName: 'Ellison',
             mobileNumber: '09564468747',
-            pic: "/assets/profpic.jpg",
+            pic: "/assets/ProfilePictures/profpic.jpg",
         });
         
         db.insertOne(Users, user, function(result){
@@ -102,7 +102,7 @@ bcrypt.hash('123123', 10, (err, hash)=>{
             firstName: 'Sebastian',
             lastName: 'Kerr',
             mobileNumber: '09564568748',
-            pic: "/assets/profpic.jpg",
+            pic: "/assets/ProfilePictures/profpic.jpg",
         });
         
         db.insertOne(Users, user, function(result){
@@ -120,7 +120,7 @@ bcrypt.hash('123123', 10, (err, hash)=>{
             firstName: 'Ian',
             lastName: 'Dowd',
             mobileNumber: '09564568749',
-            pic: "/assets/profpic.jpg",
+            pic: "/assets/ProfilePictures/profpic.jpg",
         });
         
         db.insertOne(Users, user, function(result){

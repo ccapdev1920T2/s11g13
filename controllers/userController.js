@@ -7,6 +7,7 @@ const Movies = require('../models/MoviesModel.js');
 const Shows = require('../models/ShowsModel.js');
 const Seats = require('../models/SeatsModel.js');
 const Ratings = require('../models/RatingsModel.js');
+const multer = require('multer');
 
 
 //Insert other module dependencies here
@@ -78,13 +79,33 @@ const userController = {
     },
 
     editProfile: function(req, res, next) {
-        db.updateOne(Users,{username: req.body.UName},{
-            firstName: req.body.fName,
-            lastName: req.body.lName,
-            mobileNumber: req.body.Mobile,
-            email: req.body.Email,
-            pic: "/assets/"+req.body.pic,
-        },profile=>{});
+        //multer storage
+        const storage = multer.diskStorage({
+          destination: '/assets/ProfilePictures/',
+          filename: function(req, file, cb) {
+            cb(null,file.fieldname);
+          }
+        });
+
+        const upload = multer({
+            storage: storage
+        }).single('File');
+
+        upload(req, res, (err) => {
+            if (!err){  
+                console.log(req.file.destination);
+                    
+                db.updateOne(Users,{username: req.body.UName},{
+                    firstName: req.body.fName,
+                    lastName: req.body.lName,
+                    mobileNumber: req.body.Mobile,
+                    email: req.body.Email,
+                    pic: req.file.destination + req.file.originalname,
+                },profile=>{});
+                //display
+                res.redirect("/user/"+req.body.username);
+            }
+        })
 
     },
 

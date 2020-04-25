@@ -181,7 +181,7 @@ const moviesController = {
     
     getSearch: (req, res, next)=>{
         db.findOne(Movies, {title: req.query.movieTitle}, '', result=>{
-            console.log(result)
+            //console.log(result)
             if (result){
                 return res.redirect('/movies/view/' + req.query.movieTitle);
             }
@@ -200,9 +200,9 @@ const moviesController = {
         var movieTitle = req.body.movieTitle;
         var userID = '';
 
-        console.log(rate);
-        console.log(reviewTitle);
-        console.log(review);
+        // console.log(rate);
+        // console.log(reviewTitle);
+        // console.log(review);
 
         db.findOne(Users, {username: req.session.userId}, '', function(user){
             userID = user._id;
@@ -210,7 +210,7 @@ const moviesController = {
         
         db.findOne(Movies, {_id: movieTitle},'',function(movie){
             if (movie){
-                console.log("movie found!");
+                //console.log("movie found!");
                 var d = new Date();
                 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 var date = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
@@ -230,14 +230,11 @@ const moviesController = {
                         db.findMany(Ratings, {movieID: movie._id}, '', function(r){
                             if (r){
                                 var total = 0;
-                                console.log(total);
                                 for (let i=0; i<r.length; i++){
                                     total = total + r[i].starRating;
-                                    console.log(total);
                                 }
                                 
                                 total = (total/r.length).toFixed(1);
-                                console.log(total);
                     
                                 db.updateOne(Movies,{_id: movie._id},{
                                     aveScore: total
@@ -256,7 +253,8 @@ const moviesController = {
                 });
             }
             else{
-                console.log(req.body.movieTitle);    
+                //console.log(req.body.movieTitle);
+                console.log('Movie not found!')    
             }
         })
     },
@@ -278,15 +276,12 @@ const moviesController = {
                     db.findMany(Ratings, {movieID: movie.movieID}, '', function(r){
                         if (r){
                             var total = 0;
-                            console.log(total);
                             for (let i=0; i<r.length; i++){
                                 total = total + r[i].starRating;
-                                console.log(total);
                             }
                             
                             if(r.length>=1)
                                 total = (total/r.length).toFixed(1);
-                            console.log(total);
                 
                             db.updateOne(Movies,{_id: movie.movieID},{
                                 aveScore: total
@@ -294,8 +289,6 @@ const moviesController = {
                                 if (result)
                                     console.log("Successfully changed starRating of Movie");
                                 else console.log("Error updating starRating of Movie");
-
-                                console.log('huhhuhuuhuhuhuuh');
                                 return res.redirect('/movies/view/' + movie.title);                             
                             });
                         }
@@ -321,7 +314,7 @@ const moviesController = {
         
         db.findOne(Movies, {_id: movieTitle},'',function(movie){
             if (movie){
-                console.log("movie found!");
+                //console.log("movie found!");
                 var d = new Date();
                 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 var date = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
@@ -344,14 +337,11 @@ const moviesController = {
                         db.findMany(Ratings, {movieID: movie._id}, '', function(r){
                             if (r){
                                 var total = 0;
-                                console.log(total);
                                 for (let i=0; i<r.length; i++){
                                     total = total + r[i].starRating;
-                                    console.log(total);
                                 }
                                 
                                 total = (total/r.length).toFixed(1);
-                                console.log(total);
                     
                                 db.updateOne(Movies,{_id: movie._id},{
                                     aveScore: total
@@ -370,37 +360,11 @@ const moviesController = {
                 });
             }
             else{
-                console.log(req.body.movieTitle);    
+                //console.log(req.body.movieTitle);
+                console.log('Movie not found!');    
             }
         })
     }
 };
-
-function updateStarRating (movieID, next){
-    db.findMany(Ratings, {movieID: movieID}, '', function(r){
-        if (r){
-            var total = 0;
-            console.log(total);
-            for (let i=0; i<r.length; i++){
-                total = total + r[i].starRating;
-                console.log(total);
-            }
-
-            total = total/r.length;
-            console.log(total);
-
-            db.updateOne(Movies,{_id: movieID},{
-                aveScore: total
-            }, result=>{
-                if (result)
-                    console.log("Successfully changed starRating of Movie");
-                else console.log("Error updating starRating of Movie");
-            });
-        }
-        else console.log("Error finding ratings of Movie");  
-    })
-}
-
-
 
 module.exports = moviesController;

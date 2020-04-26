@@ -14,7 +14,7 @@ router.get(["/", "/home"], controller.getHome);
 
 router.get("/calendar", controller.getCalendar, session_auth.validUser);
 
-router.post("/payment", controller.getPayment);
+router.post("/payment", session_auth.pActiveSession, controller.getPayment);
 
 router.get('/logout', session_auth.logout);
 

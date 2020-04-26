@@ -101,7 +101,7 @@ const indexController = {
             movieArrayF  = quick_Sort(movieArrayF); //6
             movieArraySa = quick_Sort(movieArraySa); //7
 
-            if (s)
+            if (!s)
                 movID = 1;
             else
                 movID = s[0].movieID._id;

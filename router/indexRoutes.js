@@ -18,7 +18,7 @@ router.post("/payment", session_auth.pActiveSession, controller.getPayment);
 
 router.get('/logout', session_auth.logout);
 
-router.get('/confirmEmail', controller.getConfirmEmail);
+//router.get('/confirmEmail', controller.getConfirmEmail);
 
 router.post('/addTicketSuccess', controller.addTicket);
 

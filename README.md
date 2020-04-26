@@ -26,8 +26,7 @@ https://github.com/ccapdev1920T2/s11g13.git
    | Command | Description |
    |:--:|:--:|
    | `node deleteAllData` | Clears all the contents of the Database in case you have used this program in the past. This can be skipped. |
-   | `node addData` | populates the database with dummy data. Includes admin |
-   | `node deleteAllData && nodeAddData`|  to do everything at once.
+   | `node addData` | populates the database with dummy data. Includes admin account |
 
 4. Run the web server with `node app` 
 
@@ -64,4 +63,4 @@ This project is under the MIT License.
 ## Acknowledgments
 - Sir Arren Antioquia, our mentor throughout the duration of CCAPDEV
 - Our families and peers who provided feedback regarding our project's appearance
-- Canvas, without it we will have a harder time accessing video tutorials provided by out professor
+- Canvas, without it we will have a harder time accessing video tutorials provided by our professor

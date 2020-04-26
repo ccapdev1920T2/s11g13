@@ -104,6 +104,7 @@ const indexController = {
             res.render("calendar", {
                 pageName: "Calendar",
                 current: "Calendar",
+                movieID: s[0].movieID._id,
                 moviePicSu: movieArraySu,
                 moviePicM: movieArrayM,
                 moviePicT: movieArrayT,

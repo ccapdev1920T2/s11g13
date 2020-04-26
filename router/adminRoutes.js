@@ -9,5 +9,6 @@ router.post('/addMovie',adminController.postMovie);
 router.post('/addShow',adminController.postShow);
 router.put('/changeShow',adminController.updateShow);
 router.delete('/removeShow',adminController.deleteShow);
+router.delete('/removeMovie',adminController.deleteMovie);
 
 module.exports = router;

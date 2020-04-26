@@ -4,6 +4,7 @@ const Movies = require('../models/MoviesModel.js');
 const Shows = require('../models/ShowsModel.js');
 const Seats = require('../models/SeatsModel.js');
 const Tickets = require('../models/TicketsModel.js');
+const Ratings = require('../models/RatingsModel.js');
 const multer = require('multer');
 
 
@@ -172,8 +173,24 @@ const adminController = {
         //movieID is showID
         db.deleteMany(Seats,{"showID": req.body.movieID},show=>{}); //deletes all seats of the show
         db.deleteOne(Shows,{"_id": req.body.movieID},show=>{}); //deletes the show
-        db.deleteMany(Tickets,{"showID": req.body.movieID},show=>{})
-    }
+        db.deleteMany(Tickets,{"showID": req.body.movieID},show=>{}); //delete tickets of show
+        console.log("Deleted shows");
+    },
+
+    deleteMovie: function(req, res, next) {
+        console.log("Deleted movies");
+        db.findMany(Shows,{"movieID": req.body.movieID},'',show=>{
+            console.log(show);
+            for (let i=0;i<show.length;i++){
+                db.deleteMany(Seats,{"showID": show[i]},seat=>{}); //deletes all seats of shows
+                db.deleteMany(Tickets,{"showID": show[i]},tickets=>{}) //deletes all tickets of shows
+            }
+        });
+        console.log(req.body.movieID);
+        db.deleteMany(Ratings,{"movieID": req.body.movieID},ratings=>{}); //deletes all reviews and ratings
+        db.deleteMany(Shows,{"movieID": req.body.movieID},show=>{}); //deletes all show
+        db.deleteOne(Movies,{"_id": req.body.movieID},movie=>{}); //deletes the movie
+    },
 
 
 }

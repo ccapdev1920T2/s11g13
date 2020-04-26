@@ -45,12 +45,17 @@
                     <div class="card w-75">
                         <table class="table table-sm table-striped text-center mb-0">
                             <tr>
-                                <th>Movie Title</th><th>Movie ID</th>
+                                <th>Movie Title</th><th>Movie ID</th><th></th>
                             </tr>
                             {{#each movies}}
-                                <tr>
-                                    <td><a href="/movies/view/{{_id}}">{{title}}</a></td>
-                                    <td>{{_id}}</td>
+                                <tr id={{id}}>
+                                        <td><a href="/movies/view/{{_id}}">{{title}}</a></td>
+                                        <td>{{_id}}</td>
+                                        <td><button type="button" class="btn btn-danger" contenteditable="false"
+                                                onclick=" var result = confirm('Are you sure you want to delete?');
+                                                        if (result) {
+                                                            deleteMovie('{{_id}}')}">Remove</button>
+                                        </td>
                                 </tr>
                             {{/each}}
                         </table>
@@ -142,7 +147,7 @@
                                     <div class="form-group row">
                                         <label for="showMovieID" class="col-form-label col-md-3 text-center">Movie Title <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Refer to Movie List Tab"></i></label>
                                         <div class="col-md-9">
-                                            <input type="text" name="showMovieID" id="showMovieID" class="form-control" placeholder="Movie ID">
+                                            <input type="text" name="showMovieID" id="showMovieID" class="form-control" required placeholder="Movie ID">
                                         </div>
                                     </div>
 
@@ -150,7 +155,7 @@
                                         <label for="showMovieDate" class="col-form-label col-md-3 text-center">Show Day</label>
                                         <div class="col-md-9">
                                             <div class="input-group date" id="datePicker" data-target-input="nearest">
-                                                <input type="text" name="showMovieDate" id="showMovieDate" class="form-control datetimepicker-input" data-target="#datePicker"/>
+                                                <input type="text" name="showMovieDate" id="showMovieDate" class="form-control datetimepicker-input" required data-target="#datePicker"/>
                                                 <div class="input-group-append" data-target="#datePicker" data-toggle="datetimepicker">
                                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                 </div>
@@ -441,6 +446,18 @@
                 method: 'DELETE',
                 data: {
                     movieID: showID
+                }
+              })
+            };
+        }
+
+        function deleteMovie(movieID){
+            $('#'+ movieID).remove();
+            { $.ajax({
+                url: '/admin/removeMovie',
+                method: 'DELETE',
+                data: {
+                    movieID: movieID
                 }
               })
             };

@@ -3,10 +3,15 @@ const hbs = require("hbs");
 const bodyParser = require("body-parser");
 const session = require('express-session');
 
+// import module `mongoose`
+const mongoose = require('mongoose');
+// import module `connect-mongo`
+const MongoStore = require('connect-mongo')(session);
+
 const db = require('./models/database.js');
 const db2 = require('./models/database_old.js');
 
-const TWO_HOURS = 1000 * 60 * 60 * 2;
+// const TWO_HOURS = 1000 * 60 * 60 * 2;
 
 require("dotenv").config();
 
@@ -15,19 +20,19 @@ const {
     port = 3000,
     NODE_ENV = 'development',
     SESS_NAME = 'sid',
-    SESS_SECRET = 'ssh!quiet,it\'sasecret',
-    SESS_LIFETIME = TWO_HOURS
+    // SESS_SECRET = 'ssh!quiet,it\'sasecret',
+    // SESS_LIFETIME = TWO_HOURS
 } = process.env;
 
 //Connecting to db
 db.connect();
 
 // Middlewares
-const IN_PROD = NODE_ENV === 'production'
+// const IN_PROD = NODE_ENV === 'production'
 
 var active, admin;
 
-app.use(session({
+/*app.use(session({
     name: SESS_NAME,
     resave: false,
     saveUninitialized: false,
@@ -37,7 +42,14 @@ app.use(session({
         sameSite: true,
         secure: IN_PROD
     }
-}))
+}))*/
+
+app.use(session({
+    'secret': 'TicketLeaveIt',
+    'resave': false,
+    'saveUninitialized': false,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
+}));
 
 const User = require('./models/UsersModel.js');
 

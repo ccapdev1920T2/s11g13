@@ -140,7 +140,7 @@ const adminController = {
                     
                     // db.findOne(Movies,{title: req.body.addMovieTitle},'', movie=>{
                     //     if (movie){
-                    db.updateOne(Movies, '{_id: req.body.editMovieID}', retrievedData, result=>{
+                    db.updateOne(Movies, {_id: req.body.editMovieID}, retrievedData, result=>{
                         if (result) console.log("Successfully updated movie details.");
                         else console.log("Error updating movie details");
                     })

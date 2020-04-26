@@ -30,8 +30,12 @@
 					<i class="fa fa-dropdown" aria-hidden="true"></i>
 					</a>
 					<div class="dropdown-menu" aria-labelledby="RegLogIn">
-						<a class="dropdown-item" href='/user/{{username}}'>View Profile</a>
-						<a class="dropdown-item" href={{userHrefBuilder username "tickets"}}>View Tickets</a>
+						{{#if (AdminSession)}}
+							<a class="dropdown-item" href='/admin'>Dashboard</a>
+						{{else}}
+							<a class="dropdown-item" href='/user/{{username}}'>View Profile</a>
+							<a class="dropdown-item" href={{userHrefBuilder username "tickets"}}>View Tickets</a>
+						{{/if}}
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="/logout">Log out</a>
 					</div>

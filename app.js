@@ -25,7 +25,7 @@ db.connect();
 // Middlewares
 const IN_PROD = NODE_ENV === 'production'
 
-var active;
+var active, admin;
 
 app.use(session({
     name: SESS_NAME,
@@ -39,6 +39,8 @@ app.use(session({
     }
 }))
 
+const User = require('./models/UsersModel.js');
+
 app.use((req, res, next)=>{
     const {userId} = req.session;
     // console.log('req.session: ' + req.session);
@@ -46,7 +48,14 @@ app.use((req, res, next)=>{
     // console.log('userId: ' + userId);
     if(userId){
         active = true;
-        res.locals.user = User.find({username: req.session.userId});
+        //res.locals.user = User.find({username: req.session.userId});
+        db.findOne(User, {username: req.session.userId}, '', function(user){
+            if (user.userType == 'Admin'){
+                admin = true;
+            }
+            else
+                admin = false;
+        })
     }
     else {
         active = false;
@@ -59,11 +68,6 @@ app.use((req, res, next)=>{
 // Middlewares
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
-/*============================= CREATE ADMIN =============================*/
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const User = require('./models/UsersModel.js');
 
 /* To access public folder where CSS and assets are located  */
 app.use(express.static(__dirname + '\\public'))
@@ -169,6 +173,10 @@ hbs.registerHelper('showDay', function(shows, val) {
 
 hbs.registerHelper('ActiveSession', function() {
     return active;
+});
+
+hbs.registerHelper('AdminSession', function() {
+    return admin;
 });
 
 /********* Routing *********/

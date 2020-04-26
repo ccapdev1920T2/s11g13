@@ -46,7 +46,7 @@ const adminController = {
                     res.render('admin', {
                      pageName: "Admin Dashboard",
                      isSignedIn: true,
-                     username: "Bh0sZxCArr3n",
+                     username: req.session.userId,
                      movies: movie,
                      show: show
                     }) 

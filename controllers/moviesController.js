@@ -12,6 +12,7 @@ const moviesController = {
             for (let i=0;i<movie.length;i++){
                 movieObj = {
                         title: movie[i].title,
+                        id: movie[i]._id,
                         imageurl: movie[i].posterUrl
                     }
                 movieArray.push(movieObj);
@@ -66,7 +67,7 @@ const moviesController = {
     getViewMovie: (req, res, next)=>{
         let movieDetails = {};
       
-        db.findOne(Movies,{title: req.params.title},'',function(movie){
+        db.findOne(Movies,{_id: req.params.movieID},'',function(movie){
             if (movie){
                 let show = [];
                 let review = [];
@@ -183,7 +184,7 @@ const moviesController = {
         db.findOne(Movies, {title: req.query.movieTitle}, '', result=>{
             //console.log(result)
             if (result){
-                return res.redirect('/movies/view/' + req.query.movieTitle);
+                return res.redirect('/movies/view/' + result._id);
             }
             else{
                 let notfound = "No movie found with title \"" + req.query.movieTitle +"\""
@@ -197,7 +198,7 @@ const moviesController = {
         var rate = req.body.rating;
         var reviewTitle = req.body.ReviewTitle;
         var review = req.body.Review;
-        var movieTitle = req.body.movieTitle;
+        var movie_id = req.body.movieTitle;
         var userID = '';
 
         // console.log(rate);
@@ -208,7 +209,7 @@ const moviesController = {
             userID = user._id;
         })
         
-        db.findOne(Movies, {_id: movieTitle},'',function(movie){
+        db.findOne(Movies, {_id: movie_id},'',function(movie){
             if (movie){
                 //console.log("movie found!");
                 var d = new Date();
@@ -247,7 +248,7 @@ const moviesController = {
                             else console.log("Error finding ratings of Movie");  
                         });
 
-                        return res.redirect('/movies/view/' + movie.title);
+                        return res.redirect('/movies/view/' + movie._id);
                     }
                     else console.log("Error inserting to Ratings collection");
                 });
@@ -260,20 +261,14 @@ const moviesController = {
     },
 
     deleteReview: (req, res, next)=>{
-        var movie = {
-            movieID: req.body.movieID,
-            title: '',
-        }
-        db.findOne(Movies, {_id: movie.movieID}, '', function(m){
-            movie.title = m.title;
-        })
+        var movieID = req.body.movieID;
         
         db.findOne(Users, {username: req.session.userId}, '', function(user){
-            db.deleteOne(Ratings, {"movieID": movie.movieID, "userID": user._id}, result=>{
+            db.deleteOne(Ratings, {"movieID": movieID, "userID": user._id}, result=>{
                 if (result){
                     console.log('Successfully deleted review on Movie');
                     //updateStarRating(movieID);
-                    db.findMany(Ratings, {movieID: movie.movieID}, '', function(r){
+                    db.findMany(Ratings, {movieID: movieID}, '', function(r){
                         if (r){
                             var total = 0;
                             for (let i=0; i<r.length; i++){
@@ -283,13 +278,13 @@ const moviesController = {
                             if(r.length>=1)
                                 total = (total/r.length).toFixed(1);
                 
-                            db.updateOne(Movies,{_id: movie.movieID},{
+                            db.updateOne(Movies,{_id: movieID},{
                                 aveScore: total
                             }, result=>{
                                 if (result)
                                     console.log("Successfully changed starRating of Movie");
                                 else console.log("Error updating starRating of Movie");
-                                return res.redirect('/movies/view/' + movie.title);                             
+                                return res.redirect('/movies/view/' + movieID);                             
                             });
                         }
                         else console.log("Error finding ratings of Movie");  
@@ -305,14 +300,14 @@ const moviesController = {
         var rate = req.body.rating;
         var reviewTitle = req.body.ReviewTitle;
         var review = req.body.Review;
-        var movieTitle = req.body.movieTitle;
+        var movieID = req.body.movieTitle;
         var userID = '';
 
         db.findOne(Users, {username: req.session.userId}, '', function(user){
             userID = user._id;
         })
         
-        db.findOne(Movies, {_id: movieTitle},'',function(movie){
+        db.findOne(Movies, {_id: movieID},'',function(movie){
             if (movie){
                 //console.log("movie found!");
                 var d = new Date();
@@ -354,7 +349,7 @@ const moviesController = {
                             else console.log("Error modifying ratings of Movie");  
                         });
 
-                        return res.redirect('/movies/view/' + movie.title);
+                        return res.redirect('/movies/view/' + movieID);
                     }
                     else console.log("Error modifying Ratings collection");
                 });

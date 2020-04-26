@@ -15,6 +15,7 @@ const indexController = {
             for (let i=0;i<movie.length;i++){
                 movieObj = {
                         title: movie[i].title,
+                        id: movie[i]._id,
                         imageurl: movie[i].posterUrl
                     }
                 movieArray.push(movieObj);

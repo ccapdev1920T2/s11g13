@@ -119,6 +119,8 @@ const indexController = {
                 username: un
             })
             
+        }).catch(err=>{
+            return res.redirect('/');
         })
     },
 
@@ -178,6 +180,8 @@ const indexController = {
                 },
                 username: un,
             })
+        }).catch(err=>{
+            return res.redirect('/');
         })
     },
 

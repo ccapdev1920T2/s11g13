@@ -74,6 +74,8 @@ const userController = {
                     lname: u.lName,
                     tickets: ticketArray,
                 })
+            }).catch(err=>{
+                return res.redirect('/');
             })
         })
     },

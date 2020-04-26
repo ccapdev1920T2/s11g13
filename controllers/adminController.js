@@ -53,6 +53,8 @@ const adminController = {
                      movies: movie,
                      show: show
                     }) 
+                }).catch(err=>{
+                    return res.redirect('/');
                 })
             })
     },

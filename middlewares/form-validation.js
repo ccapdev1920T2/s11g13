@@ -24,6 +24,8 @@ const checker = {
                             if (result.length>=1)
                                 return Promise.reject('Username unavailable')
                             else return true;
+                        }).catch(err=>{
+                            return res.redirect('/');
                         })
                 })
                 .trim().escape(),
@@ -36,6 +38,8 @@ const checker = {
                             if (result.length>=1)
                                 return Promise.reject('Email unavailable')
                             else return true;
+                        }).catch(err=>{
+                            return res.redirect('/');
                         })
                 })
                 .normalizeEmail(),
@@ -95,7 +99,9 @@ const checker = {
             if(result.length >= 1)
                 return res.send(false);
             else return res.send(true);
-        }) 
+        }).catch(err=>{
+            return res.redirect('/');
+        })
         //json({uniqueUsername: false})
         //json({uniqueUsername: true})
     },
@@ -121,6 +127,8 @@ const checker = {
             if(result.length >= 1)
                 return res.send({error: "not unique"});
             else return res.send({error: "none"});
+        }).catch(err=>{
+            return res.redirect('/');
         })
     },
 

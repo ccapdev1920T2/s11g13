@@ -176,6 +176,8 @@ const moviesController = {
                             flag: flag,
                             userRev: userReviewObj,
                         });
+                }).catch(err=>{
+                    return res.redirect('/');
                 })
             }
             else

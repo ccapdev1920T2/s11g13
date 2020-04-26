@@ -68,7 +68,11 @@ const registerController = {
                                     // res.locals.user = user;
                                     // console.log(req.session.userId);
                                     // console.log("User account created!");
-                                    return res.redirect("/confirmEmail");
+                                    // return res.redirect("/confirmEmail", result.username);
+                                    res.render("confirmEmail", {
+                                        pageName: "Confirm Email",
+                                        username: result.username
+                                    })
                                 }
                                 else {
                                     //console.log("Error in creating user account")

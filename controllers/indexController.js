@@ -242,8 +242,8 @@ const indexController = {
             username: un,
         });
     },
-    
-    getConfirmEmail: (req, res, next)=>{
+    /*
+    getConfirmEmail: (req, res, username, next)=>{
         db.findOne(Users, {username: req.session.userId}, '', function(user){
             res.render("confirmEmail", {
                 pageName: "Confirm Email",
@@ -251,6 +251,7 @@ const indexController = {
             })
         })
     }
+    */
 };
 
 function quick_Sort(movie) {

@@ -67,7 +67,7 @@ const userController = {
 
                 res.render('ticket', {
                     pageName: "View Tickets",
-                    isSignedIn: true,
+                    // isSignedIn: true,
                     pic: u.pic,
                     username: req.session.userId,
                     fname: u.fName,

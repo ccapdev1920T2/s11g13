@@ -9,6 +9,7 @@ const moviesController = {
     getMovies: function(req, res, next) {
         db.findMany(Movies, {}, 'title posterUrl', movie=>{
             let movieArray = [];
+
             for (let i=0;i<movie.length;i++){
                 movieObj = {
                         title: movie[i].title,
@@ -17,6 +18,8 @@ const moviesController = {
                     }
                 movieArray.push(movieObj);
             }
+
+            movieArray = quick_Sort(movieArray);
             
             let un;
             un = (req.session.userId)? req.session.userId: '';
@@ -361,5 +364,29 @@ const moviesController = {
         })
     }
 };
+
+function quick_Sort(movie) {
+    if (movie.length <= 1) { 
+        return movie;
+    } else {
+
+        var left = [];
+        var right = [];
+        var newArray = [];
+        var pivot = movie.pop();
+        var length = movie.length;
+
+        for (var i = 0; i < length; i++) {
+            let r = movie[i].title.localeCompare(pivot.title);
+            if (r == 0 || r == -1) {
+                left.push(movie[i]);
+            } else {
+                right.push(movie[i]);
+            }
+        }
+
+        return newArray.concat(quick_Sort(left), pivot, quick_Sort(right));
+    }
+}
 
 module.exports = moviesController;

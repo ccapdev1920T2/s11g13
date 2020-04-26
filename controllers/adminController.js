@@ -15,7 +15,9 @@ const adminController = {
     */
     getAdminBoard: function(req, res, next) {
             
-            db.findMany(Movies,{},'title _id',function(movie){
+            db.findMany(Movies,{},'title _id',function(movie){    
+                movie = quick_Sort(movie);
+
                 Shows.find().select("time date dayOfWeek").populate('movieID').exec().then(s=>{
                     let show = [];
                     for (let i=0;i<s.length;i++)
@@ -45,7 +47,7 @@ const adminController = {
                     }
                     res.render('admin', {
                      pageName: "Admin Dashboard",
-                     isSignedIn: true,
+                     //isSignedIn: true,
                      username: req.session.userId,
                      movies: movie,
                      show: show
@@ -174,6 +176,30 @@ const adminController = {
     }
 
 
+}
+
+function quick_Sort(movie) {
+    if (movie.length <= 1) { 
+        return movie;
+    } else {
+
+        var left = [];
+        var right = [];
+        var newArray = [];
+        var pivot = movie.pop();
+        var length = movie.length;
+
+        for (var i = 0; i < length; i++) {
+            let r = movie[i].title.localeCompare(pivot.title);
+            if (r == 0 || r == -1) {
+                left.push(movie[i]);
+            } else {
+                right.push(movie[i]);
+            }
+        }
+
+        return newArray.concat(quick_Sort(left), pivot, quick_Sort(right));
+    }
 }
 
 module.exports = adminController;

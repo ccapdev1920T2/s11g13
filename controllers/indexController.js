@@ -21,6 +21,8 @@ const indexController = {
                 movieArray.push(movieObj);
             }
 
+            movieArray = quick_Sort(movieArray);
+
             let un;
             un = (req.session.userId)? req.session.userId: '';
         
@@ -43,6 +45,7 @@ const indexController = {
             let movieArrayH  = []; //5
             let movieArrayF  = []; //6
             let movieArraySa = []; //7
+            
             for (let i=0;i<s.length;i++)
             {
                 var now = new Date(Date.now());
@@ -90,6 +93,14 @@ const indexController = {
             let un;
             un = (req.session.userId)? req.session.userId: '';
             
+            movieArraySu = quick_Sort(movieArraySu); //1
+            movieArrayM  = quick_Sort(movieArrayM); //2
+            movieArrayT  = quick_Sort(movieArrayT); //3
+            movieArrayW  = quick_Sort(movieArrayW); //4
+            movieArrayH  = quick_Sort(movieArrayH); //5
+            movieArrayF  = quick_Sort(movieArrayF); //6
+            movieArraySa = quick_Sort(movieArraySa); //7
+
             res.render("calendar", {
                 pageName: "Calendar",
                 current: "Calendar",
@@ -237,6 +248,28 @@ const indexController = {
     }
 };
 
+function quick_Sort(movie) {
+    if (movie.length <= 1) { 
+        return movie;
+    } else {
 
+        var left = [];
+        var right = [];
+        var newArray = [];
+        var pivot = movie.pop();
+        var length = movie.length;
+
+        for (var i = 0; i < length; i++) {
+            let r = movie[i].title.localeCompare(pivot.title);
+            if (r == 0 || r == -1) {
+                left.push(movie[i]);
+            } else {
+                right.push(movie[i]);
+            }
+        }
+
+        return newArray.concat(quick_Sort(left), pivot, quick_Sort(right));
+    }
+}
 
 module.exports = indexController;

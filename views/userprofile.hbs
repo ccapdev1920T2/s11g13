@@ -20,6 +20,18 @@
 	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 		<script type="text/javascript">
 			$(document).ready(()=>{
+				$("#fName").prop("value", $("#FNHolder").html());
+				$("#FNHolder").remove();
+
+				$("#lName").prop("value", $("#LNHolder").html());
+				$("#LNHolder").remove();
+
+				$("#Mobile").prop("value", $("#PNHolder").html());
+				$("#PNHolder").remove();
+
+
+
+
 				$("#profilepic").css("pointerEvents","none");
 
 				$("#Edit").click(()=>{
@@ -42,71 +54,74 @@
 <body>
 	{{>header}}
 
+<form class="form-horizontal" method='POST' action='{{username}}/editProfile' enctype="multipart/form-data">
 	<div class="container pt-5">
 		<div class="row">
 			<!-- Profile photo -->
-			<div class="col-md-3">
-				{{>profileSidebar}}
-			<form class="form-horizontal" method='POST' action='{{username}}/editProfile' enctype="multipart/form-data">
-				<div class="form-group">
-					<input type="file" name="File" id="File" class="btn btn-block d-none" accept="image/*" 
-					value="Upload Photo" onchange="document.getElementById('profilepic').src = window.URL.createObjectURL(this.files[0])" required>
+				<div class="col-md-3">
+					{{>profileSidebar}}
+					<div class="form-group">
+						<input type="file" name="File" id="File" class="btn btn-block d-none" accept="image/*" 
+						value="Upload Photo" onchange="document.getElementById('profilepic').src = window.URL.createObjectURL(this.files[0])" required>
+					</div>
+					
 				</div>
-				
-			</div>
-			<!-- Other contents -->
-			<div class="col-md-9">
-				<div class="card border-0 justify-content-center">
-						<!-- Name -->
-						<div class="form-group row">
-							<label class="control-label col-md-2">Name: </label>
-							<div class="col-md-5">
-								<input type="text" readonly name="fName" id="fName" class="form-control" value='{{fname}}' required>
+				<!-- Other contents -->
+				<div class="col-md-9">
+					<div class="card border-0 justify-content-center">
+							<!-- Name -->
+							<div class="d-none" id="FNHolder">{{fname}}</div>
+							<div class="d-none" id="LNHolder">{{lname}}</div>
+							<div class="d-none" id="PNHolder">{{phone}}</div>
+							<div class="form-group row">
+								<label class="control-label col-md-2">Name: </label>
+								<div class="col-md-5">
+									<input type="text" readonly name="fName" id="fName" class="form-control" required>
+								</div>
+								<div class="col-md-5">
+									<input type="text" readonly name="lName" id="lName" class="form-control" required>
+								</div>
 							</div>
-							<div class="col-md-5">
-								<input type="text" readonly name="lName" id="lName" class="form-control" value='{{lname}}' required>
-							</div>
-						</div>
 
-						<!-- Username -->
-						<div class="form-group row">
-							<label for="UName" class="control-label col-md-2">Username</label>
-							<div class="col-md-10">
-								<input type="text" readonly name="UName" id="UName" class="form-control-plaintext pl-2" value={{username}}>
+							<!-- Username -->
+							<div class="form-group row">
+								<label for="UName" class="control-label col-md-2">Username</label>
+								<div class="col-md-10">
+									<input type="text" readonly name="UName" id="UName" class="form-control-plaintext pl-2" value={{username}}>
+								</div>
 							</div>
-						</div>
 
-						<!-- Email address -->
-						<div class="form-group row">
-							<label for="Email" class="control-label col-md-2">Email address</label>
-							<div class="col-md-10">
-								<input type="email" readonly name="Email" id="Email" class="form-control" value='{{email}}' required>
+							<!-- Email address -->
+							<div class="form-group row">
+								<label for="Email" class="control-label col-md-2">Email address</label>
+								<div class="col-md-10">
+									<input type="email" readonly name="Email" id="Email" class="form-control" value='{{email}}' required>
+								</div>
 							</div>
-						</div>
 
-						<!-- Phone number -->
-						<div class="form-group row">
-							<label for="Mobile" class="control-label col-md-2">Mobile number</label>
-							<div class="col-md-10">
-								<input type="nuber" readonly name="Mobile" id="Mobile" class="form-control" value='{{phone}}' required>
+							<!-- Phone number -->
+							<div class="form-group row">
+								<label for="Mobile" class="control-label col-md-2">Mobile number</label>
+								<div class="col-md-10">
+									<input type="nuber" readonly name="Mobile" id="Mobile" class="form-control" required>
+								</div>
 							</div>
-						</div>
 
-					<!-- Controls -->
-						<div class="form-group row justify-content-center">
-							<button type="button" id="Edit" class="btn btn-danger">Edit</button>
-							<button type="submit" id="Save" class="btn btn-danger d-none">Save</button>
-						</div>
-					</form>
+						<!-- Controls -->
+							<div class="form-group row justify-content-center">
+								<button type="button" id="Edit" class="btn btn-danger">Edit</button>
+								<button type="submit" id="Save" class="btn btn-danger d-none">Save</button>
+							</div>
+					</div>
+					<!--
+					<div class="form-group row justify-content-center">
+						<a name="ViewTicket" id="ViewTicket" class="btn btn-default btn-danger mx-2" href={{userHrefBuilder username "tickets"}}>View Tickets</a>
+					</div>
+					-->
 				</div>
-				<!--
-				<div class="form-group row justify-content-center">
-					<a name="ViewTicket" id="ViewTicket" class="btn btn-default btn-danger mx-2" href={{userHrefBuilder username "tickets"}}>View Tickets</a>
-				</div>
-				-->
-			</div>
 		</div>
 	</div>
+</form>
 
 		
 </body>

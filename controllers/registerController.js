@@ -64,8 +64,8 @@ const registerController = {
                             
                             return db.insertOne(User, user, function(result){
                                 if (result){
-                                    req.session.userId = user.username;
-                                    res.locals.user = user;
+                                    // req.session.userId = user.username;
+                                    // res.locals.user = user;
                                     // console.log(req.session.userId);
                                     // console.log("User account created!");
                                     return res.redirect("/confirmEmail");

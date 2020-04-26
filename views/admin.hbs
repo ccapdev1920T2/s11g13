@@ -43,7 +43,7 @@
                 <hr>
                 <div class="row justify-content-center">
                     <div class="card w-75">
-                        <table class="table table-sm table-striped text-center mb-0">
+                        <table class="table table-sm table-striped text-center mb-0" id="movieTable">
                             <tr>
                                 <th>Movie Title</th><th>Movie ID</th><th></th>
                             </tr>
@@ -440,7 +440,6 @@
         });
 
         function deleteRow(showID){
-            $('#'+ showID).remove();
             { $.ajax({
                 url: '/admin/removeShow',
                 method: 'DELETE',
@@ -449,10 +448,16 @@
                 }
               })
             };
+            $("#SunContent").load("/admin #SunContent");
+            $("#MonContent").load("/admin #MonContent");
+            $("#TueContent").load("/admin #TueContent");
+            $("#WedContent").load("/admin #WedContent");
+            $("#ThuContent").load("/admin #ThuContent");
+            $("#FriContent").load("/admin #FriContent");
+            $("#SatContent").load("/admin #SatContent");
         }
 
         function deleteMovie(movieID){
-            $('#'+ movieID).remove();
             { $.ajax({
                 url: '/admin/removeMovie',
                 method: 'DELETE',
@@ -461,6 +466,7 @@
                 }
               })
             };
+            $("#movieTable").load("/admin #movieTable");
         }
 
         function rateBuilder(rating){

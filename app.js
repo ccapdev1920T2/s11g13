@@ -114,6 +114,7 @@ hbs.registerHelper('editRatingHidden', (loggedIn, commentUname, rating)=>{
     }
 });
 
+/*
 hbs.registerHelper('bookedTicketsArray', (tickets)=>{
     let bookedTickets = [];
     tickets.forEach(element => {
@@ -124,6 +125,7 @@ hbs.registerHelper('bookedTicketsArray', (tickets)=>{
     // console.table(bookedTickets);
     return bookedTickets;
 });
+*/
 
 hbs.registerHelper('rateBuilder', function(rating) {
     var arren = 1;

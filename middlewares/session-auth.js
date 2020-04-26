@@ -51,6 +51,14 @@ const authenticator = {
             
             return res.redirect('/home');
         })
+    },
+
+    pActiveSession: (req, res, next) =>{
+        if (req.session.userId){
+            next();
+        }
+        else
+            return res.redirect('/login');
     }
 }
 

@@ -100,10 +100,9 @@ const indexController = {
             movieArrayH  = quick_Sort(movieArrayH); //5
             movieArrayF  = quick_Sort(movieArrayF); //6
             movieArraySa = quick_Sort(movieArraySa); //7
-
-            if (!s)
-                movID = 1;
-            else
+            
+            movID=1;
+            if(s.length > 0)
                 movID = s[0].movieID._id;
 
             res.render("calendar", {

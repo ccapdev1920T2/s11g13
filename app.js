@@ -113,13 +113,6 @@ hbs.registerHelper('editRatingHidden', (loggedIn, commentUname, rating)=>{
         return new hbs.SafeString('<input type="hidden" id="initialRating" value="' + rating +'">');  
     }
 });
-//movie-view delete comment button
-hbs.registerHelper('deleteBtnBuilder', (loggedIn, commentUname)=>{
-    if(loggedIn==commentUname){
-        return new hbs.SafeString('<button class="btn btn-sm btn-danger" onclick=\" var res = confirm (\'Delete comment?\')\;if (res){$(this).parents(\'.card\').remove();deleteRev();}">Delete</button>');  
-    }
-});
-
 
 hbs.registerHelper('bookedTicketsArray', (tickets)=>{
     let bookedTickets = [];

@@ -96,7 +96,7 @@
                         <hr class="mt-0">
                         {{#if flag}}
                             {{#with userRev}}
-                                <div class="card bg-light mb-2">
+                                <div id="userRev" class="card bg-light mb-2">
                                     <div class="container-fluid">
                                         <div class="card-body p-1">
                                             <div class="row no-gutters">
@@ -133,8 +133,7 @@
                                             <span class="mr-auto">
                                                 <small class="text-muted align-middle">{{date}}</small>
                                             </span>
-                                            {{deleteBtnBuilder ../username username}}
-                                            <!--TODO: APPEND AN EDIT REVIEW button-->
+                                            <button class="btn btn-sm btn-danger" onclick=" var res = confirm ('Delete comment?'); if (res) {deleteRev();}">Delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -178,8 +177,6 @@
                                         <span class="mr-auto">
                                             <small class="text-muted align-middle">{{date}}</small>
                                         </span>
-                                        {{deleteBtnBuilder ../username username}}
-                                        <!--TODO: APPEND AN EDIT REVIEW button-->
                                     </div>
                                 </div>
                             </div>
@@ -378,6 +375,7 @@
         });
 
         function deleteRev(){
+            $("#userRev").remove();
             {$.ajax({
                 url: '/movies/deleteReview',
                 method: 'DELETE',

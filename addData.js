@@ -8,19 +8,60 @@ const Shows = require('./models/ShowsModel.js');
 const Seats = require('./models/SeatsModel.js');
 const Ratings = require('./models/RatingsModel.js');
 const Tickets = require('./models/TicketsModel.js');
+const CCInfos = require('./models/CCInfosModel.js');
 const multer = require('multer');
 
 db.connect();
 
-db2.createDatabase();
-db2.createCollection("users");
-db2.createCollection("ccinfos");
-db2.createCollection("tickets");
-db2.createCollection("shows");
-db2.createCollection("seats");
-db2.createCollection("movies");
-db2.createCollection("ratings");
+// db2.createDatabase();
+// db2.createCollection("users");
+// db2.createCollection("ccinfos");
+// db2.createCollection("tickets");
+// db2.createCollection("shows");
+// db2.createCollection("seats");
+// db2.createCollection("movies");
+// db2.createCollection("ratings");
 
+
+//Admin
+db.findOne(Users, {userType: "Admin"}, null, (result)=>{
+    //match found
+    if (result){
+        db.deleteOne(Users, {userType:"Admin"}, (isDeleted)=>{
+            if (isDeleted)
+                console.log("Successfully deleted existing admin account.");
+            else
+                console.log("Error in deleting existing admin account");
+        })
+    }
+
+    bcrypt.hash("p455w0rd", 10, (err, hash)=>{
+        if (err){
+           console.log("Error in hashing password")
+        } else {
+            const userDoc = new Users({
+                _id: new mongoose.Types.ObjectId(),
+                email: 'admin@dlsu.edu.ph',
+                username: 'bh0zXsArR3n',
+                password: hash, 
+                userType: 'Admin',
+                firstName: 'Admin',
+                lastName: 'Manager',
+                pic: '/assets/profpic.png',
+            });
+            
+
+            db.insertOne(Users, userDoc, isInserted=>{
+                if(isInserted)
+                    console.log("Admin account created successfully.")
+                else
+                    console.log("Error in creating new Admin account")
+            })
+
+        }
+    });
+
+})
 
 //Users
 bcrypt.hash('123123', 10, (err, hash)=>{

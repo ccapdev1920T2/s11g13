@@ -23,6 +23,9 @@
                 <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#Main">Movie List</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#EditMovie">Edit Movie Details</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-danger" data-toggle="tab" role="tab" href="#Add">Add Movie/Show</a>
             </li>
             <li class="nav-item">
@@ -49,19 +52,88 @@
                             </tr>
                             {{#each movies}}
                                 <tr id={{id}}>
-                                        <td><a href="/movies/view/{{_id}}">{{title}}</a></td>
-                                        <td>{{_id}}</td>
-                                        <td><button type="button" class="btn btn-danger" contenteditable="false"
-                                                onclick=" var result = confirm('Are you sure you want to delete?');
-                                                        if (result) {
-                                                            deleteMovie('{{_id}}')}">Remove</button>
-                                        </td>
+                                    <td><a href="/movies/view/{{_id}}">{{title}}</a></td>
+                                    <td>{{_id}}</td>
+                                    <td><button type="button" class="btn btn-danger" contenteditable="false"
+                                            onclick=" var result = confirm('Are you sure you want to delete?');
+                                                    if (result) {
+                                                        deleteMovie('{{_id}}')}">Remove</button>
+                                    </td>
                                 </tr>
                             {{/each}}
                         </table>
                     </div>
                 </div>
+            </div>
 
+
+            <!-- Edit movie details-->
+            <div class="tab-pane fade container-fluid py-4" id="EditMovie">
+                <h3 class="text-danger">Edit Movie details</h3>
+                <hr>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <form name="EditMovieForm" id="EditMovieForm" class="form-horizontal" method="post" action='/admin/editMovie' enctype="multipart/form-data">
+                            <div class="form-group row">
+                                <label for="editMovieID" class="col-form-label col-md-3 text-center">Movie ID <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Refer to Movie List Tab"></i></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="editMovieID" id="editMovieID" class="form-control" placeholder="Movie ID" required>
+                                    <div class="invalid-feedback" id="eMIDfeedback">No such movie ID.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="editMovieTitle" class="col-form-label col-md-3 text-center">Movie Title</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="editMovieTitle" id="editMovieTitle" class="form-control" placeholder="Title" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="editMovieGenre" class="col-form-label col-md-3 text-center">Genres</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="editMovieGenre" id="editMovieGenre" class="form-control" placeholder="Genre1, Genre2" required>
+                                </div>
+                            </div>
+                            <!--    Score Rating
+                            <div class="form-group row">
+                                <label for="addMovieScore" class="col-form-label col-md-3 text-center">Score</label>
+                                <div class="col-md-9">
+                                    <input type="number" name="addMovieScore" id="addMovieScore" class="form-control" placeholder="Out of 5">
+                                </div>
+                            </div>
+                            -->
+                            <div class="form-group row">
+                                <label for="editMovieSynopsis" class="col-form-label col-md-3 text-center">Synopsis</label>
+                                <div class="col-md-9">
+                                    <textarea name="editMovieSynopsis" id="editMovieSynopsis" rows="5" class="form-control" placeholder="Movie Synopsis here" style="resize:none"required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="editMovieCast" class="col-form-label col-md-3 text-center">Cast</label>
+                                <div class="col-md-9">
+                                    <textarea name="editMovieCast" id="editMovieCast" rows="5" class="form-control" placeholder="Starring: " style="resize:none" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="editMovieTrailer" class="col-form-label col-md-3 text-center">Trailer URL</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="editMovieTrailer" id="editMovieTrailer" class="form-control" placeholder="Trailer url" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="editMoviePoster" class="col-form-label col-md-3 text-center">Movie Poster</label>
+                                <div>
+                                    <input type="file" name="editMoviePoster" id="editMoviePoster" required>
+                                </div>
+                            </div>
+                            <div class="form-group row justify-content-center">
+                                <button disabled type="submit" id="editMovieUpload" class="btn btn-danger"> 
+                                    <i class="fa fa-upload"></i> Update Movie Details
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <!-- Adding movies or shows -->
@@ -145,7 +217,7 @@
                             <div class="col-md-8">
                                 <form name="AddShow" id="AddShow" class="form-horizontal" method="post" action='/admin/addShow'>
                                     <div class="form-group row">
-                                        <label for="showMovieID" class="col-form-label col-md-3 text-center">Movie Title <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Refer to Movie List Tab"></i></label>
+                                        <label for="showMovieID" class="col-form-label col-md-3 text-center">Movie ID <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="right" title="Refer to Movie List Tab"></i></label>
                                         <div class="col-md-9">
                                             <input type="text" name="showMovieID" id="showMovieID" class="form-control" required placeholder="Movie ID">
                                         </div>
@@ -560,6 +632,45 @@
                 }
 
         }
+
+
+        $("#editMovieID").on("keyup blur", ()=>{
+            let movID = $("#editMovieID").val();
+
+            if (movID == ""){
+                $("#eMIDfeedback").hide();
+                $("#editMovieUpload").prop("disabled", true)
+            }
+            else{
+                $.get('/admin/getDetails', {_id: movID}, result=>{
+                    if (result){
+                        $("#eMIDfeedback").hide();
+                        $("#editMovieTitle").prop("value", result.title);
+                        $("#editMovieGenre").prop("value", result.genre);
+                        $("#editMovieSynopsis").prop("value", result.synopsis);
+                        let cast = ""
+                        for (let i = 0; i < result.cast.length; i++){
+                            cast += result.cast[i];
+                            if (i + 1 < result.cast.length) cast += ", "
+                        } 
+                        $("#editMovieCast").prop("value", cast);
+                        $("#editMovieTrailer").prop("value", result.trailerUrl);
+                        $("#editMovieUpload").prop("disabled", false);
+                    }
+                    else
+                    {
+                        $("#eMIDfeedback").show();
+                        $("#editMovieTitle").prop("value", "");
+                        $("#editMovieGenre").prop("value", "");
+                        $("#editMovieSynopsis").prop("value", "");
+                        $("#editMovieCast").prop("value", "");
+                        $("#editMovieTrailer").prop("value", "");
+                        $("#editMovieUpload").prop("disabled", true);
+
+                    }
+                })
+            }
+        })
 
     </script>
 

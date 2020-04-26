@@ -107,6 +107,64 @@ const adminController = {
         })
     },
 
+    postEditMovie: (req, res, next)=>{
+        //multer storage
+        const storage = multer.diskStorage({
+            destination: '/assets/MoviePosters/',
+            filename: function(req, file, cb) {
+              cb(null,file.fieldname);
+            }
+          });
+  
+          const update = multer({
+              storage: storage
+          }).single('editMoviePoster');
+
+          update(req, res, (err) => {
+            if (!err){  
+                //console.log(req.file.destination);
+                    var textABox = req.body.editMovieCast;
+                    var castArray = textABox.split(/\n+/);
+                    let retrievedData = {
+                        _id: new mongoose.Types.ObjectId(req.body.editMovieID),
+                        genre: req.body.editMovieGenre,
+                        title: req.body.editMovieTitle,
+                        aveScore: 0,
+                        synopsis: req.body.editMovieSynopsis,
+                        cast: castArray,
+                        posterUrl:req.file.destination + req.file.originalname,
+                        trailerUrl:req.body.editMovieTrailer,
+                    }
+
+                    console.table(retrievedData)
+                    
+                    // db.findOne(Movies,{title: req.body.addMovieTitle},'', movie=>{
+                    //     if (movie){
+                    db.updateOne(Movies, '{_id: req.body.editMovieID}', retrievedData, result=>{
+                        if (result) console.log("Successfully updated movie details.");
+                        else console.log("Error updating movie details");
+                    })
+
+                            /* db.insertOne(Movies, retrievedData, result=>{
+                            if (result)
+                                console.log("Successfully added document to Movies collection.");
+                            else console.log("Error inserting to Movies collection");
+                            }); */
+                    //     }
+                    //     else
+                    //     {
+                    //         console.log("Movie title taken");
+                    //     }
+                    // })
+
+                    //display
+                    res.redirect('/admin');
+            }
+        })
+
+
+    },
+
     postShow: function(req, res, next) {
         
         let retrievedData = {
@@ -191,6 +249,16 @@ const adminController = {
         db.deleteMany(Shows,{"movieID": req.body.movieID},show=>{}); //deletes all show
         db.deleteOne(Movies,{"_id": req.body.movieID},movie=>{}); //deletes the movie
     },
+
+
+    //AJAX for edit Movie
+    fetchMovie: (req, res, next)=>{
+        let mID = req.query._id;
+        db.findOne(Movies, {_id: mID}, '',  result=>{
+            if (result) return res.send(result);
+            else return res.send(false);
+        })
+    }
 
 
 }

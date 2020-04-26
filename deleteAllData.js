@@ -12,9 +12,16 @@ const multer = require('multer');
 
 db.connect();
 
-db.deleteMany(Users, {}, callback=>{});
-db.deleteMany(Movies, {}, callback=>{});
-db.deleteMany(Shows, {}, callback=>{});
-db.deleteMany(Seats, {}, callback=>{});
-db.deleteMany(Ratings, {}, callback=>{});
-db.deleteMany(Tickets, {}, callback=>{});
+db.deleteMany(Users, {}, callback=>{
+    db.deleteMany(Movies, {}, callback=>{
+        db.deleteMany(Shows, {}, callback=>{
+            db.deleteMany(Seats, {}, callback=>{
+                db.deleteMany(Ratings, {}, callback=>{
+                    db.deleteMany(Tickets, {}, callback=>{
+                        db.close();
+                    });
+                });
+            });
+        });
+    });
+});

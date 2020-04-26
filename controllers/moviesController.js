@@ -110,6 +110,7 @@ const moviesController = {
                                 {
                                     showID: s[i]._id,
                                     date: formattedDate,
+                                    time: s[i].time,
                                     title: movieDetails.title,
                                     imageurl: movieDetails.moviecover,
                                 }

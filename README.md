@@ -22,7 +22,14 @@ https://github.com/ccapdev1920T2/s11g13.git
 
 2. Install all needed dependencies through `npm install`
 
-3. Run the web server with `node app` 
+3. Run the following commands
+   | Command | Description |
+   |:--:|:--:|
+   | `node deleteAllData` | Clears all the contents of the Database in case you have used this program in the past. This can be skipped. |
+   | `node addData` | populates the database with dummy data. Includes admin |
+   | `node deleteAllData && nodeAddData`|  to do everything at once.
+
+4. Run the web server with `node app` 
 
 ## Dependencies
 

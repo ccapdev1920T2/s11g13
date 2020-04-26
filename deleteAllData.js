@@ -8,13 +8,23 @@ const Shows = require('./models/ShowsModel.js');
 const Seats = require('./models/SeatsModel.js');
 const Ratings = require('./models/RatingsModel.js');
 const Tickets = require('./models/TicketsModel.js');
+const CCInfos = require('./models/CCInfosModel.js');
 const multer = require('multer');
 
 db.connect();
 
-db.deleteMany(Users, {}, callback=>{});
-db.deleteMany(Movies, {}, callback=>{});
-db.deleteMany(Shows, {}, callback=>{});
-db.deleteMany(Seats, {}, callback=>{});
-db.deleteMany(Ratings, {}, callback=>{});
-db.deleteMany(Tickets, {}, callback=>{});
+db.deleteMany(Users, {}, callback=>{
+    db.deleteMany(Movies, {}, callback=>{
+        db.deleteMany(Shows, {}, callback=>{
+            db.deleteMany(Seats, {}, callback=>{
+                db.deleteMany(Ratings, {}, callback=>{
+                    db.deleteMany(Tickets, {}, callback=>{
+                        db.deleteMany(CCinfos, {}, callback=>{
+                            db.close();
+                        });
+                    });
+                });
+            });
+        });
+    });
+});

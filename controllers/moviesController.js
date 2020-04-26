@@ -185,15 +185,40 @@ const moviesController = {
     },
     
     getSearch: (req, res, next)=>{
-        db.findOne(Movies, {title: req.query.movieTitle}, '', result=>{
-            //console.log(result)
-            if (result){
-                return res.redirect('/movies/view/' + result._id);
-            }
-            else{
-                let notfound = "No movie found with title \"" + req.query.movieTitle +"\""
-                res.locals.error = notfound;
-                return next();
+        var search = req.query.movieTitle.toUpperCase();
+
+        db.findMany(Movies, {}, '', function(movie){
+            if (movie){
+                var match = [];
+                for(let i=0; i<movie.length; i++){
+                    if (movie[i].title.toUpperCase().search(search) != -1){
+                        movieObj = {
+                            title: movie[i].title,
+                            id: movie[i]._id,
+                            imageurl: movie[i].posterUrl
+                        }
+                        match.push(movieObj);
+                    }
+                }
+
+                if (match.length>=1){     
+                    match = quick_Sort(match);
+                    
+                    let un;
+                    un = (req.session.userId)? req.session.userId: '';                     
+                    res.render("movies", {
+                        pageName: "Movies",
+                        current: "Movies",
+                        movies: match,
+                        username: un,
+                        error: res.locals.error
+                    })
+                }
+                else{
+                    let notfound = "No movie found with title \"" + req.query.movieTitle +"\""
+                    res.locals.error = notfound;
+                    return next();
+                }
             }
         })
     },

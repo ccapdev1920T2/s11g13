@@ -228,10 +228,10 @@ app.use((err, req, res, next)=>{
 /** Server online **/
 app.listen(process.env.PORT, LOCAL_ADDRESS, ()=>{
     console.log("Server ready.");
-    // console.log(`App listening at port ${port}`);
-    // console.log(`Access at localhost:${port}/`);
 })
 
+// console.log(`App listening at port ${port}`);
+// console.log(`Access at localhost:${port}/`);
  //db2.createDatabase();
  //db2.createCollection("users");
  //db2.createCollection("transactions");

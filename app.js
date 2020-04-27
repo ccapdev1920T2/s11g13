@@ -17,7 +17,7 @@ require("dotenv").config();
 
 const app = express();
 const {
-    port = 3000,
+    port /*= 3000*/,
     NODE_ENV = 'development',
     SESS_NAME = 'sid',
     // SESS_SECRET = 'ssh!quiet,it\'sasecret',

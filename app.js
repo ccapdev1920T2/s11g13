@@ -80,11 +80,11 @@ app.use((req, res, next)=>{
     next();
 })
 
-app.set("view engine", "hbs");
 
 /**** Set partials here ****/
 hbs.registerPartials(__dirname+ "\\views\\partials")
 
+app.set("view engine", "hbs");
 // Middlewares
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

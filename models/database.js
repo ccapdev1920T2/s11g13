@@ -25,16 +25,20 @@ const options = {
 const database = {
     // connects to database
     connect: function () {
-        mongoose.connect(url, options, function(error) {
-            console.log('Database connection success! Connected to: ' + url);
-        }).catch(error => handleError(error));
+        try {
+            mongoose.connect(url, options, function(error) {
+                console.log('Database connection success! Connected to: ' + url);
+            })
+        } catch(e){console.log(e);}
     },
 
     close: function(){
-        console.log("Disconnecting. . .")
-        mongoose.disconnect((err)=>{
-            console.log("Disconnected to database.")
-        }).catch(error => handleError(error));
+        try {
+            console.log("Disconnecting. . .")
+            mongoose.disconnect((err)=>{
+                console.log("Disconnected to database.")
+            })
+        } catch(e){console.log(e);}
     },
 
     // inserts a single `doc` to the database based on the model `model`

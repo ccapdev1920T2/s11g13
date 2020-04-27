@@ -34,7 +34,7 @@ const database = {
         console.log("Disconnecting. . .")
         mongoose.disconnect((err)=>{
             console.log("Disconnected to database.")
-        })catch(error => handleError(error));
+        }).catch(error => handleError(error));
     },
 
     // inserts a single `doc` to the database based on the model `model`

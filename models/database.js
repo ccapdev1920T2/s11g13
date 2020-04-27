@@ -26,17 +26,15 @@ const database = {
     // connects to database
     connect: function () {
         mongoose.connect(url, options, function(error) {
-            if(error) throw error;
             console.log('Database connection success! Connected to: ' + url);
-        });
+        }).catch(error => handleError(error));
     },
 
     close: function(){
         console.log("Disconnecting. . .")
         mongoose.disconnect((err)=>{
-            if (err) throw err
             console.log("Disconnected to database.")
-        });
+        })catch(error => handleError(error));
     },
 
     // inserts a single `doc` to the database based on the model `model`

@@ -26,7 +26,9 @@ const {
 } = process.env;
 
 //Connecting to db
+try {
 db.connect();
+} catch (e) {console.log(e);}
 
 // Middlewares
 // const IN_PROD = NODE_ENV === 'production'

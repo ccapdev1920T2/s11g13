@@ -9,6 +9,10 @@ const Tickets = require('../models/TicketsModel.js');
 const CCInfos = require('../models/CCInfosModel.js');
 
 const indexController = {
+    getFavicon: (req, res)=>{
+        res.status(204);
+    },
+
     getHome: function(req, res, next) {
         try{
             db.findMany(Movies, {}, 'title posterUrl', movie=>{

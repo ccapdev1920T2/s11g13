@@ -80,16 +80,54 @@ app.use((req, res, next)=>{
     next();
 })
 
+app.set("view engine", "hbs");
+
+/**** Set partials here ****/
+hbs.registerPartials(__dirname+ "\\views\\partials")
+
 // Middlewares
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 /* To access public folder where CSS and assets are located  */
 app.use(express.static(__dirname + '\\public'))
-app.set("view engine", "hbs");
 
-/**** Set partials here ****/
-hbs.registerPartials(__dirname+ "\\views\\partials")
+/********* Routing *********/
+const indexRoutes = require('./router/indexRoutes');
+const registerRoutes = require('./router/registerRoutes');
+const loginRoutes = require("./router/loginRoutes");
+const adminRoutes = require("./router/adminRoutes");
+const userRoutes = require("./router/userRoutes");
+const movieRoutes = require("./router/moviesRoutes");
+
+/********* Routing *********/
+app.use('/', indexRoutes);
+app.use('/register', registerRoutes);
+app.use('/login', loginRoutes);
+app.use("/user", userRoutes);
+app.use('/movies', movieRoutes);
+app.use('/admin', adminRoutes);
+// app.get("/emailverification", (req, res, next)=>{res.render("confirmEmail", {pageName: "Confirm Email"})})
+
+app.use((req, res, next)=>{
+    const error = new Error("The resource you are looking for does not exist, have been removed, renamed, or is temporarily unavailable. ")
+    error.status =404;
+    next(error);
+})
+
+app.use((err, req, res, next)=>{
+    if (err.status != 404)
+        res.status(500);
+    else res.status(err.status);
+    res.render("error", {
+        pageName: "Error",
+        error: {
+            status: err.status,
+            message: err.message
+        }
+    });
+})
+
 
 /**** Helper functions ****/
 hbs.registerHelper("navBuilder", (activeLoc, headerName, url)=>{
@@ -189,41 +227,7 @@ hbs.registerHelper('AdminSession', function() {
     return admin;
 });
 
-/********* Routing *********/
-const indexRoutes = require('./router/indexRoutes');
-const registerRoutes = require('./router/registerRoutes');
-const loginRoutes = require("./router/loginRoutes");
-const adminRoutes = require("./router/adminRoutes");
-const userRoutes = require("./router/userRoutes");
-const movieRoutes = require("./router/moviesRoutes");
 
-/********* Routing *********/
-app.use('/', indexRoutes);
-app.use('/register', registerRoutes);
-app.use('/login', loginRoutes);
-app.use("/user", userRoutes);
-app.use('/movies', movieRoutes);
-app.use('/admin', adminRoutes);
-// app.get("/emailverification", (req, res, next)=>{res.render("confirmEmail", {pageName: "Confirm Email"})})
-
-app.use((req, res, next)=>{
-    const error = new Error("The resource you are looking for does not exist, have been removed, renamed, or is temporarily unavailable. ")
-    error.status =404;
-    next(error);
-})
-
-app.use((err, req, res, next)=>{
-    if (err.status != 404)
-        res.status(500);
-    else res.status(err.status);
-    res.render("error", {
-        pageName: "Error",
-        error: {
-            status: err.status,
-            message: err.message
-        }
-    });
-})
 
 /** Server online **/
 app.listen(process.env.PORT, LOCAL_ADDRESS, ()=>{

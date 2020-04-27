@@ -10,7 +10,10 @@ const session_auth = require("../middlewares/session-auth");
 
 ////// ROUTING /////////
 // Handles home and '/'
-router.get(["/", "/home"], controller.getHome);
+router.get("/" , controller.getHome);
+router.get("/home" , controller.getHome);
+
+router.get("/favicon.ico", controller.getFavicon);
 
 router.get("/calendar", controller.getCalendar, session_auth.validUser);
 

@@ -223,7 +223,6 @@ app.use((err, req, res, next)=>{
     });
 })
 
-vaar
 /** Server online **/
 app.listen(port, LOCAL_ADDRESS, ()=>{
     console.log("Server ready.");

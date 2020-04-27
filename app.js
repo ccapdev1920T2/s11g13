@@ -17,7 +17,8 @@ require("dotenv").config();
 
 const app = express();
 const {
-    port /*= 3000*/,
+    port = 3000,
+    LOCAL_ADDRESS = '0.0.0.0',
     NODE_ENV = 'development',
     SESS_NAME = 'sid',
     // SESS_SECRET = 'ssh!quiet,it\'sasecret',
@@ -222,8 +223,9 @@ app.use((err, req, res, next)=>{
     });
 })
 
+vaar
 /** Server online **/
-app.listen(port, ()=>{
+app.listen(port, LOCAL_ADDRESS, ()=>{
     console.log("Server ready.");
     console.log(`App listening at port ${port}`);
     console.log(`Access at localhost:${port}/`);

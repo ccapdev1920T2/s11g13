@@ -91,11 +91,13 @@ const adminController = {
                     
                     // db.findOne(Movies,{title: req.body.addMovieTitle},'', movie=>{
                     //     if (movie){
-                            db.insertOne(Movies, retrievedData, result=>{
-                            if (result)
-                                console.log("Successfully added document to Movies collection.");
-                            else console.log("Error inserting to Movies collection");
-                            });
+                            try {
+                                db.insertOne(Movies, retrievedData, result=>{
+                                if (result)
+                                    console.log("Successfully added document to Movies collection.");
+                                else console.log("Error inserting to Movies collection");
+                                });
+                            } catch(e) {console.log(e);}
                     //     }
                     //     else
                     //     {
@@ -142,10 +144,12 @@ const adminController = {
                     
                     // db.findOne(Movies,{title: req.body.addMovieTitle},'', movie=>{
                     //     if (movie){
-                    db.updateOne(Movies, {_id: req.body.editMovieID}, retrievedData, result=>{
-                        if (result) console.log("Successfully updated movie details.");
-                        else console.log("Error updating movie details");
-                    })
+                    try {
+                        db.updateOne(Movies, {_id: req.body.editMovieID}, retrievedData, result=>{
+                            if (result) console.log("Successfully updated movie details.");
+                            else console.log("Error updating movie details");
+                        })
+                    } catch(e) {console.log(e);}
 
                             /* db.insertOne(Movies, retrievedData, result=>{
                             if (result)
@@ -175,44 +179,50 @@ const adminController = {
             date: req.body.showMovieDate
         }
 
-        db.findOne(Movies,{_id: retrievedData.movieID},'',function(movie){
-            d = new Date(req.body.showMovieDate);
-            day = d.getDay()+1;
+        try {
+            db.findOne(Movies,{_id: retrievedData.movieID},'',function(movie){
+                d = new Date(req.body.showMovieDate);
+                day = d.getDay()+1;
 
-            createdShowID = new mongoose.Types.ObjectId(); //generated showID to insert in show schema
+                createdShowID = new mongoose.Types.ObjectId(); //generated showID to insert in show schema
 
-            db.insertOne(Shows,{
-                _id: createdShowID, 
-                movieID: movie._id,
-                dayOfWeek: day,
-                date: req.body.showMovieDate, 
-                time: req.body.showMovieTime
-            }, result=>{
-                if (result)
-                    console.log("Successfully added document to Shows collection.");
-                else console.log("Error inserting to Shows collection");
-            });
-
-
-            for (var i=1;i<=4;i++)
-            {
-                for (var j=0;j<8;j++)
-                {
-                    let letter = String.fromCharCode(65 + j);
-                    db.insertOne(Seats,{
-                        _id: new mongoose.Types.ObjectId(), 
-                        showID: createdShowID, 
-                        seatNum: i+letter, 
-                        seatPrice: 200, 
-                        isTaken: false
+                try {
+                    db.insertOne(Shows,{
+                        _id: createdShowID, 
+                        movieID: movie._id,
+                        dayOfWeek: day,
+                        date: req.body.showMovieDate, 
+                        time: req.body.showMovieTime
                     }, result=>{
                         if (result)
-                            console.log("Successfully added document to Seats collection.");
-                        else console.log("Error inserting to Seats collection");
+                            console.log("Successfully added document to Shows collection.");
+                        else console.log("Error inserting to Shows collection");
                     });
+                } catch(e) {console.log(e);}
+
+
+                for (var i=1;i<=4;i++)
+                {
+                    for (var j=0;j<8;j++)
+                    {
+                        let letter = String.fromCharCode(65 + j);
+                        try {
+                            db.insertOne(Seats,{
+                                _id: new mongoose.Types.ObjectId(), 
+                                showID: createdShowID, 
+                                seatNum: i+letter, 
+                                seatPrice: 200, 
+                                isTaken: false
+                            }, result=>{
+                                if (result)
+                                    console.log("Successfully added document to Seats collection.");
+                                else console.log("Error inserting to Seats collection");
+                            });
+                        } catch (e) {console.log(e);}
+                    }
                 }
-            }
-        });
+            });
+        } catch (e) {console.log(e);}
         //display
         res.redirect('/admin');
     },
@@ -222,44 +232,48 @@ const adminController = {
         d = new Date(req.body.date);
         day = d.getDay()+1;
 
-        db.updateOne(Shows,{_id: req.body.showID},{
-            dayOfWeek: day,
-            date: req.body.date,
-            time: req.body.time,
-        },show=>{});
+        try {
+            db.updateOne(Shows,{_id: req.body.showID},{
+                dayOfWeek: day,
+                date: req.body.date,
+                time: req.body.time,
+            },show=>{});
+        } catch (e) {console.log(e);}
     },
 
     deleteShow: function(req, res, next) {
         //movieID is showID
-        db.deleteMany(Seats,{"showID": req.body.movieID},show=>{}); //deletes all seats of the show
-        db.deleteOne(Shows,{"_id": req.body.movieID},show=>{}); //deletes the show
-        db.deleteMany(Tickets,{"showID": req.body.movieID},show=>{}); //delete tickets of show
-        console.log("Deleted shows");
+        try {
+            db.deleteMany(Seats,{"showID": req.body.movieID},show=>{}); //deletes all seats of the show
+            db.deleteOne(Shows,{"_id": req.body.movieID},show=>{}); //deletes the show
+            db.deleteMany(Tickets,{"showID": req.body.movieID},show=>{}); //delete tickets of show
+        } catch (e) {console.log(e);}
     },
 
     deleteMovie: function(req, res, next) {
-        console.log("Deleted movies");
-        db.findMany(Shows,{"movieID": req.body.movieID},'',show=>{
-            console.log(show);
-            for (let i=0;i<show.length;i++){
-                db.deleteMany(Seats,{"showID": show[i]},seat=>{}); //deletes all seats of shows
-                db.deleteMany(Tickets,{"showID": show[i]},tickets=>{}) //deletes all tickets of shows
-            }
-        });
-        console.log(req.body.movieID);
-        db.deleteMany(Ratings,{"movieID": req.body.movieID},ratings=>{}); //deletes all reviews and ratings
-        db.deleteMany(Shows,{"movieID": req.body.movieID},show=>{}); //deletes all show
-        db.deleteOne(Movies,{"_id": req.body.movieID},movie=>{}); //deletes the movie
+        try {
+            db.findMany(Shows,{"movieID": req.body.movieID},'',show=>{
+                for (let i=0;i<show.length;i++){
+                    db.deleteMany(Seats,{"showID": show[i]},seat=>{}); //deletes all seats of shows
+                    db.deleteMany(Tickets,{"showID": show[i]},tickets=>{}) //deletes all tickets of shows
+                }
+            });
+            db.deleteMany(Ratings,{"movieID": req.body.movieID},ratings=>{}); //deletes all reviews and ratings
+            db.deleteMany(Shows,{"movieID": req.body.movieID},show=>{}); //deletes all show
+            db.deleteOne(Movies,{"_id": req.body.movieID},movie=>{}); //deletes the movie
+        } catch (e) {console.log(e);}
     },
 
 
     //AJAX for edit Movie
     fetchMovie: (req, res, next)=>{
         let mID = req.query._id;
-        db.findOne(Movies, {_id: mID}, '',  result=>{
-            if (result) return res.send(result);
-            else return res.send(false);
-        })
+        try {
+            db.findOne(Movies, {_id: mID}, '',  result=>{
+                if (result) return res.send(result);
+                else return res.send(false);
+            })
+        } catch (e) {console.log(e);}
     }
 
 

@@ -8,4 +8,4 @@ const ccinfosSchema = new mongoose.Schema({
     // isActive: {type: Boolean, required: true},
 });
 
-module.exports = mongoose.model("ccinfo", ccinfosSchema);
+module.exports = mongoose.model("ccinfos", ccinfosSchema);

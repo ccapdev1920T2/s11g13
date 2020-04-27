@@ -31,58 +31,60 @@ const registerController = {
         else {
             //console.log("No errors!")
 
-            db.findOne(User, {email: req.body.regEmail}, '', function(result){
-                if (result){
-                    return res.status(422).render("register", {
-                        pageName: "Register",
-                        errors: [{msg: "Username unavailable"}],
-                    })
-                    //can be any of the two errors:
-                    //409 -conflict with data
-                    //402 -unprocessable data
-                }
+            try {
+                db.findOne(User, {email: req.body.regEmail}, '', function(result){
+                    if (result){
+                        return res.status(422).render("register", {
+                            pageName: "Register",
+                            errors: [{msg: "Username unavailable"}],
+                        })
+                        //can be any of the two errors:
+                        //409 -conflict with data
+                        //402 -unprocessable data
+                    }
 
-                else {
-                    bcrypt.hash(req.body.regPassword, 10, (err, hash)=>{
-                        if (err){
-                            return res.status(500).json({
-                                error:err
-                            });
-                        } else {
-                            const user = new User({
-                                password: hash,
-                                _id: new mongoose.Types.ObjectId(),
-                                email: req.body.regEmail,
-                                username: req.body.regUName,
-                                password: hash,
-                                userType: "User",
-                                firstName: req.body.regFName,
-                                lastName: req.body.regLName,
-                                mobileNumber: req.body.regPhone,
-                                pic: "./assets/profpic.png",
-                            });
-                            
-                            return db.insertOne(User, user, function(result){
-                                if (result){
-                                    // req.session.userId = user.username;
-                                    // res.locals.user = user;
-                                    // console.log(req.session.userId);
-                                    // console.log("User account created!");
-                                    // return res.redirect("/confirmEmail", result.username);
-                                    res.render("confirmEmail", {
-                                        pageName: "Confirm Email",
-                                        username: result.username
-                                    })
-                                }
-                                else {
-                                    //console.log("Error in creating user account")
-                                    return res.status(500).redirect("/error")
-                                }
-                            })
-                        };
-                    })
-                }
-            })
+                    else {
+                        bcrypt.hash(req.body.regPassword, 10, (err, hash)=>{
+                            if (err){
+                                return res.status(500).json({
+                                    error:err
+                                });
+                            } else {
+                                const user = new User({
+                                    password: hash,
+                                    _id: new mongoose.Types.ObjectId(),
+                                    email: req.body.regEmail,
+                                    username: req.body.regUName,
+                                    password: hash,
+                                    userType: "User",
+                                    firstName: req.body.regFName,
+                                    lastName: req.body.regLName,
+                                    mobileNumber: req.body.regPhone,
+                                    pic: "./assets/profpic.png",
+                                });
+                                
+                                return db.insertOne(User, user, function(result){
+                                    if (result){
+                                        // req.session.userId = user.username;
+                                        // res.locals.user = user;
+                                        // console.log(req.session.userId);
+                                        // console.log("User account created!");
+                                        // return res.redirect("/confirmEmail", result.username);
+                                        res.render("confirmEmail", {
+                                            pageName: "Confirm Email",
+                                            username: result.username
+                                        })
+                                    }
+                                    else {
+                                        //console.log("Error in creating user account")
+                                        return res.status(500).redirect("/error")
+                                    }
+                                })
+                            };
+                        })
+                    }
+                })
+            } catch(e){console.log(e);}
         }
     },
 

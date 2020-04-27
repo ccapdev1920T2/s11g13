@@ -10,29 +10,32 @@ const CCInfos = require('../models/CCInfosModel.js');
 
 const indexController = {
     getHome: function(req, res, next) {
-        db.findMany(Movies, {}, 'title posterUrl', movie=>{
-            let movieArray = [];
-            for (let i=0;i<movie.length;i++){
-                movieObj = {
-                        title: movie[i].title,
-                        id: movie[i]._id,
-                        imageurl: movie[i].posterUrl
-                    }
-                movieArray.push(movieObj);
-            }
+        try{
+            db.findMany(Movies, {}, 'title posterUrl', movie=>{
+                let movieArray = [];
+                for (let i=0;i<movie.length;i++){
+                    movieObj = {
+                            title: movie[i].title,
+                            id: movie[i]._id,
+                            imageurl: movie[i].posterUrl
+                        }
+                    movieArray.push(movieObj);
+                }
 
-            movieArray = quick_Sort(movieArray);
+                movieArray = quick_Sort(movieArray);
 
-            let un;
-            un = (req.session.userId)? req.session.userId: '';
-        
-            res.render("home", {
-                pageName: "Home",
-                current: "Home",
-                movies: movieArray,
-                username: un,
+                let un;
+                un = (req.session.userId)? req.session.userId: '';
+            
+                res.render("home", {
+                    pageName: "Home",
+                    current: "Home",
+                    movies: movieArray,
+                    username: un,
+                })
             })
-        })
+        } catch (e) {console.log(e);}
+
     },
 
 
@@ -187,54 +190,60 @@ const indexController = {
 
     addTicket: (req, res, next)=>{
         createdTicketID = new mongoose.Types.ObjectId();
-        db.findOne(Users,{username:req.session.userId},'_id email', function(u){
-            //insert ticket into db
-            db.insertOne(Tickets,{
-                    _id: createdTicketID, 
-                    showID:req.body.showID, 
-                    userID: u._id, 
-                    status: req.body.status, 
-                    seats: req.body.seats, 
-                    totalPrice: req.body.totalPrice
-                }, result=>{
-                    if (result) console.log("Successfully inserted document to Tickets collection");
-                    else console.log("Error inserting to Tickets collection");
-                    
-                });
-            //Add credit card to db
-            // if (req.body.payCard){
-                //Form date first
-                let month = req.body.expiryMonth;
-                let year = req.body.expiryYear;
-                let day;
-                if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-                    day = "31"
-                else if (month == 9 || month == 4 || month == 6 || month == 11)
-                    day = "30";
-                else if (month == 2){
-                    if (year%4 == 0 && year%100 != 0)
-                        day = "29";
-                    else day = "28";
-                }
-                let expdate = year + "-" + month + "-" + day;
-                let creditCard = new CCInfos({
-                    email: u.email,
-                    ccnumber: req.body.cardNum,
-                    ccexpdate: expdate
-                });
+        try{
+            db.findOne(Users,{username:req.session.userId},'_id email', function(u){
+                //insert ticket into db
+                db.insertOne(Tickets,{
+                        _id: createdTicketID, 
+                        showID:req.body.showID, 
+                        userID: u._id, 
+                        status: req.body.status, 
+                        seats: req.body.seats, 
+                        totalPrice: req.body.totalPrice
+                    }, result=>{
+                        if (result) console.log("Successfully inserted document to Tickets collection");
+                        else console.log("Error inserting to Tickets collection");
+                        
+                    });
+                //Add credit card to db
+                // if (req.body.payCard){
+                    //Form date first
+                    let month = req.body.expiryMonth;
+                    let year = req.body.expiryYear;
+                    let day;
+                    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+                        day = "31"
+                    else if (month == 9 || month == 4 || month == 6 || month == 11)
+                        day = "30";
+                    else if (month == 2){
+                        if (year%4 == 0 && year%100 != 0)
+                            day = "29";
+                        else day = "28";
+                    }
+                    let expdate = year + "-" + month + "-" + day;
+                    let creditCard = new CCInfos({
+                        email: u.email,
+                        ccnumber: req.body.cardNum,
+                        ccexpdate: expdate
+                    });
 
-                db.insertOne(CCInfos, creditCard, result=>{
-                    if (result)
-                        console.log("Successfully inserted ccinfo")
-                    else console.log("Error in inserting to ccinfo")
-                })
-            // }
-        })
+                    try {
+                        db.insertOne(CCInfos, creditCard, result=>{
+                            if (result)
+                                console.log("Successfully inserted ccinfo")
+                            else console.log("Error in inserting to ccinfo")
+                        })
+                    } catch (e) {console.log(e);}
+                // }
+            })
+        } catch (e) {console.log(e);}
         //update all selected seats to taken
         var seatArray = req.body.seats.split(',');
         for (var i=0;i<seatArray.length;i++)
         {
-            db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true},seat=>{});
+            try {
+                db.updateOne(Seats,{"seatNum": seatArray[i], "showID": req.body.showID},{"isTaken": true},seat=>{});
+            } catch (e) {console.log(e);}
         }
 
         let un;

@@ -23,46 +23,50 @@ const loginController = {
             })
         }
         else{
-            db.findOne(User, {username: req.body.username}, '', function(user){
-                if (user){
-                    bcrypt.compare(req.body.password, user.password, (err,result)=>{
-                        //console.log("Err exists?" + err);
-                        //console.log("result?: "+ result)
-                        if(err){
-                            return res.status(401).render("login", {
-                                pageName: "Login",
-                                errors: [{msg: "Invalid credentials"}],
-                            })
-                        } 
-                        if (result) {
-                            req.session.userId = user.username;
-                            res.locals.user = user;
-                            //console.log(req.session.userId);
+            try {
+                db.findOne(User, {username: req.body.username}, '', function(user){
+                    if (user){
+                        bcrypt.compare(req.body.password, user.password, (err,result)=>{
+                            //console.log("Err exists?" + err);
+                            //console.log("result?: "+ result)
+                            if(err){
+                                return res.status(401).render("login", {
+                                    pageName: "Login",
+                                    errors: [{msg: "Invalid credentials"}],
+                                })
+                            } 
+                            if (result) {
+                                req.session.userId = user.username;
+                                res.locals.user = user;
+                                //console.log(req.session.userId);
 
-                            if(user.userType.localeCompare("User")){
-                                //console.log('Admin Logged In');
-                                return res.redirect("/admin");
+                                if(user.userType.localeCompare("User")){
+                                    //console.log('Admin Logged In');
+                                    return res.redirect("/admin");
+                                }
+                                else{
+                                    //console.log('User Logged In');
+                                    return res.redirect("/user/"+user.username);
+                                };
                             }
                             else{
-                                //console.log('User Logged In');
-                                return res.redirect("/user/"+user.username);
-                            };
-                        }
-                        else{
-                            return res.status(401).render("login", {
-                                pageName: "Login",
-                                errors: [{msg: "Invalid credentials"}],
-                            })
-                        }
-                    })
-                }
-                else{
-                    return res.status(403).render("login", {
-                        pageName: "Register",
-                        errors: [{msg: "Invalid credentials"}],
-                    }) 
-                }
-            });
+                                return res.status(401).render("login", {
+                                    pageName: "Login",
+                                    errors: [{msg: "Invalid credentials"}],
+                                })
+                            }
+                        })
+                    }
+                    else{
+                        return res.status(403).render("login", {
+                            pageName: "Register",
+                            errors: [{msg: "Invalid credentials"}],
+                        }) 
+                    }
+                });
+            } catch (e) {
+                console.log(e);
+            }
         }
     },
 }

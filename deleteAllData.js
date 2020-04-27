@@ -19,7 +19,7 @@ db.deleteMany(Users, {}, callback=>{
             db.deleteMany(Seats, {}, callback=>{
                 db.deleteMany(Ratings, {}, callback=>{
                     db.deleteMany(Tickets, {}, callback=>{
-                        db.deleteMany(CCinfos, {}, callback=>{
+                        db.deleteMany(CCInfos, {}, callback=>{
                             db.close();
                         });
                     });

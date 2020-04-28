@@ -47,7 +47,7 @@ db.findOne(Users, {userType: "Admin"}, null, (result)=>{
                 userType: 'Admin',
                 firstName: 'Admin',
                 lastName: 'Manager',
-                pic: '/assets/ProfilePictures/profpic.png',
+                pic: '/assets/ProfilePictures/profpic.jpg',
             });
             
 

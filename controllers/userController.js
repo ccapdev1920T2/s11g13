@@ -87,9 +87,9 @@ const userController = {
     editProfile: function(req, res, next) {
         //multer storage
         const storage = multer.diskStorage({
-          destination: '/assets/ProfilePictures/',
+          destination: './public/assets/ProfilePictures/',
           filename: function(req, file, cb) {
-            cb(null,file.fieldname);
+            cb(null,file.originalname);
           }
         });
 
@@ -107,7 +107,7 @@ const userController = {
                         lastName: req.body.lName,
                         mobileNumber: req.body.Mobile,
                         email: req.body.Email,
-                        pic: req.file.destination + req.file.originalname,
+                        pic: '/assets/ProfilePictures/' + req.file.originalname,
                     },profile=>{});
                 } catch(e){console.log(e);}
                 //display

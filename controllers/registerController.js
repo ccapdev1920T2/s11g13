@@ -60,7 +60,7 @@ const registerController = {
                                     firstName: req.body.regFName,
                                     lastName: req.body.regLName,
                                     mobileNumber: req.body.regPhone,
-                                    pic: "./assets/profpic.png",
+                                    pic: "/assets/ProfilePictures/profpic.jpg",
                                 });
                                 
                                 return db.insertOne(User, user, function(result){

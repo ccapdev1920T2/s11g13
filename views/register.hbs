@@ -16,35 +16,28 @@
     {{>header}}
     <div class="container justify-content-center mt-4">
         <div class="row justify-content-center">
-        {{#if errors}}
-            <div class="col-sm-12 col-md-6">
-            {{#each errors}}
-                <div class="alert alert-danger my-1 text-center alert-dismissable fade show">
-                    <small>{{msg}}</small>
-                    <button type="button" class="close pl-3" data-dismiss="alert">
-                        <i class="fa fa-close"></i>
-                    </button>
-                </div>
-            {{/each}}
-            </div>
-            {{#with initValues}}
-                <div id="fnholder" class="d-none">{{regFName}}</div>
-                <div id="lnholder" class="d-none">{{regLName}}</div>
-                <div id="unholder" class="d-none">{{regUName}}</div>
-                <div id="emailholder" class="d-none">{{regEmail}}</div>
-                <div id="phoneholder" class="d-none">{{regPhone}}</div>
-            {{/with}}
-        {{/if}}
-        {{#if errors}}
-            <div class="col-sm-12 col-md-6">
-            {{else}}
             <div class="col-sm-12 col-md-12">
-        {{/if}}
                 <div class="card m-auto p-3" id="regForm" style="max-width: 450px">
                     <h4 class="card-title text-center">Register</h4>
                     <p class="text-center mb-0">Create an account now to book tickets</p>
                     <hr>
-
+                    {{#if errors}}
+                        {{#each errors}}
+                            <div class="alert alert-danger my-1 text-center alert-dismissable fade show">
+                                <small>{{msg}}</small>
+                                <button type="button" class="close pl-3" data-dismiss="alert">
+                                    <i class="fa fa-close"></i>
+                                </button>
+                            </div>
+                        {{/each}}
+                        {{#with initValues}}
+                            <div id="fnholder" class="d-none">{{regFName}}</div>
+                            <div id="lnholder" class="d-none">{{regLName}}</div>
+                            <div id="unholder" class="d-none">{{regUName}}</div>
+                            <div id="emailholder" class="d-none">{{regEmail}}</div>
+                            <div id="phoneholder" class="d-none">{{regPhone}}</div>
+                        {{/with}}
+                    {{/if}}
                     <form name="register" id="register" method="POST">
                         <!-- Name -->
                         <div class="form-row">
@@ -109,6 +102,9 @@
                                 </div>
                                 <label for="regPassword" class="sr-only">Password</label>
                                 <input  type="password" name="regPassword" id="regPassword" class="form-control" placeholder="Password">
+                                <div class="invalid-feedback" id="passwordfeedback">
+                                    Password must be more than six characters.
+                                </div>
                             </div>
                         </div>
 
@@ -121,7 +117,7 @@
                                 <label for="regConfPass" class="sr-only">Confirm Password</label>
                                 <input  type="password" name="regConfPass" id="regConfPass" class="form-control" placeholder="Confirm Password">
                                 <div class="invalid-feedback" id="passMatch">
-                                    Invalid Email.
+                                    Passwords do not match.
                                 </div>
                             </div>
                         </div>
@@ -145,6 +141,8 @@
     <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     --><script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+    <!-- Validator JS frontend validation -->
+    <script src="./scripts/validator.min.js"> </script>
     <script src="/scripts/HBS-register.js"></script>
 </body>
 </html>

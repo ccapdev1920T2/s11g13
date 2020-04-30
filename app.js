@@ -94,7 +94,7 @@ app.use(express.static(__dirname + '\\public'))
 
 /* Home */
 const HomeController = require('./controllers/indexController');
-router.get("/" , HomeController.getHome);
+app.get("/" , HomeController.getHome);
 
 /********* Routing *********/
 const indexRoutes = require('./router/indexRoutes');

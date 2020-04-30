@@ -92,6 +92,10 @@ app.use(bodyParser.json());
 /* To access public folder where CSS and assets are located  */
 app.use(express.static(__dirname + '\\public'))
 
+/* Home */
+const HomeController = require('./controllers/indexController');
+router.get("/" , HomeController.getHome);
+
 /********* Routing *********/
 const indexRoutes = require('./router/indexRoutes');
 const registerRoutes = require('./router/registerRoutes');

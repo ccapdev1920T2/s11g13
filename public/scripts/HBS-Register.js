@@ -133,20 +133,25 @@ $(document).ready(()=>{
         "blur mouseout", validate
     )
 
-    // $('#regRegister').on(
-    //     "click", ()=>{
-    //         $.post("/")
-            
-    //     })
-    // });
-    
-    // console.log(allValid)
-
-    // let formData = {
-    //     email: $("#regEmail").val(),
-    //     username: $("#regUName").val(),
-    //     firstName: $("#regFName").val(),
-    //     lastName: $("#regLName").val(),
-    //     mobileNumber: $("#regPhone").val(),
-    // console.table(formData);
+    // Phase 2 feedback
+    $("#regPassword").on(
+        "keyup", ()=>{
+            let val = $("#regPassword").val();
+            if (val == ""){
+                $("#passwordfeedback").hide();
+                $("#regPassword").removeClass("is-valid")
+                $("#regPassword").removeClass("is-invalid")
+            }
+            else if (!validator.isLength(val, {min: 6})){
+                $("#passwordfeedback").show();
+                $("#regPassword").removeClass("is-valid")
+                $("#regPassword").addClass("is-invalid")
+            }
+            else {
+                $("#passwordfeedback").hide();
+                $("#regPassword").addClass("is-valid")
+                $("#regPassword").removeClass("is-invalid")
+            }
+        }
+    )
 })

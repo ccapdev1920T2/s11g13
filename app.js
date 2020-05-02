@@ -90,7 +90,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 /* To access public folder where CSS and assets are located  */
-app.use(express.static(__dirname + '\\public'))
+app.use(express.static(__dirname + '/public'));
 
 /* Home */
 const HomeController = require('./controllers/indexController');

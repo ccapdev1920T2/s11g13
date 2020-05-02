@@ -240,7 +240,7 @@ const moviesController = {
         var reviewTitle = req.body.ReviewTitle;
         var review = req.body.Review;
         var movie_id = req.body.movieTitle;
-        var userID = req.session.userId;
+        var userID = '';
 
         // console.log(rate);
         // console.log(reviewTitle);

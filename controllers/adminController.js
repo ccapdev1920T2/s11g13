@@ -114,9 +114,9 @@ const adminController = {
     postEditMovie: (req, res, next)=>{
         //multer storage
         const storage = multer.diskStorage({
-            destination: '/assets/MoviePosters/',
+            destination: './public/assets/MoviePosters/',
             filename: function(req, file, cb) {
-              cb(null,file.fieldname);
+              cb(null,file.originalname);
             }
           });
   
@@ -136,7 +136,7 @@ const adminController = {
                         aveScore: 0,
                         synopsis: req.body.editMovieSynopsis,
                         cast: castArray,
-                        posterUrl:req.file.destination + req.file.originalname,
+                        posterUrl:'/assets/MoviePosters/' + req.file.originalname,
                         trailerUrl:req.body.editMovieTrailer,
                     }
 

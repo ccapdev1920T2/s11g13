@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 //Database name
-const url = /* process.env.MONGODB_URI ||  */"mongodb://localhost:27017/TicketLeaveItDB";
-
+//const url = /* process.env.MONGODB_URI ||  */"mongodb://localhost:27017/TicketLeaveItDB";
+const url = process.env.MONGODB_URI || 'mongodb+srv://dbUser:<password>@ticketorleaveitcluster-xlh9j.mongodb.net/test'
 // Insert modules of schemas here
 const users = require("./UsersModel.js");
 const cart = require("./CartModel.js");

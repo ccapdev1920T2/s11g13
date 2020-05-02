@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 //Database name
 //const url = /* process.env.MONGODB_URI ||  */"mongodb://localhost:27017/TicketLeaveItDB";
-const url = process.env.MONGODB_URI || 'mongodb+srv://dbUser:<password>@ticketorleaveitcluster-xlh9j.mongodb.net/test'
+const url = process.env.MONGODB_URI || 'mongodb://dbUser:Sg2Jtuc8y3NjZhvr@ticketorleaveitcluster-shard-00-00-xlh9j.mongodb.net:27017,ticketorleaveitcluster-shard-00-01-xlh9j.mongodb.net:27017,ticketorleaveitcluster-shard-00-02-xlh9j.mongodb.net:27017/TicketLeaveItDB?replicaSet=TicketOrLeaveItCluster-shard-0&ssl=true&authSource=admin'
 // Insert modules of schemas here
 const users = require("./UsersModel.js");
 const cart = require("./CartModel.js");

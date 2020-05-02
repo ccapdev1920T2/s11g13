@@ -82,7 +82,7 @@ app.use((req, res, next)=>{
 
 
 /**** Set partials here ****/
-hbs.registerPartials(__dirname+ "/views/partials")
+hbs.registerPartials(__dirname+ "/views/partials");
 
 app.set("view engine", "hbs");
 // Middlewares

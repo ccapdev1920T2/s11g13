@@ -26,7 +26,8 @@ https://github.com/ccapdev1920T2/s11g13.git
    | Command | Description |
    |:--:|:--:|
    | `node deleteAllData` | Clears all the contents of the Database in case you have used this program in the past. This can be skipped. |
-   | `node addData` | populates the database with dummy data. Includes admin account |
+   | `node makeCollection` | Creates the database and the collections|
+   | `node addData` | Populates the database with dummy data. Includes admin account |
 
 4. Run the web server with `node app` 
 

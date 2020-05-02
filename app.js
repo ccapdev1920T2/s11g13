@@ -82,7 +82,7 @@ app.use((req, res, next)=>{
 
 
 /**** Set partials here ****/
-hbs.registerPartials(__dirname+ "\\views\\partials")
+hbs.registerPartials(__dirname+ "/views/partials");
 
 app.set("view engine", "hbs");
 // Middlewares
@@ -90,7 +90,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 /* To access public folder where CSS and assets are located  */
-app.use(express.static(__dirname + '\\public'))
+app.use(express.static(__dirname + '/public'));
 
 /* Home */
 const HomeController = require('./controllers/indexController');

@@ -6,6 +6,11 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const {validationResult} = require("express-validator");
 
+const nodemailer = require("nodemailer");
+const hbsnmailer = require("nodemailer-express-handlebars");
+const Email = require("email-templates");
+const path = require("path");
+
 const User = require('../models/UsersModel.js');
 
 
@@ -70,10 +75,97 @@ const registerController = {
                                         // console.log(req.session.userId);
                                         // console.log("User account created!");
                                         // return res.redirect("/confirmEmail", result.username);
-                                        res.render("confirmEmail", {
-                                            pageName: "Confirm Email",
-                                            username: result.username
+
+                                        // * Nodemailer - send an email confirmation
+                                        /* {
+                                            service: 'gmail',
+                                            auth: {
+                                                user: 
+                                                pass:
+                                            }
+                                        } */
+                                        let transporter = nodemailer.createTransport({
+                                            service: 'gmail',
+                                            auth: {
+                                                user: process.env.NODEMAILER_EMAIL,
+                                                pass: process.env.NODEMAILER_PASS
+                                            }
+                                        });
+
+                                        /* let pDir = path.join(__dirname, '../views/partials');
+                                        let lDir = path.join(__dirname, '../views/layouts');
+                                        console.log(pDir);
+                                        console.log(lDir); */
+                                        let vPath = path.join(__dirname, '../views');
+                                        console.log(vPath);
+
+                                        let emailTemplate = path.join(vPath, "email");
+                                        let template = new EmailTemplate(emailTemplate);
+
+                                        let actLink = "/activate?account="+user._id; 
+                                        let context = {
+                                            firstname: req.body.regFName,
+                                            activationLink: actLink
+                                        }
+
+                                        const toSend = new Email
+
+
+
+                                        template.render(context, (err, results)=>{
+                                            if (err){
+                                                db.deleteOne(User, {username: req.body.regUName}, (result)=>{
+                                                    res.redirect("/error");
+                                                })
+                                            }
+
+                                            let mailOptions  = {
+                                                from: 'ticketorleaveit+noreply@gmail.com',
+                                                to: req.body.regEmail,
+                                                subject: 'Confirm your email for TicketOrLeaveIt',
+                                                html: result.html
+                                            }
+                                            // TODO: Delete user's record then redirect to registration page
+                                            transporter.sendMail(mailOptions, (err, info)=>{
+                                                if (err) {
+                                                    console.log("Error sending an email");
+                                                    console.log(err)
+                                                    db.deleteOne(User, {username: req.body.regUName}, (result)=>{
+                                                        res.redirect("/error");
+                                                    })
+                                                }
+                                                else {
+                                                    console.log(info.response);
+                                                    res.render("confirmEmail", {
+                                                        pageName: "Confirm Email",
+                                                        username: result.username
+                                                    })
+                                                }
+                                            })
+
+
                                         })
+
+                                        //fsr it wont work
+                                        /* const hbsOptions = {
+                                            viewEngine: {
+                                                extname: '.hbs',
+                                                partialsDir: pDir,
+                                                layoutsDir: lDir,
+                                                defaultLayout: 'layout',
+                                            },
+                                            viewPath: vPath,
+                                            extName: '.hbs'
+                                        }
+
+                                        transporter.use('compile', hbsnmailer(hbsOptions)) */
+
+                                        
+
+                                        
+
+
+
                                     }
                                     else {
                                         //console.log("Error in creating user account")

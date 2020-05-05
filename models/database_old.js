@@ -3,7 +3,6 @@ const mongodb = require('mongodb');
 const client = mongodb.MongoClient;
 //const url = "mongodb://localhost:27017";
 const url = process.env.MONGODB_URI || 'mongodb://dbUser:Sg2Jtuc8y3NjZhvr@ticketorleaveitcluster-shard-00-00-xlh9j.mongodb.net:27017,ticketorleaveitcluster-shard-00-01-xlh9j.mongodb.net:27017,ticketorleaveitcluster-shard-00-02-xlh9j.mongodb.net:27017/TicketLeaveItDB?replicaSet=TicketOrLeaveItCluster-shard-0&ssl=true&authSource=admin'
-
 const options = {
     useUnifiedTopology: true,
     useNewUrlParser: true

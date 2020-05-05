@@ -25,6 +25,8 @@ router.get('/logout', session_auth.logout);
 
 router.post('/addTicketSuccess', controller.addTicket);
 
+router.get('/activate', controller.activateAccount);
+
 /* Ajax routes */
 router.get('/checkUniqueUName', formchecker.uniqueUsername)
 router.get('/checkEmail', formchecker.isInvalidEmail, formchecker.uniqueEmail)

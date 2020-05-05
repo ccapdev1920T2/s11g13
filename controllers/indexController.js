@@ -259,6 +259,22 @@ const indexController = {
             username: un,
         });
     },
+
+    activateAccount: (req, res, next)=>{
+        let account = req.query.account;
+        account = new mongoose.Types.ObjectId(account);
+
+        
+        db.updateOne(Users, {_id: account}, {isActivated: true}, (result)=>{
+            if (result){
+                res.render('activationSuccess', {
+                    pageName: "Activation Success"
+                })
+            }
+            else res.redirect('/error');
+        })
+    }
+
     /*
     getConfirmEmail: (req, res, username, next)=>{
         db.findOne(Users, {username: req.session.userId}, '', function(user){

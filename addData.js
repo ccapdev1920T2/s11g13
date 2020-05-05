@@ -39,6 +39,7 @@ db.findOne(Users, {userType: "Admin"}, null, (result)=>{
         if (err){
            console.log("Error in hashing password")
         } else {
+            //Users are automatically account-activated
             const userDoc = new Users({
                 _id: new mongoose.Types.ObjectId(),
                 email: 'admin@dlsu.edu.ph',
@@ -48,6 +49,7 @@ db.findOne(Users, {userType: "Admin"}, null, (result)=>{
                 firstName: 'Admin',
                 lastName: 'Manager',
                 pic: '/assets/ProfilePictures/profpic.jpg',
+                isActivated: true
             });
             
 
@@ -82,6 +84,7 @@ bcrypt.hash('123123', 10, (err, hash)=>{
             lastName: 'Knox',
             mobileNumber: '09564468746',
             pic: "/assets/ProfilePictures/profpic.jpg",
+            isActivated: true
         });
         
         db.insertOne(Users, user, function(result){
@@ -100,6 +103,7 @@ bcrypt.hash('123123', 10, (err, hash)=>{
             lastName: 'Ellison',
             mobileNumber: '09564468747',
             pic: "/assets/ProfilePictures/profpic.jpg",
+            isActivated: true
         });
         
         db.insertOne(Users, user, function(result){
@@ -118,6 +122,7 @@ bcrypt.hash('123123', 10, (err, hash)=>{
             lastName: 'Kerr',
             mobileNumber: '09564568748',
             pic: "/assets/ProfilePictures/profpic.jpg",
+            isActivated: true
         });
         
         db.insertOne(Users, user, function(result){
@@ -136,6 +141,7 @@ bcrypt.hash('123123', 10, (err, hash)=>{
             lastName: 'Dowd',
             mobileNumber: '09564568749',
             pic: "/assets/ProfilePictures/profpic.jpg",
+            isActivated: true
         });
         
         db.insertOne(Users, user, function(result){

@@ -16,6 +16,7 @@ const userSchema = mongoose.Schema({
     lastName: {type: String, required: true},
     mobileNumber: {type: String, required: false},
     pic: {type: String, required: false},
+    isActivated:{type: Boolean, required: true},
 });
 
 module.exports = mongoose.model('users', userSchema);

@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const {validationResult} = require("express-validator");
 
+const nodemailer = require("nodemailer");
+const path = require("path");
+
 const User = require('../models/UsersModel.js');
 
 
@@ -29,8 +32,6 @@ const registerController = {
             })
         }
         else {
-            //console.log("No errors!")
-
             try {
                 db.findOne(User, {email: req.body.regEmail}, '', function(result){
                     if (result){
@@ -62,7 +63,6 @@ const registerController = {
                                     mobileNumber: req.body.regPhone,
                                     pic: "/assets/ProfilePictures/profpic.jpg",
                                 });
-                                
                                 return db.insertOne(User, user, function(result){
                                     if (result){
                                         // req.session.userId = user.username;
@@ -70,9 +70,57 @@ const registerController = {
                                         // console.log(req.session.userId);
                                         // console.log("User account created!");
                                         // return res.redirect("/confirmEmail", result.username);
-                                        res.render("confirmEmail", {
-                                            pageName: "Confirm Email",
-                                            username: result.username
+
+                                        // * Nodemailer - send an email confirmation
+
+                                        let transporter = nodemailer.createTransport({
+                                            service: 'gmail',
+                                            auth: {
+                                                user: process.env.NODEMAILER_EMAIL,
+                                                pass: process.env.NODEMAILER_PASS
+                                            }
+                                        });
+
+                                        //TODO: Edit actLink to be something like herokuapp.com/activateAccount
+                                        let actLink = "/activate?account="+user._id; 
+                                        let context = {
+                                            firstname: req.body.regFName,
+                                            activationLink: actLink
+                                        };
+
+                                        res.render('email', context, (err, result)=>{
+                                            if (err){
+                                                db.deleteOne(User, {username: req.body.regUName}, (result)=>{
+                                                    res.redirect("/error");
+                                                })
+                                            }
+                                            else {
+                                                renderedHtml = result;
+
+                                                let mailOptions  = {
+                                                    from: 'ticketorleaveit+noreply@gmail.com',
+                                                    to: req.body.regEmail,
+                                                    subject: 'Confirm your email for TicketOrLeaveIt',
+                                                    html: renderedHtml
+                                                }
+
+                                                transporter.sendMail(mailOptions, (err, info)=>{
+                                                    if (err) {
+                                                        console.log("Error sending an email");
+                                                        console.log(err)
+                                                        db.deleteOne(User, {username: req.body.regUName}, (result)=>{
+                                                            res.redirect("/error");
+                                                        })
+                                                    }
+                                                    else {
+                                                        console.log(info.response);
+                                                        res.render("confirmEmail", {
+                                                            pageName: "Confirm Email",
+                                                            username: result.username
+                                                        })
+                                                    }
+                                                })
+                                            }
                                         })
                                     }
                                     else {

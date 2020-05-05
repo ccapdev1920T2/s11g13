@@ -237,6 +237,7 @@ hbs.registerHelper('AdminSession', function() {
 app.listen(process.env.PORT, LOCAL_ADDRESS, ()=>{
     console.log("Server ready.");
 })
+//console.log(`Access at ${LOCAL_ADDRESS}:${process.env.PORT}`);
 
 // console.log(`App listening at port ${port}`);
 // console.log(`Access at localhost:${port}/`);

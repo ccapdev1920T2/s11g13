@@ -62,6 +62,7 @@ const registerController = {
                                     lastName: req.body.regLName,
                                     mobileNumber: req.body.regPhone,
                                     pic: "/assets/ProfilePictures/profpic.jpg",
+                                    isActivated: false
                                 });
                                 return db.insertOne(User, user, function(result){
                                     if (result){
@@ -82,7 +83,7 @@ const registerController = {
                                         });
 
                                         //TODO: Edit actLink to be something like herokuapp.com/activateAccount
-                                        let actLink = "/activate?account="+user._id; 
+                                        let actLink = "https://ticketorleaveit.herokuapp.com/activate?account="+user._id; 
                                         let context = {
                                             firstname: req.body.regFName,
                                             activationLink: actLink

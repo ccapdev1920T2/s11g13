@@ -1,6 +1,8 @@
 .HBS-carousel-img
 {
-    height: 350px;
+    /* height: 350px; */
+    height: 100%;
+    width: auto;
 }
 
 .movie-cover

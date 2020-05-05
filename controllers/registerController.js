@@ -7,8 +7,6 @@ const bcrypt = require('bcrypt');
 const {validationResult} = require("express-validator");
 
 const nodemailer = require("nodemailer");
-const hbsnmailer = require("nodemailer-express-handlebars");
-const Email = require("email-templates");
 const path = require("path");
 
 const User = require('../models/UsersModel.js');
@@ -34,8 +32,6 @@ const registerController = {
             })
         }
         else {
-            //console.log("No errors!")
-
             try {
                 db.findOne(User, {email: req.body.regEmail}, '', function(result){
                     if (result){
@@ -67,7 +63,6 @@ const registerController = {
                                     mobileNumber: req.body.regPhone,
                                     pic: "/assets/ProfilePictures/profpic.jpg",
                                 });
-                                
                                 return db.insertOne(User, user, function(result){
                                     if (result){
                                         // req.session.userId = user.username;
@@ -77,13 +72,7 @@ const registerController = {
                                         // return res.redirect("/confirmEmail", result.username);
 
                                         // * Nodemailer - send an email confirmation
-                                        /* {
-                                            service: 'gmail',
-                                            auth: {
-                                                user: 
-                                                pass:
-                                            }
-                                        } */
+
                                         let transporter = nodemailer.createTransport({
                                             service: 'gmail',
                                             auth: {
@@ -92,80 +81,47 @@ const registerController = {
                                             }
                                         });
 
-                                        /* let pDir = path.join(__dirname, '../views/partials');
-                                        let lDir = path.join(__dirname, '../views/layouts');
-                                        console.log(pDir);
-                                        console.log(lDir); */
-                                        let vPath = path.join(__dirname, '../views');
-                                        console.log(vPath);
-
-                                        let emailTemplate = path.join(vPath, "email");
-                                        let template = new EmailTemplate(emailTemplate);
-
+                                        //TODO: Edit actLink to be something like herokuapp.com/activateAccount
                                         let actLink = "/activate?account="+user._id; 
                                         let context = {
                                             firstname: req.body.regFName,
                                             activationLink: actLink
-                                        }
+                                        };
 
-                                        const toSend = new Email
-
-
-
-                                        template.render(context, (err, results)=>{
+                                        res.render('email', context, (err, result)=>{
                                             if (err){
                                                 db.deleteOne(User, {username: req.body.regUName}, (result)=>{
                                                     res.redirect("/error");
                                                 })
                                             }
+                                            else {
+                                                renderedHtml = result;
 
-                                            let mailOptions  = {
-                                                from: 'ticketorleaveit+noreply@gmail.com',
-                                                to: req.body.regEmail,
-                                                subject: 'Confirm your email for TicketOrLeaveIt',
-                                                html: result.html
+                                                let mailOptions  = {
+                                                    from: 'ticketorleaveit+noreply@gmail.com',
+                                                    to: req.body.regEmail,
+                                                    subject: 'Confirm your email for TicketOrLeaveIt',
+                                                    html: renderedHtml
+                                                }
+
+                                                transporter.sendMail(mailOptions, (err, info)=>{
+                                                    if (err) {
+                                                        console.log("Error sending an email");
+                                                        console.log(err)
+                                                        db.deleteOne(User, {username: req.body.regUName}, (result)=>{
+                                                            res.redirect("/error");
+                                                        })
+                                                    }
+                                                    else {
+                                                        console.log(info.response);
+                                                        res.render("confirmEmail", {
+                                                            pageName: "Confirm Email",
+                                                            username: result.username
+                                                        })
+                                                    }
+                                                })
                                             }
-                                            // TODO: Delete user's record then redirect to registration page
-                                            transporter.sendMail(mailOptions, (err, info)=>{
-                                                if (err) {
-                                                    console.log("Error sending an email");
-                                                    console.log(err)
-                                                    db.deleteOne(User, {username: req.body.regUName}, (result)=>{
-                                                        res.redirect("/error");
-                                                    })
-                                                }
-                                                else {
-                                                    console.log(info.response);
-                                                    res.render("confirmEmail", {
-                                                        pageName: "Confirm Email",
-                                                        username: result.username
-                                                    })
-                                                }
-                                            })
-
-
                                         })
-
-                                        //fsr it wont work
-                                        /* const hbsOptions = {
-                                            viewEngine: {
-                                                extname: '.hbs',
-                                                partialsDir: pDir,
-                                                layoutsDir: lDir,
-                                                defaultLayout: 'layout',
-                                            },
-                                            viewPath: vPath,
-                                            extName: '.hbs'
-                                        }
-
-                                        transporter.use('compile', hbsnmailer(hbsOptions)) */
-
-                                        
-
-                                        
-
-
-
                                     }
                                     else {
                                         //console.log("Error in creating user account")

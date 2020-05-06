@@ -258,7 +258,7 @@ const moviesController = {
                 userID = user._id;
             })
         } catch(e) {console.log(e);}
-        
+        console.log(userID);
         try {
             db.findOne(Movies, {_id: movie_id},'',function(movie){
                 if (movie){
@@ -374,7 +374,7 @@ const moviesController = {
                 userID = user._id;
             })
         } catch(e){console.log(e);}
-        
+        console.log(userID);
         try {
             db.findOne(Movies, {_id: movieID},'',function(movie){
                 if (movie){

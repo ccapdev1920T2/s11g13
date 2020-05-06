@@ -62,6 +62,8 @@ const checker = {
     },
 
     /***************Login validator*******************/
+    //FIXME: No sanitation for loginvalidation.username
+    //Need pa ba eh diba alphanumeric naman
     loginValidation: ()=>{
         return [
             check('username')
@@ -73,7 +75,6 @@ const checker = {
         ]
     },
     /***************Credit card validator*******************/
-    //FIXME: No sanitation for loginvalidation.username
     ccinfovalidation: ()=>{
         return [
             check('cardNum')
@@ -84,6 +85,19 @@ const checker = {
             check('cardCIV')
             .not().isEmpty().withMessage("CVV cannot be blank.")
             .isLength({min:3, max:4}).withMessage("Invalid CVV")
+            .trim().escape()
+        ]
+    },
+
+
+    /**************** Add Movie Review ******************/
+    //Since both add and edit forms have the same input[text] names
+    sanitizeReview: ()=>{
+        return [
+            check('ReviewTitle')
+            .trim().escape(),
+            
+            check('Review')
             .trim().escape()
         ]
     },

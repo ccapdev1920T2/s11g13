@@ -5,6 +5,8 @@ const Shows = require('../models/ShowsModel.js');
 const Users = require('../models/UsersModel.js');
 const Ratings = require('../models/RatingsModel.js');
 
+const {validationResult} = require("express-validator");
+
 const moviesController = {
     getMovies: function(req, res, next) {
         try {
@@ -246,6 +248,11 @@ const moviesController = {
         // console.log(reviewTitle);
         // console.log(review);
 
+        const errors = validationResult(req).array({onlyFirstError: true}); //Get errors from express-validator routes
+        if (errors.length > 0){
+            console.table(errors);
+        }
+        
         try {
             db.findOne(Users, {username: req.session.userId}, '', function(user){
                 userID = user._id;

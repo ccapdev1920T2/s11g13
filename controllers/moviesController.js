@@ -256,66 +256,66 @@ const moviesController = {
         try {
             db.findOne(Users, {username: req.session.userId}, '', function(user){
                 userID = user._id;
+                try {
+                    db.findOne(Movies, {_id: movie_id},'',function(movie){
+                        if (movie){
+                            //console.log("movie found!");
+                            var d = new Date();
+                            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                            var date = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+                            // console.log(date.toString());
+                            
+                            try {
+                                db.insertOne(Ratings,{
+                                    userID: userID,
+                                    movieID: movie._id,
+                                    date: date,
+                                    starRating: rate,
+                                    commentTitle: reviewTitle,
+                                    comment: review,
+                                },result=>{
+                                    if (result){
+                                        console.log("Successfully added document to Ratings collection.");
+                                        //updateStarRating(movie._id);
+                                        try {
+                                            db.findMany(Ratings, {movieID: movie._id}, '', function(r){
+                                                if (r){
+                                                    var total = 0;
+                                                    for (let i=0; i<r.length; i++){
+                                                        total = total + r[i].starRating;
+                                                    }
+                                                    
+                                                    total = (total/r.length).toFixed(1);
+                                            
+                                                    try {
+                                                        db.updateOne(Movies,{_id: movie._id},{
+                                                            aveScore: total
+                                                        }, result=>{
+                                                            if (result)
+                                                                console.log("Successfully changed starRating of Movie");
+                                                            else console.log("Error updating starRating of Movie");
+                                                        });
+                                                    } catch(e) {console.log(e);}
+                                                }
+                                                else console.log("Error finding ratings of Movie");  
+                                            });
+                                        } catch (e) {console.log(e);}
+        
+                                        return res.redirect('/movies/view/' + movie._id);
+                                    }
+                                    else console.log("Error inserting to Ratings collection");
+                                });
+                            } catch(e){console.log(e);}
+                        }
+                        else{
+                            //console.log(req.body.movieTitle);
+                            console.log('Movie not found!')    
+                        }
+                    })
+                } catch(e) {console.log(e);}
             })
         } catch(e) {console.log(e);}
         console.log(userID);
-        try {
-            db.findOne(Movies, {_id: movie_id},'',function(movie){
-                if (movie){
-                    //console.log("movie found!");
-                    var d = new Date();
-                    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                    var date = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-                    // console.log(date.toString());
-                    
-                    try {
-                        db.insertOne(Ratings,{
-                            userID: userID,
-                            movieID: movie._id,
-                            date: date,
-                            starRating: rate,
-                            commentTitle: reviewTitle,
-                            comment: review,
-                        },result=>{
-                            if (result){
-                                console.log("Successfully added document to Ratings collection.");
-                                //updateStarRating(movie._id);
-                                try {
-                                    db.findMany(Ratings, {movieID: movie._id}, '', function(r){
-                                        if (r){
-                                            var total = 0;
-                                            for (let i=0; i<r.length; i++){
-                                                total = total + r[i].starRating;
-                                            }
-                                            
-                                            total = (total/r.length).toFixed(1);
-                                    
-                                            try {
-                                                db.updateOne(Movies,{_id: movie._id},{
-                                                    aveScore: total
-                                                }, result=>{
-                                                    if (result)
-                                                        console.log("Successfully changed starRating of Movie");
-                                                    else console.log("Error updating starRating of Movie");
-                                                });
-                                            } catch(e) {console.log(e);}
-                                        }
-                                        else console.log("Error finding ratings of Movie");  
-                                    });
-                                } catch (e) {console.log(e);}
-
-                                return res.redirect('/movies/view/' + movie._id);
-                            }
-                            else console.log("Error inserting to Ratings collection");
-                        });
-                    } catch(e){console.log(e);}
-                }
-                else{
-                    //console.log(req.body.movieTitle);
-                    console.log('Movie not found!')    
-                }
-            })
-        } catch(e) {console.log(e);}
     },
 
     deleteReview: (req, res, next)=>{

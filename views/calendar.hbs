@@ -91,11 +91,15 @@
                                         <div class="">
                                             <div class="slider" id="slider1">
                                             
-                                            {{#each moviePicSu}}
-                                            <a href="/movies/view/{{../movieID}}">
-                                            <img src={{movieUrl}}>
-                                            </a>
-                                            {{/each}}
+                                            {{#if (isEmpty moviePicSu)}}
+                                                <p>No Available Shows</p>
+                                            {{else}}
+                                                {{#each moviePicSu}}
+                                                <a href="/movies/view/{{../movieID}}">
+                                                <img src={{movieUrl}}>
+                                                </a>
+                                                {{/each}}
+                                            {{/if}}
 
                                         </div>
                                         <div style="text-align:center;"><button id="leftButton1"><</button> <button id="rightButton1">></button></div>
@@ -120,11 +124,15 @@
                                         <div class="">
                                             <div class="slider" id="slider2">
                                             
-                                            {{#each moviePicM}}
-                                            <a href="/movies/view/{{../movieID}}">
-                                                <img src={{movieUrl}}>
-                                            </a>
-                                            {{/each}}
+                                            {{#if (isEmpty moviePicM)}}
+                                                <p>No Available Shows</p>
+                                            {{else}}
+                                                {{#each moviePicM}}
+                                                <a href="/movies/view/{{../movieID}}">
+                                                    <img src={{movieUrl}}>
+                                                </a>
+                                                {{/each}}
+                                            {{/if}}
 
                                         </div>
                                         <div style="text-align:center;"><button id="leftButton2"><</button> <button id="rightButton2">></button></div>
@@ -147,11 +155,15 @@
                                     <div class="">
                                         <div class="slider" id="slider3">
                                         
-                                        {{#each moviePicT}}
-                                        <a href="/movies/view/{{../movieID}}">
-                                            <img src={{movieUrl}}>
-                                        </a>
-                                        {{/each}}
+                                        {{#if (isEmpty moviePicT)}}
+                                                <p>No Available Shows</p>
+                                        {{else}}
+                                            {{#each moviePicT}}
+                                            <a href="/movies/view/{{../movieID}}">
+                                                <img src={{movieUrl}}>
+                                            </a>
+                                            {{/each}}
+                                        {{/if}}
 
                                     </div>
                                     <div style="text-align:center;"><button id="leftButton3"><</button> <button id="rightButton3">></button></div>
@@ -172,11 +184,15 @@
                                     <div class="">
                                         <div class="slider" id="slider4">
                                         
-                                        {{#each moviePicW}}
-                                        <a href="/movies/view/{{../movieID}}">
-                                            <img src={{movieUrl}}>
-                                        </a>
-                                        {{/each}}
+                                        {{#if (isEmpty moviePicW)}}
+                                                <p>No Available Shows</p>
+                                        {{else}}
+                                            {{#each moviePicW}}
+                                            <a href="/movies/view/{{../movieID}}">
+                                                <img src={{movieUrl}}>
+                                            </a>
+                                            {{/each}}
+                                        {{/if}}
 
                                     </div>
                                     <div style="text-align:center;"><button id="leftButton4"><</button> <button id="rightButton4">></button></div>
@@ -197,11 +213,15 @@
                                     <div class="">
                                         <div class="slider" id="slider5">
                                         
-                                        {{#each moviePicH}}
-                                        <a href="/movies/view/{{../movieID}}">
-                                            <img src={{movieUrl}}>
-                                        </a>
-                                        {{/each}}
+                                        {{#if (isEmpty moviePicH)}}
+                                                <p>No Available Shows</p>
+                                        {{else}}
+                                            {{#each moviePicH}}
+                                            <a href="/movies/view/{{../movieID}}">
+                                                <img src={{movieUrl}}>
+                                            </a>
+                                            {{/each}}
+                                        {{/if}}
 
                                     </div>
                                     <div style="text-align:center;"><button id="leftButton5"><</button> <button id="rightButton5">></button></div>
@@ -221,11 +241,17 @@
                             <div>
                                     <div class="">
                                         <div class="slider" id="slider6">
-                                        {{#each moviePicF}}
-                                        <a href="/movies/view/{{../movieID}}">
-                                            <img src={{movieUrl}}>
-                                        </a>
-                                        {{/each}}
+
+                                        {{#if (isEmpty moviePicF)}}
+                                                <p>No Available Shows</p>
+                                        {{else}}
+                                            {{#each moviePicF}}
+                                            <a href="/movies/view/{{../movieID}}">
+                                                <img src={{movieUrl}}>
+                                            </a>
+                                            {{/each}}
+                                        {{/if}}
+
                                     </div>
                                     <div style="text-align:center;"><button id="leftButton6"><</button> <button id="rightButton6">></button></div>
                                     </div>
@@ -244,11 +270,17 @@
                             <div>
                                     <div class="">
                                         <div class="slider" id="slider7">
+
+                                        {{#if (isEmpty moviePicSa)}}
+                                            <p>No Available Shows</p>
+                                        {{else}}
                                             {{#each moviePicSa}}
                                             <a href="/movies/view/{{../movieID}}">
-                                            <img src={{movieUrl}}>
+                                                <img src={{movieUrl}}>
                                             </a>
                                             {{/each}}
+                                        {{/if}}
+
                                         </div>
                                         <div style="text-align:center;"><button id="leftButton7"><</button> <button id="rightButton7">></button></div>
                                     </div>

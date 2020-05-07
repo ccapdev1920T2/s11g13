@@ -231,6 +231,12 @@ hbs.registerHelper('AdminSession', function() {
     return admin;
 });
 
+hbs.registerHelper('isEmpty', function(shows) {
+    if (shows.length>0){
+        return false;
+    }
+    else return true;
+});
 
 
 /** Server online **/

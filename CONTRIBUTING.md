@@ -4,7 +4,7 @@
 
 Unfortunately, due to the nature of this project, we are not allowing others to contribute to this project.
 
-Despite this, we are open to any suggestions you have so we may be able to improve the site (that is, if we decide to work on this in the feature).
+Despite this, we are open to any suggestions you have so we may be able to improve the site (that is, if we decide to work on this in the future).
 
 ## Reporting bugs and opening suggestions
 

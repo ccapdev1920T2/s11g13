@@ -31,18 +31,23 @@ git clone https://github.com/ccapdev1920T2/s11g13.git
 
 4. Refer to the [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) to get yourself set-up with your heroku app.
 
-5. Set up your config vars by going to your heroku dashboard > Appname > Settings > Config Vars > Reveal Config Vars. Provide the following details to the given fields:
+5. Set up your config vars by going to your heroku dashboard > Appname > Settings > Config Vars > Reveal Config Vars, or your .env file. Provide the following details to the given fields:
 
 | Variable Name | Description |
 |:---:|:---:|
-|MONGODB_URI| The MONGODB Connection string your app will use |
+|MONGODB_URI| The MONGODB Connection string your app will use to connect to an online database |
+|MONGODB_LOCAL_URI| The local database connection string. Default value is `mongodb://localhost:27017/TicketLeaveItDB`|
+|LOCAL_ADDRESS| IP Address to access the site. Value should be `0.0.0.0` |
+|PORT| Port to access the site. Default value should be `3000`|
 |NODEMAILER_EMAIL| The email account you will use to send confirmation emails. You can only use gmail accounts, ensure that you have `Allow less secure apps` toggled to `ON` [here](https://myaccount.google.com/lesssecureapps). |
 |NODEMAILER_PASS| The password to the email account |
 
 > 
 
 ### Usage
-To launch the app locally, input the command `heroku local web`. The site will be accessible in `localhost:5000/`.
+There are two ways to use the application locally. Ensure that you have a `.env` in the main directory filled up with the variable names indicated above.
+
+To start, you can use the command `node app.js` or `heroku local web`. The site will be accessible in `localhost:<PORT>` as defined in your config vars or `.env` file.
 
 To access the main site, click this link: [https://ticketorleaveit.herokuapp.com](https://ticketorleaveit.herokuapp.com)
 

@@ -3,7 +3,7 @@ CCAPDEV Term 2 AY1920 Machine Project - Online ticket reservation website
 
 This website allows user to view movie synopis and reviews, as well as allow for booking movie tickets. 
 
-Full list of the specifications for the project can be found [here](https://github.com/ccapdev1920T2/s11g13/blob/master/Group13%20S11%20MP%20Specifications.pdf).
+Full list of the specifications for the project can be found [here]([REVISED]%20Group13%20S11%20MP%20Specifications.pdf).
 
 ## Getting Started
 
@@ -17,15 +17,15 @@ Entering the following commands in your CLI:
 
 1. Clone the repository through 
 ```
-https://github.com/ccapdev1920T2/s11g13.git
+git clone https://github.com/ccapdev1920T2/s11g13.git
 ```
 
-2. Install all needed dependencies through `npm install`
+2. Navigate to s11g13 folder, then install all needed dependencies through `npm install`
 
 3. Run the following commands
    | Command | Description |
    |:--:|:--:|
-   | `node deleteAllData` | Clears all the contents of the Database in case you have used this program in the past. This can be skipped. |
+   | `node deleteAllData` | Clears all the contents of the Database in case you have used this program in the past. Optional but recommended |
    | `node makeCollection` | Creates the database and the collections|
    | `node addData` | Populates the database with dummy data. Includes admin account |
 

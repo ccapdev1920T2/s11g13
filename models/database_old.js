@@ -1,7 +1,7 @@
 const mongodb = require('mongodb');
 
 const client = mongodb.MongoClient;
-const url = process.env.MONGODB_URI
+const url = process.env.MONGODB_URI;
 const options = {
     useUnifiedTopology: true,
     useNewUrlParser: true

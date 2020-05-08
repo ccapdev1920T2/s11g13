@@ -36,7 +36,7 @@ git clone https://github.com/ccapdev1920T2/s11g13.git
 | Variable Name | Description |
 |:---:|:---:|
 |MONGODB_URI| The MONGODB Connection string your app will use |
-|NODEMAILER_EMAIL| The email account you will use to send confirmation emails. You can only use gmail accounts, ensure that you have `Allow less secure apps` toggled to on [here](https://myaccount.google.com/lesssecureapps). |
+|NODEMAILER_EMAIL| The email account you will use to send confirmation emails. You can only use gmail accounts, ensure that you have `Allow less secure apps` toggled to `ON` [here](https://myaccount.google.com/lesssecureapps). |
 |NODEMAILER_PASS| The password to the email account |
 
 > 
@@ -44,7 +44,7 @@ git clone https://github.com/ccapdev1920T2/s11g13.git
 ### Usage
 To launch the app locally, input the command `heroku local web`. The site will be accessible in `localhost:5000/`.
 
-To access the main site, click this link: [TicketOrLeaveIt](https://ticketorleaveit.herokuapp.com)
+To access the main site, click this link: [https://ticketorleaveit.herokuapp.com](https://ticketorleaveit.herokuapp.com)
 
 Alternatively, if you pushed this repository on your own app in heroku, go to [your Heroku dashboard](https://dashboard.heroku.com), and click on your app, then the "Open App" button.
 
@@ -90,7 +90,7 @@ If you ran `node addData`, there is one ADMIN account and four USER accounts. Re
 [Howard Montecillo](https://fb.me/howard.ang.7)
 
 ## License
-This project is under the [MIT License](LICENSE.md).
+This project is under the [MIT License](LICENSE).
 
 ## Contributing
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.

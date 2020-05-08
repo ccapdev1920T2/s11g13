@@ -8,22 +8,23 @@ const mongoose = require('mongoose');
 // import module `connect-mongo`
 const MongoStore = require('connect-mongo')(session);
 
+//MONGODB URI comes from dotenv config
+require("dotenv").config();
 const db = require('./models/database.js');
 const db2 = require('./models/database_old.js');
 
 // const TWO_HOURS = 1000 * 60 * 60 * 2;
 
-require("dotenv").config();
 
 const app = express();
-const {
-    // port = 3000,
+/* const {
+    port = 3000,
     LOCAL_ADDRESS = '0.0.0.0',
     NODE_ENV = 'development',
     SESS_NAME = 'sid',
     // SESS_SECRET = 'ssh!quiet,it\'sasecret',
     // SESS_LIFETIME = TWO_HOURS
-} = process.env;
+} = process.env; */
 
 //Connecting to db
 try {
@@ -74,7 +75,7 @@ app.use((req, res, next)=>{
     }
     else {
         active = false;
-        res.clearCookie(SESS_NAME);
+        res.clearCookie(process.env.SESS_NAME);
     }
     // console.log('res.locals.user: ' + res.locals.user);
     next();
@@ -240,10 +241,9 @@ hbs.registerHelper('isEmpty', function(shows) {
 
 
 /** Server online **/
-app.listen(process.env.PORT, LOCAL_ADDRESS, ()=>{
+app.listen(process.env.PORT, process.env.LOCAL_ADDRESS, ()=>{
     console.log("Server ready.");
 })
-//console.log(`Access at ${LOCAL_ADDRESS}:${process.env.PORT}`);
 
 // console.log(`App listening at port ${port}`);
 // console.log(`Access at localhost:${port}/`);

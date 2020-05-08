@@ -11,7 +11,7 @@ Full list of the specifications for the project can be found [here](https://gith
 
 Ensure that you have [git](https://git-scm.com/downloads), [Node JS](https://nodejs.org/en/download/), [MongoDB and MongoDB Compass](https://www.mongodb.com/download-center/community), and [Heroku](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed in your machine. 
 
-### Installing
+### Installation
 Entering the following commands in your CLI:
 
 
@@ -29,7 +29,36 @@ https://github.com/ccapdev1920T2/s11g13.git
    | `node makeCollection` | Creates the database and the collections|
    | `node addData` | Populates the database with dummy data. Includes admin account |
 
-4. Refer to the [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) to get yourself set up with your heroku app.
+4. Refer to the [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) to get yourself set-up with your heroku app.
+
+5. Set up your config vars by going to your heroku dashboard > Appname > Settings > Config Vars > Reveal Config Vars. Provide the following details to the given fields:
+
+| Variable Name | Description |
+|:---:|:---:|
+|MONGODB_URI| The MONGODB Connection string your app will use |
+|NODEMAILER_EMAIL| The email account you will use to send confirmation emails. You can only use gmail accounts, ensure that you have `Allow less secure apps` toggled to on [here](https://myaccount.google.com/lesssecureapps). |
+|NODEMAILER_PASS| The password to the email account |
+
+> 
+
+### Usage
+To launch the app locally, input the command `heroku local web`. The site will be accessible in `localhost:5000/`.
+
+To access the main site, click this link: [TicketOrLeaveIt](https://ticketorleaveit.herokuapp.com)
+
+Alternatively, if you pushed this repository on your own app in heroku, go to [your Heroku dashboard](https://dashboard.heroku.com), and click on your app, then the "Open App" button.
+
+If you ran `node addData`, there is one ADMIN account and four USER accounts. Refer to the table below for the login credentials.
+
+| Username | Password | User Type |
+|:---:|:---:|:--:|
+| bh0zXsArR3n | p455w0rd | admin |
+| meganKnox | 123123 | user |
+| carolynEllison | 123123 | user |
+| sebastianKerr | 123123 | user |
+| ianDowd | 123123 | user |
+
+> Disclaimer: The names above are fictional. Any resemblance to actual persons, living or dead, is purely coincidental.
 
 ## Dependencies
 
@@ -61,7 +90,7 @@ https://github.com/ccapdev1920T2/s11g13.git
 [Howard Montecillo](https://fb.me/howard.ang.7)
 
 ## License
-This project is under the MIT License.
+This project is under the [MIT License](LICENSE.md).
 
 ## Contributing
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
@@ -70,3 +99,4 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
 - Sir Arren Antioquia, our mentor throughout the duration of CCAPDEV
 - Our families and peers who provided feedback regarding our project's appearance
 - Canvas, without it we will have a harder time accessing video tutorials provided by our professor
+- Bootstrap 4 Documentation, it had the clearest documentation out of all the dependencies used for the project.

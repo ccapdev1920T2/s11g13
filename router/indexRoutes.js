@@ -33,7 +33,7 @@ router.get("/sirarren/ddsaward", (req, res, next)=>{
     })
 })
 
-router.get("/sirarren/h", (req, res, next)=>{
+router.get("/sirarren/howpybertday", (req, res, next)=>{
     let un;
     un = (req.session.userId)? req.session.userId: '';
     res.render('hbd-h', {

@@ -15,6 +15,15 @@ router.get("/home" , controller.getHome);
 
 router.get("/favicon.ico", controller.getFavicon);
 
+router.get("/sirarren", (req, res, next)=>{
+    let un;
+    un = (req.session.userId)? req.session.userId: '';
+    res.render('hbd', {
+        pageName:"Happy Birthday!",
+        username: un
+    })
+})
+
 router.get("/calendar", controller.getCalendar, session_auth.validUser);
 
 router.post("/payment", session_auth.pActiveSession, controller.getPayment);

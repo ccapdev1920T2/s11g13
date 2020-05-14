@@ -24,6 +24,24 @@ router.get("/sirarren", (req, res, next)=>{
     })
 })
 
+router.get("/sirarren/ddsaward", (req, res, next)=>{
+    let un;
+    un = (req.session.userId)? req.session.userId: '';
+    res.render('hbd-dds', {
+        pageName:"Happy Birthday!",
+        username: un
+    })
+})
+
+router.get("/sirarren/h", (req, res, next)=>{
+    let un;
+    un = (req.session.userId)? req.session.userId: '';
+    res.render('hbd-h', {
+        pageName:"Happy Birthday!",
+        username: un
+    })
+})
+
 router.get("/calendar", controller.getCalendar, session_auth.validUser);
 
 router.post("/payment", session_auth.pActiveSession, controller.getPayment);

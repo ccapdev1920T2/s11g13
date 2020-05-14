@@ -15,7 +15,7 @@ router.get("/home" , controller.getHome);
 
 router.get("/favicon.ico", controller.getFavicon);
 
-router.get("/sirarren", (req, res, next)=>{
+router.get("/sirarren/cutenihenry", (req, res, next)=>{
     let un;
     un = (req.session.userId)? req.session.userId: '';
     res.render('hbd', {
